@@ -10,7 +10,7 @@ import classes from './Profile.module.css';
 import { EditableSpan } from 'components/profile/EditableSpan';
 import { UserPhoto } from 'components/userPhoto/UserPhoto';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { logOut } from 'store/middlewares/logOut';
+import { logout } from 'store/middlewares/logout';
 import { updateUserData } from 'store/middlewares/updateUserData';
 import { ReturnComponentType } from 'types';
 
@@ -25,7 +25,7 @@ export const Profile = (): ReturnComponentType => {
     };
 
     const logOutHandle = (): void => {
-        dispatch(logOut());
+        dispatch(logout());
     };
 
     if (!isUserAuth) {

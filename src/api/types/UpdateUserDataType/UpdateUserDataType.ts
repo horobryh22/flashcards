@@ -1,4 +1,4 @@
-export type UpDateTypes = {
+export type UpdateUserDataType = {
     name: string;
     avatar: string;
 };

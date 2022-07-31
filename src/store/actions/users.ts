@@ -1,15 +1,15 @@
 // Actions...
 
-// import { MeDataType } from 'store/reducers/types/MeDataType';
+// import { AuthUserDataType } from 'store/reducers/types/AuthUserDataType';
 
 /* type SetUsersACType = {
     type: string;
     payload: {
-        data: MeDataType;
+        data: AuthUserDataType;
     };
 };
 
-export const setUsersAC = (data: MeDataType): SetUsersACType => {
+export const setUsersAC = (data: AuthUserDataType): SetUsersACType => {
     return {
         type: 'ME_AUTH',
         payload: {

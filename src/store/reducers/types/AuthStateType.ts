@@ -1,4 +1,4 @@
-import { MeDataType } from 'store/reducers/types/MeDataType';
+import { AuthUserDataType } from 'api/types/AuthUserDataType/AuthUserDataType';
 import { Nullable } from 'types';
 
 export type AuthStateType = {
@@ -7,5 +7,5 @@ export type AuthStateType = {
     info: Nullable<string>;
     error: Nullable<string>;
     isUserAuth: boolean;
-    authUserData: MeDataType;
+    authUserData: AuthUserDataType;
 };

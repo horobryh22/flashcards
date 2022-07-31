@@ -1,31 +1,22 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
-import { authAPI } from 'api';
-import { UpDateTypes } from 'api/types/upDateTypes';
+import { userAPI } from 'api';
+import { UpdateUserDataType } from 'api/types';
 import { REQUEST_STATUS } from 'enums';
-import { setAppStatusAC, setAuthErrorAC, setUsersAC } from 'store/actions';
+import { setAppStatusAC, setUsersAC } from 'store/actions';
 import { AppThunkType } from 'store/types';
+import { errorHandler } from 'utils';
 
 export const updateUserData =
-    ({ name, avatar }: UpDateTypes): AppThunkType =>
+    ({ name, avatar }: UpdateUserDataType): AppThunkType =>
     async dispatch => {
         try {
             dispatch(setAppStatusAC(REQUEST_STATUS.LOADING));
-            const data = await authAPI.put({ name, avatar });
+            const data = await userAPI.updateUserData({ name, avatar });
 
             dispatch(setUsersAC(data.data.updatedUser));
         } catch (e) {
-            const err = e as Error | AxiosError;
-
-            if (axios.isAxiosError(err)) {
-                const error = err.response?.data
-                    ? (err.response.data as { error: string }).error
-                    : err.message;
-
-                dispatch(setAuthErrorAC(error));
-            } else {
-                dispatch(setAuthErrorAC('Some error'));
-            }
+            errorHandler(e as Error | AxiosError, dispatch);
         } finally {
             dispatch(setAppStatusAC(REQUEST_STATUS.IDLE));
         }

@@ -1,8 +1,8 @@
 import { AppStateType } from './types';
 
 import { REQUEST_STATUS } from 'enums';
-import { SET_APP_STATUS } from 'store/actions/constants';
-import { AppActionsType } from 'store/actions/types';
+import { AppActionsType } from 'store/actions';
+import { SET_APP_STATUS, SET_IS_INITIALIZED } from 'store/actions/constants';
 
 const initialState: AppStateType = {
     isInitialized: false,
@@ -15,6 +15,8 @@ export const appReducer = (
     action: AppActionsType,
 ): AppStateType => {
     switch (action.type) {
+        case SET_IS_INITIALIZED:
+            return { ...state, isInitialized: action.payload.isInitialized };
         case SET_APP_STATUS:
             return { ...state, status: action.payload.status };
         default:

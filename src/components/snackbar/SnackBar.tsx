@@ -35,7 +35,7 @@ export const SnackBar = (): ReturnComponentType => {
         >
             <Alert
                 onClose={handleClose}
-                severity={`${error ? 'error' : 'success'}`}
+                severity={`${info === null ? 'error' : 'success'}`}
                 sx={{ width: '100%' }}
             >
                 {error || info}

@@ -1,19 +1,15 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
 import { authAPI } from 'api';
 import { REQUEST_STATUS } from 'enums';
-import {
-    setAppStatusAC,
-    setAuthErrorAC,
-    setIsUserAuthAC,
-    setUsersAC,
-} from 'store/actions';
+import { setAppStatusAC, setIsUserAuthAC, setUsersAC } from 'store/actions';
 import { AppThunkType } from 'store/types';
+import { errorHandler } from 'utils';
 
-export const logOut = (): AppThunkType => async dispatch => {
+export const logout = (): AppThunkType => async dispatch => {
     try {
         dispatch(setAppStatusAC(REQUEST_STATUS.LOADING));
-        await authAPI.delete();
+        await authAPI.logout();
         dispatch(setIsUserAuthAC(false));
         dispatch(
             setUsersAC({
@@ -29,17 +25,7 @@ export const logOut = (): AppThunkType => async dispatch => {
             }),
         );
     } catch (e) {
-        const err = e as Error | AxiosError;
-
-        if (axios.isAxiosError(err)) {
-            const error = err.response?.data
-                ? (err.response.data as { error: string }).error
-                : err.message;
-
-            dispatch(setAuthErrorAC(error));
-        } else {
-            dispatch(setAuthErrorAC('Some error'));
-        }
+        errorHandler(e as Error | AxiosError, dispatch);
     } finally {
         dispatch(setAppStatusAC(REQUEST_STATUS.IDLE));
     }

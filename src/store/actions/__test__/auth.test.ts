@@ -1,3 +1,4 @@
+import { AuthUserDataType } from 'api/types/AuthUserDataType/AuthUserDataType';
 import {
     setAuthErrorAC,
     setAuthInfoAC,
@@ -7,7 +8,6 @@ import {
 } from 'store/actions/auth';
 import { authReducer } from 'store/reducers';
 import { AuthStateType } from 'store/reducers/types';
-import { MeDataType } from 'store/reducers/types/MeDataType';
 
 let startState: AuthStateType;
 
@@ -18,7 +18,7 @@ beforeEach(() => {
         info: null,
         isEmailSent: false,
         isUserAuth: false,
-        authUserData: {} as MeDataType,
+        authUserData: {} as AuthUserDataType,
     };
 });
 

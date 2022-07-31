@@ -17,17 +17,19 @@ import { FormBottomPart } from 'components';
 import { EMAIL_RULES, PASSWORD_RULES } from 'constant';
 import { useAppDispatch, useTypedSelector, useVisibility } from 'hooks';
 import { login } from 'store';
+import { selectIsUserAuth } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const SignIn = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const isUserAuth = useTypedSelector(state => state.auth.isUserAuth);
+    const isUserAuth = useTypedSelector(selectIsUserAuth);
 
     const {
         control,
         handleSubmit,
         formState: { errors },
+        getValues,
     } = useForm({
         defaultValues: {
             email: '',
@@ -92,7 +94,7 @@ export const SignIn = (): ReturnComponentType => {
                                 <FormControlLabel
                                     {...field}
                                     label="Remember me"
-                                    checked
+                                    checked={getValues().rememberMe}
                                     control={<Checkbox />}
                                 />
                             )}

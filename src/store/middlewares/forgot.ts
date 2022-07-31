@@ -1,9 +1,10 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
 import { authAPI } from 'api';
 import { REQUEST_STATUS } from 'enums';
-import { setAppStatusAC, setAuthErrorAC, setIsEmailSentAC } from 'store/actions';
+import { setAppStatusAC, setIsEmailSentAC } from 'store/actions';
 import { AppThunkType } from 'store/types';
+import { errorHandler } from 'utils';
 
 export const forgot =
     (email: string): AppThunkType =>
@@ -14,17 +15,7 @@ export const forgot =
 
             dispatch(setIsEmailSentAC(true));
         } catch (e) {
-            const err = e as Error | AxiosError;
-
-            if (axios.isAxiosError(err)) {
-                const error = err.response?.data
-                    ? (err.response.data as { error: string }).error
-                    : err.message;
-
-                dispatch(setAuthErrorAC(error));
-            } else {
-                dispatch(setAuthErrorAC('Some error'));
-            }
+            errorHandler(e as Error | AxiosError, dispatch);
         } finally {
             dispatch(setAppStatusAC(REQUEST_STATUS.IDLE));
         }

@@ -1,16 +1,18 @@
 import React from 'react';
 
 import { Box, Container } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 import { StyledAppBar, StyledButton, StyledToolbar } from './styles';
 
 import logo from 'assets/images/logo.svg';
-import { UserPhoto } from 'components/userPhoto/UserPhoto';
+import { UserPhoto } from 'components';
 import { useTypedSelector } from 'hooks';
+import { selectIsUserAuth } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const Header = (): ReturnComponentType => {
-    const isUserAuth = useTypedSelector(state => state.auth.isUserAuth);
+    const isUserAuth = useTypedSelector(selectIsUserAuth);
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -21,7 +23,9 @@ export const Header = (): ReturnComponentType => {
                         {isUserAuth ? (
                             <UserPhoto variant="small" />
                         ) : (
-                            <StyledButton variant="contained">Sign In</StyledButton>
+                            <NavLink to="/login" style={{ textDecoration: 'none' }}>
+                                <StyledButton variant="contained">Sign In</StyledButton>
+                            </NavLink>
                         )}
                     </StyledToolbar>
                 </Container>

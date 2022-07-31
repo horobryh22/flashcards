@@ -1,3 +1,5 @@
-import { setAppStatusAC } from 'store/actions/app';
+import { setAppStatusAC, setIsInitializedAC } from 'store/actions/app';
 
-export type AppActionsType = ReturnType<typeof setAppStatusAC>;
+export type AppActionsType =
+    | ReturnType<typeof setAppStatusAC>
+    | ReturnType<typeof setIsInitializedAC>;

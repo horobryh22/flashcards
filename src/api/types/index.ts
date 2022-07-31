@@ -1,6 +1,6 @@
+export type { AuthUserDataType } from './AuthUserDataType/AuthUserDataType';
+export type { UpdateUserDataType } from './UpdateUserDataType/UpdateUserDataType';
 export type {
-    AddedUserType,
+    RegisterUserDataType,
     RegisterUserErrorType,
-    UserDataType,
-} from './registerUserTypes';
-export type { LoginResponseType } from './LoginUserTypes';
+} from './RegisterUserTypes/RegisterUserTypes';

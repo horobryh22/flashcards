@@ -1,2 +1,2 @@
-export { PASSWORD_RULES, EMAIL_RULES } from './formRules';
+export { PASSWORD_RULES, EMAIL_RULES, EMAIL_REG_EXP } from './formRules';
 export { PROGRESS_STYLE } from './styles/progressStyle';

@@ -9,7 +9,7 @@
 }
 
 .photoBox{
-    background: url("/src/assets/images/profilePhoto.jpg") center no-repeat;
+    background: url("/src/assets/images/email.svg") center no-repeat;
     background-size: cover;
     border-radius: 50%;
 }

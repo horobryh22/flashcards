@@ -1,10 +1,10 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
 import { authAPI } from 'api';
 import { REQUEST_STATUS } from 'enums';
-import { setAppStatusAC } from 'store/actions/app';
-import { setAuthErrorAC, setAuthInfoAC, setGoToLoginAC } from 'store/actions/auth';
+import { setAuthInfoAC, setGoToLoginAC, setAppStatusAC } from 'store/actions';
 import { AppThunkType } from 'store/types';
+import { errorHandler } from 'utils';
 
 export const setNewPassword =
     (password: string, resetPasswordToken: string): AppThunkType =>
@@ -16,17 +16,7 @@ export const setNewPassword =
             dispatch(setAuthInfoAC(response.data.info));
             dispatch(setGoToLoginAC(true));
         } catch (e) {
-            const err = e as Error | AxiosError;
-
-            if (axios.isAxiosError(err)) {
-                const error = err.response?.data
-                    ? (err.response.data as { error: string }).error
-                    : err.message;
-
-                dispatch(setAuthErrorAC(error));
-            } else {
-                dispatch(setAuthErrorAC('Some error'));
-            }
+            errorHandler(e as Error | AxiosError, dispatch);
         } finally {
             dispatch(setAppStatusAC(REQUEST_STATUS.IDLE));
         }

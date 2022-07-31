@@ -15,7 +15,7 @@ import {
     setUsersACType, // my import
 } from './types';
 
-import { MeDataType } from 'store/reducers/types/MeDataType';
+import { AuthUserDataType } from 'api/types/AuthUserDataType/AuthUserDataType';
 import { Nullable } from 'types';
 
 export const setAuthErrorAC = (error: Nullable<string>): SetAuthErrorType => {
@@ -54,7 +54,7 @@ export const setGoToLoginAC = (goToLogin: boolean): SetGoToLogin => {
 };
 // my action
 
-export const setUsersAC = (data: MeDataType): setUsersACType => {
+export const setUsersAC = (data: AuthUserDataType): setUsersACType => {
     return {
         type: ME_AUTH,
         payload: {
