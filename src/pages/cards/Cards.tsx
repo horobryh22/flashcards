@@ -12,8 +12,10 @@ import { CardsTopContent } from 'components';
 import { CardsList } from 'components/cartdList/CardsList';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { fetchCards } from 'store/middlewares';
+import { createCard } from 'store/middlewares/cards/createCard';
 import { selectCardPacks, selectCards } from 'store/selectors';
 import { ReturnComponentType } from 'types';
+import { NewCard } from 'utils/newCardCreator/newCardCreator';
 
 export const Cards = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
@@ -26,10 +28,12 @@ export const Cards = (): ReturnComponentType => {
     const currentPuckName = currentPuck?.name || '';
 
     const addNewCard = (): void => {
-        console.log('clicked');
-    };
+        const newCard = NewCard();
 
-    console.log(currentPuckName);
+        newCard.cardsPack_id = cardsPack_id || '';
+
+        dispatch(createCard(newCard, { cardsPack_id } as SearchParamsCardsType));
+    };
 
     useEffect(() => {
         dispatch(fetchCards({ cardsPack_id } as SearchParamsCardsType));

@@ -1,0 +1,17 @@
+td.controls {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn {
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.btn:hover {
+    color: #366EFF;
+}
+
+.deleteBtn:hover {
+    color: red;
+}

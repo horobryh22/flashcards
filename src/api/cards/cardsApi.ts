@@ -1,6 +1,6 @@
 import { instance } from 'api/config';
 import { SearchParamsCardsType } from 'api/types';
-import { GetCardsType } from 'api/types/cards/GetCardType/GetCardsType';
+import { CardsType, GetCardsType } from 'api/types/cards/GetCardType/GetCardsType';
 
 export const cardsApi = {
     getCard: ({
@@ -24,8 +24,8 @@ export const cardsApi = {
             },
         });
     },
-    createCard: (card: GetCardsType) => {
-        return instance.post('cards/card', card);
+    createCard: (card: CardsType) => {
+        return instance.post('cards/card', { card });
     },
     deleteCard: (id: string) => {
         return instance.delete('cards/card', {
