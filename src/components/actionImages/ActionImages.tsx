@@ -21,11 +21,13 @@ export const ActionImages = ({
 
     const authUserId = useTypedSelector(selectAuthUserId);
 
-    const removePack = (): void => {
+    const removePack = (e: React.MouseEvent<HTMLElement>): void => {
+        e.stopPropagation();
         dispatch(removeCardsPack(packId));
     };
 
-    const updatePack = (): void => {
+    const updatePack = (e: React.MouseEvent<HTMLElement>): void => {
+        e.stopPropagation();
         dispatch(updateCardsPack(packId, 'Updated Title'));
     };
 
