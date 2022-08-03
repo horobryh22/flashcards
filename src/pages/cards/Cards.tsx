@@ -13,7 +13,7 @@ import { CardsList } from 'components/cartdList/CardsList';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { fetchCards } from 'store/middlewares';
 import { createCard } from 'store/middlewares/cards/createCard';
-import { selectCardPacks, selectCards } from 'store/selectors';
+import { selectCardPacks } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 import { NewCard } from 'utils/newCardCreator/newCardCreator';
 
@@ -22,7 +22,7 @@ export const Cards = (): ReturnComponentType => {
 
     const { cardsPack_id } = useParams();
 
-    const cards = useTypedSelector(selectCards);
+    const cards = useTypedSelector(state => state.cards.cards);
     const packs = useTypedSelector(selectCardPacks);
     const currentPuck = packs.find(pack => pack._id === cardsPack_id);
     const currentPuckName = currentPuck?.name || '';

@@ -6,8 +6,16 @@ import { Header, Links, RoutesApp, SnackBar } from 'components';
 import { PROGRESS_STYLE } from 'constant';
 import { REQUEST_STATUS } from 'enums';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { initializedApp, fetchPacks } from 'store/middlewares';
-import { selectAppStatus, selectIsInitialized, selectIsUserAuth } from 'store/selectors';
+import { fetchPacks, initializedApp } from 'store/middlewares';
+import {
+    selectAppStatus,
+    selectIsInitialized,
+    selectIsUserAuth,
+    selectPackName,
+    selectPage,
+    selectPageCount,
+    selectSortPacks,
+} from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 const App = (): ReturnComponentType => {
@@ -17,7 +25,12 @@ const App = (): ReturnComponentType => {
     const isUserAuth = useTypedSelector(selectIsUserAuth);
     const isInitialized = useTypedSelector(selectIsInitialized);
 
-    const sortPacks = useTypedSelector(state => state.packs.searchParams.sortPacks);
+    const min = useTypedSelector(state => state.packs.searchParams.min);
+    const max = useTypedSelector(state => state.packs.searchParams.max);
+    const sortPacks = useTypedSelector(selectSortPacks);
+    const page = useTypedSelector(selectPage);
+    const pageCount = useTypedSelector(selectPageCount);
+    const packName = useTypedSelector(selectPackName);
 
     useEffect(() => {
         dispatch(initializedApp());
@@ -27,7 +40,7 @@ const App = (): ReturnComponentType => {
         if (isUserAuth) {
             dispatch(fetchPacks());
         }
-    }, [isUserAuth, sortPacks]);
+    }, [isUserAuth, sortPacks, page, pageCount, packName, min, max]);
 
     if (!isInitialized) {
         return (

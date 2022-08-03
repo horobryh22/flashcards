@@ -14,3 +14,7 @@ export type { SetSortPacksType } from './SetSortPacksType';
 export type { SetCardsType } from './SetCardsType';
 export type { CardsActionType } from './CardsActionType';
 export type { SetCardsSearchParamsACType } from './SetCardsSearchParamsACType';
+export type { SetCurrentPageType } from './SetCurrentPageType';
+export type { SetPacksTotalCount } from './SetPacksTotalCount';
+export type { SetPageCountType } from './SetPageCountType';
+export type { SetPackNameType } from './SetPackNameType';

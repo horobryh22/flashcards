@@ -20,7 +20,6 @@ export type CardsType = {
 export type GetCardsType = {
     cards: CardsType[];
     searchParams: SearchParamsCardsType;
-
     cardsTotalCount: number;
     maxGrade: number;
     minGrade: number;
