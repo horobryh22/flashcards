@@ -1,4 +1,4 @@
-import { AuthUserDataType } from 'api/types/AuthUserDataType/AuthUserDataType';
+import { AuthUserDataType } from 'api/types/auth/AuthUserDataType/AuthUserDataType';
 import { ME_AUTH } from 'store/actions/constants';
 
 export type setUsersACType = {

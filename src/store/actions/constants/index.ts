@@ -6,3 +6,5 @@ export const SET_IS_USER_AUTH = 'auth/SET-IS-USER-AUTH';
 export const SET_APP_STATUS = 'app/SET-APP-STATUS';
 export const SET_IS_INITIALIZED = 'app/SET-IS-INITIALIZED';
 export const ME_AUTH = 'auth/ME-AUTH';
+export const SET_CARD_PACKS = 'packs/SET-CARD-PACKS';
+export const SET_SORT_PACKS = 'packs/SET-SORT-PACKS';

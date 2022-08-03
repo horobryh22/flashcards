@@ -1,4 +1,4 @@
 import { AuthActionsType } from 'store/actions';
-import { AppActionsType } from 'store/actions/types';
+import { AppActionsType, PacksActionsType } from 'store/actions/types';
 
-export type AppRootActionsType = AuthActionsType | AppActionsType;
+export type AppRootActionsType = AuthActionsType | AppActionsType | PacksActionsType;

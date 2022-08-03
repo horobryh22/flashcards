@@ -12,10 +12,10 @@ import {
     SetGoToLogin,
     SetIsEmailSent,
     SetIsUserAuth,
-    setUsersACType, // my import
+    setUsersACType,
 } from './types';
 
-import { AuthUserDataType } from 'api/types/AuthUserDataType/AuthUserDataType';
+import { AuthUserDataType } from 'api/types';
 import { Nullable } from 'types';
 
 export const setAuthErrorAC = (error: Nullable<string>): SetAuthErrorType => {

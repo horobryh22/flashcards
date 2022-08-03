@@ -7,6 +7,7 @@ export {
     setUsersAC,
 } from './auth';
 export { setAppStatusAC, setIsInitializedAC } from './app';
+export { setCardPacksAC, setSortPacksAC } from './packs';
 export type {
     AuthActionsType,
     SetIsUserAuth,

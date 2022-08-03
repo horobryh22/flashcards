@@ -1,7 +1,10 @@
-export { login } from './login';
-export { logout } from './logout';
-export { forgot } from './forgot';
-export { registerUser } from './registerUser';
-export { setNewPassword } from './setNewPassword';
-export { initializedApp } from './initializedApp';
-export { updateUserData } from './updateUserData';
+export { login } from 'store/middlewares/auth/login';
+export { logout } from 'store/middlewares/auth/logout';
+export { forgot } from 'store/middlewares/auth/forgot';
+export { registerUser } from 'store/middlewares/auth/registerUser';
+export { setNewPassword } from 'store/middlewares/auth/setNewPassword';
+export { initializedApp } from 'store/middlewares/app/initializedApp';
+export { updateUserData } from 'store/middlewares/auth/updateUserData';
+export { fetchPacks } from 'store/middlewares/packs/fetchPacks';
+export { addCardsPack } from 'store/middlewares/packs/addCardsPack';
+export { removeCardsPack } from 'store/middlewares/packs/removeCardsPack';

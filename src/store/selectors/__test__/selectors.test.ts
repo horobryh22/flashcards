@@ -4,6 +4,7 @@ import {
     selectAppStatus,
     selectAuthError,
     selectAuthInfo,
+    selectCardPacks,
     selectGoToLogin,
     selectIsEmailSent,
     selectIsInitialized,
@@ -27,6 +28,18 @@ beforeEach(() => {
             goToLogin: false,
             isEmailSent: false,
             authUserData: {} as AuthUserDataType,
+        },
+        packs: {
+            cardPacks: [],
+            searchParams: {
+                packName: '',
+                min: 1,
+                max: 4,
+                sortPacks: '',
+                page: 1,
+                pageCount: 4,
+                user_id: '',
+            },
         },
     };
 });
@@ -72,6 +85,12 @@ describe('select', () => {
         const isInitialized = selectIsInitialized(state);
 
         expect(isInitialized).toBeFalsy();
+    });
+
+    test('cardPacks', () => {
+        const cardPacks = selectCardPacks(state);
+
+        expect(cardPacks).toEqual([]);
     });
 });
 

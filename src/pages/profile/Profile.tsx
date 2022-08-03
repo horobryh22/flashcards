@@ -10,8 +10,8 @@ import classes from './Profile.module.css';
 import { EditableSpan } from 'components/profile/EditableSpan';
 import { UserPhoto } from 'components/userPhoto/UserPhoto';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { logout } from 'store/middlewares/logout';
-import { updateUserData } from 'store/middlewares/updateUserData';
+import { logout } from 'store/middlewares/auth/logout';
+import { updateUserData } from 'store/middlewares/auth/updateUserData';
 import { ReturnComponentType } from 'types';
 
 export const Profile = (): ReturnComponentType => {

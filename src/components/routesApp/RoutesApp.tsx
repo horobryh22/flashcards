@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import {
     ForgotPassword,
     NotFound,
+    PacksList,
     Profile,
     Registration,
     SetNewPassword,
@@ -20,6 +21,7 @@ export const RoutesApp = (): ReturnComponentType => {
                 <Routes>
                     <Route path="/" element={<SignIn />} />
                     <Route path="login" element={<SignIn />} />
+                    <Route path="packs" element={<PacksList />} />
                     <Route path="registration" element={<Registration />} />
                     <Route path="profile" element={<Profile />} />
                     <Route path="password_recovery/:token" element={<SetNewPassword />} />
