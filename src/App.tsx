@@ -18,6 +18,8 @@ const App = (): ReturnComponentType => {
     const isInitialized = useTypedSelector(selectIsInitialized);
 
     const sortPacks = useTypedSelector(state => state.packs.searchParams.sortPacks);
+    const min = useTypedSelector(state => state.packs.searchParams.min);
+    const max = useTypedSelector(state => state.packs.searchParams.max);
 
     useEffect(() => {
         dispatch(initializedApp());
@@ -27,7 +29,7 @@ const App = (): ReturnComponentType => {
         if (isUserAuth) {
             dispatch(fetchPacks());
         }
-    }, [isUserAuth, sortPacks]);
+    }, [isUserAuth, sortPacks, min, max]);
 
     if (!isInitialized) {
         return (

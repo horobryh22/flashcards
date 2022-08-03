@@ -7,3 +7,4 @@ export { SetNewPassword } from 'pages/setNewPassword/SetNewPassword';
 export { CheckEmail } from './checkEmail/CheckEmail';
 export { PacksList } from './packsList/PacksList';
 export type { SignInValuesType } from './signIn/types';
+export { Test } from './test/Test';
