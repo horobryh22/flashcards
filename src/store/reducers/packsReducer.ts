@@ -1,11 +1,12 @@
 import { PacksStateType } from './types';
 
 import {
-    SET_CARD_PACKS,
     SET_CURRENT_PAGE,
     SET_PACK_NAME,
     SET_PACKS_TOTAL_COUNT,
     SET_PAGE_COUNT,
+    SET_CARD_PACKS,
+    SET_SLIDER,
     SET_SORT_PACKS,
 } from 'store/actions/constants';
 import { PacksActionsType } from 'store/actions/types';
@@ -59,6 +60,15 @@ export const packsReducer = (
             return {
                 ...state,
                 searchParams: { ...state.searchParams, sortPacks: action.payload.sort },
+            };
+        case SET_SLIDER:
+            return {
+                ...state,
+                searchParams: {
+                    ...state.searchParams,
+                    min: action.payload.min,
+                    max: action.payload.max,
+                },
             };
         default:
             return state;

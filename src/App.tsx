@@ -25,6 +25,8 @@ const App = (): ReturnComponentType => {
     const isUserAuth = useTypedSelector(selectIsUserAuth);
     const isInitialized = useTypedSelector(selectIsInitialized);
 
+    const min = useTypedSelector(state => state.packs.searchParams.min);
+    const max = useTypedSelector(state => state.packs.searchParams.max);
     const sortPacks = useTypedSelector(selectSortPacks);
     const page = useTypedSelector(selectPage);
     const pageCount = useTypedSelector(selectPageCount);
@@ -38,7 +40,7 @@ const App = (): ReturnComponentType => {
         if (isUserAuth) {
             dispatch(fetchPacks());
         }
-    }, [isUserAuth, sortPacks, page, pageCount, packName]);
+    }, [isUserAuth, sortPacks, page, pageCount, packName, min, max]);
 
     if (!isInitialized) {
         return (
