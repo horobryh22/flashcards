@@ -15,15 +15,14 @@ export const PacksList = (): ReturnComponentType => {
 
     return (
         <>
+            <Search />
+            <NumberOfCards />
             <CardsTopContent
                 title="Packs list"
                 buttonName="Add new pack"
                 isButtonNeed
                 callback={addPack}
             />
-            <Search />
-            <NumberOfCards />
-            <CardsTopContent title="Packs list" buttonName="Add new pack" isButtonNeed />
             <TableComponent />
             <CustomPagination />
         </>
