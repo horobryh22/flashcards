@@ -1,6 +1,6 @@
 import { REQUEST_STATUS } from 'enums';
 import { setAppStatusAC, setIsInitializedAC } from 'store/actions/app';
-import { appReducer } from 'store/reducers';
+import { appReducer } from 'store/reducers/index';
 import { AppStateType } from 'store/reducers/types';
 
 let startState: AppStateType;

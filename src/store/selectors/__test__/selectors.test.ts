@@ -19,6 +19,8 @@ import {
 import { AppRootState } from 'store/types';
 
 let state: AppRootState;
+const defaultPageCount = 4;
+const defaultPacksTotalCount = 100;
 
 beforeEach(() => {
     state = {
@@ -45,10 +47,10 @@ beforeEach(() => {
                 max: 4,
                 sortPacks: '1updated',
                 page: 1,
-                pageCount: 4,
+                pageCount: defaultPageCount,
                 user_id: '',
             },
-            cardPacksTotalCount: 100,
+            cardPacksTotalCount: defaultPacksTotalCount,
         },
     };
 });
@@ -117,15 +119,13 @@ describe('select', () => {
     test('pageCount', () => {
         const pageCount = selectPageCount(state);
 
-        // eslint-disable-next-line no-magic-numbers
-        expect(pageCount).toBe(4);
+        expect(pageCount).toBe(defaultPageCount);
     });
 
     test('packsTotalCount', () => {
         const packsTotalCount = selectPacksTotalCount(state);
 
-        // eslint-disable-next-line no-magic-numbers
-        expect(packsTotalCount).toBe(100);
+        expect(packsTotalCount).toBe(defaultPacksTotalCount);
     });
 
     test('sortPacks', () => {
@@ -137,7 +137,6 @@ describe('select', () => {
     test('packName', () => {
         const packName = selectPackName(state);
 
-        // eslint-disable-next-line no-magic-numbers
         expect(packName).toBe('Some pack name');
     });
 });

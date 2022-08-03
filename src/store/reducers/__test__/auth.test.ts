@@ -7,7 +7,7 @@ import {
     setIsUserAuthAC,
     setAuthUserDataAC,
 } from 'store/actions';
-import { authReducer } from 'store/reducers';
+import { authReducer } from 'store/reducers/index';
 import { AuthStateType } from 'store/reducers/types';
 
 let startState: AuthStateType;

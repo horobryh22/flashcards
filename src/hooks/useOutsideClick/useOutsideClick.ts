@@ -10,16 +10,14 @@ export const useOutsideClick = (
 
         if (!elementRef.current) return;
 
-        if (elementRef.current) {
-            if (!elementRef.current.contains(target)) {
-                handler();
-            }
+        if (!elementRef.current.contains(target)) {
+            handler();
+        }
 
-            const link = target.closest('a');
+        const link = target.closest('a');
 
-            if (elementRef.current.contains(link)) {
-                handler();
-            }
+        if (elementRef.current.contains(link)) {
+            handler();
         }
     };
 
