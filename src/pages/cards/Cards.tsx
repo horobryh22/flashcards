@@ -36,7 +36,11 @@ export const Cards = (): ReturnComponentType => {
         const newCard = NewCard();
 
         newCard.cardsPack_id = cardsPack_id || '';
-        newCard.grade = 1.2;
+        // hardcode //
+        newCard.grade = 0;
+        newCard.question = 'new card';
+        newCard.answer = 'some answer';
+        // hardcode //
 
         dispatch(createCard(newCard, { cardsPack_id } as SearchParamsCardsType));
     };

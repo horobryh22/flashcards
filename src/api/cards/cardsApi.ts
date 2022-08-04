@@ -32,7 +32,7 @@ export const cardsApi = {
             params: { id },
         });
     },
-    updateCard: (card: GetCardsType) => {
-        return instance.put('cards/card', card);
+    updateCard: (card: CardsType) => {
+        return instance.put('cards/card', { card });
     },
 };

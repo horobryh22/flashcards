@@ -17,11 +17,14 @@ import {
 
 import s from './CardList.module.css';
 
+import { SearchParamsCardsType } from 'api/types';
+import { CardsType } from 'api/types/cards/GetCardType/GetCardsType';
 import { CardsListPropsType } from 'components/cartdList/types';
 import { OrderDirectionType } from 'components/mainTableRow/types';
 import { useAppDispatch } from 'hooks';
 import { setCardsSearchParamsAC } from 'store/actions/cards';
 import { fetchCards } from 'store/middlewares';
+import { updateCard } from 'store/middlewares/cards/updateCard';
 import { ReturnComponentType } from 'types';
 
 const UPDATE_SORT_BTN_ID = 'updateSortBtn';
@@ -63,8 +66,18 @@ export const CardsList = ({
         dispatch(fetchCards({ cardsPack_id, sortCards }));
     };
 
-    const editCardHandler = (): void => {
-        console.log('edit card');
+    const editCardHandler = (card: CardsType): void => {
+        console.log(card);
+        // hardcode //
+        const updatedCard = { ...card };
+
+        console.log(updatedCard);
+
+        updatedCard.question = 'updated question';
+        updatedCard.answer = 'updated answer';
+        // hardcode //
+
+        dispatch(updateCard(updatedCard, { cardsPack_id } as SearchParamsCardsType));
     };
 
     const deleteCardHandler = (): void => {
@@ -139,7 +152,7 @@ export const CardsList = ({
                                     <TableCell className={s.controls}>
                                         <ModeEditOutlineOutlinedIcon
                                             className={`${s.editBtn} ${s.btn} ${disableClass}`}
-                                            onClick={editCardHandler}
+                                            onClick={() => editCardHandler(card)}
                                         />
                                         <DeleteOutlineOutlinedIcon
                                             className={`${s.deleteBtn} ${s.btn} ${disableClass}`}

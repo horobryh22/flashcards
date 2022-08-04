@@ -9,7 +9,7 @@ const initialState: GetCardsType = {
         cardsPack_id: '',
         min: 0,
         max: 4,
-        sortCards: '0update',
+        sortCards: '0updated',
         page: 1,
         pageCount: 100,
     },
