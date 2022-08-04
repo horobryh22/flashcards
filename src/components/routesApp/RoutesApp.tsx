@@ -11,7 +11,6 @@ import {
     Registration,
     SetNewPassword,
     SignIn,
-    Test,
 } from 'pages';
 import { ReturnComponentType } from 'types';
 
@@ -27,7 +26,6 @@ export const RoutesApp = (): ReturnComponentType => {
                     <Route path="profile" element={<Profile />} />
                     <Route path="password_recovery/:token" element={<SetNewPassword />} />
                     <Route path="enter_new_password" element={<ForgotPassword />} />
-                    <Route path="test" element={<Test />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Grid>

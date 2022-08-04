@@ -17,7 +17,6 @@ export const Links = (): ReturnComponentType => {
             <NavLink to="/enter_new_password">forgot_pass</NavLink>
             <NavLink to="/packs">packs</NavLink>
             <NavLink to="/">main</NavLink>
-            <NavLink to="/">test</NavLink>
         </div>
     );
 };

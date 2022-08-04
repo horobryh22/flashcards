@@ -14,6 +14,7 @@ const initialState: PacksStateType = {
         pageCount: 8,
         user_id: '',
     },
+    userId: '',
 };
 
 export const packsReducer = (
