@@ -5,8 +5,12 @@ td.controls {
 
 .btn {
     cursor: pointer;
-    transition: all .2s ease;
     margin-left: 15px;
+}
+
+td .btn {
+    font-size: 1.3rem;
+    transition: all .2s ease;
 }
 
 .btn:first-child {

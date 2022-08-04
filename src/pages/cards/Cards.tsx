@@ -57,6 +57,7 @@ export const Cards = (): ReturnComponentType => {
                 buttonName="Add new card"
                 isButtonNeed
                 callback={addNewCard}
+                disabled={disabled}
             >
                 <TextField
                     name="searchCard"
