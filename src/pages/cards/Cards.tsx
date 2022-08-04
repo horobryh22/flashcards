@@ -13,7 +13,7 @@ import { CardsList } from 'components/cartdList/CardsList';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { fetchCards } from 'store/middlewares';
 import { createCard } from 'store/middlewares/cards/createCard';
-import { selectCardPacks } from 'store/selectors';
+import { selectAuthUserId, selectCardPacks, selectUserIdFromPack } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 import { NewCard } from 'utils/newCardCreator/newCardCreator';
 
@@ -27,6 +27,11 @@ export const Cards = (): ReturnComponentType => {
     const currentPuck = packs.find(pack => pack._id === cardsPack_id);
     const currentPuckName = currentPuck?.name || '';
 
+    const packUserId = useTypedSelector(selectUserIdFromPack);
+    const userId = useTypedSelector(selectAuthUserId);
+
+    const disabled = userId !== packUserId;
+
     const addNewCard = (): void => {
         const newCard = NewCard();
 
@@ -38,6 +43,8 @@ export const Cards = (): ReturnComponentType => {
     useEffect(() => {
         dispatch(fetchCards({ cardsPack_id } as SearchParamsCardsType));
     }, []);
+
+    console.log(cards);
 
     return (
         <div className={s.wrapper}>
@@ -65,7 +72,11 @@ export const Cards = (): ReturnComponentType => {
                     }}
                 />
             </CardsTopContent>
-            <CardsList cards={cards} cardsPack_id={cardsPack_id || ''} />
+            <CardsList
+                cards={cards}
+                cardsPack_id={cardsPack_id || ''}
+                disabled={disabled}
+            />
         </div>
     );
 };

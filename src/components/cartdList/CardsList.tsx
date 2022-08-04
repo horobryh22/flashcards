@@ -31,11 +31,14 @@ const GRADE_FIELD_NAME = 'grade';
 export const CardsList = ({
     cards,
     cardsPack_id,
+    disabled,
 }: CardsListPropsType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const [updateDirection, setUpdateDirection] = useState<OrderDirectionType>('asc');
     const [gradeDirection, setGradeDirection] = useState<OrderDirectionType>('asc');
+
+    const disableClass = disabled ? s.disabledIcon : '';
 
     const handleSort = (e: React.MouseEvent<HTMLElement>): void => {
         let sortCards;
@@ -123,11 +126,11 @@ export const CardsList = ({
                                 <TableCell>{card.grade}</TableCell>
                                 <TableCell className={s.controls}>
                                     <ModeEditOutlineOutlinedIcon
-                                        className={`${s.editBtn} ${s.btn}`}
+                                        className={`${s.editBtn} ${s.btn} ${disableClass}`}
                                         onClick={editCardHandler}
                                     />
                                     <DeleteOutlineOutlinedIcon
-                                        className={`${s.deleteBtn} ${s.btn}`}
+                                        className={`${s.deleteBtn} ${s.btn} ${disableClass}`}
                                         onClick={deleteCardHandler}
                                     />
                                 </TableCell>
