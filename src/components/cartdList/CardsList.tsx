@@ -5,6 +5,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import {
     Paper,
+    Rating,
     Table,
     TableBody,
     TableCell,
@@ -110,32 +111,44 @@ export const CardsList = ({
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {cards.map(card => (
-                            <TableRow
-                                key={card._id}
-                                sx={{
-                                    '&:last-child td, &:last-child th': { border: 0 },
-                                }}
-                                hover
-                            >
-                                <TableCell component="th" scope="row">
-                                    {card.question}
-                                </TableCell>
-                                <TableCell>{card.answer}</TableCell>
-                                <TableCell>{card.updated}</TableCell>
-                                <TableCell>{card.grade}</TableCell>
-                                <TableCell className={s.controls}>
-                                    <ModeEditOutlineOutlinedIcon
-                                        className={`${s.editBtn} ${s.btn} ${disableClass}`}
-                                        onClick={editCardHandler}
-                                    />
-                                    <DeleteOutlineOutlinedIcon
-                                        className={`${s.deleteBtn} ${s.btn} ${disableClass}`}
-                                        onClick={deleteCardHandler}
-                                    />
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                        {cards.map(card => {
+                            const { grade } = card;
+
+                            return (
+                                <TableRow
+                                    key={card._id}
+                                    sx={{
+                                        '&:last-child td, &:last-child th': { border: 0 },
+                                    }}
+                                    hover
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {card.question}
+                                    </TableCell>
+                                    <TableCell>{card.answer}</TableCell>
+                                    <TableCell>{card.updated}</TableCell>
+                                    <TableCell>
+                                        <Rating
+                                            value={grade}
+                                            name="rating"
+                                            precision={0.1}
+                                            size="small"
+                                            readOnly
+                                        />
+                                    </TableCell>
+                                    <TableCell className={s.controls}>
+                                        <ModeEditOutlineOutlinedIcon
+                                            className={`${s.editBtn} ${s.btn} ${disableClass}`}
+                                            onClick={editCardHandler}
+                                        />
+                                        <DeleteOutlineOutlinedIcon
+                                            className={`${s.deleteBtn} ${s.btn} ${disableClass}`}
+                                            onClick={deleteCardHandler}
+                                        />
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
                     </TableBody>
                 </Table>
             </TableContainer>

@@ -1,11 +1,10 @@
 td.controls {
-    display: flex;
-    justify-content: center;
+   min-width: 90px;
 }
 
 .btn {
     cursor: pointer;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 td .btn {

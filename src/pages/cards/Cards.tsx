@@ -36,6 +36,7 @@ export const Cards = (): ReturnComponentType => {
         const newCard = NewCard();
 
         newCard.cardsPack_id = cardsPack_id || '';
+        newCard.grade = 1.2;
 
         dispatch(createCard(newCard, { cardsPack_id } as SearchParamsCardsType));
     };
@@ -43,8 +44,6 @@ export const Cards = (): ReturnComponentType => {
     useEffect(() => {
         dispatch(fetchCards({ cardsPack_id } as SearchParamsCardsType));
     }, []);
-
-    console.log(cards);
 
     return (
         <div className={s.wrapper}>
