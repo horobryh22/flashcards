@@ -5,6 +5,7 @@ import { CardsType, GetCardsType } from 'api/types/cards/GetCardType/GetCardsTyp
 export const cardsApi = {
     getCard: ({
         cardsPack_id,
+        cardQuestion,
         cardAnswer,
         min,
         max,
@@ -15,6 +16,7 @@ export const cardsApi = {
         return instance.get<GetCardsType>('cards/card', {
             params: {
                 cardsPack_id,
+                cardQuestion,
                 cardAnswer,
                 min,
                 max,

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SearchIcon from '@mui/icons-material/Search';
@@ -10,7 +10,9 @@ import s from './Cards.module.css';
 import { SearchParamsCardsType } from 'api/types';
 import { CardsTopContent } from 'components';
 import { CardsList } from 'components/cartdList/CardsList';
-import { useAppDispatch, useTypedSelector } from 'hooks';
+import { DELAY } from 'constant';
+import { useAppDispatch, useDebounce, useTypedSelector } from 'hooks';
+import { setCardsSearchParamsAC } from 'store/actions/cards';
 import { fetchCards } from 'store/middlewares';
 import { createCard } from 'store/middlewares/cards/createCard';
 import { selectAuthUserId, selectCardPacks, selectUserIdFromPack } from 'store/selectors';
@@ -20,10 +22,14 @@ import { NewCard } from 'utils/newCardCreator/newCardCreator';
 export const Cards = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const { cardsPack_id } = useParams();
+    const { cardsPack_id } = useParams() || '';
 
     const cards = useTypedSelector(state => state.cards.cards);
     const packs = useTypedSelector(selectCardPacks);
+
+    const [value, setValue] = useState<string>('');
+    const debouncedValue = useDebounce<string>(value, DELAY);
+
     const currentPuck = packs.find(pack => pack._id === cardsPack_id);
     const currentPuckName = currentPuck?.name || '';
 
@@ -45,9 +51,27 @@ export const Cards = (): ReturnComponentType => {
         dispatch(createCard(newCard, { cardsPack_id } as SearchParamsCardsType));
     };
 
+    const searchInputHandler = (event: ChangeEvent<HTMLInputElement>): void => {
+        setValue(event.target.value);
+    };
+
     useEffect(() => {
-        dispatch(fetchCards({ cardsPack_id } as SearchParamsCardsType));
-    }, []);
+        const params: SearchParamsCardsType = {
+            cardsPack_id: cardsPack_id || '',
+            cardQuestion: debouncedValue,
+        };
+
+        dispatch(setCardsSearchParamsAC(params));
+    }, [debouncedValue]);
+
+    useEffect(() => {
+        const params: SearchParamsCardsType = {
+            cardsPack_id: cardsPack_id || '',
+            // cardQuestion: debouncedValue,
+        };
+
+        dispatch(fetchCards(params));
+    }, [debouncedValue]);
 
     return (
         <div className={s.wrapper}>
@@ -67,6 +91,7 @@ export const Cards = (): ReturnComponentType => {
                     variant="outlined"
                     label="Search"
                     fullWidth
+                    onChange={searchInputHandler}
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">

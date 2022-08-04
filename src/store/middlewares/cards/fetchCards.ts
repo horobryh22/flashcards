@@ -16,14 +16,15 @@ export const fetchCards =
 
             const { cardAnswer, max, min, page, pageCount, cardQuestion, sortCards } =
                 getState().cards.searchParams;
+
             const response = await cardsApi.getCard({
                 cardsPack_id,
+                cardQuestion,
                 cardAnswer,
                 max,
                 min,
                 page,
                 pageCount,
-                cardQuestion,
                 sortCards,
             });
 
