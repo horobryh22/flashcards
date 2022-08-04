@@ -24,6 +24,7 @@ import { OrderDirectionType } from 'components/mainTableRow/types';
 import { useAppDispatch } from 'hooks';
 import { setCardsSearchParamsAC } from 'store/actions/cards';
 import { fetchCards } from 'store/middlewares';
+import { deleteCard } from 'store/middlewares/cards/deleteCard';
 import { updateCard } from 'store/middlewares/cards/updateCard';
 import { ReturnComponentType } from 'types';
 
@@ -67,11 +68,8 @@ export const CardsList = ({
     };
 
     const editCardHandler = (card: CardsType): void => {
-        console.log(card);
         // hardcode //
         const updatedCard = { ...card };
-
-        console.log(updatedCard);
 
         updatedCard.question = 'updated question';
         updatedCard.answer = 'updated answer';
@@ -80,8 +78,8 @@ export const CardsList = ({
         dispatch(updateCard(updatedCard, { cardsPack_id } as SearchParamsCardsType));
     };
 
-    const deleteCardHandler = (): void => {
-        console.log('delete card');
+    const deleteCardHandler = (cardId: string): void => {
+        dispatch(deleteCard(cardId, { cardsPack_id } as SearchParamsCardsType));
     };
 
     if (cards.length === 0) {
@@ -156,7 +154,7 @@ export const CardsList = ({
                                         />
                                         <DeleteOutlineOutlinedIcon
                                             className={`${s.deleteBtn} ${s.btn} ${disableClass}`}
-                                            onClick={deleteCardHandler}
+                                            onClick={() => deleteCardHandler(card._id)}
                                         />
                                     </TableCell>
                                 </TableRow>
