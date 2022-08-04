@@ -8,6 +8,8 @@ import { ReturnComponentType } from 'types';
 export const TableComponent = (): ReturnComponentType => {
     const cardPacks = useTypedSelector(selectCardPacks);
 
+    console.log(cardPacks);
+
     return (
         <Paper sx={{ width: '100%' }} style={{ marginTop: '25px' }}>
             <TableContainer sx={{ maxHeight: 550 }}>

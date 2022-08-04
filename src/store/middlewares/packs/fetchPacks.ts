@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 
 import { packsAPI } from 'api/packs/packsAPI';
 import { REQUEST_STATUS } from 'enums';
-import { setAppStatusAC, setCardPacksAC } from 'store/actions';
+import { setAppStatusAC, setCardPacksAC, setPacksTotalCountAC } from 'store/actions';
 import { AppThunkType } from 'store/types';
 import { errorHandler } from 'utils';
 
@@ -33,19 +33,8 @@ export const fetchPacks =
                 max,
             });
 
-            //
-            // if (myPack) {
-            //     dispatch(setCardPacksAC(response.data.cardPacks));
-            // } else {
-            //     dispatch(setCardPacksAC(response.data.cardPacks));
-            // }
             dispatch(setCardPacksAC(response.data.cardPacks));
-
-            // if (!user_id) {
-            //     dispatch(setCardPacksAC(response.data.cardPacks));
-            // } else {
-            //     dispatch(setMyCardAC(response.data.cardPacks.));
-            // }
+            dispatch(setPacksTotalCountAC(response.data.cardPacksTotalCount));
         } catch (e) {
             errorHandler(e as Error | AxiosError, dispatch);
         } finally {

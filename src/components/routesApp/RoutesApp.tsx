@@ -12,6 +12,7 @@ import {
     SetNewPassword,
     SignIn,
 } from 'pages';
+import { Cards } from 'pages/cards/Cards';
 import { ReturnComponentType } from 'types';
 
 export const RoutesApp = (): ReturnComponentType => {
@@ -22,6 +23,7 @@ export const RoutesApp = (): ReturnComponentType => {
                     <Route path="/" element={<SignIn />} />
                     <Route path="login" element={<SignIn />} />
                     <Route path="packs" element={<PacksList />} />
+                    <Route path="packs/:cardsPack_id" element={<Cards />} />
                     <Route path="registration" element={<Registration />} />
                     <Route path="profile" element={<Profile />} />
                     <Route path="password_recovery/:token" element={<SetNewPassword />} />

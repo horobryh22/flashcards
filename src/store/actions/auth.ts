@@ -52,9 +52,8 @@ export const setGoToLoginAC = (goToLogin: boolean): SetGoToLogin => {
         payload: { goToLogin },
     } as const;
 };
-// my action
 
-export const setUsersAC = (data: AuthUserDataType): setUsersACType => {
+export const setAuthUserDataAC = (data: AuthUserDataType): setUsersACType => {
     return {
         type: ME_AUTH,
         payload: {

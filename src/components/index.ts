@@ -10,3 +10,7 @@ export { TableComponent } from './tableComponent/TableComponent';
 export { MainTableRow } from './mainTableRow/MainTableRow';
 export { TableRows } from './tableRows/TableRows';
 export { ActionImages } from './actionImages/ActionImages';
+export { CustomPagination } from './customPagination/CustomPagination';
+export { CustomSelect } from './customSelect/CustomSelect';
+export { ProfileList } from './profileList/ProfileList';
+export { Search } from './search/Search';

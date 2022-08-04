@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 
 import { authAPI } from 'api';
 import { REQUEST_STATUS } from 'enums';
-import { setAppStatusAC, setIsUserAuthAC, setUsersAC } from 'store/actions';
+import { setAppStatusAC, setIsUserAuthAC, setAuthUserDataAC } from 'store/actions';
 import { AppThunkType } from 'store/types';
 import { errorHandler } from 'utils';
 
@@ -12,7 +12,7 @@ export const logout = (): AppThunkType => async dispatch => {
         await authAPI.logout();
         dispatch(setIsUserAuthAC(false));
         dispatch(
-            setUsersAC({
+            setAuthUserDataAC({
                 email: '',
                 error: '',
                 avatar: '',

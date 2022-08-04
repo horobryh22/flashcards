@@ -22,4 +22,8 @@ export const StyledAppBar = styled(AppBar, {})`
 export const StyledToolbar = styled(Toolbar, {})`
     display: flex;
     justify-content: space-between;
+    padding: 0;
+    @media (min-width: 600px) {
+        padding: 0;
+    }
 `;
