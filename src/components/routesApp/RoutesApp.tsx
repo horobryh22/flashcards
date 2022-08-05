@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { Container, Grid } from '@mui/material';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
+import errorImage from '../../assets/images/404.jpg';
 
 import {
     ForgotPassword,
-    NotFound,
     PacksList,
     Profile,
     Registration,
@@ -28,7 +29,11 @@ export const RoutesApp = (): ReturnComponentType => {
                     <Route path="profile" element={<Profile />} />
                     <Route path="password_recovery/:token" element={<SetNewPassword />} />
                     <Route path="enter_new_password" element={<ForgotPassword />} />
-                    <Route path="*" element={<NotFound />} />
+                    <Route
+                        path="404"
+                        element={<img alt="Error 404" src={errorImage} />}
+                    />
+                    <Route path="*" element={<Navigate to="404" />} />
                 </Routes>
             </Grid>
         </Container>

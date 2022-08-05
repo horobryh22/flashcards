@@ -1,48 +1,60 @@
-// import React, { useEffect } from 'react';
-//
-// import { Button } from '@mui/material';
-//
-// import { useAppDispatch, useTypedSelector } from 'hooks';
-// import { fetchPacks, initializedApp } from 'store/middlewares';
-// import { selectIsUserAuth } from 'store/selectors';
-// import { ReturnComponentType } from 'types';
-//
-// export const ShowPacksCards = (): ReturnComponentType => {
-//     const dispatch = useAppDispatch();
-//
-//     const status = useTypedSelector(selectAppStatus);
-//     const isUserAuth = useTypedSelector(selectIsUserAuth);
-//     const isInitialized = useTypedSelector(selectIsInitialized);
-//
-//     const sortPacks = useTypedSelector(state => state.packs.searchParams.sortPacks);
-//
-//     useEffect(() => {
-//     dispatch(initializedApp());
-//      }, []);
-//
-//      useEffect(() => {
-//         if (isUserAuth) {
-//             dispatch(fetchPacks());
-//         }
-//      }, [isUserAuth, sortPacks]);
-//
-//     const allHandler = () => {
-//         dispatch(fetchPacks());
-//     };
-//
-//     const myHandler = () => {
-//         dispatch(fetchPacks());
-//     };
-//
-//     return (
-//         <div>
-//             <Button onClick={allHandler} variant="outlined">
-//                 All
-//             </Button>
-//             <Button onClick={myHandler} variant="outlined">
-//                 My
-//             </Button>
-//         </div>
-//     );
-// };
-export {};
+import React, { useState } from 'react';
+
+import { Button } from '@mui/material';
+
+import { useAppDispatch, useTypedSelector } from 'hooks';
+import { fetchPacks } from 'store/middlewares';
+import { ReturnComponentType } from 'types';
+
+export const ShowPacksCards = (): ReturnComponentType => {
+    const dispatch = useAppDispatch();
+    const isMyPack = true;
+
+    const { cardPacks } = useTypedSelector(state => state.packs);
+
+    const [colorForButton, setcolorForButton] = useState('all');
+
+    const allCardsHandler = (): void => {
+        setcolorForButton('all');
+        console.log(`cardPacks from all => ${cardPacks}`);
+        dispatch(fetchPacks());
+    };
+
+    const myCardsHandler = (): void => {
+        setcolorForButton('myCards');
+        dispatch(fetchPacks(isMyPack));
+        console.log(`cardPacks from my => ${cardPacks}`);
+    };
+
+    return (
+        <div
+            style={{
+                position: 'absolute',
+                marginTop: '96px',
+                marginLeft: '500px',
+            }}
+        >
+            <Button
+                type="button"
+                variant="contained"
+                style={{
+                    backgroundColor: colorForButton === 'all' ? 'green' : '',
+                }}
+                onClick={allCardsHandler}
+            >
+                All
+            </Button>
+
+            <Button
+                type="button"
+                variant="contained"
+                style={{
+                    backgroundColor: colorForButton === 'myCards' ? 'green' : '',
+                }}
+                onClick={myCardsHandler}
+            >
+                MY CARDS
+            </Button>
+        </div>
+    );
+};
