@@ -9,16 +9,17 @@ const initialState: GetCardsType = {
         cardsPack_id: '',
         min: 0,
         max: 4,
-        sortCards: '0update',
+        sortCards: '0updated',
         page: 1,
-        pageCount: 100,
+        pageCount: 5,
     },
     cardsTotalCount: 0,
-    maxGrade: 0,
+    maxGrade: 5,
     minGrade: 0,
-    page: 0,
-    pageCount: 0,
+    page: 1,
+    pageCount: 5,
     packUserId: '',
+    cardsPack_id: '',
 };
 
 export const cardsReducer = (
@@ -32,6 +33,34 @@ export const cardsReducer = (
             return {
                 ...state,
                 searchParams: { ...state.searchParams, ...action.payload.searchParams },
+            };
+        case 'cards/SET_CARDS_PACK_ID':
+            return {
+                ...state,
+                cardsPack_id: action.payload.cardsPack_id,
+            };
+        case 'cards/SET_CARD_QUESTION':
+            return {
+                ...state,
+                searchParams: {
+                    ...state.searchParams,
+                    cardQuestion: action.payload.question,
+                },
+            };
+        case 'cards/SET_CARDS_PAGE_COUNT':
+            return {
+                ...state,
+                pageCount: action.payload.pageCount,
+                searchParams: {
+                    ...state.searchParams,
+                    pageCount: action.payload.pageCount,
+                },
+            };
+        case 'cards/SET_CARDS_PAGE':
+            return {
+                ...state,
+                page: action.payload.page,
+                searchParams: { ...state.searchParams, page: action.payload.page },
             };
         default:
             return state;

@@ -13,8 +13,6 @@ export const NumberOfCards = (): ReturnComponentType => {
     const max = useTypedSelector(state => state.packs.searchParams.max);
     // const [value, setValue] = React.useState<number[]>([0, 100]);
 
-    // console.log(min, max);
-
     const handleChange = (event: Event, newValue: number | number[]): void => {
         if (Array.isArray(newValue)) {
             dispatch(sliderAC(newValue[0], newValue[1]));

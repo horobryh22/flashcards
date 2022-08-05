@@ -13,3 +13,7 @@ export { selectPageCount } from './selectPageCount/selectPageCount';
 export { selectPacksTotalCount } from './selectPacksTotalCount/selectPacksTotalCount';
 export { selectSortPacks } from './selectSortPacks/selectSortPacks';
 export { selectPackName } from './selectPackName/selectPackName';
+export { selectUserIdFromPack } from './selectUserIdFromPack/selectUserIdFromPack';
+export { selectCardsPage } from './selectCardsPage/selectCardsPage';
+export { selectCardsPageCount } from './selectCardsPageCount/selectCardsPageCount';
+export { selectCardsTotalCount } from './selectCardsTotalCount/selectCardsTotalCount';

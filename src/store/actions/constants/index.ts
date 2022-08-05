@@ -16,3 +16,7 @@ export const SET_PACKS_TOTAL_COUNT = 'packs/SET-PACKS-TOTAL-COUNT';
 export const SET_PAGE_COUNT = 'packs/SET-PAGE-COUNT';
 export const SET_PACK_NAME = 'packs/SET-PACK-NAME';
 export const SET_SLIDER = 'packs/SET_SLIDER';
+export const SET_CARD_QUESTION = 'cards/SET_CARD_QUESTION';
+export const SET_CARDS_PACK_ID = 'cards/SET_CARDS_PACK_ID';
+export const SET_CARDS_PAGE = 'cards/SET_CARDS_PAGE';
+export const SET_CARDS_PAGE_COUNT = 'cards/SET_CARDS_PAGE_COUNT';
