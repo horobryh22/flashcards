@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { Button } from '@mui/material';
+
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { fetchPacks } from 'store/middlewares';
 import { ReturnComponentType } from 'types';
@@ -14,7 +16,7 @@ export const ShowPacksCards = (): ReturnComponentType => {
 
     const allCardsHandler = (): void => {
         setcolorForButton('all');
-        console.log(`cardPacks from all = > ${cardPacks}`);
+        console.log(`cardPacks from all => ${cardPacks}`);
         dispatch(fetchPacks());
     };
 
@@ -25,31 +27,34 @@ export const ShowPacksCards = (): ReturnComponentType => {
     };
 
     return (
-        <div>
-            <button
+        <div
+            style={{
+                position: 'absolute',
+                marginTop: '96px',
+                marginLeft: '500px',
+            }}
+        >
+            <Button
                 type="button"
+                variant="contained"
                 style={{
-                    height: '30px',
-                    marginTop: '30px',
-                    marginLeft: '20px',
-                    backgroundColor: colorForButton === 'all' ? 'skyblue' : '',
+                    backgroundColor: colorForButton === 'all' ? 'green' : '',
                 }}
                 onClick={allCardsHandler}
             >
-                ALL
-            </button>
-            <button
+                All
+            </Button>
+
+            <Button
                 type="button"
+                variant="contained"
                 style={{
-                    height: '30px',
-                    marginTop: '30px',
-                    marginLeft: '5px',
-                    backgroundColor: colorForButton === 'myCards' ? 'skyblue' : '',
+                    backgroundColor: colorForButton === 'myCards' ? 'green' : '',
                 }}
                 onClick={myCardsHandler}
             >
                 MY CARDS
-            </button>
+            </Button>
         </div>
     );
 };
