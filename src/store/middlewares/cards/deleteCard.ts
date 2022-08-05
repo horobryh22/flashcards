@@ -1,7 +1,6 @@
 import { AxiosError } from 'axios';
 
 import { cardsApi } from 'api/cards/cardsApi';
-import { SearchParamsCardsType } from 'api/types';
 import { REQUEST_STATUS } from 'enums';
 import { setAppStatusAC } from 'store/actions';
 import { fetchCards } from 'store/middlewares/cards/fetchCards';
@@ -9,8 +8,10 @@ import { AppThunkType } from 'store/types';
 import { errorHandler } from 'utils';
 
 export const deleteCard =
-    (id: string, cardsPack_id: SearchParamsCardsType): AppThunkType =>
-    async dispatch => {
+    (id: string): AppThunkType =>
+    async (dispatch, getState) => {
+        const { cardsPack_id } = getState().cards;
+
         try {
             dispatch(setAppStatusAC(REQUEST_STATUS.LOADING));
 

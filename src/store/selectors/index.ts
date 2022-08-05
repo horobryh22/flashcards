@@ -14,3 +14,5 @@ export { selectPacksTotalCount } from './selectPacksTotalCount/selectPacksTotalC
 export { selectSortPacks } from './selectSortPacks/selectSortPacks';
 export { selectPackName } from './selectPackName/selectPackName';
 export { selectUserIdFromPack } from './selectUserIdFromPack/selectUserIdFromPack';
+export { selectCardsPage } from './selectCardsPage/selectCardsPage';
+export { selectCardsPageCount } from './selectCardsPageCount/selectCardsPageCount';

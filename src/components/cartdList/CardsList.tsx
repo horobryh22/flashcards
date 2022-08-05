@@ -46,7 +46,7 @@ export const CardsList = ({
     const disableClass = disabled ? s.disabledIcon : '';
 
     const handleSort = (e: React.MouseEvent<HTMLElement>): void => {
-        let sortCards;
+        let sortCards: string;
 
         if (e.currentTarget.id === UPDATE_SORT_BTN_ID) {
             sortCards =
@@ -54,6 +54,12 @@ export const CardsList = ({
                     ? `1${UPDATE_FIELD_NAME}`
                     : `0${UPDATE_FIELD_NAME}`;
             setUpdateDirection(updateDirection === 'asc' ? 'desc' : 'asc');
+            dispatch(
+                setCardsSearchParamsAC({
+                    cardsPack_id,
+                    sortCards,
+                } as SearchParamsCardsType),
+            );
         }
         if (e.currentTarget.id === GRADE_SORT_BTN_ID) {
             sortCards =
@@ -61,10 +67,17 @@ export const CardsList = ({
                     ? `1${GRADE_FIELD_NAME}`
                     : `0${GRADE_FIELD_NAME}`;
             setGradeDirection(gradeDirection === 'asc' ? 'desc' : 'asc');
+            dispatch(
+                setCardsSearchParamsAC({
+                    cardsPack_id,
+                    sortCards,
+                } as SearchParamsCardsType),
+            );
         }
 
-        dispatch(setCardsSearchParamsAC({ cardsPack_id, sortCards }));
-        dispatch(fetchCards({ cardsPack_id, sortCards }));
+        if (cardsPack_id) {
+            dispatch(fetchCards(cardsPack_id));
+        }
     };
 
     const editCardHandler = (card: CardsType): void => {
@@ -75,11 +88,11 @@ export const CardsList = ({
         updatedCard.answer = 'updated answer';
         // hardcode //
 
-        dispatch(updateCard(updatedCard, { cardsPack_id } as SearchParamsCardsType));
+        dispatch(updateCard(updatedCard));
     };
 
     const deleteCardHandler = (cardId: string): void => {
-        dispatch(deleteCard(cardId, { cardsPack_id } as SearchParamsCardsType));
+        dispatch(deleteCard(cardId));
     };
 
     if (cards.length === 0) {
