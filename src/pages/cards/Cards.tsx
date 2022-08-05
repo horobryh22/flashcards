@@ -33,6 +33,7 @@ import {
     selectCardPacks,
     selectCardsPage,
     selectCardsPageCount,
+    selectCardsTotalCount,
     selectUserIdFromPack,
 } from 'store/selectors';
 import { ReturnComponentType } from 'types';
@@ -49,14 +50,13 @@ export const Cards = (): ReturnComponentType => {
     const userId = useTypedSelector(selectAuthUserId);
     const page = useTypedSelector(selectCardsPage);
     const pageCount = useTypedSelector(selectCardsPageCount);
+    const cardsTotalCount = useTypedSelector(selectCardsTotalCount);
 
     const [value, setValue] = useState<string>('');
     const debouncedValue = useDebounce<string>(value, DELAY);
 
     const currentPuck = packs.find(pack => pack._id === cardsPack_id);
     const currentPuckName = currentPuck?.name || '';
-
-    const cardsTotalCount = cards.length;
 
     const count = useMemo(() => {
         return Math.ceil(cardsTotalCount / pageCount) || 1;
@@ -90,7 +90,6 @@ export const Cards = (): ReturnComponentType => {
     const changeCardsSelectHandler = (event: SelectChangeEvent): void => {
         const pageCount = +event.target.value;
 
-        console.log(`params page count ${pageCount}`);
         dispatch(setCardsPageCountAC(pageCount));
     };
 
