@@ -14,3 +14,6 @@ export { CustomPagination } from './customPagination/CustomPagination';
 export { CustomSelect } from './customSelect/CustomSelect';
 export { ProfileList } from './profileList/ProfileList';
 export { Search } from './search/Search';
+export { ShowPacksCards } from './showPacksCards/ShowPacksCards';
+export { NumberOfCards } from './numberOfCards/NumberOfCards';
+export { OverTableRow } from './overTableRow/OverTableRow';

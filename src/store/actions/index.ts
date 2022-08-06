@@ -14,6 +14,8 @@ export {
     setPacksTotalCountAC,
     setPageCountAC,
     setPackNameAC,
+    setCardsRangeAC,
+    setSearchUserIdAC,
 } from './packs';
 export type {
     AuthActionsType,

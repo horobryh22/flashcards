@@ -31,6 +31,7 @@ const App = (): ReturnComponentType => {
     const page = useTypedSelector(selectPage);
     const pageCount = useTypedSelector(selectPageCount);
     const packName = useTypedSelector(selectPackName);
+    const id = useTypedSelector(state => state.packs.searchParams.user_id);
 
     useEffect(() => {
         dispatch(initializedApp());
@@ -40,7 +41,7 @@ const App = (): ReturnComponentType => {
         if (isUserAuth) {
             dispatch(fetchPacks());
         }
-    }, [isUserAuth, sortPacks, page, pageCount, packName, min, max]);
+    }, [isUserAuth, sortPacks, page, pageCount, packName, min, max, id]);
 
     if (!isInitialized) {
         return (

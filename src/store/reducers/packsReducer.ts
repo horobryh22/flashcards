@@ -6,8 +6,9 @@ import {
     SET_PACKS_TOTAL_COUNT,
     SET_PAGE_COUNT,
     SET_CARD_PACKS,
-    SET_SLIDER,
     SET_SORT_PACKS,
+    SET_CARDS_RANGE,
+    SET_SEARCH_USER_ID,
 } from 'store/actions/constants';
 import { PacksActionsType } from 'store/actions/types';
 
@@ -16,7 +17,7 @@ const initialState: PacksStateType = {
     searchParams: {
         packName: '',
         min: 0,
-        max: 4,
+        max: 120,
         sortPacks: '0updated',
         page: 1,
         pageCount: 8,
@@ -61,13 +62,21 @@ export const packsReducer = (
                 ...state,
                 searchParams: { ...state.searchParams, sortPacks: action.payload.sort },
             };
-        case SET_SLIDER:
+        case SET_CARDS_RANGE:
             return {
                 ...state,
                 searchParams: {
                     ...state.searchParams,
                     min: action.payload.min,
                     max: action.payload.max,
+                },
+            };
+        case SET_SEARCH_USER_ID:
+            return {
+                ...state,
+                searchParams: {
+                    ...state.searchParams,
+                    user_id: action.payload.id,
                 },
             };
         default:

@@ -1,17 +1,21 @@
 import {
     SET_CARD_PACKS,
+    SET_CARDS_RANGE,
     SET_CURRENT_PAGE,
     SET_PACK_NAME,
     SET_PACKS_TOTAL_COUNT,
     SET_PAGE_COUNT,
+    SET_SEARCH_USER_ID,
     SET_SORT_PACKS,
 } from './constants';
 import {
     SetCardPacksType,
+    SetCardsRangeType,
     SetCurrentPageType,
     SetPackNameType,
     SetPacksTotalCount,
     SetPageCountType,
+    SetSearchUserId,
     SetSortPacksType,
 } from './types';
 
@@ -56,5 +60,19 @@ export const setPackNameAC = (packName: string): SetPackNameType => {
     return {
         type: SET_PACK_NAME,
         payload: { packName },
+    } as const;
+};
+
+export const setCardsRangeAC = (min: number, max: number): SetCardsRangeType => {
+    return {
+        type: SET_CARDS_RANGE,
+        payload: { min, max },
+    } as const;
+};
+
+export const setSearchUserIdAC = (id: string): SetSearchUserId => {
+    return {
+        type: SET_SEARCH_USER_ID,
+        payload: { id },
     } as const;
 };
