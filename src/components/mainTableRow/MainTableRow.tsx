@@ -6,12 +6,15 @@ import { TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
 import { OrderDirectionType } from './types';
 
 import { PACK_COLUMNS } from 'constant';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useTypedSelector } from 'hooks';
+import { selectSortPacks } from 'store/selectors';
 import { ColumnSortType, ReturnComponentType } from 'types';
 import { handleSortType } from 'utils';
 
 export const MainTableRow = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
+
+    const sortPacks = useTypedSelector(selectSortPacks);
 
     const [nameDirection, setNameDirection] = useState<OrderDirectionType>('asc');
     const [cardsDirection, setCardsDirection] = useState<OrderDirectionType>('asc');
@@ -50,15 +53,19 @@ export const MainTableRow = (): ReturnComponentType => {
         }
 
         let direction;
+        let sort;
 
         if (column.id === 'name') {
             direction = nameDirection;
+            sort = 'name';
         }
         if (column.id === 'cardsCount') {
             direction = cardsDirection;
+            sort = 'cardsCount';
         }
         if (column.id === 'updated') {
             direction = updatedDirection;
+            sort = 'updated';
         }
 
         return (
@@ -76,7 +83,7 @@ export const MainTableRow = (): ReturnComponentType => {
                 width={column.minWidth}
             >
                 <TableSortLabel
-                    active
+                    active={sortPacks.slice(1) === sort}
                     direction={direction}
                     IconComponent={ArrowDropDown}
                 >

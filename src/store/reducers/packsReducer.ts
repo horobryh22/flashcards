@@ -20,7 +20,7 @@ const initialState: PacksStateType = {
         max: 120,
         sortPacks: '0updated',
         page: 1,
-        pageCount: 8,
+        pageCount: 6,
         user_id: '',
     },
     cardPacksTotalCount: 0,

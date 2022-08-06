@@ -5,14 +5,16 @@ import Slider from '@mui/material/Slider';
 
 import classes from './NumberOfCards.module.css';
 
+import { NumEditableSpan } from 'components/numEditableSpan/NumEditableSpan';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setCardsRangeAC } from 'store/actions';
+import { selectMax, selectMin } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const NumberOfCards = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
-    const min = useTypedSelector(state => state.packs.searchParams.min);
-    const max = useTypedSelector(state => state.packs.searchParams.max);
+    const min = useTypedSelector(selectMin);
+    const max = useTypedSelector(selectMax);
 
     const handleChange = (
         event: React.SyntheticEvent | Event,
@@ -27,22 +29,17 @@ export const NumberOfCards = (): ReturnComponentType => {
         <Box>
             <span className={classes.title}>Number of cards</span>
             <div className={classes.slider}>
-                <div className={classes.numBox}>
-                    <span>{min}</span>
-                </div>
+                <NumEditableSpan num={min} isMin />
                 <Slider
                     getAriaLabel={() => 'Minimum distance'}
                     min={0}
                     max={110}
                     value={[min, max]}
                     onChangeCommitted={handleChange}
-                    disableSwap
                     valueLabelDisplay="auto"
                     style={{ width: '150px' }}
                 />
-                <div className={classes.numBox}>
-                    <span>{max}</span>
-                </div>
+                <NumEditableSpan num={max} isMin={false} />
             </div>
         </Box>
     );

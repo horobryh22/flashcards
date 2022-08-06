@@ -10,7 +10,7 @@ export const handleSortType = (
     dispatch: AppDispatch,
 ): void => {
     setDirection(directionName === 'asc' ? 'desc' : 'asc');
-    const sortDirection = directionName === 'asc' ? '1' : '0';
+    const sortDirection = directionName === 'asc' ? '0' : '1';
 
     if (sort) {
         dispatch(setSortPacksAC(`${sortDirection}${sort}`));

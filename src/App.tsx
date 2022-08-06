@@ -9,8 +9,11 @@ import { useAppDispatch, useTypedSelector } from 'hooks';
 import { fetchPacks, initializedApp } from 'store/middlewares';
 import {
     selectAppStatus,
+    selectId,
     selectIsInitialized,
     selectIsUserAuth,
+    selectMax,
+    selectMin,
     selectPackName,
     selectPage,
     selectPageCount,
@@ -25,13 +28,13 @@ const App = (): ReturnComponentType => {
     const isUserAuth = useTypedSelector(selectIsUserAuth);
     const isInitialized = useTypedSelector(selectIsInitialized);
 
-    const min = useTypedSelector(state => state.packs.searchParams.min);
-    const max = useTypedSelector(state => state.packs.searchParams.max);
+    const min = useTypedSelector(selectMin);
+    const max = useTypedSelector(selectMax);
     const sortPacks = useTypedSelector(selectSortPacks);
     const page = useTypedSelector(selectPage);
     const pageCount = useTypedSelector(selectPageCount);
     const packName = useTypedSelector(selectPackName);
-    const id = useTypedSelector(state => state.packs.searchParams.user_id);
+    const id = useTypedSelector(selectId);
 
     useEffect(() => {
         dispatch(initializedApp());

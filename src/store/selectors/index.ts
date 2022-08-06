@@ -6,7 +6,6 @@ export { selectAppStatus } from './selectAppStatus/selectAppStatus';
 export { selectIsUserAuth } from './selectIsUserAuth/selectIsUserAuth';
 export { selectIsInitialized } from './selectIsInitialized/selectIsInitialized';
 export { selectCardPacks } from './selectCardPacks/selectCardPacks';
-// export { selectCards } from './selectCards/selectCards';
 export { selectAuthUserId } from './selectAuthUserId/selectAuthUserId';
 export { selectPage } from './selectPage/selectPage';
 export { selectPageCount } from './selectPageCount/selectPageCount';
@@ -17,3 +16,6 @@ export { selectUserIdFromPack } from './selectUserIdFromPack/selectUserIdFromPac
 export { selectCardsPage } from './selectCardsPage/selectCardsPage';
 export { selectCardsPageCount } from './selectCardsPageCount/selectCardsPageCount';
 export { selectCardsTotalCount } from './selectCardsTotalCount/selectCardsTotalCount';
+export { selectMin } from './selectMin/selectMin';
+export { selectMax } from './selectMax/selectMax';
+export { selectId } from './selectId/selectId';
