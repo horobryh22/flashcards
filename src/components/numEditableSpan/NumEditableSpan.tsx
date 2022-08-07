@@ -1,19 +1,15 @@
 import React, { ChangeEvent, useState } from 'react';
 
 import classes from './NumEditableSpan.module.css';
+import { EditableSpanType } from './types';
 
+import { MAX_CARDS_COUNT } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setCardsRangeAC } from 'store/actions';
 import { selectMax, selectMin } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
-export type EditableSpanType = {
-    num: number;
-    isMin: boolean;
-};
-
 const VALUE_LENGTH = 3;
-const MAX_CARDS_COUNT = 120;
 
 export const NumEditableSpan = ({
     num,
