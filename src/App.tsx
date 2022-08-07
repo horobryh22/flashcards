@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { CircularProgress, LinearProgress } from '@mui/material';
 
-import { Header, Links, RoutesApp, SnackBar } from 'components';
+import { Header, RoutesApp, SnackBar } from 'components';
 import { PROGRESS_STYLE } from 'constant';
 import { REQUEST_STATUS } from 'enums';
 import { useAppDispatch, useTypedSelector } from 'hooks';
@@ -27,6 +27,7 @@ const App = (): ReturnComponentType => {
 
     const min = useTypedSelector(state => state.packs.searchParams.min);
     const max = useTypedSelector(state => state.packs.searchParams.max);
+    const isMyPack = useTypedSelector(state => state.packs.isMyPack);
     const sortPacks = useTypedSelector(selectSortPacks);
     const page = useTypedSelector(selectPage);
     const pageCount = useTypedSelector(selectPageCount);
@@ -40,7 +41,7 @@ const App = (): ReturnComponentType => {
         if (isUserAuth) {
             dispatch(fetchPacks());
         }
-    }, [isUserAuth, sortPacks, page, pageCount, packName, min, max]);
+    }, [isUserAuth, sortPacks, page, pageCount, packName, min, max, isMyPack]);
 
     if (!isInitialized) {
         return (
@@ -64,7 +65,6 @@ const App = (): ReturnComponentType => {
             )}
             <Header />
             <RoutesApp />
-            <Links />
             <SnackBar />
         </>
     );

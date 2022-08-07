@@ -24,14 +24,7 @@ export const NumberOfCards = (): ReturnComponentType => {
     }, [value[0], value[1]]); */
 
     return (
-        <Box
-            sx={{ width: 300 }}
-            style={{
-                position: 'absolute',
-                marginTop: '150px',
-                marginLeft: '740px',
-            }}
-        >
+        <Box sx={{ width: 300 }}>
             <Slider
                 min={0}
                 max={10}

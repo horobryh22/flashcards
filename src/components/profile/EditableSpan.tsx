@@ -15,7 +15,6 @@ export const EditableSpan = (props: EditableSpanProps): ReturnComponentType => {
     const { title, editTitle } = props;
     const [edit, setEdit] = useState(false);
     const [name, setName] = useState(title);
-    // const [avatar, setAvatar] = useState<string | null | File>(null);
 
     const onPencilClickHandler = (): void => {
         setEdit(!edit);

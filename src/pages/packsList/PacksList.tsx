@@ -1,5 +1,7 @@
 import React from 'react';
 
+import s from './PacksList.module.css';
+
 import { CardsTopContent, CustomPagination, Search, TableComponent } from 'components';
 import { NumberOfCards } from 'components/overTableRow/NumberOfCards';
 import { ShowPacksCards } from 'components/overTableRow/ShowPacksCards';
@@ -16,15 +18,18 @@ export const PacksList = (): ReturnComponentType => {
 
     return (
         <>
-            <Search />
-            <NumberOfCards />
-            <ShowPacksCards />
             <CardsTopContent
                 title="Packs list"
                 buttonName="Add new pack"
                 isButtonNeed
                 callback={addPack}
             />
+            <div className={s.tableTopContainer}>
+                <Search />
+                <ShowPacksCards />
+                <NumberOfCards />
+            </div>
+
             <TableComponent />
             <CustomPagination />
         </>

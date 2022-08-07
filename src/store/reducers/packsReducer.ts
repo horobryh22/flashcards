@@ -8,6 +8,7 @@ import {
     SET_CARD_PACKS,
     SET_SLIDER,
     SET_SORT_PACKS,
+    SET_IS_MY_CARDS,
 } from 'store/actions/constants';
 import { PacksActionsType } from 'store/actions/types';
 
@@ -22,6 +23,7 @@ const initialState: PacksStateType = {
         pageCount: 8,
         user_id: '',
     },
+    isMyPack: false,
     cardPacksTotalCount: 0,
 };
 
@@ -56,6 +58,8 @@ export const packsReducer = (
             };
         case SET_CARD_PACKS:
             return { ...state, cardPacks: action.payload.cardPacks };
+        case SET_IS_MY_CARDS:
+            return { ...state, isMyPack: action.payload.isMyPack };
         case SET_SORT_PACKS:
             return {
                 ...state,

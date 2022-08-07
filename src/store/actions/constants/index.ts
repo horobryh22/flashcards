@@ -20,3 +20,4 @@ export const SET_CARD_QUESTION = 'cards/SET_CARD_QUESTION';
 export const SET_CARDS_PACK_ID = 'cards/SET_CARDS_PACK_ID';
 export const SET_CARDS_PAGE = 'cards/SET_CARDS_PAGE';
 export const SET_CARDS_PAGE_COUNT = 'cards/SET_CARDS_PAGE_COUNT';
+export const SET_IS_MY_CARDS = 'cards/SET_IS_MY_CARDS';

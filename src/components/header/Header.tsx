@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { StyledAppBar, StyledButton, StyledToolbar } from './styles';
 
 import logo from 'assets/images/logo.svg';
-import { ProfileList, UserPhoto } from 'components';
+import { Links, ProfileList, UserPhoto } from 'components';
 import { useTypedSelector } from 'hooks';
 import { selectIsUserAuth } from 'store/selectors';
 import { ReturnComponentType } from 'types';
@@ -31,6 +31,7 @@ export const Header = (): ReturnComponentType => {
                 <Container>
                     <StyledToolbar>
                         <img src={logo} alt="logo" />
+                        <Links />
                         {isUserAuth ? (
                             <button
                                 type="button"

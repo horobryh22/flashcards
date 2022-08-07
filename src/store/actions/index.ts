@@ -14,6 +14,7 @@ export {
     setPacksTotalCountAC,
     setPageCountAC,
     setPackNameAC,
+    setIsMyPackAC,
 } from './packs';
 export type {
     AuthActionsType,

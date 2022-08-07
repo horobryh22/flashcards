@@ -1,6 +1,7 @@
 import {
     SET_CARD_PACKS,
     SET_CURRENT_PAGE,
+    SET_IS_MY_CARDS,
     SET_PACK_NAME,
     SET_PACKS_TOTAL_COUNT,
     SET_PAGE_COUNT,
@@ -16,6 +17,7 @@ import {
 } from './types';
 
 import { CardType, SortTypes } from 'api/types';
+import { SetIsPackType } from 'store/actions/types/SetMyAllCardsType';
 
 export const setCardPacksAC = (cardPacks: CardType[]): SetCardPacksType => {
     return {
@@ -56,5 +58,12 @@ export const setPackNameAC = (packName: string): SetPackNameType => {
     return {
         type: SET_PACK_NAME,
         payload: { packName },
+    } as const;
+};
+
+export const setIsMyPackAC = (isMyPack: boolean): SetIsPackType => {
+    return {
+        type: SET_IS_MY_CARDS,
+        payload: { isMyPack },
     } as const;
 };
