@@ -14,10 +14,6 @@ export const CardsTopContent: React.FC<CardsTopContentType> = ({
     callback,
     disabled,
 }): ReturnComponentType => {
-    const handleClick = (): void => {
-        callback();
-    };
-
     return (
         <div className={classes.container}>
             <div className={classes.wrapper}>
@@ -27,7 +23,7 @@ export const CardsTopContent: React.FC<CardsTopContentType> = ({
                         <StyledButton
                             variant="contained"
                             style={{ padding: '8px 28px' }}
-                            onClick={handleClick}
+                            onClick={callback}
                             disabled={disabled}
                         >
                             {buttonName}

@@ -1,7 +1,8 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Modal } from '@mui/material';
+import { createPortal } from 'react-dom';
 
 import classes from './ModalParent.module.css';
 
@@ -21,38 +22,47 @@ const style = {
 };
 
 export type ModalParentType = {
+    open: boolean;
+    onClose: () => void;
     children: ReactNode;
     title: string;
     buttonName: string;
 };
 
+const modalRootElement = document.querySelector('#modal');
+const element = document.createElement('div');
+
 export const ModalParent = ({
+    open,
+    onClose,
     children,
     title,
     buttonName,
 }: ModalParentType): ReturnComponentType => {
-    const [open, setOpen] = React.useState(false);
-    // const handleOpen = (): void => setOpen(true);
-    const handleClose = (): void => setOpen(false);
+    useEffect(() => {
+        if (open && modalRootElement) {
+            modalRootElement.appendChild(element);
 
-    return (
-        <div>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
+            return () => {
+                modalRootElement.removeChild(element);
+            };
+        }
+    }, []);
+
+    if (open) {
+        return createPortal(
+            <Modal open={open} onClose={onClose}>
                 <Box sx={style}>
                     <div className={classes.modalHeader}>
                         <span>{title}</span>
-                        <CloseIcon onClick={handleClose} style={{ cursor: 'pointer' }} />
+                        <CloseIcon onClick={onClose} style={{ cursor: 'pointer' }} />
                     </div>
+
                     {children}
                     <div className={classes.modalFooter}>
                         <StyledButton
                             variant="contained"
-                            onClick={handleClose}
+                            onClick={onClose}
                             style={{
                                 padding: '8px 35px',
                                 backgroundColor: '#FCFCFC',
@@ -63,19 +73,25 @@ export const ModalParent = ({
                         >
                             Cancel
                         </StyledButton>
-                        <StyledButton
-                            variant="contained"
-                            style={{
-                                padding: '8px 40px',
-                                boxShadow:
-                                    '0px 2px 10px rgba(109, 109, 109, 0.9), inset 0px 1px 0px rgba(255, 255, 255, 0.7)',
-                            }}
-                        >
-                            {buttonName}
-                        </StyledButton>
+                        <form>
+                            <StyledButton
+                                type="submit"
+                                variant="contained"
+                                style={{
+                                    padding: '8px 40px',
+                                    boxShadow:
+                                        '0px 2px 10px rgba(109, 109, 109, 0.9), inset 0px 1px 0px rgba(255, 255, 255, 0.7)',
+                                }}
+                            >
+                                {buttonName}
+                            </StyledButton>
+                        </form>
                     </div>
                 </Box>
-            </Modal>
-        </div>
-    );
+            </Modal>,
+            element,
+        );
+    }
+
+    return null;
 };

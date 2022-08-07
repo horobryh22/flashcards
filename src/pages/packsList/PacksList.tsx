@@ -1,5 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
+import { useForm } from 'react-hook-form';
+
+import { CardsPackType } from 'api/types';
 import {
     AddPackModal,
     CardsTopContent,
@@ -7,6 +10,7 @@ import {
     OverTableRow,
     TableComponent,
 } from 'components';
+import { DELAY } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { addCardsPack, fetchPacks } from 'store/middlewares';
 import {
@@ -24,6 +28,25 @@ import { ReturnComponentType } from 'types';
 export const PacksList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
+    const [openAddPackModal, setOpenAddPackModal] = useState(false);
+
+    const { control, handleSubmit, getValues, reset } = useForm({
+        defaultValues: {
+            name: '',
+            private: false,
+        },
+        mode: 'onSubmit',
+    });
+
+    const onSubmit = (values: CardsPackType): void => {
+        dispatch(addCardsPack(values));
+
+        setTimeout(() => {
+            setOpenAddPackModal(false);
+            reset();
+        }, DELAY);
+    };
+
     const isUserAuth = useTypedSelector(selectIsUserAuth);
 
     const min = useTypedSelector(selectMin);
@@ -33,10 +56,6 @@ export const PacksList = (): ReturnComponentType => {
     const pageCount = useTypedSelector(selectPageCount);
     const packName = useTypedSelector(selectPackName);
     const id = useTypedSelector(selectId);
-
-    const addPack = (): void => {
-        dispatch(addCardsPack('Test pack'));
-    };
 
     useEffect(() => {
         if (isUserAuth) {
@@ -50,12 +69,19 @@ export const PacksList = (): ReturnComponentType => {
                 title="Packs list"
                 buttonName="Add new pack"
                 isButtonNeed
-                callback={addPack}
+                callback={() => setOpenAddPackModal(true)}
             />
             <OverTableRow />
             <TableComponent />
             <CustomPagination />
-            <AddPackModal />
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <AddPackModal
+                    open={openAddPackModal}
+                    onClose={() => setOpenAddPackModal(false)}
+                    control={control}
+                    getValues={getValues}
+                />
+            </form>
         </>
     );
 };

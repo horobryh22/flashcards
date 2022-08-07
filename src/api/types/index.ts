@@ -14,3 +14,4 @@ export type {
 export type { GetCardsType } from 'api/types/cards/GetCardType/GetCardsType';
 export type { SearchParamsCardsType } from 'api/types/cards/GetCurrentCardRequestType/SearchParamsCardsType';
 export type { GetCurrentCardResponseType } from './cards/GetCurrentCardResponseType/GetCurrentCardResponseType';
+export type { CardsPackType } from './cards/CardsPackType/CardsPackType';
