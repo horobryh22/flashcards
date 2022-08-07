@@ -1,0 +1,16 @@
+.modalHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 40px;
+}
+
+.modalFooter {
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-between;
+}

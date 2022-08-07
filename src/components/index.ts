@@ -17,4 +17,6 @@ export { Search } from './search/Search';
 export { ShowPacksCards } from './showPacksCards/ShowPacksCards';
 export { NumberOfCards } from './numberOfCards/NumberOfCards';
 export { OverTableRow } from './overTableRow/OverTableRow';
-export { NumEditableSpan } from 'components/numEditableSpan/NumEditableSpan';
+export { NumEditableSpan } from './numEditableSpan/NumEditableSpan';
+export { ModalParent } from './modalParent/ModalParent';
+export { AddPackModal } from './modals';

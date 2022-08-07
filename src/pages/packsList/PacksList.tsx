@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import {
+    AddPackModal,
     CardsTopContent,
     CustomPagination,
     OverTableRow,
@@ -54,6 +55,7 @@ export const PacksList = (): ReturnComponentType => {
             <OverTableRow />
             <TableComponent />
             <CustomPagination />
+            <AddPackModal />
         </>
     );
 };
