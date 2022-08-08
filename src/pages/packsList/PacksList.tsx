@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import { useForm } from 'react-hook-form';
-
-import { CardsPackType } from 'api/types';
 import {
-    AddPackModal,
     CardsTopContent,
     CustomPagination,
+    ModalParent,
     OverTableRow,
     TableComponent,
 } from 'components';
-import { DELAY } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { addCardsPack, fetchPacks } from 'store/middlewares';
+import { setModalStateAC, setModalTypeAC } from 'store/actions';
+import { fetchPacks } from 'store/middlewares';
 import {
     selectId,
     selectIsUserAuth,
@@ -28,24 +25,7 @@ import { ReturnComponentType } from 'types';
 export const PacksList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const [openAddPackModal, setOpenAddPackModal] = useState(false);
-
-    const { control, handleSubmit, getValues, reset } = useForm({
-        defaultValues: {
-            name: '',
-            private: false,
-        },
-        mode: 'onSubmit',
-    });
-
-    const onSubmit = (values: CardsPackType): void => {
-        dispatch(addCardsPack(values));
-
-        setTimeout(() => {
-            setOpenAddPackModal(false);
-            reset();
-        }, DELAY);
-    };
+    const isOpen = useTypedSelector(state => state.app.modal.isOpen);
 
     const isUserAuth = useTypedSelector(selectIsUserAuth);
 
@@ -56,6 +36,21 @@ export const PacksList = (): ReturnComponentType => {
     const pageCount = useTypedSelector(selectPageCount);
     const packName = useTypedSelector(selectPackName);
     const id = useTypedSelector(selectId);
+
+    const handleClick = (): void => {
+        dispatch(
+            setModalTypeAC({
+                isOpen: true,
+                type: 'addPack',
+                modalTitle: 'Add new pack',
+                buttonName: 'Save',
+            }),
+        );
+    };
+
+    const onClose = (): void => {
+        dispatch(setModalStateAC(false));
+    };
 
     useEffect(() => {
         if (isUserAuth) {
@@ -69,19 +64,12 @@ export const PacksList = (): ReturnComponentType => {
                 title="Packs list"
                 buttonName="Add new pack"
                 isButtonNeed
-                callback={() => setOpenAddPackModal(true)}
+                callback={handleClick}
             />
             <OverTableRow />
             <TableComponent />
             <CustomPagination />
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <AddPackModal
-                    open={openAddPackModal}
-                    onClose={() => setOpenAddPackModal(false)}
-                    control={control}
-                    getValues={getValues}
-                />
-            </form>
+            <ModalParent open={isOpen} onClose={onClose} />
         </>
     );
 };

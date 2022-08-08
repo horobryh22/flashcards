@@ -10,6 +10,12 @@ beforeEach(() => {
         error: null,
         status: REQUEST_STATUS.IDLE,
         isInitialized: false,
+        modal: {
+            isOpen: false,
+            modalTitle: '',
+            type: '',
+            buttonName: '',
+        },
     };
 });
 

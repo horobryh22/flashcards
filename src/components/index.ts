@@ -19,4 +19,5 @@ export { NumberOfCards } from './numberOfCards/NumberOfCards';
 export { OverTableRow } from './overTableRow/OverTableRow';
 export { NumEditableSpan } from './numEditableSpan/NumEditableSpan';
 export { ModalParent } from './modalParent/ModalParent';
-export { AddPackModal } from './modals';
+export { PackModal } from './modals';
+export { ModalContent } from 'components/modalContent/ModalContent';

@@ -1,50 +1,73 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Modal } from '@mui/material';
 import { createPortal } from 'react-dom';
+import { useForm } from 'react-hook-form';
 
 import classes from './ModalParent.module.css';
+import { BOX_STYLES } from './styles';
+import { ModalMapperType, ModalParentType } from './types';
 
-import { StyledButton } from 'components/header/styles';
+import { CardsPackType } from 'api/types';
+import { ModalContent } from 'components';
+import { PackModal } from 'components/modals';
+import { DELAY } from 'constant';
+import { useAppDispatch, useTypedSelector } from 'hooks';
+import { setModalStateAC } from 'store/actions';
 import { ReturnComponentType } from 'types';
+import { chooseAction } from 'utils';
 
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    backgroundColor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+let TIMER: ReturnType<typeof setTimeout>;
+const ELEMENT = document.createElement('div');
+const MODAL_ROOT_ELEMENT = document.querySelector('#modal');
 
-export type ModalParentType = {
-    open: boolean;
-    onClose: () => void;
-    children: ReactNode;
-    title: string;
-    buttonName: string;
-};
+export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponentType => {
+    const dispatch = useAppDispatch();
 
-const modalRootElement = document.querySelector('#modal');
-const element = document.createElement('div');
+    const modalType = useTypedSelector(state => state.app.modal.type);
+    const modalTitle = useTypedSelector(state => state.app.modal.modalTitle);
+    const buttonName = useTypedSelector(state => state.app.modal.buttonName);
+    const packTitle = useTypedSelector(state => state.app.modal.packTitle);
+    const packId = useTypedSelector(state => state.app.modal.packId);
 
-export const ModalParent = ({
-    open,
-    onClose,
-    children,
-    title,
-    buttonName,
-}: ModalParentType): ReturnComponentType => {
+    const { control, handleSubmit, getValues, reset } = useForm({
+        defaultValues: {
+            name: '',
+            private: false,
+        },
+        mode: 'onSubmit',
+    });
+
+    const modalTypesMapper: ModalMapperType = {
+        addPack: <PackModal control={control} getValues={getValues} />,
+        editPack: (
+            <PackModal control={control} getValues={getValues} packTitle={packTitle} />
+        ),
+        removePack: (
+            <div className={classes.modalContent}>
+                Do you really want to remove <b>{packTitle}</b>?<br /> All cards will be
+                deleted.
+            </div>
+        ),
+    };
+
+    const onSubmit = (values: CardsPackType): void => {
+        chooseAction(modalType, dispatch, packId as string, values);
+
+        TIMER = setTimeout(() => {
+            dispatch(setModalStateAC(false));
+            reset();
+        }, DELAY);
+    };
+
     useEffect(() => {
-        if (open && modalRootElement) {
-            modalRootElement.appendChild(element);
+        if (open && MODAL_ROOT_ELEMENT) {
+            MODAL_ROOT_ELEMENT.appendChild(ELEMENT);
 
             return () => {
-                modalRootElement.removeChild(element);
+                MODAL_ROOT_ELEMENT.removeChild(ELEMENT);
+                clearTimeout(TIMER);
             };
         }
     }, []);
@@ -52,44 +75,21 @@ export const ModalParent = ({
     if (open) {
         return createPortal(
             <Modal open={open} onClose={onClose}>
-                <Box sx={style}>
+                <Box sx={BOX_STYLES}>
                     <div className={classes.modalHeader}>
-                        <span>{title}</span>
+                        <span>{modalTitle}</span>
                         <CloseIcon onClick={onClose} style={{ cursor: 'pointer' }} />
                     </div>
-
-                    {children}
-                    <div className={classes.modalFooter}>
-                        <StyledButton
-                            variant="contained"
-                            onClick={onClose}
-                            style={{
-                                padding: '8px 35px',
-                                backgroundColor: '#FCFCFC',
-                                color: 'black',
-                                boxShadow:
-                                    '0px 2px 10px rgba(109, 109, 109, 0.9), inset 0px 1px 0px rgba(255, 255, 255, 0.7)',
-                            }}
-                        >
-                            Cancel
-                        </StyledButton>
-                        <form>
-                            <StyledButton
-                                type="submit"
-                                variant="contained"
-                                style={{
-                                    padding: '8px 40px',
-                                    boxShadow:
-                                        '0px 2px 10px rgba(109, 109, 109, 0.9), inset 0px 1px 0px rgba(255, 255, 255, 0.7)',
-                                }}
-                            >
-                                {buttonName}
-                            </StyledButton>
-                        </form>
-                    </div>
+                    <ModalContent
+                        onSubmit={handleSubmit(onSubmit)}
+                        content={modalTypesMapper}
+                        modalType={modalType}
+                        onClose={onClose}
+                        buttonName={buttonName}
+                    />
                 </Box>
             </Modal>,
-            element,
+            ELEMENT,
         );
     }
 

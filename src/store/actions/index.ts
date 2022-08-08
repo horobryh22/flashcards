@@ -6,7 +6,12 @@ export {
     setGoToLoginAC,
     setAuthUserDataAC,
 } from './auth';
-export { setAppStatusAC, setIsInitializedAC } from './app';
+export {
+    setAppStatusAC,
+    setIsInitializedAC,
+    setModalTypeAC,
+    setModalStateAC,
+} from './app';
 export {
     setCardPacksAC,
     setSortPacksAC,

@@ -32,6 +32,12 @@ beforeEach(() => {
             status: REQUEST_STATUS.IDLE,
             isInitialized: false,
             error: null,
+            modal: {
+                isOpen: false,
+                modalTitle: '',
+                type: '',
+                buttonName: '',
+            },
         },
         auth: {
             error: 'some error',

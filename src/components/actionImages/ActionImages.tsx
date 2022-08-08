@@ -9,12 +9,13 @@ import edit from 'assets/images/edit.svg';
 import knowledge from 'assets/images/knowledge.svg';
 import remove from 'assets/images/remove.svg';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { removeCardsPack, updateCardsPack } from 'store/middlewares';
+import { setModalTypeAC } from 'store/actions';
 import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const ActionImages = ({
     packId,
+    packTitle,
     currentUserId,
 }: ActionImagesType): ReturnComponentType => {
     const dispatch = useAppDispatch();
@@ -23,12 +24,30 @@ export const ActionImages = ({
 
     const removePack = (e: React.MouseEvent<HTMLElement>): void => {
         e.stopPropagation();
-        dispatch(removeCardsPack(packId));
+        dispatch(
+            setModalTypeAC({
+                packId,
+                packTitle,
+                isOpen: true,
+                type: 'removePack',
+                modalTitle: 'Delete pack',
+                buttonName: 'Delete',
+            }),
+        );
     };
 
     const updatePack = (e: React.MouseEvent<HTMLElement>): void => {
         e.stopPropagation();
-        dispatch(updateCardsPack(packId, 'Updated Title'));
+        dispatch(
+            setModalTypeAC({
+                packId,
+                packTitle,
+                isOpen: true,
+                type: 'editPack',
+                modalTitle: 'Edit pack',
+                buttonName: 'Save',
+            }),
+        );
     };
 
     const linkClass = authUserId !== currentUserId ? classes.disabledIcon : '';

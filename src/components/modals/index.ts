@@ -1,1 +1,1 @@
-export { AddPackModal } from './addPackModal/AddPackModal';
+export { PackModal } from './packModal/PackModal';

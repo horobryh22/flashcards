@@ -9,8 +9,8 @@
     margin-bottom: 40px;
 }
 
-.modalFooter {
-    margin-top: 35px;
-    display: flex;
-    justify-content: space-between;
+.modalContent {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 30px;
 }

@@ -20,3 +20,5 @@ export type { SetPageCountType } from './SetPageCountType';
 export type { SetPackNameType } from './SetPackNameType';
 export type { SetCardsRangeType } from './SetCardsRangeType';
 export type { SetSearchUserId } from './SetSearchUserId';
+export type { SetModalType } from './SetModalType';
+export type { SetModalState } from './SetModalState';
