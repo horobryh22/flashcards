@@ -15,6 +15,13 @@ import { PackModal } from 'components/modals';
 import { DELAY } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setModalStateAC } from 'store/actions';
+import {
+    selectButtonName,
+    selectModalTitle,
+    selectModalType,
+    selectPackId,
+    selectPackTitle,
+} from 'store/selectors';
 import { ReturnComponentType } from 'types';
 import { chooseAction } from 'utils';
 
@@ -25,13 +32,14 @@ const MODAL_ROOT_ELEMENT = document.querySelector('#modal');
 export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const modalType = useTypedSelector(state => state.app.modal.type);
-    const modalTitle = useTypedSelector(state => state.app.modal.modalTitle);
-    const buttonName = useTypedSelector(state => state.app.modal.buttonName);
-    const packTitle = useTypedSelector(state => state.app.modal.packTitle);
-    const packId = useTypedSelector(state => state.app.modal.packId);
+    const modalType = useTypedSelector(selectModalType);
+    const modalTitle = useTypedSelector(selectModalTitle);
+    const buttonName = useTypedSelector(selectButtonName);
+    const packTitle = useTypedSelector(selectPackTitle);
+    const packId = useTypedSelector(selectPackId);
+    const packPrivate = useTypedSelector(state => state.app.modal.packPrivate);
 
-    const { control, handleSubmit, getValues, reset } = useForm({
+    const { control, handleSubmit, getValues, setValue, resetField } = useForm({
         defaultValues: {
             name: '',
             private: false,
@@ -57,9 +65,20 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
 
         TIMER = setTimeout(() => {
             dispatch(setModalStateAC(false));
-            reset();
         }, DELAY);
     };
+
+    useEffect(() => {
+        if (modalType === 'addPack') {
+            resetField('name');
+            resetField('private');
+
+            return;
+        }
+
+        setValue('name', packTitle as string);
+        setValue('private', packPrivate as boolean);
+    }, [packTitle, modalType, packPrivate]);
 
     useEffect(() => {
         if (open && MODAL_ROOT_ELEMENT) {

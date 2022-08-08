@@ -19,3 +19,9 @@ export { selectCardsTotalCount } from './selectCardsTotalCount/selectCardsTotalC
 export { selectMin } from './selectMin/selectMin';
 export { selectMax } from './selectMax/selectMax';
 export { selectId } from './selectId/selectId';
+export { selectIsOpen } from './selectIsOpen/selectIsOpen';
+export { selectModalType } from './selectModalType/selectModalType';
+export { selectModalTitle } from './selectModalTitle/selectModalTitle';
+export { selectButtonName } from './selectButtonName/selectButtonName';
+export { selectPackTitle } from './selectPackTitle/selectPackTitle';
+export { selectPackId } from './selectPackId/selectPackId';

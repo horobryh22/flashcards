@@ -55,6 +55,7 @@ export const TableRows = ({ rows }: TableRowsType): ReturnComponentType => {
                                     currentUserId={row.user_id}
                                     packTitle={row.name}
                                     packId={row._id}
+                                    packPrivate={row.private}
                                 />
                             )}
                         </TableCell>

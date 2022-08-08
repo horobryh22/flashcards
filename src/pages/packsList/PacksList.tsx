@@ -12,6 +12,7 @@ import { setModalStateAC, setModalTypeAC } from 'store/actions';
 import { fetchPacks } from 'store/middlewares';
 import {
     selectId,
+    selectIsOpen,
     selectIsUserAuth,
     selectMax,
     selectMin,
@@ -25,7 +26,7 @@ import { ReturnComponentType } from 'types';
 export const PacksList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const isOpen = useTypedSelector(state => state.app.modal.isOpen);
+    const isOpen = useTypedSelector(selectIsOpen);
 
     const isUserAuth = useTypedSelector(selectIsUserAuth);
 

@@ -14,6 +14,7 @@ const initialState: AppStateType = {
     error: null,
     status: REQUEST_STATUS.IDLE,
     modal: {
+        packPrivate: false,
         packId: '',
         packTitle: '',
         isOpen: false,

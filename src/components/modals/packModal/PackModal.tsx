@@ -8,11 +8,7 @@ import { PackModalType } from './types';
 
 import { ReturnComponentType } from 'types';
 
-export const PackModal = ({
-    control,
-    getValues,
-    packTitle,
-}: PackModalType): ReturnComponentType => {
+export const PackModal = ({ control, getValues }: PackModalType): ReturnComponentType => {
     return (
         <div className={classes.modalBody}>
             <Controller
@@ -24,7 +20,6 @@ export const PackModal = ({
                         label="Name pack"
                         placeholder="Enter pack name"
                         size="small"
-                        defaultValue={packTitle}
                         variant="standard"
                         fullWidth
                     />

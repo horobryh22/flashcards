@@ -17,6 +17,7 @@ export const ActionImages = ({
     packId,
     packTitle,
     currentUserId,
+    packPrivate,
 }: ActionImagesType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
@@ -40,6 +41,7 @@ export const ActionImages = ({
         e.stopPropagation();
         dispatch(
             setModalTypeAC({
+                packPrivate,
                 packId,
                 packTitle,
                 isOpen: true,
