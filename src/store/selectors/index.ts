@@ -25,3 +25,4 @@ export { selectModalTitle } from './selectModalTitle/selectModalTitle';
 export { selectButtonName } from './selectButtonName/selectButtonName';
 export { selectPackTitle } from './selectPackTitle/selectPackTitle';
 export { selectPackId } from './selectPackId/selectPackId';
+export { selectPackPrivate } from './selectPackPrivate/selectPackPrivate';

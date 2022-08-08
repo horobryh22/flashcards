@@ -20,6 +20,7 @@ import {
     selectModalTitle,
     selectModalType,
     selectPackId,
+    selectPackPrivate,
     selectPackTitle,
 } from 'store/selectors';
 import { ReturnComponentType } from 'types';
@@ -37,7 +38,7 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
     const buttonName = useTypedSelector(selectButtonName);
     const packTitle = useTypedSelector(selectPackTitle);
     const packId = useTypedSelector(selectPackId);
-    const packPrivate = useTypedSelector(state => state.app.modal.packPrivate);
+    const packPrivate = useTypedSelector(selectPackPrivate);
 
     const { control, handleSubmit, getValues, setValue, resetField } = useForm({
         defaultValues: {

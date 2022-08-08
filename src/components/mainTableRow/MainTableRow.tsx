@@ -16,9 +16,9 @@ export const MainTableRow = (): ReturnComponentType => {
 
     const sortPacks = useTypedSelector(selectSortPacks);
 
-    const [nameDirection, setNameDirection] = useState<OrderDirectionType>('asc');
-    const [cardsDirection, setCardsDirection] = useState<OrderDirectionType>('asc');
-    const [updatedDirection, setUpdatedDirection] = useState<OrderDirectionType>('asc');
+    const [nameDirection, setNameDirection] = useState<OrderDirectionType>('desc');
+    const [cardsDirection, setCardsDirection] = useState<OrderDirectionType>('desc');
+    const [updatedDirection, setUpdatedDirection] = useState<OrderDirectionType>('desc');
 
     const handleSortRequest = (sort: ColumnSortType): void => {
         if (sort === 'name') {
