@@ -33,6 +33,7 @@ export const fetchPacks =
                 max,
             });
 
+            console.log(`userId => ${user_id}, id = ${_id}, isMyPack = ${isMyPack} `);
             dispatch(setCardPacksAC(response.data.cardPacks));
             dispatch(setPacksTotalCountAC(response.data.cardPacksTotalCount));
         } catch (e) {

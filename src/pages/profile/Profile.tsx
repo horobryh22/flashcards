@@ -3,7 +3,7 @@ import React from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PhotoCameraRoundedIcon from '@mui/icons-material/PhotoCameraRounded';
-import { Navigate } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 
 import classes from './Profile.module.css';
 
@@ -36,13 +36,10 @@ export const Profile = (): ReturnComponentType => {
         <div className={classes.container}>
             <div className={classes.BackToPack}>
                 {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-                <div
-                    style={{ display: 'flex', justifyContent: 'center' }}
-                    onClick={() => {}}
-                >
+                <NavLink to="/packs" className={classes.breadcrumbs}>
                     <ArrowBackIcon />
-                    Back to packs List
-                </div>
+                    <span>Back to packs List</span>
+                </NavLink>
             </div>
             <div className={classes.rectangle}>
                 <div className={classes.personalInfo}>Personal Information</div>

@@ -16,6 +16,7 @@ import { ReturnComponentType } from 'types';
 export const ActionImages = ({
     packId,
     currentUserId,
+    cardId,
 }: ActionImagesType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
@@ -31,6 +32,10 @@ export const ActionImages = ({
         dispatch(updateCardsPack(packId, 'Updated Title'));
     };
 
+    const learnPack = (e: React.MouseEvent<HTMLElement>): void => {
+        e.stopPropagation();
+    };
+
     const linkClass = authUserId !== currentUserId ? classes.disabledIcon : '';
 
     return (
@@ -41,7 +46,7 @@ export const ActionImages = ({
             <NavLink to="" onClick={updatePack} className={linkClass}>
                 <img src={edit} alt="edit" />
             </NavLink>
-            <NavLink to="">
+            <NavLink to={`/learn/${cardId}`} onClick={learnPack}>
                 <img src={knowledge} alt="knowledge" />
             </NavLink>
         </div>

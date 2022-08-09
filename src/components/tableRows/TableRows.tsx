@@ -54,6 +54,7 @@ export const TableRows = ({ rows }: TableRowsType): ReturnComponentType => {
                                 <ActionImages
                                     packId={row._id}
                                     currentUserId={row.user_id}
+                                    cardId={row._id}
                                 />
                             )}
                         </TableCell>
