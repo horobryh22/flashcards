@@ -14,6 +14,7 @@ import { StyledButton } from 'components/header/styles';
 import { LearnCardContainer } from 'components/learnCard/LearnCardContainer';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { fetchCards } from 'store/middlewares';
+import { updateCardGrade } from 'store/middlewares/cards/updateCardGrade';
 import { selectSelectedPackName } from 'store/selectors/selectSelectedPackName/selectSelectedPackName';
 import { ReturnComponentType } from 'types';
 import { getRandomCard } from 'utils/getRandomCard/getRandomCard';
@@ -34,6 +35,7 @@ export const LearnCard = (): ReturnComponentType => {
     const cards = useTypedSelector(state => state.cards.cards);
 
     const [isChecked, setIsChecked] = useState<boolean>(false);
+    const [grade, setGrade] = useState(grades[0]);
     const [first, setFirst] = useState(true);
     const [card, setCard] = useState({
         cardsPack_id: '',
@@ -48,7 +50,20 @@ export const LearnCard = (): ReturnComponentType => {
     });
 
     const onNext = (): void => {
-        setIsChecked(true);
+        const gradeNumber = grades.indexOf(grade) + 1;
+
+        setIsChecked(false);
+
+        dispatch(updateCardGrade(gradeNumber, card._id));
+
+        if (cards.length > 0) {
+            setCard(getRandomCard(cards));
+        }
+    };
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        console.log(event.target.value);
+        setGrade((event.target as HTMLInputElement).value);
     };
 
     useEffect(() => {
@@ -89,8 +104,9 @@ export const LearnCard = (): ReturnComponentType => {
                             </FormLabel>
                             <RadioGroup
                                 aria-labelledby="grades"
-                                defaultValue={grades[0]}
                                 name="grade"
+                                value={grade}
+                                onChange={handleChange}
                             >
                                 {grades.map(grade => {
                                     return (
@@ -108,7 +124,7 @@ export const LearnCard = (): ReturnComponentType => {
                             className={s.btn}
                             variant="contained"
                             color="primary"
-                            onClick={() => setIsChecked(false)}
+                            onClick={onNext}
                         >
                             Next question
                         </StyledButton>
@@ -118,75 +134,12 @@ export const LearnCard = (): ReturnComponentType => {
                         className={s.btn}
                         variant="contained"
                         color="primary"
-                        onClick={onNext}
+                        onClick={() => setIsChecked(true)}
                     >
                         Show answer
                     </StyledButton>
                 )}
             </div>
         </LearnCardContainer>
-        // <Container className={s.container}>
-        //     <NavLink to="/packs" className={s.breadcrumbs}>
-        //         <ArrowBackIcon />
-        //         <span>Back to packs List</span>
-        //     </NavLink>
-        //     <h2 className={s.title}>
-        //         <span className={s.tooltip}>Learn:</span> {packName}
-        //     </h2>
-        //     <div className={s.wrapper}>
-        //         <p className={s.description}>Number of replies: {card.shots}</p>
-        //         <h3 className={s.question}>
-        //             Question: <span className={s.answer}>{card.question}</span>
-        //         </h3>
-        //         <div>
-        //             {isChecked ? (
-        //                 <div className={s.answerContainer}>
-        //                     <h3 className={s.question}>
-        //                         Answer:<span className={s.answer}>{card.answer}</span>
-        //                     </h3>
-        //                     <hr />
-        //                     <FormControl>
-        //                         <FormLabel id="demo-radio-buttons-group-label">
-        //                             Rate yourself:
-        //                         </FormLabel>
-        //                         <RadioGroup
-        //                             aria-labelledby="grades"
-        //                             defaultValue={grades[0]}
-        //                             name="grade"
-        //                         >
-        //                             {grades.map(grade => {
-        //                                 return (
-        //                                     <FormControlLabel
-        //                                         key={`${grade}key`}
-        //                                         value={grade}
-        //                                         control={<Radio />}
-        //                                         label={grade}
-        //                                     />
-        //                                 );
-        //                             })}
-        //                         </RadioGroup>
-        //                     </FormControl>
-        //                     <StyledButton
-        //                         className={s.btn}
-        //                         variant="contained"
-        //                         color="primary"
-        //                         onClick={() => setIsChecked(false)}
-        //                     >
-        //                         Next question
-        //                     </StyledButton>
-        //                 </div>
-        //             ) : (
-        //                 <StyledButton
-        //                     className={s.btn}
-        //                     variant="contained"
-        //                     color="primary"
-        //                     onClick={onNext}
-        //                 >
-        //                     Show answer
-        //                 </StyledButton>
-        //             )}
-        //         </div>
-        //     </div>
-        // </Container>
     );
 };
