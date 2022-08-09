@@ -14,7 +14,7 @@ import {
     SignIn,
 } from 'pages';
 import { Cards } from 'pages/cards/Cards';
-import { LearnCard } from 'pages/learn/LearnCard';
+import { LearnCard } from 'pages/learnCard/LearnCard';
 import { ReturnComponentType } from 'types';
 
 export const RoutesApp = (): ReturnComponentType => {

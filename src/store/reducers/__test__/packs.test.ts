@@ -19,6 +19,7 @@ beforeEach(() => {
     startState = {
         cardPacks: [{} as CardType],
         cardPacksTotalCount: 100,
+        selectedCardsPack: {} as CardType,
         searchParams: {
             packName: 'english',
             page: 1,

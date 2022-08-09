@@ -62,6 +62,15 @@ export const cardsReducer = (
                 page: action.payload.page,
                 searchParams: { ...state.searchParams, page: action.payload.page },
             };
+        case 'cards/SET_UPDATED_GRADE':
+            return {
+                ...state,
+                cards: state.cards.map(card =>
+                    card._id === action.payload.updatedCard.updatedGrade.card_id
+                        ? { ...card, ...action.payload.updatedCard.updatedGrade }
+                        : card,
+                ),
+            };
         default:
             return state;
     }

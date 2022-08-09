@@ -18,3 +18,5 @@ export type { SetCurrentPageType } from './SetCurrentPageType';
 export type { SetPacksTotalCount } from './SetPacksTotalCount';
 export type { SetPageCountType } from './SetPageCountType';
 export type { SetPackNameType } from './SetPackNameType';
+export type { SetSelectedCardsPackType } from './SetSelectedCardsPackType';
+export type { SetUpdatedGradeType } from './SetUpgratedGradeType';
