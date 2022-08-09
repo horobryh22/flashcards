@@ -1,38 +1,51 @@
 import { AxiosError } from 'axios';
 
 import { packsAPI } from 'api/packs/packsAPI';
+import { SortTypes } from 'api/types';
 import { REQUEST_STATUS } from 'enums';
 import { setAppStatusAC, setCardPacksAC, setPacksTotalCountAC } from 'store/actions';
 import { AppThunkType } from 'store/types';
 import { errorHandler } from 'utils';
 
-export const fetchPacks = (): AppThunkType => async (dispatch, getState) => {
-    try {
-        dispatch(setAppStatusAC(REQUEST_STATUS.LOADING));
+export const fetchPacks =
+    (
+        paramId?: string,
+        paramMin?: string,
+        paramMax?: string,
+        paramPackName?: string,
+        paramSort?: SortTypes,
+    ): AppThunkType =>
+    async (dispatch, getState) => {
+        try {
+            dispatch(setAppStatusAC(REQUEST_STATUS.LOADING));
 
-        const { packName } = getState().packs.searchParams;
-        const { min } = getState().packs.searchParams;
-        const { max } = getState().packs.searchParams;
-        const { sortPacks } = getState().packs.searchParams;
-        const { page } = getState().packs.searchParams;
-        const { user_id } = getState().packs.searchParams;
-        const { pageCount } = getState().packs.searchParams;
+            console.log(paramPackName);
 
-        const response = await packsAPI.fetchPacks({
-            packName,
-            sortPacks,
-            page,
-            pageCount,
-            user_id,
-            min,
-            max,
-        });
+            const packName = paramPackName || getState().packs.searchParams.packName;
+            const min = Number(paramMin) || getState().packs.searchParams.min;
+            const max = Number(paramMax) || getState().packs.searchParams.max;
+            const sortPacks = paramSort || getState().packs.searchParams.sortPacks;
+            const { page } = getState().packs.searchParams;
+            const user_id = paramId || getState().packs.searchParams.user_id;
+            const { pageCount } = getState().packs.searchParams;
 
-        dispatch(setCardPacksAC(response.data.cardPacks));
-        dispatch(setPacksTotalCountAC(response.data.cardPacksTotalCount));
-    } catch (e) {
-        errorHandler(e as Error | AxiosError, dispatch);
-    } finally {
-        dispatch(setAppStatusAC(REQUEST_STATUS.IDLE));
-    }
-};
+            console.log(paramPackName, packName);
+
+            const response = await packsAPI.fetchPacks({
+                packName,
+                sortPacks,
+                page,
+                pageCount,
+                user_id,
+                min,
+                max,
+            });
+
+            dispatch(setCardPacksAC(response.data.cardPacks));
+            dispatch(setPacksTotalCountAC(response.data.cardPacksTotalCount));
+        } catch (e) {
+            errorHandler(e as Error | AxiosError, dispatch);
+        } finally {
+            dispatch(setAppStatusAC(REQUEST_STATUS.IDLE));
+        }
+    };

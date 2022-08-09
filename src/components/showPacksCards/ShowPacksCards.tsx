@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Button } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setSearchUserIdAC } from 'store/actions';
@@ -10,18 +11,21 @@ import { ReturnComponentType } from 'types';
 export const ShowPacksCards = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const [active, setActive] = useState<'All' | 'My'>('All');
+    const [searchParams, setSearchParams] = useSearchParams();
 
+    const paramId = searchParams.get('user_id');
     const authUserId = useTypedSelector(selectAuthUserId);
 
     const handleClickAll = (): void => {
+        searchParams.set('user_id', '');
         dispatch(setSearchUserIdAC(''));
-        setActive('All');
+        setSearchParams(searchParams);
     };
 
     const handleClickMy = (): void => {
+        searchParams.set('user_id', authUserId);
         dispatch(setSearchUserIdAC(authUserId));
-        setActive('My');
+        setSearchParams(searchParams);
     };
 
     return (
@@ -39,7 +43,7 @@ export const ShowPacksCards = (): ReturnComponentType => {
                 Show packs cards
             </span>
             <Button
-                variant={active === 'All' ? 'contained' : 'outlined'}
+                variant={paramId === authUserId ? 'outlined' : 'contained'}
                 style={{ textTransform: 'none' }}
                 onClick={handleClickAll}
             >
@@ -47,7 +51,7 @@ export const ShowPacksCards = (): ReturnComponentType => {
             </Button>
 
             <Button
-                variant={active === 'My' ? 'contained' : 'outlined'}
+                variant={paramId === authUserId ? 'contained' : 'outlined'}
                 style={{ textTransform: 'none' }}
                 onClick={handleClickMy}
             >

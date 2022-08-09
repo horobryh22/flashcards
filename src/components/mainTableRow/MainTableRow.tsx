@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { ArrowDropDown } from '@mui/icons-material';
 import { TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 
 import { OrderDirectionType } from './types';
 
@@ -16,20 +17,36 @@ export const MainTableRow = (): ReturnComponentType => {
 
     const sortPacks = useTypedSelector(selectSortPacks);
 
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const [nameDirection, setNameDirection] = useState<OrderDirectionType>('desc');
     const [cardsDirection, setCardsDirection] = useState<OrderDirectionType>('desc');
     const [updatedDirection, setUpdatedDirection] = useState<OrderDirectionType>('desc');
 
     const handleSortRequest = (sort: ColumnSortType): void => {
         if (sort === 'name') {
-            handleSortType(setNameDirection, nameDirection, sort, dispatch);
+            handleSortType(setNameDirection, nameDirection, sort, dispatch, searchParams);
         }
         if (sort === 'cardsCount') {
-            handleSortType(setCardsDirection, cardsDirection, sort, dispatch);
+            handleSortType(
+                setCardsDirection,
+                cardsDirection,
+                sort,
+                dispatch,
+                searchParams,
+            );
         }
         if (sort === 'updated') {
-            handleSortType(setUpdatedDirection, updatedDirection, sort, dispatch);
+            handleSortType(
+                setUpdatedDirection,
+                updatedDirection,
+                sort,
+                dispatch,
+                searchParams,
+            );
         }
+
+        setSearchParams(searchParams);
     };
 
     const mappedColumns = PACK_COLUMNS.map(column => {

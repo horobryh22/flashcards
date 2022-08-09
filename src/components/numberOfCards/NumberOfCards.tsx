@@ -2,21 +2,23 @@ import React, { useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
+import { useSearchParams } from 'react-router-dom';
 
 import classes from './NumberOfCards.module.css';
 
 import { NumEditableSpan } from 'components';
 import { MAX_CARDS_COUNT } from 'constant';
-import { useAppDispatch, useTypedSelector } from 'hooks';
+import { useAppDispatch } from 'hooks';
 import { setCardsRangeAC } from 'store/actions';
-import { selectMax, selectMin } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const NumberOfCards = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const min = useTypedSelector(selectMin);
-    const max = useTypedSelector(selectMax);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const min = Number(searchParams.get('min')) || 0;
+    const max = Number(searchParams.get('max')) || MAX_CARDS_COUNT;
 
     const [value, setValue] = useState([min, max]);
 
@@ -28,6 +30,9 @@ export const NumberOfCards = (): ReturnComponentType => {
 
     const setCardsRange = (): void => {
         dispatch(setCardsRangeAC(value[0], value[1]));
+        searchParams.set('min', `${value[0]}`);
+        searchParams.set('max', `${value[1]}`);
+        setSearchParams(searchParams);
     };
 
     return (

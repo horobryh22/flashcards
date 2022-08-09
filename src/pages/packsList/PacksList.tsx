@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 
+import { useSearchParams } from 'react-router-dom';
+
+import { SortTypes } from 'api/types';
 import {
     CardsTopContent,
     CustomPagination,
@@ -7,36 +10,34 @@ import {
     OverTableRow,
     TableComponent,
 } from 'components';
+import { MAX_CARDS_COUNT } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setModalStateAC, setModalTypeAC } from 'store/actions';
 import { fetchPacks } from 'store/middlewares';
 import {
-    selectId,
     selectIsOpen,
     selectIsUserAuth,
-    selectMax,
-    selectMin,
-    selectPackName,
     selectPage,
     selectPageCount,
-    selectSortPacks,
 } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const PacksList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
+    const [searchParams] = useSearchParams();
+
     const isOpen = useTypedSelector(selectIsOpen);
 
     const isUserAuth = useTypedSelector(selectIsUserAuth);
 
-    const min = useTypedSelector(selectMin);
-    const max = useTypedSelector(selectMax);
-    const sortPacks = useTypedSelector(selectSortPacks);
+    const paramMin = searchParams.get('min') || 0;
+    const paramMax = searchParams.get('max') || MAX_CARDS_COUNT;
+    const paramSort = searchParams.get('sortPacks') || '0updated';
     const page = useTypedSelector(selectPage);
     const pageCount = useTypedSelector(selectPageCount);
-    const packName = useTypedSelector(selectPackName);
-    const id = useTypedSelector(selectId);
+    const paramPackName = searchParams.get('packName') || '';
+    const paramId = searchParams.get('user_id') || '';
 
     const handleClick = (): void => {
         dispatch(
@@ -55,9 +56,26 @@ export const PacksList = (): ReturnComponentType => {
 
     useEffect(() => {
         if (isUserAuth) {
-            dispatch(fetchPacks());
+            dispatch(
+                fetchPacks(
+                    paramId,
+                    `${paramMin}`,
+                    `${paramMax}`,
+                    paramPackName,
+                    paramSort as SortTypes,
+                ),
+            );
         }
-    }, [isUserAuth, sortPacks, page, pageCount, packName, min, max, id]);
+    }, [
+        isUserAuth,
+        paramSort,
+        page,
+        pageCount,
+        paramPackName,
+        paramMin,
+        paramMax,
+        paramId,
+    ]);
 
     return (
         <>
