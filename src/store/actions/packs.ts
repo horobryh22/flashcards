@@ -5,6 +5,7 @@ import {
     SET_PACK_NAME,
     SET_PACKS_TOTAL_COUNT,
     SET_PAGE_COUNT,
+    SET_SELECTED_CARDS_PACK,
     SET_SORT_PACKS,
 } from './constants';
 import {
@@ -13,6 +14,7 @@ import {
     SetPackNameType,
     SetPacksTotalCount,
     SetPageCountType,
+    SetSelectedCardsPackType,
     SetSortPacksType,
 } from './types';
 
@@ -66,4 +68,11 @@ export const setIsMyPackAC = (isMyPack: boolean): SetIsPackType => {
         type: SET_IS_MY_CARDS,
         payload: { isMyPack },
     } as const;
+};
+
+export const setSelectedCardPackAC = (pack: CardType): SetSelectedCardsPackType => {
+    return {
+        type: SET_SELECTED_CARDS_PACK,
+        payload: { pack },
+    };
 };

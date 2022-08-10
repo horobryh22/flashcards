@@ -5,4 +5,5 @@ export type PacksStateType = {
     searchParams: SearchParamsType;
     cardPacksTotalCount: number;
     isMyPack: boolean;
+    selectedCardsPack: CardType;
 };

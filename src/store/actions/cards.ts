@@ -1,5 +1,5 @@
 import { SearchParamsCardsType } from 'api/types';
-import { GetCardsType } from 'api/types/cards/GetCardType/GetCardsType';
+import { GetCardsType, UpdatedGradeType } from 'api/types/cards/GetCardType/GetCardsType';
 import {
     SET_CARD_QUESTION,
     SET_CARDS,
@@ -7,6 +7,7 @@ import {
     SET_CARDS_PAGE,
     SET_CARDS_PAGE_COUNT,
     SET_CARDS_SEARCH_PARAMS,
+    SET_UPDATED_GRADE,
 } from 'store/actions/constants';
 import { SetCardsType } from 'store/actions/types';
 import { SetCardsPackIdType } from 'store/actions/types/SetCardsPackIdType';
@@ -14,6 +15,7 @@ import { SetCardsPageCountType } from 'store/actions/types/SetCardsPageCountType
 import { SetCardsPageType } from 'store/actions/types/SetCardsPageType';
 import { SetCardsQuestionAC } from 'store/actions/types/SetCardsQuestionAC';
 import { SetCardsSearchParamsACType } from 'store/actions/types/SetCardsSearchParamsACType';
+import { SetUpdatedGradeType } from 'store/actions/types/SetUpgratedGradeType';
 
 export const setCardsAC = (data: GetCardsType): SetCardsType => {
     return {
@@ -55,5 +57,12 @@ export const setCardsQuestionAC = (question: string): SetCardsQuestionAC => {
     return {
         type: SET_CARD_QUESTION,
         payload: { question },
+    };
+};
+
+export const setUpdatedGradeAC = (updatedCard: UpdatedGradeType): SetUpdatedGradeType => {
+    return {
+        type: SET_UPDATED_GRADE,
+        payload: { updatedCard },
     };
 };

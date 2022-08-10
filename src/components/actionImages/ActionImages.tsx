@@ -9,29 +9,32 @@ import edit from 'assets/images/edit.svg';
 import knowledge from 'assets/images/knowledge.svg';
 import remove from 'assets/images/remove.svg';
 import { useAppDispatch, useTypedSelector } from 'hooks';
+import { setSelectedCardPackAC } from 'store/actions/packs';
 import { removeCardsPack, updateCardsPack } from 'store/middlewares';
 import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
-export const ActionImages = ({
-    packId,
-    currentUserId,
-}: ActionImagesType): ReturnComponentType => {
+export const ActionImages = ({ card }: ActionImagesType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const authUserId = useTypedSelector(selectAuthUserId);
 
     const removePack = (e: React.MouseEvent<HTMLElement>): void => {
         e.stopPropagation();
-        dispatch(removeCardsPack(packId));
+        dispatch(removeCardsPack(card._id));
     };
 
     const updatePack = (e: React.MouseEvent<HTMLElement>): void => {
         e.stopPropagation();
-        dispatch(updateCardsPack(packId, 'Updated Title'));
+        dispatch(updateCardsPack(card._id, 'Updated Title'));
     };
 
-    const linkClass = authUserId !== currentUserId ? classes.disabledIcon : '';
+    const learnPack = (e: React.MouseEvent<HTMLElement>): void => {
+        e.stopPropagation();
+        dispatch(setSelectedCardPackAC(card));
+    };
+
+    const linkClass = authUserId !== card.user_id ? classes.disabledIcon : '';
 
     return (
         <div style={{ width: '70px', display: 'flex', justifyContent: 'space-between' }}>
@@ -41,7 +44,7 @@ export const ActionImages = ({
             <NavLink to="" onClick={updatePack} className={linkClass}>
                 <img src={edit} alt="edit" />
             </NavLink>
-            <NavLink to="">
+            <NavLink to={`/learn/${card._id}`} onClick={learnPack}>
                 <img src={knowledge} alt="knowledge" />
             </NavLink>
         </div>

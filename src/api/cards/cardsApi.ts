@@ -1,6 +1,10 @@
 import { instance } from 'api/config';
 import { SearchParamsCardsType } from 'api/types';
-import { CardsType, GetCardsType } from 'api/types/cards/GetCardType/GetCardsType';
+import {
+    CardsType,
+    GetCardsType,
+    UpdatedGradeType,
+} from 'api/types/cards/GetCardType/GetCardsType';
 
 export const cardsApi = {
     getCard: ({
@@ -36,5 +40,8 @@ export const cardsApi = {
     },
     updateCard: (card: CardsType) => {
         return instance.put('cards/card', { card });
+    },
+    updateGrade: (grade: number, card_id: string) => {
+        return instance.put<UpdatedGradeType>('cards/grade', { grade, card_id });
     },
 };

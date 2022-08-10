@@ -28,3 +28,20 @@ export type GetCardsType = {
     packUserId: string;
     cardsPack_id: string;
 };
+
+export type UpdatedGradeType = {
+    updatedGrade: {
+        _id: string;
+        cardsPack_id: string;
+        card_id: string;
+        user_id: string;
+        grade: number;
+        shots: number;
+        more_id: string;
+        created: string;
+        updated: string;
+        __v: number;
+    };
+    token: string;
+    tokenDeathTime: number;
+};

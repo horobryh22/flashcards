@@ -1,11 +1,11 @@
 import { PacksStateType } from './types';
 
 import {
+    SET_CARD_PACKS,
     SET_CURRENT_PAGE,
     SET_PACK_NAME,
     SET_PACKS_TOTAL_COUNT,
     SET_PAGE_COUNT,
-    SET_CARD_PACKS,
     SET_SLIDER,
     SET_SORT_PACKS,
     SET_IS_MY_CARDS,
@@ -25,6 +25,23 @@ const initialState: PacksStateType = {
     },
     isMyPack: false,
     cardPacksTotalCount: 0,
+    selectedCardsPack: {
+        _id: '',
+        user_id: '',
+        cardsCount: 0,
+        name: '',
+        created: '',
+        grade: 0,
+        path: '',
+        private: false,
+        type: '',
+        deckCover: '',
+        more_id: '',
+        rating: 0,
+        shots: 0,
+        updated: '',
+        user_name: '',
+    },
 };
 
 export const packsReducer = (
@@ -73,6 +90,11 @@ export const packsReducer = (
                     min: action.payload.min,
                     max: action.payload.max,
                 },
+            };
+        case 'packs/SET_SELECTED_CARDS_PACK':
+            return {
+                ...state,
+                selectedCardsPack: action.payload.pack,
             };
         default:
             return state;
