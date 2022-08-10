@@ -61,6 +61,7 @@ beforeEach(() => {
                 user_id: 'some user ID',
             },
             cardPacksTotalCount: defaultPacksTotalCount,
+            isInitialized: false,
         },
         cards: {} as GetCardsType,
     };

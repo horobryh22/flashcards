@@ -24,6 +24,7 @@ export const ActionImages = ({
     const authUserId = useTypedSelector(selectAuthUserId);
 
     const removePack = (e: React.MouseEvent<HTMLElement>): void => {
+        e.preventDefault();
         e.stopPropagation();
         dispatch(
             setModalTypeAC({
@@ -38,6 +39,7 @@ export const ActionImages = ({
     };
 
     const updatePack = (e: React.MouseEvent<HTMLElement>): void => {
+        e.preventDefault();
         e.stopPropagation();
         dispatch(
             setModalTypeAC({

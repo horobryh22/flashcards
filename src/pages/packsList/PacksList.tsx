@@ -12,7 +12,7 @@ import {
 } from 'components';
 import { DEFAULT_PAGE_COUNT, MAX_CARDS_COUNT } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { setModalStateAC, setModalTypeAC } from 'store/actions';
+import { setModalStateAC, setModalTypeAC, setSearchParamsAC } from 'store/actions';
 import { fetchPacks } from 'store/middlewares';
 import { selectIsOpen, selectIsUserAuth } from 'store/selectors';
 import { ReturnComponentType } from 'types';
@@ -25,14 +25,15 @@ export const PacksList = (): ReturnComponentType => {
     const isOpen = useTypedSelector(selectIsOpen);
 
     const isUserAuth = useTypedSelector(selectIsUserAuth);
+    const isPacksInitialized = useTypedSelector(state => state.packs.isInitialized);
 
-    const paramMin = searchParams.get('min') || String(0);
-    const paramMax = searchParams.get('max') || String(MAX_CARDS_COUNT);
-    const paramSort = searchParams.get('sortPacks') || '0updated';
-    const paramPage = searchParams.get('page') || '1';
-    const paramPageCount = searchParams.get('pageCount') || String(DEFAULT_PAGE_COUNT);
+    const paramMin = Number(searchParams.get('min')) || 0;
+    const paramMax = Number(searchParams.get('max')) || MAX_CARDS_COUNT;
+    const paramSortPacks = searchParams.get('sortPacks') || '0updated';
+    const paramPage = Number(searchParams.get('page')) || 1;
+    const paramPageCount = Number(searchParams.get('pageCount')) || DEFAULT_PAGE_COUNT;
     const paramPackName = searchParams.get('packName') || '';
-    const paramId = searchParams.get('user_id') || '';
+    const paramUser_id = searchParams.get('user_id') || '';
 
     const handleClick = (): void => {
         dispatch(
@@ -50,29 +51,35 @@ export const PacksList = (): ReturnComponentType => {
     };
 
     useEffect(() => {
-        if (isUserAuth) {
-            dispatch(
-                fetchPacks(
-                    paramId,
-                    paramMin,
-                    paramMax,
-                    paramPackName,
-                    paramSort as SortTypes,
-                    paramPage,
-                    paramPageCount,
-                ),
-            );
+        if (isPacksInitialized) {
+            dispatch(fetchPacks());
         }
     }, [
-        isUserAuth,
-        paramSort,
-        paramPage,
-        paramPageCount,
-        paramPackName,
         paramMin,
         paramMax,
-        paramId,
+        paramUser_id,
+        paramPage,
+        paramPackName,
+        paramPageCount,
+        paramSortPacks,
+        isPacksInitialized,
     ]);
+
+    useEffect(() => {
+        const params = {
+            min: paramMin,
+            max: paramMax,
+            packName: paramPackName,
+            sortPacks: paramSortPacks as SortTypes,
+            page: paramPage,
+            pageCount: paramPageCount,
+            user_id: paramUser_id,
+        };
+
+        if (isUserAuth) {
+            dispatch(setSearchParamsAC(params));
+        }
+    }, [isUserAuth]);
 
     return (
         <>

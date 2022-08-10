@@ -22,3 +22,4 @@ export type { SetCardsRangeType } from './SetCardsRangeType';
 export type { SetSearchUserId } from './SetSearchUserId';
 export type { SetModalType } from './SetModalType';
 export type { SetModalState } from './SetModalState';
+export type { SetSearchParamsType } from './SetSearchParamsType';

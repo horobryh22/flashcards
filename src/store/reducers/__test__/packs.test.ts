@@ -28,6 +28,7 @@ beforeEach(() => {
             min: 5,
             user_id: 'userId',
         },
+        isInitialized: false,
     };
 });
 

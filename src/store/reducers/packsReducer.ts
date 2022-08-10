@@ -9,6 +9,7 @@ import {
     SET_SORT_PACKS,
     SET_CARDS_RANGE,
     SET_SEARCH_USER_ID,
+    SET_SEARCH_PARAMS,
 } from 'store/actions/constants';
 import { PacksActionsType } from 'store/actions/types';
 
@@ -24,6 +25,7 @@ const initialState: PacksStateType = {
         user_id: '',
     },
     cardPacksTotalCount: 0,
+    isInitialized: false,
 };
 
 export const packsReducer = (
@@ -78,6 +80,12 @@ export const packsReducer = (
                     ...state.searchParams,
                     user_id: action.payload.id,
                 },
+            };
+        case SET_SEARCH_PARAMS:
+            return {
+                ...state,
+                searchParams: { ...state.searchParams, ...action.payload.params },
+                isInitialized: true,
             };
         default:
             return state;

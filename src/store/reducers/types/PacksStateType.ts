@@ -4,4 +4,5 @@ export type PacksStateType = {
     cardPacks: CardType[];
     searchParams: SearchParamsType;
     cardPacksTotalCount: number;
+    isInitialized: boolean;
 };

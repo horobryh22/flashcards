@@ -21,6 +21,7 @@ export {
     setPackNameAC,
     setCardsRangeAC,
     setSearchUserIdAC,
+    setSearchParamsAC,
 } from './packs';
 export type {
     AuthActionsType,
