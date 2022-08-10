@@ -10,16 +10,11 @@ import {
     OverTableRow,
     TableComponent,
 } from 'components';
-import { MAX_CARDS_COUNT } from 'constant';
+import { DEFAULT_PAGE_COUNT, MAX_CARDS_COUNT } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setModalStateAC, setModalTypeAC } from 'store/actions';
 import { fetchPacks } from 'store/middlewares';
-import {
-    selectIsOpen,
-    selectIsUserAuth,
-    selectPage,
-    selectPageCount,
-} from 'store/selectors';
+import { selectIsOpen, selectIsUserAuth } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const PacksList = (): ReturnComponentType => {
@@ -31,11 +26,11 @@ export const PacksList = (): ReturnComponentType => {
 
     const isUserAuth = useTypedSelector(selectIsUserAuth);
 
-    const paramMin = searchParams.get('min') || 0;
-    const paramMax = searchParams.get('max') || MAX_CARDS_COUNT;
+    const paramMin = searchParams.get('min') || String(0);
+    const paramMax = searchParams.get('max') || String(MAX_CARDS_COUNT);
     const paramSort = searchParams.get('sortPacks') || '0updated';
-    const page = useTypedSelector(selectPage);
-    const pageCount = useTypedSelector(selectPageCount);
+    const paramPage = searchParams.get('page') || '1';
+    const paramPageCount = searchParams.get('pageCount') || String(DEFAULT_PAGE_COUNT);
     const paramPackName = searchParams.get('packName') || '';
     const paramId = searchParams.get('user_id') || '';
 
@@ -59,18 +54,20 @@ export const PacksList = (): ReturnComponentType => {
             dispatch(
                 fetchPacks(
                     paramId,
-                    `${paramMin}`,
-                    `${paramMax}`,
+                    paramMin,
+                    paramMax,
                     paramPackName,
                     paramSort as SortTypes,
+                    paramPage,
+                    paramPageCount,
                 ),
             );
         }
     }, [
         isUserAuth,
         paramSort,
-        page,
-        pageCount,
+        paramPage,
+        paramPageCount,
         paramPackName,
         paramMin,
         paramMax,

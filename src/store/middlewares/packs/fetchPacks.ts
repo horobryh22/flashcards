@@ -14,22 +14,21 @@ export const fetchPacks =
         paramMax?: string,
         paramPackName?: string,
         paramSort?: SortTypes,
+        paramPage?: string,
+        paramPageCount?: string,
     ): AppThunkType =>
     async (dispatch, getState) => {
         try {
             dispatch(setAppStatusAC(REQUEST_STATUS.LOADING));
 
-            console.log(paramPackName);
-
             const packName = paramPackName || getState().packs.searchParams.packName;
             const min = Number(paramMin) || getState().packs.searchParams.min;
             const max = Number(paramMax) || getState().packs.searchParams.max;
             const sortPacks = paramSort || getState().packs.searchParams.sortPacks;
-            const { page } = getState().packs.searchParams;
+            const page = Number(paramPage) || getState().packs.searchParams.page;
             const user_id = paramId || getState().packs.searchParams.user_id;
-            const { pageCount } = getState().packs.searchParams;
-
-            console.log(paramPackName, packName);
+            const pageCount =
+                Number(paramPageCount) || getState().packs.searchParams.pageCount;
 
             const response = await packsAPI.fetchPacks({
                 packName,
