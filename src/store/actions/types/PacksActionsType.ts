@@ -5,10 +5,12 @@ import {
     setPageCountAC,
     setCardPacksAC,
     setSortPacksAC,
+    setCardsRangeAC,
+    setSearchUserIdAC,
+    setSearchParamsAC,
     setIsMyPackAC,
 } from 'store/actions';
 import { setSelectedCardPackAC } from 'store/actions/packs';
-import { sliderAC } from 'store/actions/slider';
 
 export type PacksActionsType =
     | ReturnType<typeof setCardPacksAC>
@@ -17,6 +19,8 @@ export type PacksActionsType =
     | ReturnType<typeof setPacksTotalCountAC>
     | ReturnType<typeof setPageCountAC>
     | ReturnType<typeof setPackNameAC>
+    | ReturnType<typeof setCardsRangeAC>
+    | ReturnType<typeof setSearchUserIdAC>
+    | ReturnType<typeof setSearchParamsAC>
     | ReturnType<typeof setIsMyPackAC>
-    | ReturnType<typeof sliderAC>
     | ReturnType<typeof setSelectedCardPackAC>;

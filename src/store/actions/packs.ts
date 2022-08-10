@@ -1,24 +1,30 @@
 import {
     SET_CARD_PACKS,
+    SET_CARDS_RANGE,
     SET_CURRENT_PAGE,
     SET_IS_MY_CARDS,
     SET_PACK_NAME,
     SET_PACKS_TOTAL_COUNT,
     SET_PAGE_COUNT,
     SET_SELECTED_CARDS_PACK,
+    SET_SEARCH_PARAMS,
+    SET_SEARCH_USER_ID,
     SET_SORT_PACKS,
 } from './constants';
 import {
     SetCardPacksType,
+    SetCardsRangeType,
     SetCurrentPageType,
     SetPackNameType,
     SetPacksTotalCount,
     SetPageCountType,
     SetSelectedCardsPackType,
+    SetSearchParamsType,
+    SetSearchUserId,
     SetSortPacksType,
 } from './types';
 
-import { CardType, SortTypes } from 'api/types';
+import { CardType, SortTypes, SearchParamsType } from 'api/types';
 import { SetIsPackType } from 'store/actions/types/SetMyAllCardsType';
 
 export const setCardPacksAC = (cardPacks: CardType[]): SetCardPacksType => {
@@ -75,4 +81,25 @@ export const setSelectedCardPackAC = (pack: CardType): SetSelectedCardsPackType 
         type: SET_SELECTED_CARDS_PACK,
         payload: { pack },
     };
+};
+
+export const setCardsRangeAC = (min: number, max: number): SetCardsRangeType => {
+    return {
+        type: SET_CARDS_RANGE,
+        payload: { min, max },
+    } as const;
+};
+
+export const setSearchUserIdAC = (id: string): SetSearchUserId => {
+    return {
+        type: SET_SEARCH_USER_ID,
+        payload: { id },
+    } as const;
+};
+
+export const setSearchParamsAC = (params: SearchParamsType): SetSearchParamsType => {
+    return {
+        type: SET_SEARCH_PARAMS,
+        payload: { params },
+    } as const;
 };

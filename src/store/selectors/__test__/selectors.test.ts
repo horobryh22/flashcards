@@ -7,9 +7,12 @@ import {
     selectAuthUserId,
     selectCardPacks,
     selectGoToLogin,
+    selectId,
     selectIsEmailSent,
     selectIsInitialized,
     selectIsUserAuth,
+    selectMax,
+    selectMin,
     selectPackName,
     selectPacksTotalCount,
     selectPage,
@@ -21,6 +24,7 @@ import { AppRootState } from 'store/types';
 let state: AppRootState;
 const defaultPageCount = 4;
 const defaultPacksTotalCount = 100;
+const maxCardsCount = 4;
 
 beforeEach(() => {
     state = {
@@ -28,6 +32,12 @@ beforeEach(() => {
             status: REQUEST_STATUS.IDLE,
             isInitialized: false,
             error: null,
+            modal: {
+                isOpen: false,
+                modalTitle: '',
+                type: '',
+                buttonName: '',
+            },
         },
         auth: {
             error: 'some error',
@@ -44,13 +54,14 @@ beforeEach(() => {
             searchParams: {
                 packName: 'Some pack name',
                 min: 1,
-                max: 4,
+                max: maxCardsCount,
                 sortPacks: '1updated',
                 page: 1,
                 pageCount: defaultPageCount,
-                user_id: '',
+                user_id: 'some user ID',
             },
             cardPacksTotalCount: defaultPacksTotalCount,
+            isInitialized: false,
             selectedCardsPack: {} as CardType,
             isMyPack: false,
         },
@@ -141,6 +152,24 @@ describe('select', () => {
         const packName = selectPackName(state);
 
         expect(packName).toBe('Some pack name');
+    });
+
+    test('min', () => {
+        const min = selectMin(state);
+
+        expect(min).toBe(1);
+    });
+
+    test('max', () => {
+        const max = selectMax(state);
+
+        expect(max).toBe(maxCardsCount);
+    });
+
+    test('id', () => {
+        const id = selectId(state);
+
+        expect(id).toBe('some user ID');
     });
 });
 

@@ -7,9 +7,6 @@ import { AppThunkType } from 'store/types';
 import { errorHandler } from 'utils';
 
 export const fetchPacks = (): AppThunkType => async (dispatch, getState) => {
-    const { _id } = getState().auth.authUserData;
-    /* const  _id  = getState().auth.authUserData._id; */
-
     try {
         dispatch(setAppStatusAC(REQUEST_STATUS.LOADING));
 
@@ -18,16 +15,15 @@ export const fetchPacks = (): AppThunkType => async (dispatch, getState) => {
         const { max } = getState().packs.searchParams;
         const { sortPacks } = getState().packs.searchParams;
         const { page } = getState().packs.searchParams;
-        // const { user_id } = getState().packs.searchParams;
+        const { user_id } = getState().packs.searchParams;
         const { pageCount } = getState().packs.searchParams;
-        const { isMyPack } = getState().packs;
 
         const response = await packsAPI.fetchPacks({
             packName,
             sortPacks,
             page,
             pageCount,
-            user_id: isMyPack ? _id : '',
+            user_id,
             min,
             max,
         });

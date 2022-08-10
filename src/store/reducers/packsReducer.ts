@@ -6,8 +6,10 @@ import {
     SET_PACK_NAME,
     SET_PACKS_TOTAL_COUNT,
     SET_PAGE_COUNT,
-    SET_SLIDER,
     SET_SORT_PACKS,
+    SET_CARDS_RANGE,
+    SET_SEARCH_USER_ID,
+    SET_SEARCH_PARAMS,
     SET_IS_MY_CARDS,
 } from 'store/actions/constants';
 import { PacksActionsType } from 'store/actions/types';
@@ -17,14 +19,15 @@ const initialState: PacksStateType = {
     searchParams: {
         packName: '',
         min: 0,
-        max: 4,
+        max: 120,
         sortPacks: '0updated',
         page: 1,
-        pageCount: 8,
+        pageCount: 6,
         user_id: '',
     },
     isMyPack: false,
     cardPacksTotalCount: 0,
+    isInitialized: false,
     selectedCardsPack: {
         _id: '',
         user_id: '',
@@ -82,7 +85,7 @@ export const packsReducer = (
                 ...state,
                 searchParams: { ...state.searchParams, sortPacks: action.payload.sort },
             };
-        case SET_SLIDER:
+        case SET_CARDS_RANGE:
             return {
                 ...state,
                 searchParams: {
@@ -90,6 +93,20 @@ export const packsReducer = (
                     min: action.payload.min,
                     max: action.payload.max,
                 },
+            };
+        case SET_SEARCH_USER_ID:
+            return {
+                ...state,
+                searchParams: {
+                    ...state.searchParams,
+                    user_id: action.payload.id,
+                },
+            };
+        case SET_SEARCH_PARAMS:
+            return {
+                ...state,
+                searchParams: { ...state.searchParams, ...action.payload.params },
+                isInitialized: true,
             };
         case 'packs/SET_SELECTED_CARDS_PACK':
             return {

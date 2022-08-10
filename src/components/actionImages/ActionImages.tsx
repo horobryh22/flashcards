@@ -9,24 +9,47 @@ import edit from 'assets/images/edit.svg';
 import knowledge from 'assets/images/knowledge.svg';
 import remove from 'assets/images/remove.svg';
 import { useAppDispatch, useTypedSelector } from 'hooks';
+import { setModalTypeAC } from 'store/actions';
 import { setSelectedCardPackAC } from 'store/actions/packs';
-import { removeCardsPack, updateCardsPack } from 'store/middlewares';
 import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const ActionImages = ({ card }: ActionImagesType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
+    const { name: packTitle, _id: packId, private: packPrivate } = card;
+
     const authUserId = useTypedSelector(selectAuthUserId);
 
     const removePack = (e: React.MouseEvent<HTMLElement>): void => {
+        e.preventDefault();
         e.stopPropagation();
-        dispatch(removeCardsPack(card._id));
+        dispatch(
+            setModalTypeAC({
+                packId,
+                packTitle,
+                isOpen: true,
+                type: 'removePack',
+                modalTitle: 'Delete pack',
+                buttonName: 'Delete',
+            }),
+        );
     };
 
     const updatePack = (e: React.MouseEvent<HTMLElement>): void => {
+        e.preventDefault();
         e.stopPropagation();
-        dispatch(updateCardsPack(card._id, 'Updated Title'));
+        dispatch(
+            setModalTypeAC({
+                packPrivate,
+                packId,
+                packTitle,
+                isOpen: true,
+                type: 'editPack',
+                modalTitle: 'Edit pack',
+                buttonName: 'Save',
+            }),
+        );
     };
 
     const learnPack = (e: React.MouseEvent<HTMLElement>): void => {

@@ -1,7 +1,18 @@
-import { SET_APP_STATUS, SET_IS_INITIALIZED } from './constants';
-import { SetAppStatusType, SetIsInitializedType } from './types';
+import {
+    SET_APP_STATUS,
+    SET_IS_INITIALIZED,
+    SET_MODAL_STATE,
+    SET_MODAL_TYPE,
+} from './constants';
+import {
+    SetAppStatusType,
+    SetIsInitializedType,
+    SetModalState,
+    SetModalType,
+} from './types';
 
 import { REQUEST_STATUS } from 'enums';
+import { ModalObjectType } from 'types';
 
 export const setAppStatusAC = (status: REQUEST_STATUS): SetAppStatusType => {
     return {
@@ -14,5 +25,19 @@ export const setIsInitializedAC = (isInitialized: boolean): SetIsInitializedType
     return {
         type: SET_IS_INITIALIZED,
         payload: { isInitialized },
+    } as const;
+};
+
+export const setModalTypeAC = (modal: ModalObjectType): SetModalType => {
+    return {
+        type: SET_MODAL_TYPE,
+        payload: { modal },
+    } as const;
+};
+
+export const setModalStateAC = (isOpen: boolean): SetModalState => {
+    return {
+        type: SET_MODAL_STATE,
+        payload: { isOpen },
     } as const;
 };

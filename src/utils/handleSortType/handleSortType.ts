@@ -8,11 +8,13 @@ export const handleSortType = (
     directionName: OrderDirectionType,
     sort: ColumnSortType,
     dispatch: AppDispatch,
+    searchParams: URLSearchParams,
 ): void => {
     setDirection(directionName === 'asc' ? 'desc' : 'asc');
-    const sortDirection = directionName === 'asc' ? '1' : '0';
+    const sortDirection = directionName === 'asc' ? '0' : '1';
 
     if (sort) {
         dispatch(setSortPacksAC(`${sortDirection}${sort}`));
+        searchParams.set('sortPacks', `${sortDirection}${sort}`);
     }
 };

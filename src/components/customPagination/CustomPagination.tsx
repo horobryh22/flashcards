@@ -1,20 +1,24 @@
 import React, { useMemo } from 'react';
 
 import { Pagination } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 
 import classes from './CustomPagination.module.css';
 
 import { CustomSelect } from 'components';
+import { DEFAULT_PAGE_COUNT } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setCurrentPageAC } from 'store/actions';
-import { selectPacksTotalCount, selectPage, selectPageCount } from 'store/selectors';
+import { selectPacksTotalCount } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const CustomPagination = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const page = useTypedSelector(selectPage);
-    const pageCount = useTypedSelector(selectPageCount);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const page = Number(searchParams.get('page')) || 1;
+    const pageCount = Number(searchParams.get('pageCount')) || DEFAULT_PAGE_COUNT;
     const cardPacksTotalCount = useTypedSelector(selectPacksTotalCount);
 
     const count = useMemo(() => {
@@ -23,6 +27,8 @@ export const CustomPagination = (): ReturnComponentType => {
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number): void => {
         dispatch(setCurrentPageAC(value));
+        searchParams.set('page', String(value));
+        setSearchParams(searchParams);
     };
 
     return (
