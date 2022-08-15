@@ -1,5 +1,4 @@
 export { Header } from './header/Header';
-export { Links } from './links/Links';
 export { SignUp } from '../pages/signUp/SignUp';
 export { FormBottomPart } from './formBottomPart/FormBottomPart';
 export { SnackBar } from 'components/snackbar/SnackBar';
