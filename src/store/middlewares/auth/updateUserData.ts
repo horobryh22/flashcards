@@ -11,6 +11,7 @@ export const updateUserData =
     ({ name, avatar }: UpdateUserDataType): AppThunkType =>
     async dispatch => {
         try {
+            console.log(name, avatar);
             dispatch(setAppStatusAC(REQUEST_STATUS.LOADING));
             const data = await userAPI.updateUserData({ name, avatar });
 

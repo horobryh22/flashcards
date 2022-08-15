@@ -1,18 +1,20 @@
 import React, { useState, MouseEvent } from 'react';
 
-import { Box, Container } from '@mui/material';
+import { Avatar, Box, Container } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 import { StyledAppBar, StyledButton, StyledToolbar } from './styles';
 
+import defaultAvatar from 'assets/images/defaultAvatar.jpg';
 import logo from 'assets/images/logo.svg';
-import { ProfileList, UserPhoto } from 'components';
+import { ProfileList } from 'components';
 import { useTypedSelector } from 'hooks';
 import { selectIsUserAuth } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const Header = (): ReturnComponentType => {
     const isUserAuth = useTypedSelector(selectIsUserAuth);
+    const avatar = useTypedSelector(state => state.auth.authUserData.avatar);
 
     const [opened, setOpened] = useState<boolean>(false);
 
@@ -42,7 +44,11 @@ export const Header = (): ReturnComponentType => {
                                     backgroundColor: 'inherit',
                                 }}
                             >
-                                <UserPhoto variant="small" />
+                                <Avatar
+                                    alt="avatar"
+                                    src={avatar || defaultAvatar}
+                                    sx={{ width: 36, height: 36 }}
+                                />
                             </button>
                         ) : (
                             <NavLink to="/login" style={{ textDecoration: 'none' }}>
