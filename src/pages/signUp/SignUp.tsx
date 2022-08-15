@@ -1,55 +1,50 @@
 import React from 'react';
 
-import {
-    Checkbox,
-    FormControl,
-    FormControlLabel,
-    FormGroup,
-    TextField,
-} from '@mui/material';
+import { FormControl, FormGroup, TextField } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
-import { Navigate, NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import classes from './SignIn.module.css';
-import { SignInValuesType } from './types';
+import classes from './SignUp.module.css';
+import { SignUpFormType } from './types';
 
 import { FormBottomPart } from 'components';
 import { EMAIL_RULES, PASSWORD_RULES } from 'constant';
-import { useAppDispatch, useTypedSelector, useVisibility } from 'hooks';
-import { login } from 'store';
-import { selectIsUserAuth } from 'store/selectors';
+import { useAppDispatch, useVisibility } from 'hooks';
+import { registerUser } from 'store/middlewares';
 import { ReturnComponentType } from 'types';
 
-export const SignIn = (): ReturnComponentType => {
+const INTERVAL_TO_REDIRECT = 1000;
+
+export const SignUp = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const isUserAuth = useTypedSelector(selectIsUserAuth);
+    const navigate = useNavigate();
+
+    const [visible, visibility] = useVisibility(false);
 
     const {
         control,
         handleSubmit,
+        setError,
         formState: { errors },
-        getValues,
-    } = useForm({
-        defaultValues: {
-            email: '',
-            password: '',
-            rememberMe: false,
-        },
-        mode: 'onBlur',
-    });
+    } = useForm<SignUpFormType>({ mode: 'onBlur' });
 
-    const [visible, visibility] = useVisibility(false);
+    const onSubmit = ({ email, password, passwordConfirm }: SignUpFormType): void => {
+        if (password !== passwordConfirm) {
+            setError('passwordConfirm', { message: 'Passwords should be the same' });
 
-    const onSubmit = (values: SignInValuesType): void => {
-        dispatch(login(values));
+            return;
+        }
+
+        dispatch(registerUser({ email, password }));
+        setTimeout(() => {
+            navigate('/login');
+        }, INTERVAL_TO_REDIRECT);
     };
-
-    if (isUserAuth) return <Navigate to="/profile" />;
 
     return (
         <div className={classes.formWrapper}>
-            <h1 className={classes.title}>Sign In</h1>
+            <h1 className={classes.title}>Sign Up</h1>
             <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                 <FormControl fullWidth>
                     <FormGroup>
@@ -88,23 +83,31 @@ export const SignIn = (): ReturnComponentType => {
                         />
                         <div className={classes.error}>{errors.password?.message}</div>
                         <Controller
-                            name="rememberMe"
+                            name="passwordConfirm"
                             control={control}
+                            rules={PASSWORD_RULES}
                             render={({ field }) => (
-                                <FormControlLabel
+                                <TextField
                                     {...field}
-                                    label="Remember me"
-                                    checked={getValues().rememberMe}
-                                    control={<Checkbox />}
+                                    variant="standard"
+                                    type={`${visibility ? 'text' : 'password'}`}
+                                    label="Password"
+                                    margin="normal"
+                                    color={`${errors.password ? 'error' : 'primary'}`}
+                                    InputProps={{
+                                        endAdornment: visible,
+                                    }}
                                 />
                             )}
                         />
-                        <NavLink to="/enter_new_password">Forgot password?</NavLink>
+                        <div className={classes.error}>
+                            {errors.passwordConfirm?.message}
+                        </div>
                         <FormBottomPart
-                            buttonName="Sign In"
-                            helperText="Don’t have an account?"
-                            linkText="Sign Up"
-                            redirectTo="/registration"
+                            buttonName="Sign Up"
+                            helperText="Already have an account?"
+                            linkText="Sign In"
+                            redirectTo="/login"
                         />
                     </FormGroup>
                 </FormControl>
