@@ -17,7 +17,7 @@ export const EditableSpan = (): ReturnComponentType => {
     const [editMode, setEditMode] = useState(false);
     const [value, setValue] = useState(userName);
 
-    const handleClick = (): void => {
+    const changeMode = (): void => {
         setEditMode(true);
     };
 
@@ -59,7 +59,7 @@ export const EditableSpan = (): ReturnComponentType => {
             ) : (
                 <>
                     <span className={classes.title}>{userName}</span>
-                    <button type="button" className={classes.image} onClick={handleClick}>
+                    <button type="button" className={classes.image} onClick={changeMode}>
                         <img src={edit} alt="edit" />
                     </button>
                 </>

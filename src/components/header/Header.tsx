@@ -1,13 +1,12 @@
-import React, { useState, MouseEvent } from 'react';
+import React from 'react';
 
-import { Avatar, Box, Container } from '@mui/material';
+import { Avatar, Box, Container, IconButton } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 import { StyledAppBar, StyledButton, StyledToolbar } from './styles';
 
 import defaultAvatar from 'assets/images/defaultAvatar.jpg';
 import logo from 'assets/images/logo.svg';
-import { ProfileList } from 'components';
 import { useTypedSelector } from 'hooks';
 import { selectIsUserAuth } from 'store/selectors';
 import { ReturnComponentType } from 'types';
@@ -16,15 +15,12 @@ export const Header = (): ReturnComponentType => {
     const isUserAuth = useTypedSelector(selectIsUserAuth);
     const avatar = useTypedSelector(state => state.auth.authUserData.avatar);
 
-    const [opened, setOpened] = useState<boolean>(false);
+    const [element, setElement] = React.useState<null | HTMLElement>(null);
 
-    const onClose = (): void => {
-        setOpened(false);
-    };
+    const open = Boolean(element);
 
-    const onOpen = (e: MouseEvent): void => {
-        e.stopPropagation();
-        setOpened(!opened);
+    const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
+        setElement(event.currentTarget);
     };
 
     return (
@@ -34,28 +30,25 @@ export const Header = (): ReturnComponentType => {
                     <StyledToolbar>
                         <img src={logo} alt="logo" />
                         {isUserAuth ? (
-                            <button
-                                type="button"
-                                onClick={onOpen}
-                                style={{
-                                    padding: '0',
-                                    border: 'none',
-                                    cursor: 'pointer',
-                                    backgroundColor: 'inherit',
-                                }}
+                            <IconButton
+                                onClick={handleClick}
+                                size="small"
+                                sx={{ ml: 2 }}
+                                aria-controls={open ? 'account-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={open ? 'true' : undefined}
                             >
                                 <Avatar
                                     alt="avatar"
                                     src={avatar || defaultAvatar}
                                     sx={{ width: 36, height: 36 }}
                                 />
-                            </button>
+                            </IconButton>
                         ) : (
                             <NavLink to="/login" style={{ textDecoration: 'none' }}>
                                 <StyledButton variant="contained">Sign In</StyledButton>
                             </NavLink>
                         )}
-                        {opened && <ProfileList opened={opened} onClose={onClose} />}
                     </StyledToolbar>
                 </Container>
             </StyledAppBar>
