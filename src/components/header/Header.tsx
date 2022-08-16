@@ -7,17 +7,18 @@ import { StyledAppBar, StyledButton, StyledToolbar } from './styles';
 
 import defaultAvatar from 'assets/images/defaultAvatar.jpg';
 import logo from 'assets/images/logo.svg';
+import { AccountMenu } from 'components';
 import { useTypedSelector } from 'hooks';
-import { selectIsUserAuth } from 'store/selectors';
+import { selectAvatar, selectIsUserAuth } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const Header = (): ReturnComponentType => {
-    const isUserAuth = useTypedSelector(selectIsUserAuth);
-    const avatar = useTypedSelector(state => state.auth.authUserData.avatar);
-
     const [element, setElement] = React.useState<null | HTMLElement>(null);
 
     const open = Boolean(element);
+
+    const isUserAuth = useTypedSelector(selectIsUserAuth);
+    const avatar = useTypedSelector(selectAvatar);
 
     const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
         setElement(event.currentTarget);
@@ -49,6 +50,11 @@ export const Header = (): ReturnComponentType => {
                                 <StyledButton variant="contained">Sign In</StyledButton>
                             </NavLink>
                         )}
+                        <AccountMenu
+                            open={open}
+                            element={element}
+                            setElement={setElement}
+                        />
                     </StyledToolbar>
                 </Container>
             </StyledAppBar>

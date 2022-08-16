@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
@@ -34,6 +34,10 @@ export const NumberOfCards = (): ReturnComponentType => {
         searchParams.set('max', `${value[1]}`);
         setSearchParams(searchParams);
     };
+
+    useEffect(() => {
+        setValue([min, max]);
+    }, [min, max]);
 
     return (
         <Box>

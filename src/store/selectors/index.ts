@@ -26,3 +26,7 @@ export { selectButtonName } from './selectButtonName/selectButtonName';
 export { selectPackTitle } from './selectPackTitle/selectPackTitle';
 export { selectPackId } from './selectPackId/selectPackId';
 export { selectPackPrivate } from './selectPackPrivate/selectPackPrivate';
+export { selectAvatar } from './selectAvatar/selectAvatar';
+export { selectUserName } from './selectUserName/selectUserName';
+export { selectUserEmail } from './selectUserEmail/selectUserEmail';
+export { selectPacksInitialized } from './selectPacksInitialized/selectPacksInitialized';

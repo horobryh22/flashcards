@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './OverTableRow.module.css';
 
-import { NumberOfCards, Search, ShowPacksCards } from 'components';
+import { FilterRemove, NumberOfCards, Search, ShowPacksCards } from 'components';
 import { ReturnComponentType } from 'types';
 
 export const OverTableRow = (): ReturnComponentType => {
@@ -11,6 +11,7 @@ export const OverTableRow = (): ReturnComponentType => {
             <Search />
             <ShowPacksCards />
             <NumberOfCards />
+            <FilterRemove />
         </div>
     );
 };

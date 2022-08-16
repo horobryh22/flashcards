@@ -11,14 +11,15 @@ import logoutImage from 'assets/images/logout.svg';
 import { ArrowBackTo, EditableSpan } from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { logout } from 'store/middlewares';
+import { selectAvatar, selectIsUserAuth, selectUserEmail } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const Profile = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const userEmail = useTypedSelector(state => state.auth.authUserData.email);
-    const avatar = useTypedSelector(state => state.auth.authUserData.avatar);
-    const isUserAuth = useTypedSelector(state => state.auth.isUserAuth);
+    const userEmail = useTypedSelector(selectUserEmail);
+    const avatar = useTypedSelector(selectAvatar);
+    const isUserAuth = useTypedSelector(selectIsUserAuth);
 
     const handleClick = (): void => {
         dispatch(logout());

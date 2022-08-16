@@ -7,12 +7,13 @@ import classes from './EditableSpan.module.css';
 import edit from 'assets/images/edit.svg';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { updateUserData } from 'store/middlewares';
+import { selectUserName } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const EditableSpan = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const userName = useTypedSelector(state => state.auth.authUserData.name);
+    const userName = useTypedSelector(selectUserName);
 
     const [editMode, setEditMode] = useState(false);
     const [value, setValue] = useState(userName);

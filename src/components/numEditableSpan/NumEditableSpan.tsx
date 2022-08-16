@@ -1,12 +1,13 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+
+import { useSearchParams } from 'react-router-dom';
 
 import classes from './NumEditableSpan.module.css';
 import { EditableSpanType } from './types';
 
 import { MAX_CARDS_COUNT } from 'constant';
-import { useAppDispatch, useTypedSelector } from 'hooks';
+import { useAppDispatch } from 'hooks';
 import { setCardsRangeAC } from 'store/actions';
-import { selectMax, selectMin } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 const VALUE_LENGTH = 3;
@@ -17,8 +18,10 @@ export const NumEditableSpan = ({
 }: EditableSpanType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const min = useTypedSelector(selectMin);
-    const max = useTypedSelector(selectMax);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const min = Number(searchParams.get('min')) || 0;
+    const max = Number(searchParams.get('max')) || MAX_CARDS_COUNT;
 
     const [mode, setMode] = useState(false);
     const [value, setValue] = useState(num);
@@ -31,11 +34,15 @@ export const NumEditableSpan = ({
         setMode(!mode);
         if (isMin) {
             dispatch(setCardsRangeAC(value, max));
+            searchParams.set('min', `${value}`);
         }
 
         if (!isMin) {
             dispatch(setCardsRangeAC(min, value));
+            searchParams.set('max', `${value}`);
         }
+
+        setSearchParams(searchParams);
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -45,6 +52,10 @@ export const NumEditableSpan = ({
             setValue(Number(value));
         }
     };
+
+    useEffect(() => {
+        setValue(num);
+    }, [num]);
 
     return (
         <div className={classes.numBox} onDoubleClick={handleDoubleClick}>

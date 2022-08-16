@@ -1,17 +1,11 @@
 import React from 'react';
 
-import { Logout, PersonAdd, Settings } from '@mui/icons-material';
-import { ListItemIcon, Menu, MenuItem } from '@mui/material';
+import { Menu } from '@mui/material';
 
-import { Nullable, ReturnComponentType } from 'types';
-
-export type MenuType = {
-    element: Nullable<HTMLElement>;
-    open: boolean;
-    setElement: (element: Nullable<HTMLElement>) => void;
-};
+import { MenuType, ReturnComponentType } from 'types';
 
 export const ParentMenu = ({
+    children,
     open,
     setElement,
     element,
@@ -56,24 +50,7 @@ export const ParentMenu = ({
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-            <MenuItem>
-                <ListItemIcon>
-                    <PersonAdd fontSize="small" />
-                </ListItemIcon>
-                Add another account
-            </MenuItem>
-            <MenuItem>
-                <ListItemIcon>
-                    <Settings fontSize="small" />
-                </ListItemIcon>
-                Settings
-            </MenuItem>
-            <MenuItem>
-                <ListItemIcon>
-                    <Logout fontSize="small" />
-                </ListItemIcon>
-                Logout
-            </MenuItem>
+            {children}
         </Menu>
     );
 };

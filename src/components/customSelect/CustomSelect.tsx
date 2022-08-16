@@ -35,7 +35,6 @@ export const CustomSelect = (): ReturnComponentType => {
                     <MenuItem value={2}>2</MenuItem>
                     <MenuItem value={4}>4</MenuItem>
                     <MenuItem value={6}>6</MenuItem>
-                    <MenuItem value={8}>8</MenuItem>
                 </Select>
             </FormControl>
         </Box>

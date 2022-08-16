@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { useSearchParams } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 
 import { SortTypes } from 'api/types';
 import {
@@ -14,7 +14,7 @@ import { DEFAULT_PAGE_COUNT, MAX_CARDS_COUNT } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setModalStateAC, setModalTypeAC, setSearchParamsAC } from 'store/actions';
 import { fetchPacks } from 'store/middlewares';
-import { selectIsOpen, selectIsUserAuth } from 'store/selectors';
+import { selectIsOpen, selectIsUserAuth, selectPacksInitialized } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const PacksList = (): ReturnComponentType => {
@@ -25,7 +25,7 @@ export const PacksList = (): ReturnComponentType => {
     const isOpen = useTypedSelector(selectIsOpen);
 
     const isUserAuth = useTypedSelector(selectIsUserAuth);
-    const isPacksInitialized = useTypedSelector(state => state.packs.isInitialized);
+    const isPacksInitialized = useTypedSelector(selectPacksInitialized);
 
     const paramMin = Number(searchParams.get('min')) || 0;
     const paramMax = Number(searchParams.get('max')) || MAX_CARDS_COUNT;
@@ -80,6 +80,10 @@ export const PacksList = (): ReturnComponentType => {
             dispatch(setSearchParamsAC(params));
         }
     }, [isUserAuth]);
+
+    if (!isUserAuth) {
+        return <Navigate to="/login" />;
+    }
 
     return (
         <>
