@@ -9,6 +9,7 @@ import {
     setSearchUserIdAC,
     setSearchParamsAC,
     setIsMyPackAC,
+    setPacksStatusAC,
 } from 'store/actions';
 import { setSelectedCardPackAC } from 'store/actions/packs';
 
@@ -23,4 +24,5 @@ export type PacksActionsType =
     | ReturnType<typeof setSearchUserIdAC>
     | ReturnType<typeof setSearchParamsAC>
     | ReturnType<typeof setIsMyPackAC>
-    | ReturnType<typeof setSelectedCardPackAC>;
+    | ReturnType<typeof setSelectedCardPackAC>
+    | ReturnType<typeof setPacksStatusAC>;

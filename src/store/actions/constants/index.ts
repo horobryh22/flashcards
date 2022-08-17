@@ -9,6 +9,7 @@ export const SET_IS_INITIALIZED = 'app/SET-IS-INITIALIZED';
 export const SET_MODAL_TYPE = 'app/SET-MODAL-TYPE';
 export const SET_MODAL_STATE = 'app/SET-MODAL-STATE';
 export const SET_CARD_PACKS = 'packs/SET-CARD-PACKS';
+export const SET_PACKS_STATUS = 'packs/SET-PACKS-STATUS';
 export const SET_SORT_PACKS = 'packs/SET-SORT-PACKS';
 export const SET_CURRENT_PAGE = 'packs/SET-CURRENT-PAGE';
 export const SET_PACKS_TOTAL_COUNT = 'packs/SET-PACKS-TOTAL-COUNT';

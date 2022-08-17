@@ -1,4 +1,13 @@
 import { GetCardsType } from 'api/types';
+import {
+    SET_CARD_QUESTION,
+    SET_CARDS,
+    SET_CARDS_PACK_ID,
+    SET_CARDS_PAGE,
+    SET_CARDS_PAGE_COUNT,
+    SET_CARDS_SEARCH_PARAMS,
+    SET_UPDATED_GRADE,
+} from 'store/actions/constants';
 import { CardsActionType } from 'store/actions/types';
 
 const initialState: GetCardsType = {
@@ -27,19 +36,19 @@ export const cardsReducer = (
     action: CardsActionType,
 ): GetCardsType => {
     switch (action.type) {
-        case 'cards/SET_CARDS':
+        case SET_CARDS:
             return { ...state, ...action.payload.data };
-        case '/cards/SET_CARDS_SEARCH_PARAMS':
+        case SET_CARDS_SEARCH_PARAMS:
             return {
                 ...state,
                 searchParams: { ...state.searchParams, ...action.payload.searchParams },
             };
-        case 'cards/SET_CARDS_PACK_ID':
+        case SET_CARDS_PACK_ID:
             return {
                 ...state,
                 cardsPack_id: action.payload.cardsPack_id,
             };
-        case 'cards/SET_CARD_QUESTION':
+        case SET_CARD_QUESTION:
             return {
                 ...state,
                 searchParams: {
@@ -47,7 +56,7 @@ export const cardsReducer = (
                     cardQuestion: action.payload.question,
                 },
             };
-        case 'cards/SET_CARDS_PAGE_COUNT':
+        case SET_CARDS_PAGE_COUNT:
             return {
                 ...state,
                 pageCount: action.payload.pageCount,
@@ -56,13 +65,13 @@ export const cardsReducer = (
                     pageCount: action.payload.pageCount,
                 },
             };
-        case 'cards/SET_CARDS_PAGE':
+        case SET_CARDS_PAGE:
             return {
                 ...state,
                 page: action.payload.page,
                 searchParams: { ...state.searchParams, page: action.payload.page },
             };
-        case 'cards/SET_UPDATED_GRADE':
+        case SET_UPDATED_GRADE:
             return {
                 ...state,
                 cards: state.cards.map(card =>

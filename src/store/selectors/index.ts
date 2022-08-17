@@ -30,3 +30,4 @@ export { selectAvatar } from './selectAvatar/selectAvatar';
 export { selectUserName } from './selectUserName/selectUserName';
 export { selectUserEmail } from './selectUserEmail/selectUserEmail';
 export { selectPacksInitialized } from './selectPacksInitialized/selectPacksInitialized';
+export { selectPacksStatus } from './selectPacksStatus/selectPacksStatus';

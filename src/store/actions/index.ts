@@ -23,6 +23,7 @@ export {
     setSearchUserIdAC,
     setSearchParamsAC,
     setIsMyPackAC,
+    setPacksStatusAC,
 } from './packs';
 export type {
     AuthActionsType,

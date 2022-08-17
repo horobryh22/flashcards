@@ -10,6 +10,7 @@ import {
     SET_SEARCH_PARAMS,
     SET_SEARCH_USER_ID,
     SET_SORT_PACKS,
+    SET_PACKS_STATUS,
 } from './constants';
 import {
     SetCardPacksType,
@@ -22,9 +23,11 @@ import {
     SetSearchParamsType,
     SetSearchUserId,
     SetSortPacksType,
+    SetPacksStatus,
 } from './types';
 
 import { CardType, SortTypes, SearchParamsType } from 'api/types';
+import { PACKS_STATUS } from 'enums';
 import { SetIsPackType } from 'store/actions/types/SetMyAllCardsType';
 
 export const setCardPacksAC = (cardPacks: CardType[]): SetCardPacksType => {
@@ -101,5 +104,12 @@ export const setSearchParamsAC = (params: SearchParamsType): SetSearchParamsType
     return {
         type: SET_SEARCH_PARAMS,
         payload: { params },
+    } as const;
+};
+
+export const setPacksStatusAC = (status: PACKS_STATUS): SetPacksStatus => {
+    return {
+        type: SET_PACKS_STATUS,
+        payload: { status },
     } as const;
 };

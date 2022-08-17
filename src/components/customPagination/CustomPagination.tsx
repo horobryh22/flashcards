@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 
-import { Pagination } from '@mui/material';
+import { Pagination, Skeleton } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
 import classes from './CustomPagination.module.css';
 
-import { CustomSelect } from 'components';
+import { CustomSelect } from 'components/customSelect/CustomSelect';
 import { DEFAULT_PAGE_COUNT } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setCurrentPageAC } from 'store/actions';
@@ -33,18 +33,29 @@ export const CustomPagination: any = (): ReturnComponentType => {
 
     return (
         <div className={classes.wrapper}>
-            <Pagination
-                count={count}
-                page={page}
-                onChange={handleChange}
-                shape="circular"
-                color="primary"
-            />
-            <div className={classes.selectWrapper}>
-                <span>Show</span>
-                <CustomSelect />
-                <span>cards per page</span>
-            </div>
+            {cardPacksTotalCount === 0 ? (
+                <Skeleton
+                    animation="wave"
+                    variant="rectangular"
+                    width={600}
+                    height={40}
+                />
+            ) : (
+                <>
+                    <Pagination
+                        count={count}
+                        page={page}
+                        onChange={handleChange}
+                        shape="circular"
+                        color="primary"
+                    />
+                    <div className={classes.selectWrapper}>
+                        <span>Show</span>
+                        <CustomSelect />
+                        <span>cards per page</span>
+                    </div>
+                </>
+            )}
         </div>
     );
 };

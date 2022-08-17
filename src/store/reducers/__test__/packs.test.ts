@@ -1,4 +1,5 @@
 import { CardType } from 'api/types';
+import { PACKS_STATUS } from 'enums';
 import {
     setCardPacksAC,
     setCurrentPageAC,
@@ -17,6 +18,7 @@ const defaultPage = 50;
 
 beforeEach(() => {
     startState = {
+        status: PACKS_STATUS.IDLE,
         cardPacks: [{} as CardType],
         cardPacksTotalCount: 100,
         selectedCardsPack: {} as CardType,
