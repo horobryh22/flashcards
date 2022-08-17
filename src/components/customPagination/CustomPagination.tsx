@@ -12,7 +12,7 @@ import { setCurrentPageAC } from 'store/actions';
 import { selectPacksTotalCount } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
-export const CustomPagination = (): ReturnComponentType => {
+export const CustomPagination: any = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const [searchParams, setSearchParams] = useSearchParams();

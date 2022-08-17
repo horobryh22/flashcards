@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { Grid } from '@mui/material';
 import { Navigate, useSearchParams } from 'react-router-dom';
 
 import { SortTypes } from 'api/types';
@@ -86,7 +87,7 @@ export const PacksList = (): ReturnComponentType => {
     }
 
     return (
-        <>
+        <Grid justifyContent="center" alignContent="flex-end">
             <CardsTopContent
                 title="Packs list"
                 buttonName="Add new pack"
@@ -97,6 +98,6 @@ export const PacksList = (): ReturnComponentType => {
             <TableComponent />
             <CustomPagination />
             <ModalParent open={isOpen} onClose={onClose} />
-        </>
+        </Grid>
     );
 };

@@ -10,8 +10,8 @@ export const TableComponent = (): ReturnComponentType => {
 
     return (
         <Paper sx={{ width: '100%' }} style={{ marginTop: '25px' }}>
-            <TableContainer sx={{ maxHeight: 550 }}>
-                <Table stickyHeader aria-label="sticky table">
+            <TableContainer>
+                <Table stickyHeader aria-label="sticky table" sx={{ maxHeight: 550 }}>
                     <MainTableRow />
                     <TableRows rows={cardPacks} />
                 </Table>

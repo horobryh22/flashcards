@@ -1,9 +1,5 @@
 .wrapper {
-    position: absolute;
-    bottom: 40px;
-    left: 180px;
     margin-top: 40px;
-    width: 1000px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -19,5 +15,4 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 15px;
-    color:blue
 }

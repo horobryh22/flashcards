@@ -30,6 +30,8 @@ let TIMER: ReturnType<typeof setTimeout>;
 const ELEMENT = document.createElement('div');
 const MODAL_ROOT_ELEMENT = document.querySelector('#modal');
 
+const MAX_STRING_LENGTH = 19;
+
 export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
@@ -39,6 +41,11 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
     const packTitle = useTypedSelector(selectPackTitle);
     const packId = useTypedSelector(selectPackId);
     const packPrivate = useTypedSelector(selectPackPrivate);
+
+    const deletingPack =
+        packTitle && packTitle.length > MAX_STRING_LENGTH
+            ? `${packTitle?.slice(0, MAX_STRING_LENGTH)}...`
+            : packTitle;
 
     const { control, handleSubmit, getValues, setValue, resetField } = useForm({
         defaultValues: {
@@ -55,8 +62,8 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
         ),
         removePack: (
             <div className={classes.modalContent}>
-                Do you really want to remove <b>{packTitle}</b>?<br /> All cards will be
-                deleted.
+                Do you really want to remove <b>{deletingPack}</b>
+                ?<br /> All cards will be deleted.
             </div>
         ),
     };

@@ -3,6 +3,7 @@ import React from 'react';
 import { TableBody, TableCell, TableRow } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
+import classes from './TableRows.module.css';
 import { TableRowsType } from './types';
 
 import { CardType } from 'api/types';
@@ -49,9 +50,11 @@ export const TableRows = ({ rows }: TableRowsType): ReturnComponentType => {
                     return (
                         <TableCell key={column.id} align={column.align}>
                             {column.id !== 'actions' ? (
-                                value
+                                <div className={classes.nameWrapper}>{value}</div>
                             ) : (
-                                <ActionImages card={row} />
+                                <div className={classes.actionsWrapper}>
+                                    <ActionImages card={row} />
+                                </div>
                             )}
                         </TableCell>
                     );
