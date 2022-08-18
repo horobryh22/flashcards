@@ -20,23 +20,21 @@ export const TableComponent = (): ReturnComponentType => {
 
     return (
         <Paper sx={{ width: '100%' }} style={{ marginTop: '25px' }}>
-            <TableContainer>
-                <Table stickyHeader aria-label="sticky table" sx={{ maxHeight: 550 }}>
-                    {status === PACKS_STATUS.LOADING ? (
-                        <Skeleton
-                            animation="wave"
-                            variant="rectangular"
-                            width={1150}
-                            height={ROW_HEIGHT * paramPageCount}
-                        />
-                    ) : (
-                        <>
-                            <MainTableRow />
-                            <TableRows rows={cardPacks} />
-                        </>
-                    )}
-                </Table>
-            </TableContainer>
+            {status === PACKS_STATUS.LOADING ? (
+                <Skeleton
+                    animation="wave"
+                    variant="rectangular"
+                    width={1150}
+                    height={ROW_HEIGHT * paramPageCount}
+                />
+            ) : (
+                <TableContainer>
+                    <Table stickyHeader aria-label="sticky table" sx={{ maxHeight: 550 }}>
+                        <MainTableRow />
+                        <TableRows rows={cardPacks} />
+                    </Table>
+                </TableContainer>
+            )}
         </Paper>
     );
 };

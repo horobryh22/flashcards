@@ -1,0 +1,15 @@
+.contentWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.userName {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    border: 2px;
+    border-style: none none dashed none;
+    cursor: pointer;
+}

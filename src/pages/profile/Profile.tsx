@@ -5,10 +5,9 @@ import { Navigate } from 'react-router-dom';
 
 import classes from './Profile.module.css';
 
-import camera from 'assets/images/camera.svg';
 import defaultAvatar from 'assets/images/defaultAvatar.jpg';
 import logoutImage from 'assets/images/logout.svg';
-import { ArrowBackTo, EditableSpan } from 'components';
+import { ArrowBackTo, EditableSpan, InputTypeFile } from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { logout } from 'store/middlewares';
 import { selectAvatar, selectIsUserAuth, selectUserEmail } from 'store/selectors';
@@ -40,9 +39,7 @@ export const Profile = (): ReturnComponentType => {
                         src={avatar || defaultAvatar}
                         sx={{ width: 100, height: 100 }}
                     />
-                    <div className={classes.avatarIcon}>
-                        <img src={camera} alt="camera" />
-                    </div>
+                    <InputTypeFile />
                 </div>
                 <EditableSpan />
                 <span className={classes.email}>{userEmail}</span>

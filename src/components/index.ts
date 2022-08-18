@@ -23,3 +23,4 @@ export { ArrowBackTo } from './arrowBackTo/ArrowBackTo';
 export { ParentMenu } from './menu/ParentMenu';
 export { AccountMenu } from './menus/AccountMenu';
 export { FilterRemove } from './filterRemove/FilterRemove';
+export { InputTypeFile } from './inputTypeFile/InputTypeFile';

@@ -1,4 +1,4 @@
 export type UpdateUserDataType = {
-    name: string;
-    avatar: string;
+    name?: string;
+    avatar?: string;
 };
