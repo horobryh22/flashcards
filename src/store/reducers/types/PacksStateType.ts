@@ -7,6 +7,4 @@ export type PacksStateType = {
     searchParams: SearchParamsType;
     cardPacksTotalCount: number;
     isInitialized: boolean;
-    isMyPack: boolean;
-    selectedCardsPack: CardType;
 };

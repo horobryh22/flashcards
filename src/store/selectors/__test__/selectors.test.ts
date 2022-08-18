@@ -1,4 +1,4 @@
-import { AuthUserDataType, CardType, GetCardsType } from 'api/types';
+import { AuthUserDataType } from 'api/types';
 import { PACKS_STATUS, REQUEST_STATUS } from 'enums';
 import {
     selectAppStatus,
@@ -64,10 +64,10 @@ beforeEach(() => {
             },
             cardPacksTotalCount: defaultPacksTotalCount,
             isInitialized: false,
-            selectedCardsPack: {} as CardType,
-            isMyPack: false,
         },
-        cards: {} as GetCardsType,
+        cards: {
+            cards: [],
+        },
     };
 });
 

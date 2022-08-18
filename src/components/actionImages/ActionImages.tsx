@@ -10,7 +10,6 @@ import knowledge from 'assets/images/knowledge.svg';
 import remove from 'assets/images/remove.svg';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setModalTypeAC } from 'store/actions';
-import { setSelectedCardPackAC } from 'store/actions/packs';
 import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
@@ -52,11 +51,6 @@ export const ActionImages = ({ card }: ActionImagesType): ReturnComponentType =>
         );
     };
 
-    const learnPack = (e: React.MouseEvent<HTMLElement>): void => {
-        e.stopPropagation();
-        dispatch(setSelectedCardPackAC(card));
-    };
-
     const linkClass = authUserId !== card.user_id ? classes.disabledIcon : '';
 
     return (
@@ -67,7 +61,7 @@ export const ActionImages = ({ card }: ActionImagesType): ReturnComponentType =>
             <NavLink to="" onClick={updatePack} className={linkClass}>
                 <img src={edit} alt="edit" />
             </NavLink>
-            <NavLink to={`/learn/${card._id}`} onClick={learnPack}>
+            <NavLink to="">
                 <img src={knowledge} alt="knowledge" />
             </NavLink>
         </div>

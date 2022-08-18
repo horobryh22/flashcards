@@ -1,7 +1,7 @@
 import {
-    ME_AUTH,
     SET_AUTH_ERROR,
     SET_AUTH_INFO,
+    SET_AUTH_USER_DATA,
     SET_GO_TO_LOGIN,
     SET_IS_AVATAR_BROKEN,
     SET_IS_EMAIL_SENT,
@@ -10,11 +10,11 @@ import {
 import {
     SetAuthErrorType,
     SetAuthInfoType,
+    SetAuthUserDataType,
     SetGoToLogin,
     SetIsAvatarBroken,
     SetIsEmailSent,
     SetIsUserAuth,
-    setUsersACType,
 } from './types';
 
 import { AuthUserDataType } from 'api/types';
@@ -55,9 +55,9 @@ export const setGoToLoginAC = (goToLogin: boolean): SetGoToLogin => {
     } as const;
 };
 
-export const setAuthUserDataAC = (data: AuthUserDataType): setUsersACType => {
+export const setAuthUserDataAC = (data: AuthUserDataType): SetAuthUserDataType => {
     return {
-        type: ME_AUTH,
+        type: SET_AUTH_USER_DATA,
         payload: {
             data,
         },

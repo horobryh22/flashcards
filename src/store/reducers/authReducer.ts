@@ -2,7 +2,7 @@ import { AuthStateType } from './types';
 
 import { AuthActionsType } from 'store/actions';
 import {
-    ME_AUTH,
+    SET_AUTH_USER_DATA,
     SET_AUTH_ERROR,
     SET_AUTH_INFO,
     SET_GO_TO_LOGIN,
@@ -17,6 +17,7 @@ const initialState: AuthStateType = {
     info: null,
     error: null,
     isUserAuth: false,
+    isAvatarBroken: false,
     authUserData: {
         _id: '',
         email: '',
@@ -27,7 +28,6 @@ const initialState: AuthStateType = {
         verified: false,
         rememberMe: false,
     },
-    isAvatarBroken: false,
 };
 
 export const authReducer = (
@@ -45,7 +45,7 @@ export const authReducer = (
             return { ...state, isUserAuth: action.payload.isUserAuth };
         case SET_AUTH_ERROR:
             return { ...state, error: action.payload.error };
-        case ME_AUTH:
+        case SET_AUTH_USER_DATA:
             return { ...state, authUserData: action.payload.data };
         case SET_IS_AVATAR_BROKEN:
             return { ...state, isAvatarBroken: action.payload.isBroken };

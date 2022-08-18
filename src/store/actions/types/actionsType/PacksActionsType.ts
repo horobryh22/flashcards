@@ -8,10 +8,8 @@ import {
     setCardsRangeAC,
     setSearchUserIdAC,
     setSearchParamsAC,
-    setIsMyPackAC,
     setPacksStatusAC,
-} from 'store/actions';
-import { setSelectedCardPackAC } from 'store/actions/packs';
+} from 'store/actions/index';
 
 export type PacksActionsType =
     | ReturnType<typeof setCardPacksAC>
@@ -23,6 +21,4 @@ export type PacksActionsType =
     | ReturnType<typeof setCardsRangeAC>
     | ReturnType<typeof setSearchUserIdAC>
     | ReturnType<typeof setSearchParamsAC>
-    | ReturnType<typeof setIsMyPackAC>
-    | ReturnType<typeof setSelectedCardPackAC>
     | ReturnType<typeof setPacksStatusAC>;

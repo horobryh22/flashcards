@@ -9,4 +9,3 @@ export { fetchPacks } from 'store/middlewares/packs/fetchPacks';
 export { addCardsPack } from 'store/middlewares/packs/addCardsPack';
 export { removeCardsPack } from 'store/middlewares/packs/removeCardsPack';
 export { updateCardsPack } from 'store/middlewares/packs/updateCardsPack';
-export { fetchCards } from 'store/middlewares/cards/fetchCards';

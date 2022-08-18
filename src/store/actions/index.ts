@@ -23,7 +23,6 @@ export {
     setCardsRangeAC,
     setSearchUserIdAC,
     setSearchParamsAC,
-    setIsMyPackAC,
     setPacksStatusAC,
 } from './packs';
 export type {
@@ -35,5 +34,6 @@ export type {
     SetAuthErrorType,
     SetAppStatusType,
     SetGoToLogin,
-    setUsersACType,
+    SetAuthUserDataType,
+    CardsActionsType,
 } from './types';

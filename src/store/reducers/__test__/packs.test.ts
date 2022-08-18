@@ -21,8 +21,6 @@ beforeEach(() => {
         status: PACKS_STATUS.IDLE,
         cardPacks: [{} as CardType],
         cardPacksTotalCount: 100,
-        selectedCardsPack: {} as CardType,
-        isMyPack: false,
         searchParams: {
             packName: 'english',
             page: 1,

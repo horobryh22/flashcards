@@ -2,33 +2,29 @@ import {
     SET_CARD_PACKS,
     SET_CARDS_RANGE,
     SET_CURRENT_PAGE,
-    SET_IS_MY_CARDS,
     SET_PACK_NAME,
+    SET_PACKS_STATUS,
     SET_PACKS_TOTAL_COUNT,
     SET_PAGE_COUNT,
-    SET_SELECTED_CARDS_PACK,
     SET_SEARCH_PARAMS,
     SET_SEARCH_USER_ID,
     SET_SORT_PACKS,
-    SET_PACKS_STATUS,
 } from './constants';
 import {
     SetCardPacksType,
     SetCardsRangeType,
     SetCurrentPageType,
     SetPackNameType,
+    SetPacksStatus,
     SetPacksTotalCount,
     SetPageCountType,
-    SetSelectedCardsPackType,
     SetSearchParamsType,
     SetSearchUserId,
     SetSortPacksType,
-    SetPacksStatus,
 } from './types';
 
-import { CardType, SortTypes, SearchParamsType } from 'api/types';
+import { CardType, SearchParamsType, SortTypes } from 'api/types';
 import { PACKS_STATUS } from 'enums';
-import { SetIsPackType } from 'store/actions/types/SetMyAllCardsType';
 
 export const setCardPacksAC = (cardPacks: CardType[]): SetCardPacksType => {
     return {
@@ -70,20 +66,6 @@ export const setPackNameAC = (packName: string): SetPackNameType => {
         type: SET_PACK_NAME,
         payload: { packName },
     } as const;
-};
-
-export const setIsMyPackAC = (isMyPack: boolean): SetIsPackType => {
-    return {
-        type: SET_IS_MY_CARDS,
-        payload: { isMyPack },
-    } as const;
-};
-
-export const setSelectedCardPackAC = (pack: CardType): SetSelectedCardsPackType => {
-    return {
-        type: SET_SELECTED_CARDS_PACK,
-        payload: { pack },
-    };
 };
 
 export const setCardsRangeAC = (min: number, max: number): SetCardsRangeType => {

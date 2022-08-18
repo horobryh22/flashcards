@@ -5,14 +5,12 @@ import {
     SET_CARD_PACKS,
     SET_CARDS_RANGE,
     SET_CURRENT_PAGE,
-    SET_IS_MY_CARDS,
     SET_PACK_NAME,
     SET_PACKS_STATUS,
     SET_PACKS_TOTAL_COUNT,
     SET_PAGE_COUNT,
     SET_SEARCH_PARAMS,
     SET_SEARCH_USER_ID,
-    SET_SELECTED_CARDS_PACK,
     SET_SORT_PACKS,
 } from 'store/actions/constants';
 import { PacksActionsType } from 'store/actions/types';
@@ -29,26 +27,8 @@ const initialState: PacksStateType = {
         pageCount: 6,
         user_id: '',
     },
-    isMyPack: false,
     cardPacksTotalCount: 0,
     isInitialized: false,
-    selectedCardsPack: {
-        _id: '',
-        user_id: '',
-        cardsCount: 0,
-        name: '',
-        created: '',
-        grade: 0,
-        path: '',
-        private: false,
-        type: '',
-        deckCover: '',
-        more_id: '',
-        rating: 0,
-        shots: 0,
-        updated: '',
-        user_name: '',
-    },
 };
 
 export const packsReducer = (
@@ -87,8 +67,6 @@ export const packsReducer = (
             };
         case SET_CARD_PACKS:
             return { ...state, cardPacks: action.payload.cardPacks };
-        case SET_IS_MY_CARDS:
-            return { ...state, isMyPack: action.payload.isMyPack };
         case SET_SORT_PACKS:
             return {
                 ...state,
@@ -116,11 +94,6 @@ export const packsReducer = (
                 ...state,
                 searchParams: { ...state.searchParams, ...action.payload.params },
                 isInitialized: true,
-            };
-        case SET_SELECTED_CARDS_PACK:
-            return {
-                ...state,
-                selectedCardsPack: action.payload.pack,
             };
         default:
             return state;
