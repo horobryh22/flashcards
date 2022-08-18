@@ -5,7 +5,7 @@ import { Avatar } from '@mui/material';
 import defaultAvatar from 'assets/images/defaultAvatar.jpg';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setAuthErrorAC, setIsAvatarBrokenAC } from 'store/actions';
-import { selectAvatar } from 'store/selectors';
+import { selectAvatar, selectIsAvatarBroken } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export type UserAvatarType = {
@@ -17,7 +17,7 @@ export const UserAvatar = ({ width, height }: UserAvatarType): ReturnComponentTy
     const dispatch = useAppDispatch();
 
     const avatar = useTypedSelector(selectAvatar);
-    const isAvatarBroken = useTypedSelector(state => state.auth.isAvatarBroken);
+    const isAvatarBroken = useTypedSelector(selectIsAvatarBroken);
 
     const [ava, setAva] = useState(avatar);
 
