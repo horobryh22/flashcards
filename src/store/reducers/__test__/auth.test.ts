@@ -20,6 +20,7 @@ beforeEach(() => {
         isEmailSent: false,
         isUserAuth: false,
         authUserData: {} as AuthUserDataType,
+        isAvatarBroken: false,
     };
 });
 

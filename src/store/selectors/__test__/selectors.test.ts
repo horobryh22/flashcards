@@ -48,6 +48,7 @@ beforeEach(() => {
             authUserData: {
                 _id: 'test id',
             } as AuthUserDataType,
+            isAvatarBroken: false,
         },
         packs: {
             status: PACKS_STATUS.IDLE,

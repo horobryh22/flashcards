@@ -3,6 +3,7 @@ import {
     SET_AUTH_ERROR,
     SET_AUTH_INFO,
     SET_GO_TO_LOGIN,
+    SET_IS_AVATAR_BROKEN,
     SET_IS_EMAIL_SENT,
     SET_IS_USER_AUTH,
 } from './constants';
@@ -10,6 +11,7 @@ import {
     SetAuthErrorType,
     SetAuthInfoType,
     SetGoToLogin,
+    SetIsAvatarBroken,
     SetIsEmailSent,
     SetIsUserAuth,
     setUsersACType,
@@ -58,6 +60,15 @@ export const setAuthUserDataAC = (data: AuthUserDataType): setUsersACType => {
         type: ME_AUTH,
         payload: {
             data,
+        },
+    };
+};
+
+export const setIsAvatarBrokenAC = (isBroken: boolean): SetIsAvatarBroken => {
+    return {
+        type: SET_IS_AVATAR_BROKEN,
+        payload: {
+            isBroken,
         },
     };
 };

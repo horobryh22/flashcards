@@ -6,6 +6,7 @@ import {
     SET_AUTH_ERROR,
     SET_AUTH_INFO,
     SET_GO_TO_LOGIN,
+    SET_IS_AVATAR_BROKEN,
     SET_IS_EMAIL_SENT,
     SET_IS_USER_AUTH,
 } from 'store/actions/constants';
@@ -26,6 +27,7 @@ const initialState: AuthStateType = {
         verified: false,
         rememberMe: false,
     },
+    isAvatarBroken: false,
 };
 
 export const authReducer = (
@@ -45,6 +47,8 @@ export const authReducer = (
             return { ...state, error: action.payload.error };
         case ME_AUTH:
             return { ...state, authUserData: action.payload.data };
+        case SET_IS_AVATAR_BROKEN:
+            return { ...state, isAvatarBroken: action.payload.isBroken };
         default:
             return state;
     }

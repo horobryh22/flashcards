@@ -5,6 +5,7 @@ export {
     setIsUserAuthAC,
     setGoToLoginAC,
     setAuthUserDataAC,
+    setIsAvatarBrokenAC,
 } from './auth';
 export {
     setAppStatusAC,

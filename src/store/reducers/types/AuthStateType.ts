@@ -8,4 +8,5 @@ export type AuthStateType = {
     error: Nullable<string>;
     isUserAuth: boolean;
     authUserData: AuthUserDataType;
+    isAvatarBroken: boolean;
 };

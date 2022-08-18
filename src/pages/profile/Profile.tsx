@@ -1,23 +1,20 @@
 import React from 'react';
 
-import { Avatar } from '@mui/material';
 import { Navigate } from 'react-router-dom';
 
 import classes from './Profile.module.css';
 
-import defaultAvatar from 'assets/images/defaultAvatar.jpg';
 import logoutImage from 'assets/images/logout.svg';
-import { ArrowBackTo, EditableSpan, InputTypeFile } from 'components';
+import { ArrowBackTo, EditableSpan, InputTypeFile, UserAvatar } from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { logout } from 'store/middlewares';
-import { selectAvatar, selectIsUserAuth, selectUserEmail } from 'store/selectors';
+import { selectIsUserAuth, selectUserEmail } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const Profile = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const userEmail = useTypedSelector(selectUserEmail);
-    const avatar = useTypedSelector(selectAvatar);
     const isUserAuth = useTypedSelector(selectIsUserAuth);
 
     const handleClick = (): void => {
@@ -34,11 +31,7 @@ export const Profile = (): ReturnComponentType => {
             <div className={classes.wrapper}>
                 <span className={classes.title}>Personal Information</span>
                 <div className={classes.avatar}>
-                    <Avatar
-                        alt="avatar"
-                        src={avatar || defaultAvatar}
-                        sx={{ width: 100, height: 100 }}
-                    />
+                    <UserAvatar height={100} width={100} />
                     <InputTypeFile />
                 </div>
                 <EditableSpan />

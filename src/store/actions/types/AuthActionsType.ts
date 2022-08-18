@@ -5,6 +5,7 @@ import {
     setIsUserAuthAC,
     setGoToLoginAC,
     setAuthUserDataAC,
+    setIsAvatarBrokenAC,
 } from 'store/actions';
 
 export type AuthActionsType =
@@ -13,4 +14,5 @@ export type AuthActionsType =
     | ReturnType<typeof setAuthInfoAC>
     | ReturnType<typeof setIsEmailSentAC>
     | ReturnType<typeof setGoToLoginAC>
-    | ReturnType<typeof setAuthUserDataAC>;
+    | ReturnType<typeof setAuthUserDataAC>
+    | ReturnType<typeof setIsAvatarBrokenAC>;

@@ -1,16 +1,15 @@
 import React from 'react';
 
-import { Avatar, Box, Container, IconButton } from '@mui/material';
+import { Box, Container, IconButton } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 import classes from './Header.module.css';
 import { StyledAppBar, StyledButton, StyledToolbar } from './styles';
 
-import defaultAvatar from 'assets/images/defaultAvatar.jpg';
 import logo from 'assets/images/logo.svg';
-import { AccountMenu } from 'components';
+import { AccountMenu, UserAvatar } from 'components';
 import { useTypedSelector } from 'hooks';
-import { selectAvatar, selectIsUserAuth, selectUserName } from 'store/selectors';
+import { selectIsUserAuth, selectUserName } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const Header = (): ReturnComponentType => {
@@ -19,7 +18,6 @@ export const Header = (): ReturnComponentType => {
     const open = Boolean(element);
 
     const isUserAuth = useTypedSelector(selectIsUserAuth);
-    const avatar = useTypedSelector(selectAvatar);
     const userName = useTypedSelector(selectUserName);
 
     const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
@@ -46,11 +44,7 @@ export const Header = (): ReturnComponentType => {
                                     aria-haspopup="true"
                                     aria-expanded={open ? 'true' : undefined}
                                 >
-                                    <Avatar
-                                        alt="avatar"
-                                        src={avatar || defaultAvatar}
-                                        sx={{ width: 36, height: 36 }}
-                                    />
+                                    <UserAvatar height={36} width={36} />
                                 </IconButton>
                             </div>
                         ) : (
