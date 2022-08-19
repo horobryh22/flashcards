@@ -25,3 +25,4 @@ export { AccountMenu } from './menus/AccountMenu';
 export { FilterRemove } from './filterRemove/FilterRemove';
 export { InputTypeFile } from './inputTypeFile/InputTypeFile';
 export { UserAvatar } from './userAvatar/UserAvatar';
+export { NoResultsFound } from './noResultsFound/NoResultsFound';

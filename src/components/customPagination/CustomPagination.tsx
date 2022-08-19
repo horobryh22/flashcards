@@ -33,7 +33,7 @@ export const CustomPagination: any = (): ReturnComponentType => {
 
     return (
         <div className={classes.wrapper}>
-            {cardPacksTotalCount === 0 ? (
+            {cardPacksTotalCount === 0 ? ( // !!!!!!!!!!
                 <Skeleton
                     animation="wave"
                     variant="rectangular"

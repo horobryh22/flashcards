@@ -6,8 +6,9 @@ import classes from './FilterRemove.module.css';
 
 import { SearchParamsType } from 'api/types';
 import removeImage from 'assets/images/filter-remove.svg';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setSearchParamsAC } from 'store/actions';
+import { selectPackName } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 const PARAMS: SearchParamsType = {
@@ -24,10 +25,11 @@ export const FilterRemove = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const [, setSearchParams] = useSearchParams();
+    const packName = useTypedSelector(selectPackName);
 
     const handleClick = (): void => {
-        dispatch(setSearchParamsAC(PARAMS));
-        setSearchParams({ packName: '' });
+        dispatch(setSearchParamsAC({ ...PARAMS, packName }));
+        setSearchParams({ packName });
     };
 
     return (
