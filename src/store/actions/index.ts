@@ -17,13 +17,11 @@ export {
     setCardPacksAC,
     setSortPacksAC,
     setCurrentPageAC,
-    setPacksTotalCountAC,
     setPageCountAC,
     setPackNameAC,
     setCardsRangeAC,
     setSearchUserIdAC,
     setSearchParamsAC,
-    setPacksStatusAC,
 } from './packs';
 export type {
     AuthActionsType,

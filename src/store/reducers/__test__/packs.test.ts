@@ -1,10 +1,8 @@
 import { CardType } from 'api/types';
-import { PACKS_STATUS } from 'enums';
 import {
     setCardPacksAC,
     setCurrentPageAC,
     setPackNameAC,
-    setPacksTotalCountAC,
     setPageCountAC,
     setSortPacksAC,
 } from 'store/actions';
@@ -18,7 +16,7 @@ const defaultPage = 50;
 
 beforeEach(() => {
     startState = {
-        status: PACKS_STATUS.IDLE,
+        isPacksFetched: false,
         cardPacks: [{} as CardType],
         cardPacksTotalCount: 100,
         searchParams: {
@@ -45,15 +43,6 @@ describe('packs reducer', () => {
         const endState = packsReducer(startState, setPageCountAC(pageCount));
 
         expect(endState.searchParams.pageCount).toBe(pageCount);
-    });
-
-    test('total count of packs should be correct set in the state', () => {
-        const endState = packsReducer(
-            startState,
-            setPacksTotalCountAC(defaultPacksCount),
-        );
-
-        expect(endState.cardPacksTotalCount).toBe(defaultPacksCount);
     });
 
     test('current page should be correct set in the state', () => {
@@ -89,10 +78,14 @@ describe('packs reducer', () => {
             },
         ];
 
-        const endState = packsReducer(startState, setCardPacksAC(cardPacks));
+        const endState = packsReducer(
+            startState,
+            setCardPacksAC(cardPacks, defaultPacksCount),
+        );
 
         expect(endState.cardPacks).not.toEqual([{}]);
         expect(endState.cardPacks.length).toBe(1);
         expect(endState.cardPacks[0]._id).toBe('cardId');
+        expect(endState.cardPacksTotalCount).toBe(defaultPacksCount);
     });
 });

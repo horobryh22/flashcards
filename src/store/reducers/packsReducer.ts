@@ -1,13 +1,10 @@
 import { PacksStateType } from './types';
 
-import { PACKS_STATUS } from 'enums';
 import {
     SET_CARD_PACKS,
     SET_CARDS_RANGE,
     SET_CURRENT_PAGE,
     SET_PACK_NAME,
-    SET_PACKS_STATUS,
-    SET_PACKS_TOTAL_COUNT,
     SET_PAGE_COUNT,
     SET_SEARCH_PARAMS,
     SET_SEARCH_USER_ID,
@@ -16,8 +13,8 @@ import {
 import { PacksActionsType } from 'store/actions/types';
 
 const initialState: PacksStateType = {
-    status: PACKS_STATUS.IDLE,
     cardPacks: [],
+    isPacksFetched: false,
     searchParams: {
         packName: '',
         min: 0,
@@ -53,20 +50,18 @@ export const packsReducer = (
                     pageCount: action.payload.pageCount,
                 },
             };
-        case SET_PACKS_STATUS:
-            return {
-                ...state,
-                status: action.payload.status,
-            };
-        case SET_PACKS_TOTAL_COUNT:
-            return { ...state, cardPacksTotalCount: action.payload.packsTotalCount };
         case SET_CURRENT_PAGE:
             return {
                 ...state,
                 searchParams: { ...state.searchParams, page: action.payload.page },
             };
         case SET_CARD_PACKS:
-            return { ...state, cardPacks: action.payload.cardPacks };
+            return {
+                ...state,
+                cardPacks: action.payload.cardPacks,
+                cardPacksTotalCount: action.payload.packsTotalCount,
+                isPacksFetched: true,
+            };
         case SET_SORT_PACKS:
             return {
                 ...state,

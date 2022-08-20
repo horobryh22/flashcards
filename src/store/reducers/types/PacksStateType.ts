@@ -1,8 +1,7 @@
 import { CardType, SearchParamsType } from 'api/types';
-import { PACKS_STATUS } from 'enums';
 
 export type PacksStateType = {
-    status: PACKS_STATUS;
+    isPacksFetched: boolean;
     cardPacks: CardType[];
     searchParams: SearchParamsType;
     cardPacksTotalCount: number;

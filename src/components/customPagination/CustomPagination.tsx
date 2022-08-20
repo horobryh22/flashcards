@@ -9,7 +9,7 @@ import { CustomSelect } from 'components/customSelect/CustomSelect';
 import { DEFAULT_PAGE_COUNT } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setCurrentPageAC } from 'store/actions';
-import { selectPacksTotalCount } from 'store/selectors';
+import { selectIsPacksFetched, selectPacksTotalCount } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const CustomPagination: any = (): ReturnComponentType => {
@@ -20,6 +20,7 @@ export const CustomPagination: any = (): ReturnComponentType => {
     const page = Number(searchParams.get('page')) || 1;
     const pageCount = Number(searchParams.get('pageCount')) || DEFAULT_PAGE_COUNT;
     const cardPacksTotalCount = useTypedSelector(selectPacksTotalCount);
+    const isPacksFetched = useTypedSelector(selectIsPacksFetched);
 
     const count = useMemo(() => {
         return Math.ceil(cardPacksTotalCount / pageCount);
@@ -33,17 +34,10 @@ export const CustomPagination: any = (): ReturnComponentType => {
 
     return (
         <div className={classes.wrapper}>
-            {cardPacksTotalCount === 0 ? ( // !!!!!!!!!!
-                <Skeleton
-                    animation="wave"
-                    variant="rectangular"
-                    width={600}
-                    height={40}
-                />
-            ) : (
+            {isPacksFetched ? (
                 <>
                     <Pagination
-                        count={count}
+                        count={count || 1}
                         page={page}
                         onChange={handleChange}
                         shape="circular"
@@ -55,6 +49,13 @@ export const CustomPagination: any = (): ReturnComponentType => {
                         <span>cards per page</span>
                     </div>
                 </>
+            ) : (
+                <Skeleton
+                    animation="wave"
+                    variant="rectangular"
+                    width={600}
+                    height={40}
+                />
             )}
         </div>
     );

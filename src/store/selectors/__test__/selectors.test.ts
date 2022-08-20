@@ -1,5 +1,5 @@
 import { AuthUserDataType } from 'api/types';
-import { PACKS_STATUS, REQUEST_STATUS } from 'enums';
+import { REQUEST_STATUS } from 'enums';
 import {
     selectAppStatus,
     selectAuthError,
@@ -51,7 +51,7 @@ beforeEach(() => {
             isAvatarBroken: false,
         },
         packs: {
-            status: PACKS_STATUS.IDLE,
+            isPacksFetched: false,
             cardPacks: [],
             searchParams: {
                 packName: 'Some pack name',

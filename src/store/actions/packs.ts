@@ -3,8 +3,6 @@ import {
     SET_CARDS_RANGE,
     SET_CURRENT_PAGE,
     SET_PACK_NAME,
-    SET_PACKS_STATUS,
-    SET_PACKS_TOTAL_COUNT,
     SET_PAGE_COUNT,
     SET_SEARCH_PARAMS,
     SET_SEARCH_USER_ID,
@@ -15,8 +13,6 @@ import {
     SetCardsRangeType,
     SetCurrentPageType,
     SetPackNameType,
-    SetPacksStatus,
-    SetPacksTotalCount,
     SetPageCountType,
     SetSearchParamsType,
     SetSearchUserId,
@@ -24,12 +20,14 @@ import {
 } from './types';
 
 import { CardType, SearchParamsType, SortTypes } from 'api/types';
-import { PACKS_STATUS } from 'enums';
 
-export const setCardPacksAC = (cardPacks: CardType[]): SetCardPacksType => {
+export const setCardPacksAC = (
+    cardPacks: CardType[],
+    packsTotalCount: number,
+): SetCardPacksType => {
     return {
         type: SET_CARD_PACKS,
-        payload: { cardPacks },
+        payload: { cardPacks, packsTotalCount },
     } as const;
 };
 
@@ -44,13 +42,6 @@ export const setCurrentPageAC = (page: number): SetCurrentPageType => {
     return {
         type: SET_CURRENT_PAGE,
         payload: { page },
-    } as const;
-};
-
-export const setPacksTotalCountAC = (packsTotalCount: number): SetPacksTotalCount => {
-    return {
-        type: SET_PACKS_TOTAL_COUNT,
-        payload: { packsTotalCount },
     } as const;
 };
 
@@ -86,12 +77,5 @@ export const setSearchParamsAC = (params: SearchParamsType): SetSearchParamsType
     return {
         type: SET_SEARCH_PARAMS,
         payload: { params },
-    } as const;
-};
-
-export const setPacksStatusAC = (status: PACKS_STATUS): SetPacksStatus => {
-    return {
-        type: SET_PACKS_STATUS,
-        payload: { status },
     } as const;
 };

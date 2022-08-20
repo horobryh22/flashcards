@@ -13,7 +13,6 @@ export type { SetCardPacksType } from 'store/actions/types/packs/SetCardPacksTyp
 export type { SetSortPacksType } from 'store/actions/types/packs/SetSortPacksType';
 export type { CardsActionsType } from 'store/actions/types/actionsType/CardsActionsType';
 export type { SetCurrentPageType } from 'store/actions/types/packs/SetCurrentPageType';
-export type { SetPacksTotalCount } from 'store/actions/types/packs/SetPacksTotalCount';
 export type { SetPageCountType } from 'store/actions/types/packs/SetPageCountType';
 export type { SetPackNameType } from 'store/actions/types/packs/SetPackNameType';
 export type { SetCardsRangeType } from 'store/actions/types/packs/SetCardsRangeType';
@@ -21,5 +20,4 @@ export type { SetSearchUserId } from 'store/actions/types/packs/SetSearchUserId'
 export type { SetModalType } from 'store/actions/types/app/SetModalType';
 export type { SetModalState } from 'store/actions/types/app/SetModalState';
 export type { SetSearchParamsType } from 'store/actions/types/packs/SetSearchParamsType';
-export type { SetPacksStatus } from 'store/actions/types/packs/SetPacksStatus';
 export type { SetIsAvatarBroken } from 'store/actions/types/auth/SetIsAvatarBroken';
