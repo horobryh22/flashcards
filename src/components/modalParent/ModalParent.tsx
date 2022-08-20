@@ -74,6 +74,11 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
         TIMER = setTimeout(() => {
             dispatch(setModalStateAC(false));
         }, DELAY);
+
+        if (modalType === 'addPack') {
+            resetField('name');
+            resetField('private');
+        }
     };
 
     useEffect(() => {

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 
-import { CircularProgress, LinearProgress } from '@mui/material';
+import { Backdrop, CircularProgress } from '@mui/material';
 
 import { Header, RoutesApp, SnackBar } from 'components';
-import { PROGRESS_STYLE } from 'constant';
 import { REQUEST_STATUS } from 'enums';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { initializedApp } from 'store/middlewares';
@@ -25,7 +24,7 @@ const App = (): ReturnComponentType => {
             <div
                 style={{
                     position: 'fixed',
-                    top: '30%',
+                    top: '47%',
                     textAlign: 'center',
                     width: '100%',
                 }}
@@ -37,9 +36,12 @@ const App = (): ReturnComponentType => {
 
     return (
         <>
-            {status === REQUEST_STATUS.LOADING && (
-                <LinearProgress style={PROGRESS_STYLE} color="primary" />
-            )}
+            <Backdrop
+                sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }}
+                open={status === REQUEST_STATUS.LOADING}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             <Header />
             <RoutesApp />
             <SnackBar />
