@@ -1,5 +1,5 @@
-import { CardType } from 'api/types';
+import { PackType } from 'api/types';
 
 export type TableRowsType = {
-    rows: CardType[];
+    rows: PackType[];
 };

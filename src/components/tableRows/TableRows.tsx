@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { TableBody, TableCell, TableRow } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import classes from './TableRows.module.css';
 import { TableRowsType } from './types';
@@ -10,9 +11,21 @@ import { PACK_COLUMNS } from 'constant';
 import { ReturnComponentType } from 'types';
 
 export const TableRows = ({ rows }: TableRowsType): ReturnComponentType => {
+    const navigate = useNavigate();
+
     const mappedRows = rows.map(row => {
+        const handleClick = (): void => {
+            navigate(`/packs/${row._id}`);
+        };
+
         return (
-            <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
+            <TableRow
+                hover
+                role="checkbox"
+                tabIndex={-1}
+                key={row._id}
+                onClick={handleClick}
+            >
                 {PACK_COLUMNS.map(column => {
                     let value;
 

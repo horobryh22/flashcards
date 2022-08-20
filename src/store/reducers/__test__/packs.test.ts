@@ -1,4 +1,4 @@
-import { CardType } from 'api/types';
+import { PackType } from 'api/types';
 import {
     setCardPacksAC,
     setCurrentPageAC,
@@ -17,7 +17,7 @@ const defaultPage = 50;
 beforeEach(() => {
     startState = {
         isPacksFetched: false,
-        cardPacks: [{} as CardType],
+        cardPacks: [{} as PackType],
         cardPacksTotalCount: 100,
         searchParams: {
             packName: 'english',

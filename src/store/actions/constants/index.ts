@@ -17,3 +17,4 @@ export const SET_PACK_NAME = 'packs/SET-PACK-NAME';
 export const SET_CARDS_RANGE = 'packs/SET-CARDS-RANGE';
 export const SET_SEARCH_USER_ID = 'packs/SET-SEARCH-USER-ID';
 export const SET_SEARCH_PARAMS = 'packs/SET-SEARCH-PARAMS';
+export const SET_CARDS = 'cards/SET-CARDS';

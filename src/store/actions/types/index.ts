@@ -21,3 +21,4 @@ export type { SetModalType } from 'store/actions/types/app/SetModalType';
 export type { SetModalState } from 'store/actions/types/app/SetModalState';
 export type { SetSearchParamsType } from 'store/actions/types/packs/SetSearchParamsType';
 export type { SetIsAvatarBroken } from 'store/actions/types/auth/SetIsAvatarBroken';
+export type { SetCardsType } from './cards/SetCardsType';

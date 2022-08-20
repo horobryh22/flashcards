@@ -1,17 +1,16 @@
 export type CardType = {
     _id: string;
+    cardsPack_id: string;
     user_id: string;
-    user_name: string;
-    private: boolean;
-    name: string;
-    path: string;
+    answer: string;
+    question: string;
     grade: number;
     shots: number;
-    deckCover?: string;
-    cardsCount: number;
+    comments: string;
     type: string;
     rating: number;
+    more_id: string;
     created: string;
     updated: string;
-    more_id: string;
+    __v: number;
 };

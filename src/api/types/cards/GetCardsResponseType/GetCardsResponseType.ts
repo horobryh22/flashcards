@@ -1,12 +1,13 @@
-import { CardType } from 'api/types/index';
+import { CardType } from 'api/types/cards/CardType/CardType';
 
 export type GetCardsResponseType = {
-    cardPacks: CardType[];
+    cards: CardType[];
+    packUserId: string;
     page: number;
     pageCount: number;
-    cardPacksTotalCount: number;
-    minCardsCount: number;
-    maxCardsCount: number;
+    cardsTotalCount: number;
+    minGrade: number;
+    maxGrade: number;
     token: string;
     tokenDeathTime: number;
 };

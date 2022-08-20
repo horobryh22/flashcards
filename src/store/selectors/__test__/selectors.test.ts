@@ -66,7 +66,20 @@ beforeEach(() => {
             isInitialized: false,
         },
         cards: {
+            cardsTotalCount: 0,
+            packUserId: '',
             cards: [],
+            searchParams: {
+                max: 1,
+                pageCount: 1,
+                min: 1,
+                page: 2,
+                cardAnswer: '',
+                cardQuestion: '',
+                cardsPack_id: '',
+                sortCards: '0updated',
+            },
+            isCardsFetched: false,
         },
     };
 });

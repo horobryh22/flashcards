@@ -19,10 +19,10 @@ import {
     SetSortPacksType,
 } from './types';
 
-import { CardType, SearchParamsType, SortTypes } from 'api/types';
+import { PackType, SearchParamsType, SortTypes } from 'api/types';
 
 export const setCardPacksAC = (
-    cardPacks: CardType[],
+    cardPacks: PackType[],
     packsTotalCount: number,
 ): SetCardPacksType => {
     return {

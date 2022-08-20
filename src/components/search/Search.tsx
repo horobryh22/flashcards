@@ -7,14 +7,17 @@ import { useSearchParams } from 'react-router-dom';
 import classes from './Search.module.css';
 
 import { DELAY } from 'constant';
-import { useAppDispatch, useDebounce } from 'hooks';
+import { useAppDispatch, useDebounce, useTypedSelector } from 'hooks';
 import { setPackNameAC } from 'store/actions';
+import { selectIsPacksFetched } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const Search = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const [searchParams, setSearchParams] = useSearchParams();
+
+    const isPacksFetched = useTypedSelector(selectIsPacksFetched);
 
     const [value, setValue] = useState<string>(searchParams.get('packName') || '');
     const debouncedValue = useDebounce<string>(value, DELAY);
@@ -24,6 +27,10 @@ export const Search = (): ReturnComponentType => {
     };
 
     useEffect(() => {
+        if (!isPacksFetched) {
+            return;
+        }
+
         dispatch(setPackNameAC(debouncedValue));
         searchParams.set('packName', debouncedValue);
 

@@ -1,1 +1,3 @@
-export type CardsActionsType = any;
+import { setCardsAC } from 'store/actions/cards';
+
+export type CardsActionsType = ReturnType<typeof setCardsAC>;
