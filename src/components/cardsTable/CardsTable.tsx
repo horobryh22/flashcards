@@ -3,13 +3,11 @@ import { useSearchParams } from 'react-router-dom';
 
 import classes from './CardsTable.module.css';
 
-import { MainTableRow, NoResultsFound, TableRows } from 'components';
-import { DEFAULT_PAGE_COUNT } from 'constant';
+import { CardsTableRows, MainTableRow, NoResultsFound } from 'components';
+import { DEFAULT_PAGE_COUNT, ROW_HEIGHT } from 'constant';
 import { CARDS_COLUMNS } from 'constant/table/cardsColumns';
 import { useTypedSelector } from 'hooks';
 import { ReturnComponentType } from 'types';
-
-const ROW_HEIGHT = 54.61;
 
 export const CardsTable = (): ReturnComponentType => {
     const [searchParams] = useSearchParams();
@@ -17,8 +15,10 @@ export const CardsTable = (): ReturnComponentType => {
     const isCardsFetched = useTypedSelector(state => state.cards.isCardsFetched);
     const paramPageCount =
         (Number(searchParams.get('pageCount')) || DEFAULT_PAGE_COUNT) + 1;
-    // const cards = useTypedSelector(state => state.cards.cards);
+    const cards = useTypedSelector(state => state.cards.cards);
     const sortCards = useTypedSelector(state => state.cards.searchParams.sortCards);
+
+    console.log(cards);
 
     return (
         <div className={classes.container}>
@@ -34,7 +34,7 @@ export const CardsTable = (): ReturnComponentType => {
                                 columns={CARDS_COLUMNS}
                                 currentSort={sortCards}
                             />
-                            <TableRows rows={[]} />
+                            <CardsTableRows rows={cards} />
                         </Table>
                         <NoResultsFound />
                     </TableContainer>

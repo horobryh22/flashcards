@@ -1,5 +1,5 @@
 import { PackType } from 'api/types';
 
-export type TableRowsType = {
+export type PacksTableRowsType = {
     rows: PackType[];
 };

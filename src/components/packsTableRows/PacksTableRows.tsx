@@ -3,8 +3,8 @@ import React from 'react';
 import { TableBody, TableCell, TableRow } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import classes from './TableRows.module.css';
-import { TableRowsType } from './types';
+import classes from './PacksTableRows.module.css';
+import { PacksTableRowsType } from './types';
 
 import { ActionImages } from 'components';
 import { PACK_COLUMNS } from 'constant';
@@ -12,7 +12,7 @@ import { useAppDispatch } from 'hooks';
 import { setCardsPackNameAC } from 'store/actions';
 import { ReturnComponentType } from 'types';
 
-export const TableRows = ({ rows }: TableRowsType): ReturnComponentType => {
+export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const navigate = useNavigate();

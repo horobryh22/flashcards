@@ -3,13 +3,11 @@ import { useSearchParams } from 'react-router-dom';
 
 import classes from './PacksTable.module.css';
 
-import { MainTableRow, NoResultsFound, TableRows } from 'components';
-import { DEFAULT_PAGE_COUNT, PACK_COLUMNS } from 'constant';
+import { MainTableRow, NoResultsFound, PacksTableRows } from 'components';
+import { DEFAULT_PAGE_COUNT, PACK_COLUMNS, ROW_HEIGHT } from 'constant';
 import { useTypedSelector } from 'hooks';
 import { selectCardPacks, selectIsPacksFetched, selectSortPacks } from 'store/selectors';
 import { ReturnComponentType } from 'types';
-
-const ROW_HEIGHT = 54.61;
 
 export const PacksTable = (): ReturnComponentType => {
     const [searchParams] = useSearchParams();
@@ -34,7 +32,7 @@ export const PacksTable = (): ReturnComponentType => {
                                 currentSort={sortPacks}
                                 columns={PACK_COLUMNS}
                             />
-                            <TableRows rows={cardPacks} />
+                            <PacksTableRows rows={cardPacks} />
                         </Table>
                         <NoResultsFound />
                     </TableContainer>

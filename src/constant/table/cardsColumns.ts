@@ -4,7 +4,7 @@ export const CARDS_COLUMNS: CardsColumnsType[] = [
     {
         id: 'question',
         label: 'Question',
-        minWidth: 280,
+        minWidth: 320,
         align: 'left',
         sort: 'question',
     },
@@ -25,7 +25,7 @@ export const CARDS_COLUMNS: CardsColumnsType[] = [
     {
         id: 'grade',
         label: 'Grade',
-        minWidth: 230,
+        minWidth: 190,
         align: 'left',
         sort: 'grade',
     },

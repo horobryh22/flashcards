@@ -1,0 +1,12 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actionImages {
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

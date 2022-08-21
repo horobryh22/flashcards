@@ -13,11 +13,11 @@ const initialState: CardsStateType = {
         cardAnswer: '',
         cardQuestion: '',
         cardsPack_id: '',
-        min: 1,
-        max: 2,
+        min: 0,
+        max: 120,
         sortCards: '0updated',
         page: 1,
-        pageCount: 4,
+        pageCount: 10,
     },
 };
 
