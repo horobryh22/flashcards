@@ -2,8 +2,7 @@ import { AxiosError } from 'axios';
 
 import { cardsAPI } from 'api';
 import { REQUEST_STATUS } from 'enums';
-import { setAppStatusAC } from 'store/actions';
-import { setCardsAC } from 'store/actions/cards';
+import { setAppStatusAC, setCardsAC } from 'store/actions';
 import { AppThunkType } from 'store/types';
 import { errorHandler } from 'utils';
 

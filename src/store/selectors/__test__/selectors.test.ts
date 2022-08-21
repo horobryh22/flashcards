@@ -66,6 +66,7 @@ beforeEach(() => {
             isInitialized: false,
         },
         cards: {
+            packName: '',
             cardsTotalCount: 0,
             packUserId: '',
             cards: [],

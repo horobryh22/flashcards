@@ -1,20 +1,21 @@
 import { Paper, Skeleton, Table, TableContainer } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
-import classes from './TableComponent.module.css';
+import classes from './PacksTable.module.css';
 
 import { MainTableRow, NoResultsFound, TableRows } from 'components';
-import { DEFAULT_PAGE_COUNT } from 'constant';
+import { DEFAULT_PAGE_COUNT, PACK_COLUMNS } from 'constant';
 import { useTypedSelector } from 'hooks';
-import { selectCardPacks, selectIsPacksFetched } from 'store/selectors';
+import { selectCardPacks, selectIsPacksFetched, selectSortPacks } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 const ROW_HEIGHT = 54.61;
 
-export const TableComponent = (): ReturnComponentType => {
+export const PacksTable = (): ReturnComponentType => {
     const [searchParams] = useSearchParams();
 
     const isPacksFetched = useTypedSelector(selectIsPacksFetched);
+    const sortPacks = useTypedSelector(selectSortPacks);
     const paramPageCount =
         (Number(searchParams.get('pageCount')) || DEFAULT_PAGE_COUNT) + 1;
     const cardPacks = useTypedSelector(selectCardPacks);
@@ -29,7 +30,10 @@ export const TableComponent = (): ReturnComponentType => {
                             aria-label="sticky table"
                             sx={{ maxHeight: 550 }}
                         >
-                            <MainTableRow />
+                            <MainTableRow
+                                currentSort={sortPacks}
+                                columns={PACK_COLUMNS}
+                            />
                             <TableRows rows={cardPacks} />
                         </Table>
                         <NoResultsFound />

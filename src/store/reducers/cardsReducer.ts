@@ -1,13 +1,14 @@
 import { CardsStateType } from './types';
 
 import { CardsActionsType } from 'store/actions';
-import { SET_CARDS } from 'store/actions/constants';
+import { SET_CARDS, SET_CARDS_PACK_NAME } from 'store/actions/constants';
 
 const initialState: CardsStateType = {
     cards: [],
     isCardsFetched: false,
     cardsTotalCount: 0,
     packUserId: '',
+    packName: '',
     searchParams: {
         cardAnswer: '',
         cardQuestion: '',
@@ -32,6 +33,11 @@ export const cardsReducer = (
                 packUserId: action.payload.packUserId,
                 isCardsFetched: true,
                 cardsTotalCount: action.payload.cardsTotalCount,
+            };
+        case SET_CARDS_PACK_NAME:
+            return {
+                ...state,
+                packName: action.payload.packName,
             };
         default:
             return state;

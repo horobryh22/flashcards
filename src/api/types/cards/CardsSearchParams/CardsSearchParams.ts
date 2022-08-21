@@ -1,4 +1,4 @@
-import { CardsSortType } from 'api/types';
+import { SortTypes } from 'api/types';
 
 export type CardsSearchParams = {
     cardAnswer: string;
@@ -6,7 +6,7 @@ export type CardsSearchParams = {
     cardsPack_id: string;
     min: number;
     max: number;
-    sortCards: CardsSortType;
+    sortCards: SortTypes;
     page: number;
     pageCount: number;
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 export type CardsTopContentType = {
     title: string;
@@ -7,4 +7,5 @@ export type CardsTopContentType = {
     children?: React.ReactNode;
     callback: () => void;
     disabled?: boolean;
+    style?: CSSProperties;
 };

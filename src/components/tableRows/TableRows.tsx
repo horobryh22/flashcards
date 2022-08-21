@@ -8,13 +8,18 @@ import { TableRowsType } from './types';
 
 import { ActionImages } from 'components';
 import { PACK_COLUMNS } from 'constant';
+import { useAppDispatch } from 'hooks';
+import { setCardsPackNameAC } from 'store/actions';
 import { ReturnComponentType } from 'types';
 
 export const TableRows = ({ rows }: TableRowsType): ReturnComponentType => {
+    const dispatch = useAppDispatch();
+
     const navigate = useNavigate();
 
     const mappedRows = rows.map(row => {
         const handleClick = (): void => {
+            dispatch(setCardsPackNameAC(row.name));
             navigate(`/packs/${row._id}`);
         };
 

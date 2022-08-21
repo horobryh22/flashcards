@@ -1,45 +1,47 @@
 import { instance } from 'api/config';
 import {
-    GetCardsResponseType,
-    SearchParamsType,
-    AddCardsPackType,
+    AddCardType,
+    CardsSearchParams,
     CardType,
-    UpdateCardsPackType,
+    GetCardsResponseType,
+    UpdateCardType,
 } from 'api/types';
 
-export const packsAPI = {
-    fetchPacks: ({
-        packName,
+export const cardsAPI = {
+    fetchCards: ({
         min,
         max,
-        sortPacks,
         page,
         pageCount,
-        user_id,
-    }: SearchParamsType) => {
-        return instance.get<GetCardsResponseType>('cards/pack', {
+        cardsPack_id,
+        cardQuestion,
+        sortCards,
+        cardAnswer,
+    }: CardsSearchParams) => {
+        return instance.get<GetCardsResponseType>('cards/card', {
             params: {
-                packName,
                 min,
                 max,
-                sortPacks,
                 page,
                 pageCount,
-                user_id,
+                cardsPack_id,
+                cardQuestion,
+                sortCards,
+                cardAnswer,
             },
         });
     },
-    addCardsPack: (pack: AddCardsPackType) => {
-        return instance.post<{ newCardsPack: CardType }>('cards/pack', pack);
+    addCard: (data: AddCardType) => {
+        return instance.post<{ newCard: CardType }>('cards/card', data);
     },
-    removeCardsPack: (packId: string) => {
-        return instance.delete<{ deletedCardsPack: CardType }>('cards/pack', {
+    removeCard: (cardId: string) => {
+        return instance.delete<{ deletedCard: CardType }>('cards/pack', {
             params: {
-                id: packId,
+                id: cardId,
             },
         });
     },
-    updateCardsPack: (pack: UpdateCardsPackType) => {
-        return instance.put<{ updatedCardsPack: CardType }>('cards/pack', pack);
+    updateCard: (card: UpdateCardType) => {
+        return instance.put<{ updatedCard: CardType }>('cards/pack', card);
     },
 };

@@ -9,7 +9,7 @@ import {
     CustomPagination,
     ModalParent,
     OverTableRow,
-    TableComponent,
+    PacksTable,
 } from 'components';
 import { DEFAULT_PAGE_COUNT, MAX_CARDS_COUNT } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
@@ -95,7 +95,7 @@ export const PacksList = (): ReturnComponentType => {
                 callback={handleClick}
             />
             <OverTableRow />
-            <TableComponent />
+            <PacksTable />
             <CustomPagination />
             <ModalParent open={isOpen} onClose={onClose} />
         </Grid>

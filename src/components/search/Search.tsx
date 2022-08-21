@@ -5,21 +5,23 @@ import { InputAdornment, TextField } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
 import classes from './Search.module.css';
+import { SearchType } from './types';
 
 import { DELAY } from 'constant';
-import { useAppDispatch, useDebounce, useTypedSelector } from 'hooks';
+import { useAppDispatch, useDebounce } from 'hooks';
 import { setPackNameAC } from 'store/actions';
-import { selectIsPacksFetched } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
-export const Search = (): ReturnComponentType => {
+export const Search = ({
+    uriParam,
+    fullWidth,
+    isDataFetched,
+}: SearchType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const isPacksFetched = useTypedSelector(selectIsPacksFetched);
-
-    const [value, setValue] = useState<string>(searchParams.get('packName') || '');
+    const [value, setValue] = useState<string>(searchParams.get(uriParam) || '');
     const debouncedValue = useDebounce<string>(value, DELAY);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -27,12 +29,12 @@ export const Search = (): ReturnComponentType => {
     };
 
     useEffect(() => {
-        if (!isPacksFetched) {
+        if (!isDataFetched) {
             return;
         }
 
         dispatch(setPackNameAC(debouncedValue));
-        searchParams.set('packName', debouncedValue);
+        searchParams.set(uriParam, debouncedValue);
 
         setSearchParams(searchParams);
     }, [debouncedValue]);
@@ -41,8 +43,9 @@ export const Search = (): ReturnComponentType => {
         <div className={classes.wrapper}>
             <span className={classes.title}>Search</span>
             <TextField
+                fullWidth={fullWidth}
                 size="small"
-                sx={{ width: '460px' }}
+                sx={!fullWidth ? { width: `460px` } : {}}
                 id="input-with-icon-textfield"
                 placeholder="Provide your text"
                 onChange={handleChange}

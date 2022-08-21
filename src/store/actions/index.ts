@@ -23,6 +23,7 @@ export {
     setSearchUserIdAC,
     setSearchParamsAC,
 } from './packs';
+export { setCardsPackNameAC, setCardsAC } from './cards';
 export type {
     AuthActionsType,
     SetIsUserAuth,

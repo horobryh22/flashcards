@@ -6,4 +6,5 @@ export type CardsStateType = {
     isCardsFetched: boolean;
     packUserId: string;
     cardsTotalCount: number;
+    packName: string;
 };

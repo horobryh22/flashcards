@@ -13,9 +13,10 @@ export const CardsTopContent: React.FC<CardsTopContentType> = ({
     children,
     callback,
     disabled,
+    style,
 }): ReturnComponentType => {
     return (
-        <div className={classes.container}>
+        <div className={classes.container} style={style}>
             <div className={classes.wrapper}>
                 <h2 className={classes.title}>{title}</h2>
                 <div>

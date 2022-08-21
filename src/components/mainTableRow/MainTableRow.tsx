@@ -6,24 +6,38 @@ import { useSearchParams } from 'react-router-dom';
 
 import { OrderDirectionType } from './types';
 
-import { PACK_COLUMNS } from 'constant';
-import { useAppDispatch, useTypedSelector } from 'hooks';
-import { selectSortPacks } from 'store/selectors';
-import { ColumnSortType, ReturnComponentType } from 'types';
+import { CardsSortType, SortTypes } from 'api/types';
+import { useAppDispatch } from 'hooks';
+import {
+    CardsColumnsType,
+    ColumnSortType,
+    PackColumnsType,
+    ReturnComponentType,
+} from 'types';
 import { handleSortType } from 'utils';
 
-export const MainTableRow = (): ReturnComponentType => {
-    const dispatch = useAppDispatch();
+export type MainTableRowType = {
+    columns: PackColumnsType[] | CardsColumnsType[];
+    currentSort: SortTypes;
+};
 
-    const sortPacks = useTypedSelector(selectSortPacks);
+export const MainTableRow = ({
+    columns,
+    currentSort,
+}: MainTableRowType): ReturnComponentType => {
+    const dispatch = useAppDispatch();
 
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [nameDirection, setNameDirection] = useState<OrderDirectionType>('desc');
     const [cardsDirection, setCardsDirection] = useState<OrderDirectionType>('desc');
     const [updatedDirection, setUpdatedDirection] = useState<OrderDirectionType>('desc');
+    const [answerDirection, setAnswerDirection] = useState<OrderDirectionType>('desc');
+    const [questionDirection, setQuestionDirection] =
+        useState<OrderDirectionType>('desc');
+    const [gradeDirection, setGradeDirection] = useState<OrderDirectionType>('desc');
 
-    const handleSortRequest = (sort: ColumnSortType): void => {
+    const handleSortRequest = (sort: ColumnSortType | CardsSortType): void => {
         if (sort === 'name') {
             handleSortType(setNameDirection, nameDirection, sort, dispatch, searchParams);
         }
@@ -45,11 +59,38 @@ export const MainTableRow = (): ReturnComponentType => {
                 searchParams,
             );
         }
+        if (sort === 'question') {
+            handleSortType(
+                setQuestionDirection,
+                questionDirection,
+                sort,
+                dispatch,
+                searchParams,
+            );
+        }
+        if (sort === 'answer') {
+            handleSortType(
+                setAnswerDirection,
+                answerDirection,
+                sort,
+                dispatch,
+                searchParams,
+            );
+        }
+        if (sort === 'grade') {
+            handleSortType(
+                setGradeDirection,
+                gradeDirection,
+                sort,
+                dispatch,
+                searchParams,
+            );
+        }
 
         setSearchParams(searchParams);
     };
 
-    const mappedColumns = PACK_COLUMNS.map(column => {
+    const mappedColumns = columns.map(column => {
         if (!column.sort) {
             return (
                 <TableCell
@@ -84,6 +125,18 @@ export const MainTableRow = (): ReturnComponentType => {
             direction = updatedDirection;
             sort = 'updated';
         }
+        if (column.id === 'answer') {
+            direction = answerDirection;
+            sort = 'answer';
+        }
+        if (column.id === 'question') {
+            direction = answerDirection;
+            sort = 'question';
+        }
+        if (column.id === 'grade') {
+            direction = answerDirection;
+            sort = 'grade';
+        }
 
         return (
             <TableCell
@@ -100,7 +153,7 @@ export const MainTableRow = (): ReturnComponentType => {
                 width={column.minWidth}
             >
                 <TableSortLabel
-                    active={sortPacks.slice(1) === sort}
+                    active={currentSort.slice(1) === sort}
                     direction={direction}
                     IconComponent={ArrowDropDown}
                 >
