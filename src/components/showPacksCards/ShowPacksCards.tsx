@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setSearchUserIdAC } from 'store/actions';
-import { selectAuthUserId } from 'store/selectors';
+import { selectAuthUserId, selectId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const ShowPacksCards = (): ReturnComponentType => {
@@ -13,7 +13,9 @@ export const ShowPacksCards = (): ReturnComponentType => {
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const paramId = searchParams.get('user_id');
+    const userId = useTypedSelector(selectId);
+    const paramId = searchParams.get('user_id') || userId;
+
     const authUserId = useTypedSelector(selectAuthUserId);
 
     const handleClickAll = (): void => {
