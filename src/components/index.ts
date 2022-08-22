@@ -28,4 +28,5 @@ export { UserAvatar } from './userAvatar/UserAvatar';
 export { NoResultsFound } from './noResultsFound/NoResultsFound';
 export { CardsTable } from './cardsTable/CardsTable';
 export { CardsTableRows } from './cardsTableRows/CardsTableRows';
-export { RatingStars } from 'components/ratingStars/RatingStars';
+export { RatingStars } from './ratingStars/RatingStars';
+export { EmptyPack } from './emptyPack/EmptyPack';

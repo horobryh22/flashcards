@@ -12,7 +12,6 @@ export const CardsTopContent: React.FC<CardsTopContentType> = ({
     title,
     children,
     callback,
-    disabled,
     style,
 }): ReturnComponentType => {
     return (
@@ -25,7 +24,6 @@ export const CardsTopContent: React.FC<CardsTopContentType> = ({
                             variant="contained"
                             style={{ padding: '8px 28px' }}
                             onClick={callback}
-                            disabled={disabled}
                         >
                             {buttonName}
                         </StyledButton>

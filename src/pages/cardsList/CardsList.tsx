@@ -9,6 +9,7 @@ import {
     CardsTable,
     CardsTopContent,
     CustomPagination,
+    EmptyPack,
     Search,
 } from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
@@ -67,29 +68,35 @@ export const CardsList = (): ReturnComponentType => {
     return (
         <Grid justifyContent="center" alignContent="flex-end" width="100%">
             <ArrowBackTo />
-            <CardsTopContent
-                title="DEFAULT NAME"
-                buttonName={buttonNameCondition}
-                isButtonNeed
-                callback={() => {}}
-                style={{ marginTop: '50px', marginBottom: '0px' }}
-            />
-            <Search
-                onChangeValue={handleValueChange}
-                uriParam="cardQuestion"
-                fullWidth
-                isDataFetched={isCardsFetched}
-                style={{ marginTop: '0px' }}
-                defaultValue={cardQuestion}
-            />
-            <CardsTable />
-            <CustomPagination
-                page={page}
-                pageCount={pageCount}
-                isItemsFetched={isCardsFetched}
-                totalCount={totalCount}
-            />
-            {/* <ModalParent open={false} onClose={() => {}} /> */}
+            {totalCount ? (
+                <>
+                    <CardsTopContent
+                        title="DEFAULT NAME"
+                        buttonName={buttonNameCondition}
+                        isButtonNeed
+                        callback={() => {}}
+                        style={{ marginTop: '50px', marginBottom: '0px' }}
+                    />
+                    <Search
+                        onChangeValue={handleValueChange}
+                        uriParam="cardQuestion"
+                        fullWidth
+                        isDataFetched={isCardsFetched}
+                        style={{ marginTop: '0px' }}
+                        defaultValue={cardQuestion}
+                    />
+                    <CardsTable />
+                    <CustomPagination
+                        page={page}
+                        pageCount={pageCount}
+                        isItemsFetched={isCardsFetched}
+                        totalCount={totalCount}
+                    />
+                    {/* <ModalParent open={false} onClose={() => {}} /> */}
+                </>
+            ) : (
+                <EmptyPack title="DEFAULT NAME" isMyPack={authUserId === packUserId} />
+            )}
         </Grid>
     );
 };

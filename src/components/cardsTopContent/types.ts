@@ -6,6 +6,5 @@ export type CardsTopContentType = {
     isButtonNeed: boolean;
     children?: React.ReactNode;
     callback: () => void;
-    disabled?: boolean;
     style?: CSSProperties;
 };
