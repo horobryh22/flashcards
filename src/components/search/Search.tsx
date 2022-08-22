@@ -8,8 +8,7 @@ import classes from './Search.module.css';
 import { SearchType } from './types';
 
 import { DELAY } from 'constant';
-import { useAppDispatch, useDebounce } from 'hooks';
-import { setPackNameAC } from 'store/actions';
+import { useDebounce } from 'hooks';
 import { ReturnComponentType } from 'types';
 
 export const Search = ({
@@ -18,9 +17,8 @@ export const Search = ({
     fullWidth,
     isDataFetched,
     style,
+    onChangeValue,
 }: SearchType): ReturnComponentType => {
-    const dispatch = useAppDispatch();
-
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [value, setValue] = useState<string>(
@@ -37,7 +35,7 @@ export const Search = ({
             return;
         }
 
-        dispatch(setPackNameAC(debouncedValue));
+        onChangeValue(debouncedValue);
         searchParams.set(uriParam, debouncedValue);
 
         setSearchParams(searchParams);

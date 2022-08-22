@@ -12,7 +12,7 @@ import {
     Search,
 } from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { setCardsSearchParamsAC } from 'store/actions';
+import { setCardQuestionAC, setCardsSearchParamsAC } from 'store/actions';
 import { fetchCards } from 'store/middlewares';
 import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
@@ -23,6 +23,7 @@ export const CardsList = (): ReturnComponentType => {
     const [searchParams] = useSearchParams();
 
     const cardsPackId = useTypedSelector(state => state.cards.searchParams.cardsPack_id);
+    const cardQuestion = useTypedSelector(state => state.cards.searchParams.cardQuestion);
 
     const isCardsFetched = useTypedSelector(state => state.cards.isCardsFetched);
     const authUserId = useTypedSelector(selectAuthUserId);
@@ -33,6 +34,7 @@ export const CardsList = (): ReturnComponentType => {
     const totalCount = useTypedSelector(state => state.cards.cardsTotalCount);
 
     const paramCardsPackId = searchParams.get('cardsPack_id') || cardsPackId;
+    const paramCardQuestion = searchParams.get('cardQuestion') || cardQuestion;
 
     const buttonNameCondition =
         authUserId === packUserId ? 'Add new card' : 'Learn to pack';
@@ -41,13 +43,13 @@ export const CardsList = (): ReturnComponentType => {
         if (cardsPackId) {
             dispatch(fetchCards());
         }
-    }, [cardsPackId]);
+    }, [cardsPackId, cardQuestion]);
 
     useEffect(() => {
         const params: CardsSearchParams = {
             cardsPack_id: paramCardsPackId,
             sortCards: '0updated',
-            cardQuestion: '',
+            cardQuestion: paramCardQuestion,
             max: 120,
             page: 1,
             pageCount: 6,
@@ -56,7 +58,11 @@ export const CardsList = (): ReturnComponentType => {
         };
 
         dispatch(setCardsSearchParamsAC(params));
-    }, [paramCardsPackId]);
+    }, [paramCardsPackId, paramCardQuestion]);
+
+    const handleValueChange = (value: string): void => {
+        dispatch(setCardQuestionAC(value));
+    };
 
     return (
         <Grid justifyContent="center" alignContent="flex-end" width="100%">
@@ -69,11 +75,12 @@ export const CardsList = (): ReturnComponentType => {
                 style={{ marginTop: '50px', marginBottom: '0px' }}
             />
             <Search
+                onChangeValue={handleValueChange}
                 uriParam="cardQuestion"
                 fullWidth
                 isDataFetched={isCardsFetched}
                 style={{ marginTop: '0px' }}
-                defaultValue=""
+                defaultValue={cardQuestion}
             />
             <CardsTable />
             <CustomPagination

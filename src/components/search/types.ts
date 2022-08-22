@@ -6,4 +6,5 @@ export type SearchType = {
     fullWidth: boolean;
     style: CSSProperties;
     defaultValue: string;
+    onChangeValue: (value: string) => void;
 };

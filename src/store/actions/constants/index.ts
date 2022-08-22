@@ -20,3 +20,4 @@ export const SET_SEARCH_PARAMS = 'packs/SET-SEARCH-PARAMS';
 export const SET_CARDS = 'cards/SET-CARDS';
 export const SET_CARDS_PACK_ID = 'cards/SET-CARDS-PACK-ID';
 export const SET_CARDS_SEARCH_PARAMS = 'cards/SET-CARDS-SEARCH-PARAMS';
+export const SET_CARD_QUESTION = 'cards/SET-CARD-QUESTION';

@@ -24,3 +24,4 @@ export type { SetIsAvatarBroken } from 'store/actions/types/auth/SetIsAvatarBrok
 export type { SetCardsType } from './cards/SetCardsType';
 export type { SetCardsPackId } from './cards/SetCardsPackId';
 export type { SetCardsSearchParams } from './cards/SetCardsSearchParams';
+export type { SetCardQuestion } from './cards/SetCardQuestion';

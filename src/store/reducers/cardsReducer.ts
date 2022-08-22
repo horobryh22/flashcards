@@ -2,6 +2,7 @@ import { CardsStateType } from './types';
 
 import { CardsActionsType } from 'store/actions';
 import {
+    SET_CARD_QUESTION,
     SET_CARDS,
     SET_CARDS_PACK_ID,
     SET_CARDS_SEARCH_PARAMS,
@@ -50,6 +51,14 @@ export const cardsReducer = (
             return {
                 ...state,
                 searchParams: { ...state.searchParams, ...action.payload.params },
+            };
+        case SET_CARD_QUESTION:
+            return {
+                ...state,
+                searchParams: {
+                    ...state.searchParams,
+                    cardQuestion: action.payload.cardQuestion,
+                },
             };
         default:
             return state;

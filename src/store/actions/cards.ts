@@ -1,5 +1,15 @@
-import { SET_CARDS, SET_CARDS_PACK_ID, SET_CARDS_SEARCH_PARAMS } from './constants';
-import { SetCardsPackId, SetCardsSearchParams, SetCardsType } from './types';
+import {
+    SET_CARD_QUESTION,
+    SET_CARDS,
+    SET_CARDS_PACK_ID,
+    SET_CARDS_SEARCH_PARAMS,
+} from './constants';
+import {
+    SetCardQuestion,
+    SetCardsPackId,
+    SetCardsSearchParams,
+    SetCardsType,
+} from './types';
 
 import { CardsSearchParams, CardType } from 'api/types';
 
@@ -27,5 +37,12 @@ export const setCardsSearchParamsAC = (
     return {
         type: SET_CARDS_SEARCH_PARAMS,
         payload: { params },
+    } as const;
+};
+
+export const setCardQuestionAC = (cardQuestion: string): SetCardQuestion => {
+    return {
+        type: SET_CARD_QUESTION,
+        payload: { cardQuestion },
     } as const;
 };
