@@ -17,8 +17,7 @@ export const CardsTable = (): ReturnComponentType => {
         (Number(searchParams.get('pageCount')) || DEFAULT_PAGE_COUNT) + 1;
     const cards = useTypedSelector(state => state.cards.cards);
     const sortCards = useTypedSelector(state => state.cards.searchParams.sortCards);
-
-    console.log(cards);
+    const cardsTotalCount = useTypedSelector(state => state.cards.cardsTotalCount);
 
     return (
         <div className={classes.container}>
@@ -36,7 +35,10 @@ export const CardsTable = (): ReturnComponentType => {
                             />
                             <CardsTableRows rows={cards} />
                         </Table>
-                        <NoResultsFound />
+                        <NoResultsFound
+                            isItemsFetched={isCardsFetched}
+                            totalCount={cardsTotalCount}
+                        />
                     </TableContainer>
                 ) : (
                     <Skeleton

@@ -13,15 +13,19 @@ import { setPackNameAC } from 'store/actions';
 import { ReturnComponentType } from 'types';
 
 export const Search = ({
+    defaultValue,
     uriParam,
     fullWidth,
     isDataFetched,
+    style,
 }: SearchType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const [value, setValue] = useState<string>(searchParams.get(uriParam) || '');
+    const [value, setValue] = useState<string>(
+        searchParams.get(uriParam) || defaultValue,
+    );
     const debouncedValue = useDebounce<string>(value, DELAY);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -45,12 +49,11 @@ export const Search = ({
             <TextField
                 fullWidth={fullWidth}
                 size="small"
-                sx={!fullWidth ? { width: `460px` } : {}}
                 id="input-with-icon-textfield"
                 placeholder="Provide your text"
                 onChange={handleChange}
                 value={value}
-                style={{ height: '36px' }}
+                style={{ height: '36px', ...style }}
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">

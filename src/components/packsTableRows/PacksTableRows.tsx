@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 import { TableBody, TableCell, TableRow } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import classes from './PacksTableRows.module.css';
 import { PacksTableRowsType } from './types';
@@ -9,7 +9,7 @@ import { PacksTableRowsType } from './types';
 import { ActionImages } from 'components';
 import { PACK_COLUMNS } from 'constant';
 import { useAppDispatch } from 'hooks';
-import { setCardsPackNameAC } from 'store/actions';
+import { setCardsPackIdAC } from 'store/actions';
 import { ReturnComponentType } from 'types';
 
 export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentType => {
@@ -19,8 +19,13 @@ export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentTyp
 
     const mappedRows = rows.map(row => {
         const handleClick = (): void => {
-            dispatch(setCardsPackNameAC(row.name));
-            navigate(`/packs/${row._id}`);
+            dispatch(setCardsPackIdAC(row._id));
+            navigate(`/cards?cardsPack_id=${row._id}`);
+        };
+
+        const stopPropagation = (e: MouseEvent): void => {
+            e.preventDefault();
+            e.stopPropagation();
         };
 
         return (
@@ -30,6 +35,7 @@ export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentTyp
                 tabIndex={-1}
                 key={row._id}
                 onClick={handleClick}
+                style={{ cursor: 'pointer' }}
             >
                 {PACK_COLUMNS.map(column => {
                     let value;
@@ -49,9 +55,13 @@ export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentTyp
                             {column.id !== 'actions' ? (
                                 <div className={classes.nameWrapper}>{value}</div>
                             ) : (
-                                <div className={classes.actionsWrapper}>
+                                <NavLink
+                                    to=""
+                                    className={classes.actionsWrapper}
+                                    onClick={stopPropagation}
+                                >
                                     <ActionImages card={row} />
-                                </div>
+                                </NavLink>
                             )}
                         </TableCell>
                     );

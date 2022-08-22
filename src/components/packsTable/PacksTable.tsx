@@ -4,19 +4,26 @@ import { useSearchParams } from 'react-router-dom';
 import classes from './PacksTable.module.css';
 
 import { MainTableRow, NoResultsFound, PacksTableRows } from 'components';
-import { DEFAULT_PAGE_COUNT, PACK_COLUMNS, ROW_HEIGHT } from 'constant';
+import { PACK_COLUMNS, ROW_HEIGHT } from 'constant';
 import { useTypedSelector } from 'hooks';
-import { selectCardPacks, selectIsPacksFetched, selectSortPacks } from 'store/selectors';
+import {
+    selectCardPacks,
+    selectIsPacksFetched,
+    selectPacksTotalCount,
+    selectPageCount,
+    selectSortPacks,
+} from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const PacksTable = (): ReturnComponentType => {
     const [searchParams] = useSearchParams();
 
+    const pageCount = useTypedSelector(selectPageCount);
     const isPacksFetched = useTypedSelector(selectIsPacksFetched);
     const sortPacks = useTypedSelector(selectSortPacks);
-    const paramPageCount =
-        (Number(searchParams.get('pageCount')) || DEFAULT_PAGE_COUNT) + 1;
+    const paramPageCount = (Number(searchParams.get('pageCount')) || pageCount) + 1;
     const cardPacks = useTypedSelector(selectCardPacks);
+    const cardPacksTotalCount = useTypedSelector(selectPacksTotalCount);
 
     return (
         <div className={classes.container}>
@@ -34,7 +41,10 @@ export const PacksTable = (): ReturnComponentType => {
                             />
                             <PacksTableRows rows={cardPacks} />
                         </Table>
-                        <NoResultsFound />
+                        <NoResultsFound
+                            isItemsFetched={isPacksFetched}
+                            totalCount={cardPacksTotalCount}
+                        />
                     </TableContainer>
                 ) : (
                     <Skeleton

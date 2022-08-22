@@ -4,27 +4,26 @@ import { Pagination, Skeleton } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
 import classes from './CustomPagination.module.css';
+import { CustomPaginationType } from './types';
 
-import { CustomSelect } from 'components/customSelect/CustomSelect';
-import { DEFAULT_PAGE_COUNT } from 'constant';
-import { useAppDispatch, useTypedSelector } from 'hooks';
+import { CustomSelect } from 'components';
+import { useAppDispatch } from 'hooks';
 import { setCurrentPageAC } from 'store/actions';
-import { selectIsPacksFetched, selectPacksTotalCount } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
-export const CustomPagination: any = (): ReturnComponentType => {
+export const CustomPagination = ({
+    isItemsFetched,
+    totalCount,
+    pageCount,
+    page,
+}: CustomPaginationType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const page = Number(searchParams.get('page')) || 1;
-    const pageCount = Number(searchParams.get('pageCount')) || DEFAULT_PAGE_COUNT;
-    const cardPacksTotalCount = useTypedSelector(selectPacksTotalCount);
-    const isPacksFetched = useTypedSelector(selectIsPacksFetched);
-
     const count = useMemo(() => {
-        return Math.ceil(cardPacksTotalCount / pageCount);
-    }, [cardPacksTotalCount, pageCount]);
+        return Math.ceil(totalCount / pageCount);
+    }, [totalCount, pageCount]);
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number): void => {
         dispatch(setCurrentPageAC(value));
@@ -34,7 +33,7 @@ export const CustomPagination: any = (): ReturnComponentType => {
 
     return (
         <div className={classes.wrapper}>
-            {isPacksFetched ? (
+            {isItemsFetched ? (
                 <>
                     <Pagination
                         count={count || 1}

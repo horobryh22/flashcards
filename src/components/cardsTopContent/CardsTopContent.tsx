@@ -16,8 +16,8 @@ export const CardsTopContent: React.FC<CardsTopContentType> = ({
     style,
 }): ReturnComponentType => {
     return (
-        <div className={classes.container} style={style}>
-            <div className={classes.wrapper}>
+        <div className={classes.container}>
+            <div className={classes.wrapper} style={style}>
                 <h2 className={classes.title}>{title}</h2>
                 <div>
                     {isButtonNeed && (

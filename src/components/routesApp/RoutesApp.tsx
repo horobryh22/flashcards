@@ -23,7 +23,7 @@ export const RoutesApp = (): ReturnComponentType => {
                     <Route path="/" element={<SignIn />} />
                     <Route path="login" element={<SignIn />} />
                     <Route path="packs" element={<PacksList />} />
-                    <Route path="packs/:packId" element={<CardsList />} />
+                    <Route path="cards" element={<CardsList />} />
                     <Route path="registration" element={<SignUp />} />
                     <Route path="profile" element={<Profile />} />
                     <Route path="password_recovery/:token" element={<SetNewPassword />} />

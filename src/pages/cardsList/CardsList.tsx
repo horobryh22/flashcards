@@ -1,10 +1,18 @@
 import React, { useEffect } from 'react';
 
 import { Grid } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
-import { ArrowBackTo, CardsTable, CardsTopContent, Search } from 'components';
+import { CardsSearchParams } from 'api/types';
+import {
+    ArrowBackTo,
+    CardsTable,
+    CardsTopContent,
+    CustomPagination,
+    Search,
+} from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
+import { setCardsSearchParamsAC } from 'store/actions';
 import { fetchCards } from 'store/middlewares';
 import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
@@ -12,35 +20,68 @@ import { ReturnComponentType } from 'types';
 export const CardsList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const { packId } = useParams();
+    const [searchParams] = useSearchParams();
 
-    const packName = useTypedSelector(state => state.cards.packName);
+    const cardsPackId = useTypedSelector(state => state.cards.searchParams.cardsPack_id);
+
     const isCardsFetched = useTypedSelector(state => state.cards.isCardsFetched);
     const authUserId = useTypedSelector(selectAuthUserId);
     const packUserId = useTypedSelector(state => state.cards.packUserId);
+
+    const page = useTypedSelector(state => state.cards.searchParams.page);
+    const pageCount = useTypedSelector(state => state.cards.searchParams.pageCount);
+    const totalCount = useTypedSelector(state => state.cards.cardsTotalCount);
+
+    const paramCardsPackId = searchParams.get('cardsPack_id') || cardsPackId;
 
     const buttonNameCondition =
         authUserId === packUserId ? 'Add new card' : 'Learn to pack';
 
     useEffect(() => {
-        if (packId) {
-            dispatch(fetchCards(packId));
+        if (cardsPackId) {
+            dispatch(fetchCards());
         }
-    }, [packId]);
+    }, [cardsPackId]);
+
+    useEffect(() => {
+        const params: CardsSearchParams = {
+            cardsPack_id: paramCardsPackId,
+            sortCards: '0updated',
+            cardQuestion: '',
+            max: 120,
+            page: 1,
+            pageCount: 6,
+            min: 0,
+            cardAnswer: '',
+        };
+
+        dispatch(setCardsSearchParamsAC(params));
+    }, [paramCardsPackId]);
 
     return (
         <Grid justifyContent="center" alignContent="flex-end" width="100%">
             <ArrowBackTo />
             <CardsTopContent
-                title={packName || 'DEFAULT NAME'}
+                title="DEFAULT NAME"
                 buttonName={buttonNameCondition}
                 isButtonNeed
                 callback={() => {}}
-                style={{ marginTop: '50px' }}
+                style={{ marginTop: '50px', marginBottom: '0px' }}
             />
-            <Search uriParam="cardQuestion" fullWidth isDataFetched={isCardsFetched} />
+            <Search
+                uriParam="cardQuestion"
+                fullWidth
+                isDataFetched={isCardsFetched}
+                style={{ marginTop: '0px' }}
+                defaultValue=""
+            />
             <CardsTable />
-            {/* <CustomPagination /> */}
+            <CustomPagination
+                page={page}
+                pageCount={pageCount}
+                isItemsFetched={isCardsFetched}
+                totalCount={totalCount}
+            />
             {/* <ModalParent open={false} onClose={() => {}} /> */}
         </Grid>
     );

@@ -1,5 +1,6 @@
-import { setCardsAC, setCardsPackNameAC } from 'store/actions';
+import { setCardsAC, setCardsSearchParamsAC, setCardsPackIdAC } from 'store/actions';
 
 export type CardsActionsType =
     | ReturnType<typeof setCardsAC>
-    | ReturnType<typeof setCardsPackNameAC>;
+    | ReturnType<typeof setCardsPackIdAC>
+    | ReturnType<typeof setCardsSearchParamsAC>;

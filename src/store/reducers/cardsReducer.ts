@@ -1,7 +1,11 @@
 import { CardsStateType } from './types';
 
 import { CardsActionsType } from 'store/actions';
-import { SET_CARDS, SET_CARDS_PACK_NAME } from 'store/actions/constants';
+import {
+    SET_CARDS,
+    SET_CARDS_PACK_ID,
+    SET_CARDS_SEARCH_PARAMS,
+} from 'store/actions/constants';
 
 const initialState: CardsStateType = {
     cards: [],
@@ -17,7 +21,7 @@ const initialState: CardsStateType = {
         max: 120,
         sortCards: '0updated',
         page: 1,
-        pageCount: 10,
+        pageCount: 6,
     },
 };
 
@@ -34,10 +38,18 @@ export const cardsReducer = (
                 isCardsFetched: true,
                 cardsTotalCount: action.payload.cardsTotalCount,
             };
-        case SET_CARDS_PACK_NAME:
+        case SET_CARDS_PACK_ID:
             return {
                 ...state,
-                packName: action.payload.packName,
+                searchParams: {
+                    ...state.searchParams,
+                    cardsPack_id: action.payload.cardsPackId,
+                },
+            };
+        case SET_CARDS_SEARCH_PARAMS:
+            return {
+                ...state,
+                searchParams: { ...state.searchParams, ...action.payload.params },
             };
         default:
             return state;

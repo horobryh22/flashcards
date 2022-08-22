@@ -8,8 +8,9 @@ import classes from './NumberOfCards.module.css';
 
 import { NumEditableSpan } from 'components';
 import { MAX_CARDS_COUNT } from 'constant';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setCardsRangeAC } from 'store/actions';
+import { selectMax, selectMin } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const NumberOfCards = (): ReturnComponentType => {
@@ -17,8 +18,11 @@ export const NumberOfCards = (): ReturnComponentType => {
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const min = Number(searchParams.get('min')) || 0;
-    const max = Number(searchParams.get('max')) || MAX_CARDS_COUNT;
+    const stateMin = useTypedSelector(selectMin);
+    const stateMax = useTypedSelector(selectMax);
+
+    const min = Number(searchParams.get('min')) || stateMin;
+    const max = Number(searchParams.get('max')) || stateMax;
 
     const [value, setValue] = useState([min, max]);
 

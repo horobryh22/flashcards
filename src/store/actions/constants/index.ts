@@ -18,4 +18,5 @@ export const SET_CARDS_RANGE = 'packs/SET-CARDS-RANGE';
 export const SET_SEARCH_USER_ID = 'packs/SET-SEARCH-USER-ID';
 export const SET_SEARCH_PARAMS = 'packs/SET-SEARCH-PARAMS';
 export const SET_CARDS = 'cards/SET-CARDS';
-export const SET_CARDS_PACK_NAME = 'cards/SET-CARDS-PACK-NAME';
+export const SET_CARDS_PACK_ID = 'cards/SET-CARDS-PACK-ID';
+export const SET_CARDS_SEARCH_PARAMS = 'cards/SET-CARDS-SEARCH-PARAMS';

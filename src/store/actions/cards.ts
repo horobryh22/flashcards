@@ -1,7 +1,7 @@
-import { SET_CARDS, SET_CARDS_PACK_NAME } from './constants';
-import { SetCardsPackNameType, SetCardsType } from './types';
+import { SET_CARDS, SET_CARDS_PACK_ID, SET_CARDS_SEARCH_PARAMS } from './constants';
+import { SetCardsPackId, SetCardsSearchParams, SetCardsType } from './types';
 
-import { CardType } from 'api/types';
+import { CardsSearchParams, CardType } from 'api/types';
 
 export const setCardsAC = (
     cards: CardType[],
@@ -14,9 +14,18 @@ export const setCardsAC = (
     } as const;
 };
 
-export const setCardsPackNameAC = (packName: string): SetCardsPackNameType => {
+export const setCardsPackIdAC = (cardsPackId: string): SetCardsPackId => {
     return {
-        type: SET_CARDS_PACK_NAME,
-        payload: { packName },
+        type: SET_CARDS_PACK_ID,
+        payload: { cardsPackId },
+    } as const;
+};
+
+export const setCardsSearchParamsAC = (
+    params: CardsSearchParams,
+): SetCardsSearchParams => {
+    return {
+        type: SET_CARDS_SEARCH_PARAMS,
+        payload: { params },
     } as const;
 };

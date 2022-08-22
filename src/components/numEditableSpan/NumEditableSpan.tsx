@@ -6,8 +6,9 @@ import classes from './NumEditableSpan.module.css';
 import { EditableSpanType } from './types';
 
 import { MAX_CARDS_COUNT } from 'constant';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setCardsRangeAC } from 'store/actions';
+import { selectMax, selectMin } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 const VALUE_LENGTH = 3;
@@ -20,8 +21,11 @@ export const NumEditableSpan = ({
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const min = Number(searchParams.get('min')) || 0;
-    const max = Number(searchParams.get('max')) || MAX_CARDS_COUNT;
+    const stateMin = useTypedSelector(selectMin);
+    const stateMax = useTypedSelector(selectMax);
+
+    const min = Number(searchParams.get('min')) || stateMin;
+    const max = Number(searchParams.get('max')) || stateMax;
 
     const [mode, setMode] = useState(false);
     const [value, setValue] = useState(num);

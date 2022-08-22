@@ -11,7 +11,7 @@ import { setSearchParamsAC } from 'store/actions';
 import { selectPackName } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
-const PARAMS: SearchParamsType = {
+const INITIAL_PARAMS: SearchParamsType = {
     min: 0,
     max: 120,
     packName: '',
@@ -28,7 +28,7 @@ export const FilterRemove = (): ReturnComponentType => {
     const packName = useTypedSelector(selectPackName);
 
     const handleClick = (): void => {
-        dispatch(setSearchParamsAC({ ...PARAMS, packName }));
+        dispatch(setSearchParamsAC({ ...INITIAL_PARAMS, packName }));
         setSearchParams({ packName });
     };
 
