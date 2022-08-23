@@ -3,25 +3,38 @@ import React from 'react';
 import { Box, FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
-import { DEFAULT_PAGE_COUNT } from 'constant';
-import { useAppDispatch } from 'hooks';
-import { setPageCountAC } from 'store/actions';
 import { ReturnComponentType } from 'types';
 
-export const CustomSelect = (): ReturnComponentType => {
-    const dispatch = useAppDispatch();
+export type CustomSelectType = {
+    values: number[];
+    statePageCount: number;
+    setPageCount: (pageCount: string) => void;
+};
 
+export const CustomSelect = ({
+    statePageCount,
+    setPageCount,
+    values,
+}: CustomSelectType): ReturnComponentType => {
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const pageCount = searchParams.get('pageCount') || String(DEFAULT_PAGE_COUNT);
+    const pageCount = searchParams.get('pageCount') || String(statePageCount);
 
     const handleChange = (event: SelectChangeEvent): void => {
         const { value } = event.target;
 
-        dispatch(setPageCountAC(Number(value)));
+        setPageCount(value);
         searchParams.set('pageCount', value);
         setSearchParams(searchParams);
     };
+
+    const mappedValues = values.map(value => {
+        return (
+            <MenuItem key={`${value + 1}`} value={value}>
+                {String(value)}
+            </MenuItem>
+        );
+    });
 
     return (
         <Box sx={{ minWidth: 30 }}>
@@ -32,9 +45,7 @@ export const CustomSelect = (): ReturnComponentType => {
                     value={pageCount}
                     onChange={handleChange}
                 >
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={4}>4</MenuItem>
-                    <MenuItem value={6}>6</MenuItem>
+                    {mappedValues}
                 </Select>
             </FormControl>
         </Box>

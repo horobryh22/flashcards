@@ -1,10 +1,14 @@
 import {
+    SET_CARD_CURRENT_PAGE,
+    SET_CARD_PAGE_COUNT,
     SET_CARD_QUESTION,
     SET_CARDS,
     SET_CARDS_PACK_ID,
     SET_CARDS_SEARCH_PARAMS,
 } from './constants';
 import {
+    SetCardCurrentPage,
+    SetCardPageCount,
     SetCardQuestion,
     SetCardsPackId,
     SetCardsSearchParams,
@@ -44,5 +48,19 @@ export const setCardQuestionAC = (cardQuestion: string): SetCardQuestion => {
     return {
         type: SET_CARD_QUESTION,
         payload: { cardQuestion },
+    } as const;
+};
+
+export const setCardCurrentPageAC = (page: number): SetCardCurrentPage => {
+    return {
+        type: SET_CARD_CURRENT_PAGE,
+        payload: { page },
+    } as const;
+};
+
+export const setCardPageCountAC = (pageCount: number): SetCardPageCount => {
+    return {
+        type: SET_CARD_PAGE_COUNT,
+        payload: { pageCount },
     } as const;
 };

@@ -3,4 +3,5 @@ export type CustomPaginationType = {
     pageCount: number;
     totalCount: number;
     isItemsFetched: boolean;
+    setPage: (page: number) => void;
 };

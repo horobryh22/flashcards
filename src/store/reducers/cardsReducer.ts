@@ -2,6 +2,8 @@ import { CardsStateType } from './types';
 
 import { CardsActionsType } from 'store/actions';
 import {
+    SET_CARD_CURRENT_PAGE,
+    SET_CARD_PAGE_COUNT,
     SET_CARD_QUESTION,
     SET_CARDS,
     SET_CARDS_PACK_ID,
@@ -58,6 +60,19 @@ export const cardsReducer = (
                 searchParams: {
                     ...state.searchParams,
                     cardQuestion: action.payload.cardQuestion,
+                },
+            };
+        case SET_CARD_CURRENT_PAGE:
+            return {
+                ...state,
+                searchParams: { ...state.searchParams, page: action.payload.page },
+            };
+        case SET_CARD_PAGE_COUNT:
+            return {
+                ...state,
+                searchParams: {
+                    ...state.searchParams,
+                    pageCount: action.payload.pageCount,
                 },
             };
         default:

@@ -12,7 +12,12 @@ import {
     PacksTable,
 } from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { setModalStateAC, setModalTypeAC, setSearchParamsAC } from 'store/actions';
+import {
+    setCurrentPageAC,
+    setModalStateAC,
+    setModalTypeAC,
+    setSearchParamsAC,
+} from 'store/actions';
 import { fetchPacks } from 'store/middlewares';
 import {
     selectId,
@@ -105,6 +110,10 @@ export const PacksList = (): ReturnComponentType => {
         }
     }, [isUserAuth]);
 
+    const handlePageChange = (page: number): void => {
+        dispatch(setCurrentPageAC(page));
+    };
+
     if (!isUserAuth) {
         return <Navigate to="/login" />;
     }
@@ -120,6 +129,7 @@ export const PacksList = (): ReturnComponentType => {
             <OverTableRow />
             <PacksTable />
             <CustomPagination
+                setPage={handlePageChange}
                 page={paramPage}
                 pageCount={paramPageCount}
                 totalCount={cardPacksTotalCount}

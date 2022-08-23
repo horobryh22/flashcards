@@ -28,6 +28,8 @@ export {
     setCardsPackIdAC,
     setCardsSearchParamsAC,
     setCardQuestionAC,
+    setCardCurrentPageAC,
+    setCardPageCountAC,
 } from './cards';
 export type {
     AuthActionsType,

@@ -8,14 +8,18 @@ import { CustomPaginationType } from './types';
 
 import { CustomSelect } from 'components';
 import { useAppDispatch } from 'hooks';
-import { setCurrentPageAC } from 'store/actions';
+import { setCardPageCountAC } from 'store/actions';
 import { ReturnComponentType } from 'types';
+
+// eslint-disable-next-line no-magic-numbers
+const CARDS_PAGE_COUNT_VALUES = [2, 4, 6, 8, 10];
 
 export const CustomPagination = ({
     isItemsFetched,
     totalCount,
     pageCount,
     page,
+    setPage,
 }: CustomPaginationType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
@@ -26,9 +30,13 @@ export const CustomPagination = ({
     }, [totalCount, pageCount]);
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number): void => {
-        dispatch(setCurrentPageAC(value));
+        setPage(value);
         searchParams.set('page', String(value));
         setSearchParams(searchParams);
+    };
+
+    const handlePageCountChange = (pageCount: string): void => {
+        dispatch(setCardPageCountAC(Number(pageCount)));
     };
 
     return (
@@ -44,7 +52,11 @@ export const CustomPagination = ({
                     />
                     <div className={classes.selectWrapper}>
                         <span>Show</span>
-                        <CustomSelect />
+                        <CustomSelect
+                            statePageCount={pageCount}
+                            setPageCount={handlePageCountChange}
+                            values={CARDS_PAGE_COUNT_VALUES}
+                        />
                         <span>cards per page</span>
                     </div>
                 </>
