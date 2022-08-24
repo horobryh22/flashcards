@@ -30,3 +30,4 @@ export { CardsTable } from './cardsTable/CardsTable';
 export { CardsTableRows } from './cardsTableRows/CardsTableRows';
 export { RatingStars } from './ratingStars/RatingStars';
 export { EmptyPack } from './emptyPack/EmptyPack';
+export { PackMenu } from './menus/PackMenu';

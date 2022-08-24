@@ -7,22 +7,17 @@ import classes from './CustomPagination.module.css';
 import { CustomPaginationType } from './types';
 
 import { CustomSelect } from 'components';
-import { useAppDispatch } from 'hooks';
-import { setCardPageCountAC } from 'store/actions';
 import { ReturnComponentType } from 'types';
 
-// eslint-disable-next-line no-magic-numbers
-const CARDS_PAGE_COUNT_VALUES = [2, 4, 6, 8, 10];
-
 export const CustomPagination = ({
+    pageCountValues,
     isItemsFetched,
     totalCount,
     pageCount,
     page,
     setPage,
+    setPageCount,
 }: CustomPaginationType): ReturnComponentType => {
-    const dispatch = useAppDispatch();
-
     const [searchParams, setSearchParams] = useSearchParams();
 
     const count = useMemo(() => {
@@ -36,7 +31,7 @@ export const CustomPagination = ({
     };
 
     const handlePageCountChange = (pageCount: string): void => {
-        dispatch(setCardPageCountAC(Number(pageCount)));
+        setPageCount(pageCount);
     };
 
     return (
@@ -55,7 +50,7 @@ export const CustomPagination = ({
                         <CustomSelect
                             statePageCount={pageCount}
                             setPageCount={handlePageCountChange}
-                            values={CARDS_PAGE_COUNT_VALUES}
+                            values={pageCountValues}
                         />
                         <span>cards per page</span>
                     </div>

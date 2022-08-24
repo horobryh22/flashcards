@@ -27,3 +27,4 @@ export type { SetCardsSearchParams } from './cards/SetCardsSearchParams';
 export type { SetCardQuestion } from './cards/SetCardQuestion';
 export type { SetCardCurrentPage } from './cards/SetCardCurrentPage';
 export type { SetCardPageCount } from './cards/SetCardPageCount';
+export type { ClearPackUserId } from './cards/ClearPackUserId';

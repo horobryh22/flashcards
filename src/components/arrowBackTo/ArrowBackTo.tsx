@@ -7,16 +7,15 @@ import classes from './ArrowBackTo.module.css';
 
 import { CardsSearchParams } from 'api/types';
 import { useAppDispatch } from 'hooks';
-import { setCardsSearchParamsAC } from 'store/actions';
+import { clearPackUserIdAC, setCardsSearchParamsAC } from 'store/actions';
 import { ReturnComponentType } from 'types';
 
-const CARD_PARAMS_STATE: CardsSearchParams = {
+const CARD_PARAMS_STATE: Omit<CardsSearchParams, 'pageCount'> = {
     cardsPack_id: '',
     sortCards: '0updated',
     cardQuestion: '',
     max: 120,
     page: 1,
-    pageCount: 6,
     min: 0,
     cardAnswer: '',
 };
@@ -25,7 +24,8 @@ export const ArrowBackTo = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const handleClick = (): void => {
-        dispatch(setCardsSearchParamsAC(CARD_PARAMS_STATE));
+        dispatch(setCardsSearchParamsAC(CARD_PARAMS_STATE as CardsSearchParams));
+        dispatch(clearPackUserIdAC());
     };
 
     return (

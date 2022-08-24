@@ -5,6 +5,7 @@ import {
     setCardQuestionAC,
     setCardCurrentPageAC,
     setCardPageCountAC,
+    clearPackUserIdAC,
 } from 'store/actions';
 
 export type CardsActionsType =
@@ -13,4 +14,5 @@ export type CardsActionsType =
     | ReturnType<typeof setCardsSearchParamsAC>
     | ReturnType<typeof setCardQuestionAC>
     | ReturnType<typeof setCardCurrentPageAC>
-    | ReturnType<typeof setCardPageCountAC>;
+    | ReturnType<typeof setCardPageCountAC>
+    | ReturnType<typeof clearPackUserIdAC>;

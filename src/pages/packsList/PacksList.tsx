@@ -16,6 +16,7 @@ import {
     setCurrentPageAC,
     setModalStateAC,
     setModalTypeAC,
+    setPageCountAC,
     setSearchParamsAC,
 } from 'store/actions';
 import { fetchPacks } from 'store/middlewares';
@@ -34,6 +35,8 @@ import {
     selectSortPacks,
 } from 'store/selectors';
 import { ReturnComponentType } from 'types';
+
+const PACKS_PAGE_COUNT_VALUES = [2, 4, 6, 8, 10];
 
 export const PacksList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
@@ -114,6 +117,10 @@ export const PacksList = (): ReturnComponentType => {
         dispatch(setCurrentPageAC(page));
     };
 
+    const handlePageCountChange = (value: string): void => {
+        dispatch(setPageCountAC(Number(value)));
+    };
+
     if (!isUserAuth) {
         return <Navigate to="/login" />;
     }
@@ -129,6 +136,8 @@ export const PacksList = (): ReturnComponentType => {
             <OverTableRow />
             <PacksTable />
             <CustomPagination
+                setPageCount={handlePageCountChange}
+                pageCountValues={PACKS_PAGE_COUNT_VALUES}
                 setPage={handlePageChange}
                 page={paramPage}
                 pageCount={paramPageCount}

@@ -1,4 +1,5 @@
 import {
+    CLEAR_PACK_USER_ID,
     SET_CARD_CURRENT_PAGE,
     SET_CARD_PAGE_COUNT,
     SET_CARD_QUESTION,
@@ -7,6 +8,7 @@ import {
     SET_CARDS_SEARCH_PARAMS,
 } from './constants';
 import {
+    ClearPackUserId,
     SetCardCurrentPage,
     SetCardPageCount,
     SetCardQuestion,
@@ -62,5 +64,11 @@ export const setCardPageCountAC = (pageCount: number): SetCardPageCount => {
     return {
         type: SET_CARD_PAGE_COUNT,
         payload: { pageCount },
+    } as const;
+};
+
+export const clearPackUserIdAC = (): ClearPackUserId => {
+    return {
+        type: CLEAR_PACK_USER_ID,
     } as const;
 };

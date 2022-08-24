@@ -23,12 +23,8 @@ export const CardsTable = (): ReturnComponentType => {
         <div className={classes.container}>
             <Paper sx={{ width: '100%' }} style={{ marginTop: '25px' }}>
                 {isCardsFetched ? (
-                    <TableContainer>
-                        <Table
-                            stickyHeader
-                            aria-label="sticky table"
-                            sx={{ maxHeight: 550 }}
-                        >
+                    <TableContainer sx={{ maxHeight: 395 }}>
+                        <Table stickyHeader aria-label="sticky table">
                             <MainTableRow
                                 columns={CARDS_COLUMNS}
                                 currentSort={sortCards}

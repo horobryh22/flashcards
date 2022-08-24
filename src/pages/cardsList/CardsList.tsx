@@ -15,12 +15,15 @@ import {
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import {
     setCardCurrentPageAC,
+    setCardPageCountAC,
     setCardQuestionAC,
     setCardsSearchParamsAC,
 } from 'store/actions';
 import { fetchCards } from 'store/middlewares';
 import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
+
+const CARDS_PAGE_COUNT_VALUES = [2, 4, 6, 8, 10];
 
 export const CardsList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
@@ -75,6 +78,10 @@ export const CardsList = (): ReturnComponentType => {
         dispatch(setCardCurrentPageAC(value));
     };
 
+    const handlePageCountChange = (value: string): void => {
+        dispatch(setCardPageCountAC(Number(value)));
+    };
+
     return (
         <Grid justifyContent="center" alignContent="flex-end" width="100%">
             <ArrowBackTo />
@@ -97,11 +104,13 @@ export const CardsList = (): ReturnComponentType => {
                     />
                     <CardsTable />
                     <CustomPagination
+                        pageCountValues={CARDS_PAGE_COUNT_VALUES}
                         page={page}
                         pageCount={pageCount}
                         isItemsFetched={isCardsFetched}
                         totalCount={totalCount}
                         setPage={handlePageChange}
+                        setPageCount={handlePageCountChange}
                     />
                 </>
             ) : (

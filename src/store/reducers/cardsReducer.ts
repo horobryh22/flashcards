@@ -2,6 +2,7 @@ import { CardsStateType } from './types';
 
 import { CardsActionsType } from 'store/actions';
 import {
+    CLEAR_PACK_USER_ID,
     SET_CARD_CURRENT_PAGE,
     SET_CARD_PAGE_COUNT,
     SET_CARD_QUESTION,
@@ -74,6 +75,11 @@ export const cardsReducer = (
                     ...state.searchParams,
                     pageCount: action.payload.pageCount,
                 },
+            };
+        case CLEAR_PACK_USER_ID:
+            return {
+                ...state,
+                packUserId: '',
             };
         default:
             return state;

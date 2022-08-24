@@ -30,6 +30,7 @@ export {
     setCardQuestionAC,
     setCardCurrentPageAC,
     setCardPageCountAC,
+    clearPackUserIdAC,
 } from './cards';
 export type {
     AuthActionsType,

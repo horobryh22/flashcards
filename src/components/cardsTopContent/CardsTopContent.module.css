@@ -14,6 +14,12 @@
     align-items: center;
 }
 
+
+.titleWrapper{
+    display: flex;
+    align-items: center;
+}
+
 .title {
     font-style: normal;
     font-weight: 600;
