@@ -31,6 +31,8 @@ export {
     setCardCurrentPageAC,
     setCardPageCountAC,
     clearPackUserIdAC,
+    updatePackDataAC,
+    setIsPackDeletedAC,
 } from './cards';
 export type {
     AuthActionsType,

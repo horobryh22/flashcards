@@ -10,6 +10,7 @@ import {
     CardsTopContent,
     CustomPagination,
     EmptyPack,
+    ModalParent,
     Search,
 } from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
@@ -18,9 +19,10 @@ import {
     setCardPageCountAC,
     setCardQuestionAC,
     setCardsSearchParamsAC,
+    setModalStateAC,
 } from 'store/actions';
 import { fetchCards } from 'store/middlewares';
-import { selectAuthUserId } from 'store/selectors';
+import { selectAuthUserId, selectIsOpen } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 const CARDS_PAGE_COUNT_VALUES = [2, 4, 6, 8, 10];
@@ -29,6 +31,10 @@ export const CardsList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const [searchParams] = useSearchParams();
+
+    const isOpen = useTypedSelector(selectIsOpen);
+
+    const packName = useTypedSelector(state => state.cards.packName);
 
     const cardsPackId = useTypedSelector(state => state.cards.searchParams.cardsPack_id);
     const cardQuestion = useTypedSelector(state => state.cards.searchParams.cardQuestion);
@@ -82,13 +88,17 @@ export const CardsList = (): ReturnComponentType => {
         dispatch(setCardPageCountAC(Number(value)));
     };
 
+    const onClose = (): void => {
+        dispatch(setModalStateAC(false));
+    };
+
     return (
         <Grid justifyContent="center" alignContent="flex-end" width="100%">
             <ArrowBackTo />
             {totalCount ? (
                 <>
                     <CardsTopContent
-                        title="DEFAULT NAME"
+                        title={packName}
                         buttonName={buttonNameCondition}
                         isButtonNeed
                         callback={() => {}}
@@ -114,8 +124,9 @@ export const CardsList = (): ReturnComponentType => {
                     />
                 </>
             ) : (
-                <EmptyPack title="DEFAULT NAME" isMyPack={authUserId === packUserId} />
+                <EmptyPack title={packName} isMyPack={authUserId === packUserId} />
             )}
+            <ModalParent open={isOpen} onClose={onClose} />
         </Grid>
     );
 };

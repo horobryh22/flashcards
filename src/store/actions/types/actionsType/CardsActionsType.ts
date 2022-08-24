@@ -1,11 +1,13 @@
 import {
-    setCardsAC,
-    setCardsSearchParamsAC,
-    setCardsPackIdAC,
-    setCardQuestionAC,
+    clearPackUserIdAC,
     setCardCurrentPageAC,
     setCardPageCountAC,
-    clearPackUserIdAC,
+    setCardQuestionAC,
+    setCardsAC,
+    setCardsPackIdAC,
+    setCardsSearchParamsAC,
+    updatePackDataAC,
+    setIsPackDeletedAC,
 } from 'store/actions';
 
 export type CardsActionsType =
@@ -15,4 +17,6 @@ export type CardsActionsType =
     | ReturnType<typeof setCardQuestionAC>
     | ReturnType<typeof setCardCurrentPageAC>
     | ReturnType<typeof setCardPageCountAC>
-    | ReturnType<typeof clearPackUserIdAC>;
+    | ReturnType<typeof clearPackUserIdAC>
+    | ReturnType<typeof updatePackDataAC>
+    | ReturnType<typeof setIsPackDeletedAC>;

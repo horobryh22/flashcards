@@ -9,14 +9,19 @@ import {
     SET_CARDS,
     SET_CARDS_PACK_ID,
     SET_CARDS_SEARCH_PARAMS,
+    SET_IS_PACK_DELETED,
+    UPDATE_PACK_DATA,
 } from 'store/actions/constants';
 
 const initialState: CardsStateType = {
     cards: [],
     isCardsFetched: false,
     cardsTotalCount: 0,
+    isPackDeleted: false,
     packUserId: '',
     packName: '',
+    packPrivate: false,
+    packDeckCover: '',
     searchParams: {
         cardAnswer: '',
         cardQuestion: '',
@@ -37,10 +42,14 @@ export const cardsReducer = (
         case SET_CARDS:
             return {
                 ...state,
-                cards: action.payload.cards,
-                packUserId: action.payload.packUserId,
+                cards: action.payload.data.cards,
+                packUserId: action.payload.data.packUserId,
                 isCardsFetched: true,
-                cardsTotalCount: action.payload.cardsTotalCount,
+                cardsTotalCount: action.payload.data.cardsTotalCount,
+                packName: action.payload.data.packName,
+                packPrivate: action.payload.data.packPrivate,
+                packDeckCover: action.payload.data.packDeckCover,
+                isPackDeleted: false,
             };
         case SET_CARDS_PACK_ID:
             return {
@@ -80,6 +89,18 @@ export const cardsReducer = (
             return {
                 ...state,
                 packUserId: '',
+            };
+        case UPDATE_PACK_DATA:
+            return {
+                ...state,
+                packDeckCover: action.payload.deckCover,
+                packPrivate: action.payload.packPrivate,
+                packName: action.payload.name,
+            };
+        case SET_IS_PACK_DELETED:
+            return {
+                ...state,
+                isPackDeleted: action.payload.isPackDeleted,
             };
         default:
             return state;

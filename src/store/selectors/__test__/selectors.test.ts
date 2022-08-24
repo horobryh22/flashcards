@@ -66,6 +66,9 @@ beforeEach(() => {
             isInitialized: false,
         },
         cards: {
+            isPackDeleted: false,
+            packPrivate: false,
+            packDeckCover: null,
             packName: '',
             cardsTotalCount: 0,
             packUserId: '',

@@ -4,6 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Box, Modal } from '@mui/material';
 import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import classes from './ModalParent.module.css';
 import { BOX_STYLES } from './styles';
@@ -34,6 +35,8 @@ const MAX_STRING_LENGTH = 19;
 
 export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponentType => {
     const dispatch = useAppDispatch();
+
+    const navigate = useNavigate();
 
     const modalType = useTypedSelector(selectModalType);
     const modalTitle = useTypedSelector(selectModalTitle);
@@ -73,6 +76,7 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
 
         TIMER = setTimeout(() => {
             dispatch(setModalStateAC(false));
+            navigate('/packs');
         }, DELAY);
 
         if (modalType === 'addPack') {

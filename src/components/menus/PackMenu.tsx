@@ -1,14 +1,13 @@
 import React from 'react';
 
 import { ListItemIcon, MenuItem } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 
 import edit from 'assets/images/edit.svg';
 import knowledge from 'assets/images/knowledge.svg';
 import remove from 'assets/images/remove.svg';
 import { ParentMenu } from 'components';
-import { useAppDispatch } from 'hooks';
-import { logout } from 'store/middlewares';
+import { useAppDispatch, useTypedSelector } from 'hooks';
+import { setModalTypeAC } from 'store/actions';
 import { MenuType, ReturnComponentType } from 'types';
 
 export const PackMenu = ({
@@ -18,31 +17,52 @@ export const PackMenu = ({
 }: MenuType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const navigate = useNavigate();
+    const packTitle = useTypedSelector(state => state.cards.packName);
+    const packPrivate = useTypedSelector(state => state.cards.packPrivate);
+    const packId = useTypedSelector(state => state.cards.searchParams.cardsPack_id);
 
-    const handleProfileClick = (): void => {
-        navigate('profile');
+    const handleEditClick = (): void => {
+        dispatch(
+            setModalTypeAC({
+                packPrivate,
+                packId,
+                packTitle,
+                isOpen: true,
+                type: 'editPack',
+                modalTitle: 'Edit pack',
+                buttonName: 'Save',
+            }),
+        );
     };
 
-    const handleLogoutClick = (): void => {
-        dispatch(logout());
+    const handleDeleteClick = (): void => {
+        dispatch(
+            setModalTypeAC({
+                packId,
+                packTitle,
+                isOpen: true,
+                type: 'removePack',
+                modalTitle: 'Delete pack',
+                buttonName: 'Delete',
+            }),
+        );
     };
 
     return (
         <ParentMenu element={element} open={open} setElement={setElement}>
-            <MenuItem onClick={handleProfileClick}>
+            <MenuItem onClick={handleEditClick}>
                 <ListItemIcon>
                     <img src={edit} alt="edit" />
                 </ListItemIcon>
                 Edit
             </MenuItem>
-            <MenuItem onClick={handleLogoutClick}>
+            <MenuItem onClick={handleDeleteClick}>
                 <ListItemIcon>
                     <img src={remove} alt="remove" />
                 </ListItemIcon>
                 Delete
             </MenuItem>
-            <MenuItem onClick={handleLogoutClick}>
+            <MenuItem onClick={() => {}}>
                 <ListItemIcon>
                     <img src={knowledge} alt="knowledge" />
                 </ListItemIcon>

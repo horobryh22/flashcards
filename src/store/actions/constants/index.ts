@@ -23,4 +23,6 @@ export const SET_CARDS_SEARCH_PARAMS = 'cards/SET-CARDS-SEARCH-PARAMS';
 export const SET_CARD_QUESTION = 'cards/SET-CARD-QUESTION';
 export const SET_CARD_CURRENT_PAGE = 'cards/SET-CARD-CURRENT-PAGE';
 export const SET_CARD_PAGE_COUNT = 'cards/SET-CARD-PAGE-COUNT';
-export const CLEAR_PACK_USER_ID = 'cards/CLEAR_PACK_USER_ID';
+export const CLEAR_PACK_USER_ID = 'cards/CLEAR-PACK-USER_ID';
+export const UPDATE_PACK_DATA = 'cards/UPDATE-PACK-DATA';
+export const SET_IS_PACK_DELETED = 'cards/SET-IS-PACK-DELETED';

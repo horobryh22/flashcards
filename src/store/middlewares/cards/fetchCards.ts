@@ -30,9 +30,7 @@ export const fetchCards = (): AppThunkType => async (dispatch, getState) => {
             cardAnswer,
         });
 
-        const { cards, cardsTotalCount, packUserId } = data;
-
-        dispatch(setCardsAC(cards, cardsTotalCount, packUserId));
+        dispatch(setCardsAC(data));
     } catch (e) {
         errorHandler(e as Error | AxiosError, dispatch);
     } finally {
