@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { Grid } from '@mui/material';
-import { useSearchParams } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 
 import { CardsSearchParams } from 'api/types';
 import {
@@ -35,6 +35,7 @@ export const CardsList = (): ReturnComponentType => {
     const isOpen = useTypedSelector(selectIsOpen);
 
     const packName = useTypedSelector(state => state.cards.packName);
+    const isPackDeleted = useTypedSelector(state => state.cards.isPackDeleted);
 
     const cardsPackId = useTypedSelector(state => state.cards.searchParams.cardsPack_id);
     const cardQuestion = useTypedSelector(state => state.cards.searchParams.cardQuestion);
@@ -91,6 +92,10 @@ export const CardsList = (): ReturnComponentType => {
     const onClose = (): void => {
         dispatch(setModalStateAC(false));
     };
+
+    if (isPackDeleted) {
+        return <Navigate to="/packs" />;
+    }
 
     return (
         <Grid justifyContent="center" alignContent="flex-end" width="100%">

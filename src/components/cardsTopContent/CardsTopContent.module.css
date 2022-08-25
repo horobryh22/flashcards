@@ -15,9 +15,17 @@
 }
 
 
-.titleWrapper{
+.titleWrapper {
     display: flex;
     align-items: center;
+}
+
+.titleWrapper h2 {
+    margin-right: 10px;
+}
+
+.titleWrapper .titleButton {
+    margin-top: 5px;
 }
 
 .title {

@@ -2,12 +2,13 @@ import {
     setCardPacksAC,
     setCardsRangeAC,
     setCurrentPageAC,
+    setIsPacksFetched,
     setPackNameAC,
     setPageCountAC,
     setSearchParamsAC,
     setSearchUserIdAC,
     setSortPacksAC,
-} from 'store/actions/index';
+} from 'store/actions';
 
 export type PacksActionsType =
     | ReturnType<typeof setCardPacksAC>
@@ -17,4 +18,5 @@ export type PacksActionsType =
     | ReturnType<typeof setPackNameAC>
     | ReturnType<typeof setCardsRangeAC>
     | ReturnType<typeof setSearchUserIdAC>
-    | ReturnType<typeof setSearchParamsAC>;
+    | ReturnType<typeof setSearchParamsAC>
+    | ReturnType<typeof setIsPacksFetched>;

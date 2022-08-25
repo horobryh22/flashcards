@@ -9,7 +9,7 @@ import { PacksTableRowsType } from './types';
 import { ActionImages } from 'components';
 import { PACK_COLUMNS } from 'constant';
 import { useAppDispatch } from 'hooks';
-import { setCardsPackIdAC } from 'store/actions';
+import { setCardsPackIdAC, setIsPacksFetched } from 'store/actions';
 import { ReturnComponentType } from 'types';
 
 export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentType => {
@@ -20,6 +20,7 @@ export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentTyp
     const mappedRows = rows.map(row => {
         const handleClick = (): void => {
             dispatch(setCardsPackIdAC(row._id));
+            dispatch(setIsPacksFetched(false));
             navigate(`/cards?cardsPack_id=${row._id}`);
         };
 

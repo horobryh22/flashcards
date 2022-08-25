@@ -30,3 +30,4 @@ export type { SetCardPageCount } from './cards/SetCardPageCount';
 export type { ClearPackUserId } from './cards/ClearPackUserId';
 export type { UpdatePackDataType } from './cards/UpdatePackDataType';
 export type { SetIsPackDeleted } from './cards/SetIsPackDeleted';
+export type { SetIsPacksFetched } from './packs/SetIsPacksFetched';

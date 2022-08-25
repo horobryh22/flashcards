@@ -4,6 +4,7 @@ import {
     SET_CARD_PACKS,
     SET_CARDS_RANGE,
     SET_CURRENT_PAGE,
+    SET_IS_PACKS_FETCHED,
     SET_PACK_NAME,
     SET_PAGE_COUNT,
     SET_SEARCH_PARAMS,
@@ -90,6 +91,8 @@ export const packsReducer = (
                 searchParams: { ...state.searchParams, ...action.payload.params },
                 isInitialized: true,
             };
+        case SET_IS_PACKS_FETCHED:
+            return { ...state, isPacksFetched: action.payload.isPacksFetched };
         default:
             return state;
     }

@@ -22,6 +22,7 @@ export {
     setCardsRangeAC,
     setSearchUserIdAC,
     setSearchParamsAC,
+    setIsPacksFetched,
 } from './packs';
 export {
     setCardsAC,

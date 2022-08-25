@@ -14,6 +14,7 @@ export const SET_SORT_PACKS = 'packs/SET-SORT-PACKS';
 export const SET_CURRENT_PAGE = 'packs/SET-CURRENT-PAGE';
 export const SET_PAGE_COUNT = 'packs/SET-PAGE-COUNT';
 export const SET_PACK_NAME = 'packs/SET-PACK-NAME';
+export const SET_IS_PACKS_FETCHED = 'packs/SET-IS-PACKS-FETCHED';
 export const SET_CARDS_RANGE = 'packs/SET-CARDS-RANGE';
 export const SET_SEARCH_USER_ID = 'packs/SET-SEARCH-USER-ID';
 export const SET_SEARCH_PARAMS = 'packs/SET-SEARCH-PARAMS';
