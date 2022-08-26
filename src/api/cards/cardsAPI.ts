@@ -8,27 +8,9 @@ import {
 } from 'api/types';
 
 export const cardsAPI = {
-    fetchCards: ({
-        min,
-        max,
-        page,
-        pageCount,
-        cardsPack_id,
-        cardQuestion,
-        sortCards,
-        cardAnswer,
-    }: CardsSearchParams) => {
+    fetchCards: (params: CardsSearchParams) => {
         return instance.get<GetCardsResponseType>('cards/card', {
-            params: {
-                min,
-                max,
-                page,
-                pageCount,
-                cardsPack_id,
-                cardQuestion,
-                sortCards,
-                cardAnswer,
-            },
+            params,
         });
     },
     addCard: (data: AddCardType) => {

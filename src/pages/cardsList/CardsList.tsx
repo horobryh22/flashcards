@@ -22,7 +22,19 @@ import {
     setModalStateAC,
 } from 'store/actions';
 import { fetchCards } from 'store/middlewares';
-import { selectAuthUserId, selectIsOpen } from 'store/selectors';
+import {
+    selectAuthUserId,
+    selectCardQuestion,
+    selectCardsPackId,
+    selectCardsPackName,
+    selectCardsPage,
+    selectCardsPageCount,
+    selectCardsTotalCount,
+    selectIsCardsFetched,
+    selectIsOpen,
+    selectIsPackDeleted,
+    selectPackUserId,
+} from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 const CARDS_PAGE_COUNT_VALUES = [2, 4, 6, 8, 10];
@@ -34,19 +46,17 @@ export const CardsList = (): ReturnComponentType => {
 
     const isOpen = useTypedSelector(selectIsOpen);
 
-    const packName = useTypedSelector(state => state.cards.packName);
-    const isPackDeleted = useTypedSelector(state => state.cards.isPackDeleted);
-
-    const cardsPackId = useTypedSelector(state => state.cards.searchParams.cardsPack_id);
-    const cardQuestion = useTypedSelector(state => state.cards.searchParams.cardQuestion);
-    const page = useTypedSelector(state => state.cards.searchParams.page);
-    const pageCount = useTypedSelector(state => state.cards.searchParams.pageCount);
-
-    const totalCount = useTypedSelector(state => state.cards.cardsTotalCount);
-
-    const isCardsFetched = useTypedSelector(state => state.cards.isCardsFetched);
+    const packName = useTypedSelector(selectCardsPackName);
+    const isPackDeleted = useTypedSelector(selectIsPackDeleted);
+    const totalCount = useTypedSelector(selectCardsTotalCount);
+    const isCardsFetched = useTypedSelector(selectIsCardsFetched);
     const authUserId = useTypedSelector(selectAuthUserId);
-    const packUserId = useTypedSelector(state => state.cards.packUserId);
+    const packUserId = useTypedSelector(selectPackUserId);
+
+    const cardsPackId = useTypedSelector(selectCardsPackId);
+    const cardQuestion = useTypedSelector(selectCardQuestion);
+    const page = useTypedSelector(selectCardsPage);
+    const pageCount = useTypedSelector(selectCardsPageCount);
 
     const paramCardsPackId = searchParams.get('cardsPack_id') || cardsPackId;
     const paramCardQuestion = searchParams.get('cardQuestion') || cardQuestion;
