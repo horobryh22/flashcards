@@ -4,4 +4,5 @@ export type ModalTypes =
     | 'removePack'
     | 'editPack'
     | 'removeCard'
-    | 'addCard';
+    | 'addCard'
+    | 'editCard';

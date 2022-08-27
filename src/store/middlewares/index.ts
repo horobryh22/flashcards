@@ -11,3 +11,5 @@ export { removeCardsPack } from 'store/middlewares/packs/removeCardsPack';
 export { updateCardsPack } from 'store/middlewares/packs/updateCardsPack';
 export { fetchCards } from 'store/middlewares/cards/fetchCards';
 export { removeCard } from 'store/middlewares/cards/removeCard';
+export { addCard } from 'store/middlewares/cards/addCard';
+export { updateCard } from 'store/middlewares/cards/updateCard';

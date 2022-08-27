@@ -17,28 +17,17 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
 
     return (
         <div className={classes.modalBody}>
-            <Controller
-                name="question"
-                control={control}
-                render={({ field }) => (
-                    <>
-                        <span className={classes.helperText}>
-                            Choose a question format
-                        </span>
-                        <Select
-                            {...field}
-                            fullWidth
-                            defaultValue="Text"
-                            size="small"
-                            onChange={handleChange}
-                            value={questionFormat}
-                        >
-                            <MenuItem value="Text">Text</MenuItem>
-                            <MenuItem value="Image">Image</MenuItem>
-                        </Select>
-                    </>
-                )}
-            />
+            <span className={classes.helperText}>Choose a question format</span>
+            <Select
+                fullWidth
+                defaultValue="Text"
+                size="small"
+                onChange={handleChange}
+                value={questionFormat}
+            >
+                <MenuItem value="Text">Text</MenuItem>
+                <MenuItem value="Image">Image</MenuItem>
+            </Select>
             <Controller
                 name="question"
                 control={control}

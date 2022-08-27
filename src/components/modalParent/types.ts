@@ -8,3 +8,10 @@ export type ModalParentType = {
 export type ModalMapperType = {
     [key: string]: ReactElement;
 };
+
+export type FormValuesType = {
+    name: string;
+    private: boolean;
+    question: string;
+    answer: string;
+};

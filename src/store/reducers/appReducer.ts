@@ -15,7 +15,8 @@ const initialState: AppStateType = {
     status: REQUEST_STATUS.IDLE,
     modal: {
         cardId: '',
-        cardTitle: '',
+        cardQuestion: '',
+        cardAnswer: '',
         packPrivate: false,
         packId: '',
         packTitle: '',

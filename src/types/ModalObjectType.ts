@@ -2,7 +2,8 @@ import { ModalTypes } from 'types';
 
 export type ModalObjectType = {
     cardId?: string;
-    cardTitle?: string;
+    cardQuestion?: string;
+    cardAnswer?: string;
     packPrivate?: boolean;
     packId?: string;
     packTitle?: string;

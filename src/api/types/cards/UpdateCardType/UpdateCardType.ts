@@ -3,7 +3,6 @@ export type UpdateCardType = {
 };
 
 type UpdatedCardType = {
-    // lots of types aren't necessary here you need to check its later
     _id: string;
     cardsPack_id?: string;
     user_id?: string;

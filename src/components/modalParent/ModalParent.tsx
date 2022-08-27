@@ -7,9 +7,8 @@ import { useForm } from 'react-hook-form';
 
 import classes from './ModalParent.module.css';
 import { BOX_STYLES } from './styles';
-import { ModalMapperType, ModalParentType } from './types';
+import { FormValuesType, ModalMapperType, ModalParentType } from './types';
 
-import { CardsPackType } from 'api/types';
 import { CardModal, ModalContent } from 'components';
 import { PackModal } from 'components/modals';
 import { DELAY } from 'constant';
@@ -41,8 +40,10 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
     const packTitle = useTypedSelector(selectPackTitle);
     const packId = useTypedSelector(selectPackId);
     const packPrivate = useTypedSelector(selectPackPrivate);
-    const cardTitle = useTypedSelector(state => state.app.modal.cardTitle);
+    const cardQuestion = useTypedSelector(state => state.app.modal.cardQuestion);
+    const cardAnswer = useTypedSelector(state => state.app.modal.cardAnswer);
     const cardId = useTypedSelector(state => state.app.modal.cardId);
+    const cardsPack_id = useTypedSelector(state => state.cards.searchParams.cardsPack_id);
 
     const deletingPack =
         packTitle && packTitle.length > MAX_STRING_LENGTH
@@ -50,11 +51,11 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
             : packTitle;
 
     const deletingCard =
-        cardTitle && cardTitle.length > MAX_STRING_LENGTH
-            ? `${cardTitle?.slice(0, MAX_STRING_LENGTH)}...`
-            : cardTitle;
+        cardQuestion && cardQuestion.length > MAX_STRING_LENGTH
+            ? `${cardQuestion?.slice(0, MAX_STRING_LENGTH)}...`
+            : cardQuestion;
 
-    const { control, handleSubmit, getValues, setValue, resetField, reset } = useForm({
+    const { control, handleSubmit, getValues, setValue, reset } = useForm({
         defaultValues: {
             name: '',
             private: false,
@@ -76,6 +77,7 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
             </div>
         ),
         addCard: <CardModal control={control} />,
+        editCard: <CardModal control={control} />,
         removeCard: (
             <div className={classes.modalContent}>
                 Do you really want to remove <b>{deletingCard}</b>?
@@ -83,30 +85,32 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
         ),
     };
 
-    const onSubmit = (values: CardsPackType): void => {
-        chooseAction(modalType, dispatch, packId as string, values, cardId as string);
+    const onSubmit = (values: FormValuesType): void => {
+        chooseAction(
+            modalType,
+            dispatch,
+            packId as string,
+            values,
+            cardId as string,
+            cardsPack_id,
+        );
 
         TIMER = setTimeout(() => {
             dispatch(setModalStateAC(false));
         }, DELAY);
-
-        if (modalType === 'addPack') {
-            resetField('name');
-            resetField('private');
-        }
     };
 
     useEffect(() => {
-        if (modalType === 'addPack') {
-            resetField('name');
-            resetField('private');
-
-            return;
+        if (modalType === 'editPack') {
+            setValue('name', packTitle as string);
+            setValue('private', packPrivate as boolean);
         }
 
-        setValue('name', packTitle as string);
-        setValue('private', packPrivate as boolean);
-    }, [packTitle, modalType, packPrivate]);
+        if (modalType === 'editCard') {
+            setValue('question', cardQuestion as string);
+            setValue('answer', cardAnswer as string);
+        }
+    }, [packTitle, modalType, packPrivate, cardQuestion, cardAnswer]);
 
     useEffect(() => {
         if (open && MODAL_ROOT_ELEMENT) {

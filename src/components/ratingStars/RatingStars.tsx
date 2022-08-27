@@ -28,11 +28,27 @@ export const RatingStars = ({ card }: RatingStarsType): ReturnComponentType => {
         dispatch(
             setModalTypeAC({
                 cardId: card._id,
-                cardTitle: card.question,
+                cardQuestion: card.question,
                 isOpen: true,
                 type: 'removeCard',
                 modalTitle: 'Delete Card',
                 buttonName: 'Delete',
+            }),
+        );
+    };
+
+    const editCard = (e: React.MouseEvent<HTMLElement>): void => {
+        e.preventDefault();
+        e.stopPropagation();
+        dispatch(
+            setModalTypeAC({
+                cardId: card._id,
+                cardQuestion: card.question,
+                cardAnswer: card.answer,
+                isOpen: true,
+                type: 'editCard',
+                modalTitle: 'Edit card',
+                buttonName: 'Save',
             }),
         );
     };
@@ -42,7 +58,7 @@ export const RatingStars = ({ card }: RatingStarsType): ReturnComponentType => {
             <Rating name="read-only" value={card.grade} readOnly />
             {authUserId === card.user_id ? (
                 <div className={classes.actionImages}>
-                    <NavLink to="" onClick={() => {}}>
+                    <NavLink to="" onClick={editCard}>
                         <img src={edit} alt="edit" />
                     </NavLink>
                     <NavLink to="" onClick={removeCard}>
