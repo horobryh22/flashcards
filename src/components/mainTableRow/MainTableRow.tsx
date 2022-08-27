@@ -7,7 +7,8 @@ import { useSearchParams } from 'react-router-dom';
 import { OrderDirectionType } from './types';
 
 import { CardsSortType, SortTypes } from 'api/types';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useTypedSelector } from 'hooks';
+import { selectIsPacksFetched } from 'store/selectors';
 import {
     CardsColumnsType,
     ColumnSortType,
@@ -37,9 +38,18 @@ export const MainTableRow = ({
         useState<OrderDirectionType>('desc');
     const [gradeDirection, setGradeDirection] = useState<OrderDirectionType>('desc');
 
+    const isPacksFetched = useTypedSelector(selectIsPacksFetched);
+
     const handleSortRequest = (sort: ColumnSortType | CardsSortType): void => {
         if (sort === 'name') {
-            handleSortType(setNameDirection, nameDirection, sort, dispatch, searchParams);
+            handleSortType(
+                setNameDirection,
+                nameDirection,
+                sort,
+                dispatch,
+                searchParams,
+                isPacksFetched,
+            );
         }
         if (sort === 'cardsCount') {
             handleSortType(
@@ -48,6 +58,7 @@ export const MainTableRow = ({
                 sort,
                 dispatch,
                 searchParams,
+                isPacksFetched,
             );
         }
         if (sort === 'updated') {
@@ -57,6 +68,7 @@ export const MainTableRow = ({
                 sort,
                 dispatch,
                 searchParams,
+                isPacksFetched,
             );
         }
         if (sort === 'question') {
@@ -66,6 +78,7 @@ export const MainTableRow = ({
                 sort,
                 dispatch,
                 searchParams,
+                isPacksFetched,
             );
         }
         if (sort === 'answer') {
@@ -75,6 +88,7 @@ export const MainTableRow = ({
                 sort,
                 dispatch,
                 searchParams,
+                isPacksFetched,
             );
         }
         if (sort === 'grade') {
@@ -84,6 +98,7 @@ export const MainTableRow = ({
                 sort,
                 dispatch,
                 searchParams,
+                isPacksFetched,
             );
         }
 
@@ -130,11 +145,11 @@ export const MainTableRow = ({
             sort = 'answer';
         }
         if (column.id === 'question') {
-            direction = answerDirection;
+            direction = questionDirection;
             sort = 'question';
         }
         if (column.id === 'grade') {
-            direction = answerDirection;
+            direction = gradeDirection;
             sort = 'grade';
         }
 

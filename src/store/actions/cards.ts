@@ -7,6 +7,7 @@ import {
     SET_CARDS_PACK_ID,
     SET_CARDS_SEARCH_PARAMS,
     SET_IS_PACK_DELETED,
+    SET_SORT_CARDS,
     UPDATE_PACK_DATA,
 } from './constants';
 import {
@@ -18,10 +19,11 @@ import {
     SetCardsSearchParams,
     SetCardsType,
     SetIsPackDeleted,
+    SetSortCards,
     UpdatePackDataType,
 } from './types';
 
-import { CardsSearchParams, GetCardsResponseType } from 'api/types';
+import { CardsSearchParams, GetCardsResponseType, SortTypes } from 'api/types';
 import { Nullable } from 'types';
 
 export const setCardsAC = (data: GetCardsResponseType): SetCardsType => {
@@ -94,6 +96,15 @@ export const setIsPackDeletedAC = (isPackDeleted: boolean): SetIsPackDeleted => 
         type: SET_IS_PACK_DELETED,
         payload: {
             isPackDeleted,
+        },
+    } as const;
+};
+
+export const setSortCardsAC = (sort: SortTypes): SetSortCards => {
+    return {
+        type: SET_SORT_CARDS,
+        payload: {
+            sort,
         },
     } as const;
 };

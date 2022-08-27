@@ -27,3 +27,4 @@ export const SET_CARD_PAGE_COUNT = 'cards/SET-CARD-PAGE-COUNT';
 export const CLEAR_PACK_USER_ID = 'cards/CLEAR-PACK-USER_ID';
 export const UPDATE_PACK_DATA = 'cards/UPDATE-PACK-DATA';
 export const SET_IS_PACK_DELETED = 'cards/SET-IS-PACK-DELETED';
+export const SET_SORT_CARDS = 'cards/SET-SORT-CARDS';

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { Navigate, useSearchParams } from 'react-router-dom';
 
-import { CardsSearchParams } from 'api/types';
+import { CardsSearchParams, SortTypes } from 'api/types';
 import {
     ArrowBackTo,
     CardsTable,
@@ -57,11 +57,13 @@ export const CardsList = (): ReturnComponentType => {
     const cardQuestion = useTypedSelector(selectCardQuestion);
     const page = useTypedSelector(selectCardsPage);
     const pageCount = useTypedSelector(selectCardsPageCount);
+    const sortCards = useTypedSelector(state => state.cards.searchParams.sortCards);
 
     const paramCardsPackId = searchParams.get('cardsPack_id') || cardsPackId;
     const paramCardQuestion = searchParams.get('cardQuestion') || cardQuestion;
     const paramPage = Number(searchParams.get('page')) || page;
     const paramPageCount = Number(searchParams.get('pageCount')) || pageCount;
+    const paramSortCards = searchParams.get('sortCards') || sortCards;
 
     const buttonNameCondition =
         authUserId === packUserId ? 'Add new card' : 'Learn to pack';
@@ -70,12 +72,12 @@ export const CardsList = (): ReturnComponentType => {
         if (cardsPackId) {
             dispatch(fetchCards());
         }
-    }, [cardsPackId, cardQuestion, page, pageCount]);
+    }, [cardsPackId, cardQuestion, page, pageCount, sortCards]);
 
     useEffect(() => {
         const params: CardsSearchParams = {
             cardsPack_id: paramCardsPackId,
-            sortCards: '0updated',
+            sortCards: paramSortCards as SortTypes,
             cardQuestion: paramCardQuestion,
             max: 120,
             page: paramPage,
@@ -85,7 +87,7 @@ export const CardsList = (): ReturnComponentType => {
         };
 
         dispatch(setCardsSearchParamsAC(params));
-    }, [paramCardsPackId, paramCardQuestion, paramPage, paramPageCount]);
+    }, [paramCardsPackId, paramCardQuestion, paramPage, paramPageCount, paramSortCards]);
 
     const handleValueChange = (value: string): void => {
         dispatch(setCardQuestionAC(value));

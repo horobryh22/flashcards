@@ -10,6 +10,7 @@ import {
     SET_CARDS_PACK_ID,
     SET_CARDS_SEARCH_PARAMS,
     SET_IS_PACK_DELETED,
+    SET_SORT_CARDS,
     UPDATE_PACK_DATA,
 } from 'store/actions/constants';
 
@@ -101,6 +102,11 @@ export const cardsReducer = (
             return {
                 ...state,
                 isPackDeleted: action.payload.isPackDeleted,
+            };
+        case SET_SORT_CARDS:
+            return {
+                ...state,
+                searchParams: { ...state.searchParams, sortCards: action.payload.sort },
             };
         default:
             return state;

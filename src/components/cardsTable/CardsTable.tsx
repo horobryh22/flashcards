@@ -7,17 +7,18 @@ import { CardsTableRows, MainTableRow, NoResultsFound } from 'components';
 import { DEFAULT_PAGE_COUNT, ROW_HEIGHT } from 'constant';
 import { CARDS_COLUMNS } from 'constant/table/cardsColumns';
 import { useTypedSelector } from 'hooks';
+import { selectCardsTotalCount, selectIsCardsFetched } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const CardsTable = (): ReturnComponentType => {
     const [searchParams] = useSearchParams();
 
-    const isCardsFetched = useTypedSelector(state => state.cards.isCardsFetched);
+    const isCardsFetched = useTypedSelector(selectIsCardsFetched);
     const paramPageCount =
         (Number(searchParams.get('pageCount')) || DEFAULT_PAGE_COUNT) + 1;
     const cards = useTypedSelector(state => state.cards.cards);
     const sortCards = useTypedSelector(state => state.cards.searchParams.sortCards);
-    const cardsTotalCount = useTypedSelector(state => state.cards.cardsTotalCount);
+    const cardsTotalCount = useTypedSelector(selectCardsTotalCount);
 
     return (
         <div className={classes.container}>
