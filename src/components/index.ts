@@ -17,6 +17,7 @@ export { OverTableRow } from './overTableRow/OverTableRow';
 export { NumEditableSpan } from './numEditableSpan/NumEditableSpan';
 export { ModalParent } from './modalParent/ModalParent';
 export { PackModal } from './modals';
+export { CardModal } from './modals';
 export { ModalContent } from './modalContent/ModalContent';
 export { EditableSpan } from './editableSpan/EditableSpan';
 export { ArrowBackTo } from './arrowBackTo/ArrowBackTo';

@@ -4,17 +4,10 @@ import { Grid } from '@mui/material';
 import { Navigate, useSearchParams } from 'react-router-dom';
 
 import { SortTypes } from 'api/types';
-import {
-    CardsTopContent,
-    CustomPagination,
-    ModalParent,
-    OverTableRow,
-    PacksTable,
-} from 'components';
+import { CardsTopContent, CustomPagination, OverTableRow, PacksTable } from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import {
     setCurrentPageAC,
-    setModalStateAC,
     setModalTypeAC,
     setPageCountAC,
     setSearchParamsAC,
@@ -22,7 +15,6 @@ import {
 import { fetchPacks } from 'store/middlewares';
 import {
     selectId,
-    selectIsOpen,
     selectIsPacksFetched,
     selectIsUserAuth,
     selectMax,
@@ -42,8 +34,6 @@ export const PacksList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const [searchParams] = useSearchParams();
-
-    const isOpen = useTypedSelector(selectIsOpen);
 
     const isUserAuth = useTypedSelector(selectIsUserAuth);
     const isPacksInitialized = useTypedSelector(selectPacksInitialized);
@@ -67,7 +57,7 @@ export const PacksList = (): ReturnComponentType => {
     const paramPackName = searchParams.get('packName') || packName;
     const paramUser_id = searchParams.get('user_id') || userId;
 
-    const handleClick = (): void => {
+    const addPack = (): void => {
         dispatch(
             setModalTypeAC({
                 isOpen: true,
@@ -76,10 +66,6 @@ export const PacksList = (): ReturnComponentType => {
                 buttonName: 'Save',
             }),
         );
-    };
-
-    const onClose = (): void => {
-        dispatch(setModalStateAC(false));
     };
 
     useEffect(() => {
@@ -131,7 +117,7 @@ export const PacksList = (): ReturnComponentType => {
                 title="Packs list"
                 buttonName="Add new pack"
                 isButtonNeed
-                callback={handleClick}
+                callback={addPack}
             />
             <OverTableRow />
             <PacksTable />
@@ -144,7 +130,6 @@ export const PacksList = (): ReturnComponentType => {
                 totalCount={cardPacksTotalCount}
                 isItemsFetched={isPacksFetched}
             />
-            <ModalParent open={isOpen} onClose={onClose} />
         </Grid>
     );
 };

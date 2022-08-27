@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 
 import { Backdrop, CircularProgress } from '@mui/material';
 
-import { Header, RoutesApp, SnackBar } from 'components';
+import { Header, ModalParent, RoutesApp, SnackBar } from 'components';
 import { REQUEST_STATUS } from 'enums';
 import { useAppDispatch, useTypedSelector } from 'hooks';
+import { setModalStateAC } from 'store/actions';
 import { initializedApp } from 'store/middlewares';
-import { selectAppStatus, selectIsInitialized } from 'store/selectors';
+import { selectAppStatus, selectIsInitialized, selectIsOpen } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 const App = (): ReturnComponentType => {
@@ -14,10 +15,15 @@ const App = (): ReturnComponentType => {
 
     const status = useTypedSelector(selectAppStatus);
     const isInitialized = useTypedSelector(selectIsInitialized);
+    const isOpen = useTypedSelector(selectIsOpen);
 
     useEffect(() => {
         dispatch(initializedApp());
     }, []);
+
+    const onClose = (): void => {
+        dispatch(setModalStateAC(false));
+    };
 
     if (!isInitialized) {
         return (
@@ -45,6 +51,7 @@ const App = (): ReturnComponentType => {
             <Header />
             <RoutesApp />
             <SnackBar />
+            <ModalParent open={isOpen} onClose={onClose} />
         </>
     );
 };

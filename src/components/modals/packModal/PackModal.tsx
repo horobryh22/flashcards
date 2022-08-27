@@ -18,7 +18,6 @@ export const PackModal = ({ control, getValues }: PackModalType): ReturnComponen
                     <TextField
                         {...field}
                         label="Name pack"
-                        placeholder="Enter pack name"
                         size="small"
                         variant="standard"
                         fullWidth

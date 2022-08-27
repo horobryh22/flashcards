@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { Grid } from '@mui/material';
-import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 
 import { CardsSearchParams, SortTypes } from 'api/types';
 import {
@@ -10,7 +10,6 @@ import {
     CardsTopContent,
     CustomPagination,
     EmptyPack,
-    ModalParent,
     Search,
 } from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
@@ -19,7 +18,7 @@ import {
     setCardPageCountAC,
     setCardQuestionAC,
     setCardsSearchParamsAC,
-    setModalStateAC,
+    setModalTypeAC,
 } from 'store/actions';
 import { fetchCards } from 'store/middlewares';
 import {
@@ -31,7 +30,6 @@ import {
     selectCardsPageCount,
     selectCardsTotalCount,
     selectIsCardsFetched,
-    selectIsOpen,
     selectIsPackDeleted,
     selectPackUserId,
 } from 'store/selectors';
@@ -42,11 +40,9 @@ const CARDS_PAGE_COUNT_VALUES = [2, 4, 6, 8, 10];
 export const CardsList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const [searchParams] = useSearchParams();
-
-    const isOpen = useTypedSelector(selectIsOpen);
 
     const packName = useTypedSelector(selectCardsPackName);
     const isPackDeleted = useTypedSelector(selectIsPackDeleted);
@@ -103,11 +99,18 @@ export const CardsList = (): ReturnComponentType => {
         dispatch(setCardPageCountAC(Number(value)));
     };
 
-    const onClose = (): void => {
-        dispatch(setModalStateAC(false));
-    };
+    // const learnPack = (): void => navigate('/learn');
 
-    const learnPack = (): void => navigate('/learn');
+    const addCard = (): void => {
+        dispatch(
+            setModalTypeAC({
+                isOpen: true,
+                type: 'addCard',
+                modalTitle: 'Add new card',
+                buttonName: 'Save',
+            }),
+        );
+    };
 
     if (isPackDeleted) {
         return <Navigate to="/packs" />;
@@ -122,7 +125,7 @@ export const CardsList = (): ReturnComponentType => {
                         title={packName}
                         buttonName={buttonNameCondition}
                         isButtonNeed
-                        callback={learnPack}
+                        callback={addCard}
                         style={{ marginTop: '50px', marginBottom: '0px' }}
                     />
                     <Search
@@ -147,7 +150,6 @@ export const CardsList = (): ReturnComponentType => {
             ) : (
                 <EmptyPack title={packName} isMyPack={authUserId === packUserId} />
             )}
-            <ModalParent open={isOpen} onClose={onClose} />
         </Grid>
     );
 };

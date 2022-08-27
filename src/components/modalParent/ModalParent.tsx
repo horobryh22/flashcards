@@ -10,7 +10,7 @@ import { BOX_STYLES } from './styles';
 import { ModalMapperType, ModalParentType } from './types';
 
 import { CardsPackType } from 'api/types';
-import { ModalContent } from 'components';
+import { CardModal, ModalContent } from 'components';
 import { PackModal } from 'components/modals';
 import { DELAY } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
@@ -41,7 +41,6 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
     const packTitle = useTypedSelector(selectPackTitle);
     const packId = useTypedSelector(selectPackId);
     const packPrivate = useTypedSelector(selectPackPrivate);
-
     const cardTitle = useTypedSelector(state => state.app.modal.cardTitle);
     const cardId = useTypedSelector(state => state.app.modal.cardId);
 
@@ -59,6 +58,8 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
         defaultValues: {
             name: '',
             private: false,
+            question: '',
+            answer: '',
         },
         mode: 'onSubmit',
     });
@@ -74,6 +75,7 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
                 ?<br /> All cards will be deleted.
             </div>
         ),
+        addCard: <CardModal control={control} />,
         removeCard: (
             <div className={classes.modalContent}>
                 Do you really want to remove <b>{deletingCard}</b>?
