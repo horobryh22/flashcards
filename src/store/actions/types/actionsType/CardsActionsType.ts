@@ -9,6 +9,7 @@ import {
     updatePackDataAC,
     setIsPackDeletedAC,
     setSortCardsAC,
+    setCardsPackNameAC,
 } from 'store/actions';
 
 export type CardsActionsType =
@@ -21,4 +22,5 @@ export type CardsActionsType =
     | ReturnType<typeof clearPackUserIdAC>
     | ReturnType<typeof updatePackDataAC>
     | ReturnType<typeof setIsPackDeletedAC>
-    | ReturnType<typeof setSortCardsAC>;
+    | ReturnType<typeof setSortCardsAC>
+    | ReturnType<typeof setCardsPackNameAC>;

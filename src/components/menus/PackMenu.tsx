@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ListItemIcon, MenuItem } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import edit from 'assets/images/edit.svg';
 import knowledge from 'assets/images/knowledge.svg';
@@ -16,6 +17,8 @@ export const PackMenu = ({
     open,
 }: MenuType): ReturnComponentType => {
     const dispatch = useAppDispatch();
+
+    const navigate = useNavigate();
 
     const packTitle = useTypedSelector(state => state.cards.packName);
     const packPrivate = useTypedSelector(state => state.cards.packPrivate);
@@ -48,6 +51,8 @@ export const PackMenu = ({
         );
     };
 
+    const handleLearnClick = (): void => navigate('/learn');
+
     return (
         <ParentMenu element={element} open={open} setElement={setElement}>
             <MenuItem onClick={handleEditClick}>
@@ -62,7 +67,7 @@ export const PackMenu = ({
                 </ListItemIcon>
                 Delete
             </MenuItem>
-            <MenuItem onClick={() => {}}>
+            <MenuItem onClick={handleLearnClick}>
                 <ListItemIcon>
                     <img src={knowledge} alt="knowledge" />
                 </ListItemIcon>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { Grid } from '@mui/material';
-import { Navigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { CardsSearchParams, SortTypes } from 'api/types';
 import {
@@ -41,6 +41,8 @@ const CARDS_PAGE_COUNT_VALUES = [2, 4, 6, 8, 10];
 
 export const CardsList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
+
+    const navigate = useNavigate();
 
     const [searchParams] = useSearchParams();
 
@@ -105,6 +107,8 @@ export const CardsList = (): ReturnComponentType => {
         dispatch(setModalStateAC(false));
     };
 
+    const learnPack = (): void => navigate('/learn');
+
     if (isPackDeleted) {
         return <Navigate to="/packs" />;
     }
@@ -118,7 +122,7 @@ export const CardsList = (): ReturnComponentType => {
                         title={packName}
                         buttonName={buttonNameCondition}
                         isButtonNeed
-                        callback={() => {}}
+                        callback={learnPack}
                         style={{ marginTop: '50px', marginBottom: '0px' }}
                     />
                     <Search

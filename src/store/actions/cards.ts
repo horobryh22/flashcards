@@ -5,6 +5,7 @@ import {
     SET_CARD_QUESTION,
     SET_CARDS,
     SET_CARDS_PACK_ID,
+    SET_CARDS_PACK_NAME,
     SET_CARDS_SEARCH_PARAMS,
     SET_IS_PACK_DELETED,
     SET_SORT_CARDS,
@@ -16,6 +17,7 @@ import {
     SetCardPageCount,
     SetCardQuestion,
     SetCardsPackId,
+    SetCardsPackName,
     SetCardsSearchParams,
     SetCardsType,
     SetIsPackDeleted,
@@ -105,6 +107,15 @@ export const setSortCardsAC = (sort: SortTypes): SetSortCards => {
         type: SET_SORT_CARDS,
         payload: {
             sort,
+        },
+    } as const;
+};
+
+export const setCardsPackNameAC = (packName: string): SetCardsPackName => {
+    return {
+        type: SET_CARDS_PACK_NAME,
+        payload: {
+            packName,
         },
     } as const;
 };

@@ -9,7 +9,7 @@ import actionsGroup from 'assets/images/actionsGroup.svg';
 import { StyledButton } from 'components/header/styles';
 import { PackMenu } from 'components/menus/PackMenu';
 import { useTypedSelector } from 'hooks';
-import { selectAuthUserId } from 'store/selectors';
+import { selectAuthUserId, selectPackUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const CardsTopContent: React.FC<CardsTopContentType> = ({
@@ -24,7 +24,7 @@ export const CardsTopContent: React.FC<CardsTopContentType> = ({
 
     const open = Boolean(element);
 
-    const packUserId = useTypedSelector(state => state.cards.packUserId);
+    const packUserId = useTypedSelector(selectPackUserId);
     const authUserId = useTypedSelector(selectAuthUserId);
 
     const handleClick = (event: React.MouseEvent<HTMLElement>): void => {

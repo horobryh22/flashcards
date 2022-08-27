@@ -8,6 +8,7 @@ import {
     SET_CARD_QUESTION,
     SET_CARDS,
     SET_CARDS_PACK_ID,
+    SET_CARDS_PACK_NAME,
     SET_CARDS_SEARCH_PARAMS,
     SET_IS_PACK_DELETED,
     SET_SORT_CARDS,
@@ -108,6 +109,8 @@ export const cardsReducer = (
                 ...state,
                 searchParams: { ...state.searchParams, sortCards: action.payload.sort },
             };
+        case SET_CARDS_PACK_NAME:
+            return { ...state, packName: action.payload.packName };
         default:
             return state;
     }
