@@ -110,7 +110,7 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
             setValue('question', cardQuestion as string);
             setValue('answer', cardAnswer as string);
         }
-    }, [packTitle, modalType, packPrivate, cardQuestion, cardAnswer]);
+    }, [packTitle, modalType, packPrivate, cardQuestion, cardAnswer, open]);
 
     useEffect(() => {
         if (open && MODAL_ROOT_ELEMENT) {

@@ -12,14 +12,15 @@ import { useTypedSelector } from 'hooks';
 import { selectAuthUserId, selectPackUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
-export const CardsTopContent: React.FC<CardsTopContentType> = ({
+export const CardsTopContent = ({
     isButtonNeed,
     buttonName,
     title,
     children,
-    callback,
+    addItem,
     style,
-}): ReturnComponentType => {
+    learnPack,
+}: CardsTopContentType): ReturnComponentType => {
     const [element, setElement] = React.useState<null | HTMLElement>(null);
 
     const open = Boolean(element);
@@ -60,7 +61,7 @@ export const CardsTopContent: React.FC<CardsTopContentType> = ({
                         <StyledButton
                             variant="contained"
                             style={{ padding: '8px 28px' }}
-                            onClick={callback}
+                            onClick={packUserId === authUserId ? addItem : learnPack}
                         >
                             {buttonName}
                         </StyledButton>

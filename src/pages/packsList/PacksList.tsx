@@ -117,7 +117,7 @@ export const PacksList = (): ReturnComponentType => {
                 title="Packs list"
                 buttonName="Add new pack"
                 isButtonNeed
-                callback={addPack}
+                addItem={addPack}
             />
             <OverTableRow />
             <PacksTable />
