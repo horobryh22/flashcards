@@ -42,12 +42,20 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
     const packId = useTypedSelector(selectPackId);
     const packPrivate = useTypedSelector(selectPackPrivate);
 
+    const cardTitle = useTypedSelector(state => state.app.modal.cardTitle);
+    const cardId = useTypedSelector(state => state.app.modal.cardId);
+
     const deletingPack =
         packTitle && packTitle.length > MAX_STRING_LENGTH
             ? `${packTitle?.slice(0, MAX_STRING_LENGTH)}...`
             : packTitle;
 
-    const { control, handleSubmit, getValues, setValue, resetField } = useForm({
+    const deletingCard =
+        cardTitle && cardTitle.length > MAX_STRING_LENGTH
+            ? `${cardTitle?.slice(0, MAX_STRING_LENGTH)}...`
+            : cardTitle;
+
+    const { control, handleSubmit, getValues, setValue, resetField, reset } = useForm({
         defaultValues: {
             name: '',
             private: false,
@@ -66,10 +74,15 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
                 ?<br /> All cards will be deleted.
             </div>
         ),
+        removeCard: (
+            <div className={classes.modalContent}>
+                Do you really want to remove <b>{deletingCard}</b>?
+            </div>
+        ),
     };
 
     const onSubmit = (values: CardsPackType): void => {
-        chooseAction(modalType, dispatch, packId as string, values);
+        chooseAction(modalType, dispatch, packId as string, values, cardId as string);
 
         TIMER = setTimeout(() => {
             dispatch(setModalStateAC(false));
@@ -103,6 +116,10 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
             };
         }
     }, []);
+
+    useEffect(() => {
+        if (!open) reset();
+    }, [open]);
 
     if (open) {
         return createPortal(

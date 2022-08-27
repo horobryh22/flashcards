@@ -7,13 +7,9 @@ import { CardsTableRowsType } from './types';
 
 import { RatingStars } from 'components';
 import { CARDS_COLUMNS } from 'constant';
-import { useTypedSelector } from 'hooks';
-import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const CardsTableRows = ({ rows }: CardsTableRowsType): ReturnComponentType => {
-    const authUserId = useTypedSelector(selectAuthUserId);
-
     const mappedRows = rows.map(row => {
         return (
             <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
@@ -35,10 +31,7 @@ export const CardsTableRows = ({ rows }: CardsTableRowsType): ReturnComponentTyp
                             {column.id !== 'grade' ? (
                                 <div className={classes.nameWrapper}>{value}</div>
                             ) : (
-                                <RatingStars
-                                    grade={row.grade}
-                                    isMyPack={authUserId === row.user_id}
-                                />
+                                <RatingStars card={row} />
                             )}
                         </TableCell>
                     );

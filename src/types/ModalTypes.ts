@@ -1,1 +1,1 @@
-export type ModalTypes = '' | 'addPack' | 'removePack' | 'editPack';
+export type ModalTypes = '' | 'addPack' | 'removePack' | 'editPack' | 'removeCard';

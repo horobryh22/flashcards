@@ -29,7 +29,7 @@ export const ActionImages = ({ card }: ActionImagesType): ReturnComponentType =>
                 packTitle,
                 isOpen: true,
                 type: 'removePack',
-                modalTitle: 'Delete pack',
+                modalTitle: 'Delete Pack',
                 buttonName: 'Delete',
             }),
         );

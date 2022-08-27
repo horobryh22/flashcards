@@ -1,6 +1,11 @@
 import { CardsPackType } from 'api/types';
 import { AppDispatch } from 'store';
-import { addCardsPack, removeCardsPack, updateCardsPack } from 'store/middlewares';
+import {
+    addCardsPack,
+    removeCard,
+    removeCardsPack,
+    updateCardsPack,
+} from 'store/middlewares';
 import { ModalTypes } from 'types';
 
 export const chooseAction = (
@@ -8,6 +13,7 @@ export const chooseAction = (
     dispatch: AppDispatch,
     packId: string,
     values: CardsPackType,
+    cardId: string,
 ): void => {
     switch (modalType) {
         case 'addPack':
@@ -18,6 +24,9 @@ export const chooseAction = (
             break;
         case 'removePack':
             dispatch(removeCardsPack(packId as string));
+            break;
+        case 'removeCard':
+            dispatch(removeCard(cardId));
             break;
         default:
     }

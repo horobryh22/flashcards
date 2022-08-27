@@ -14,6 +14,8 @@ const initialState: AppStateType = {
     error: null,
     status: REQUEST_STATUS.IDLE,
     modal: {
+        cardId: '',
+        cardTitle: '',
         packPrivate: false,
         packId: '',
         packTitle: '',

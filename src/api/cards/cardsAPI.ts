@@ -17,13 +17,13 @@ export const cardsAPI = {
         return instance.post<{ newCard: CardType }>('cards/card', data);
     },
     removeCard: (cardId: string) => {
-        return instance.delete<{ deletedCard: CardType }>('cards/pack', {
+        return instance.delete<{ deletedCard: CardType }>('cards/card', {
             params: {
                 id: cardId,
             },
         });
     },
     updateCard: (card: UpdateCardType) => {
-        return instance.put<{ updatedCard: CardType }>('cards/pack', card);
+        return instance.put<{ updatedCard: CardType }>('cards/card', card);
     },
 };
