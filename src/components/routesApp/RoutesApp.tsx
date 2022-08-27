@@ -6,6 +6,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import {
     CardsList,
     ForgotPassword,
+    LearnPack,
     NotFound,
     PacksList,
     Profile,
@@ -24,6 +25,7 @@ export const RoutesApp = (): ReturnComponentType => {
                     <Route path="login" element={<SignIn />} />
                     <Route path="packs" element={<PacksList />} />
                     <Route path="cards" element={<CardsList />} />
+                    <Route path="learn" element={<LearnPack />} />
                     <Route path="registration" element={<SignUp />} />
                     <Route path="profile" element={<Profile />} />
                     <Route path="password_recovery/:token" element={<SetNewPassword />} />

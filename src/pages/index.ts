@@ -7,4 +7,5 @@ export { CheckEmail } from './checkEmail/CheckEmail';
 export { PacksList } from './packsList/PacksList';
 export { SignUp } from './signUp/SignUp';
 export { CardsList } from './cardsList/CardsList';
+export { LearnPack } from './learnPack/LearnPack';
 export type { SignInValuesType } from './signIn/types';
