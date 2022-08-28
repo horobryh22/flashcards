@@ -17,3 +17,4 @@ export type { GetCardsResponseType } from './cards/GetCardsResponseType/GetCards
 export type { CardsSortType } from './cards/CardsSortType/CardsSortType';
 export type { AddCardType } from './cards/AddCardType/AddCardType';
 export type { UpdateCardType } from './cards/UpdateCardType/UpdateCardType';
+export type { UpdatedGradeType } from './cards/UpdatedGradeType/UpdatedGradeType';

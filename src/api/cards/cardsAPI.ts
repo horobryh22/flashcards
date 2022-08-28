@@ -5,6 +5,7 @@ import {
     CardType,
     GetCardsResponseType,
     UpdateCardType,
+    UpdatedGradeType,
 } from 'api/types';
 
 export const cardsAPI = {
@@ -25,5 +26,11 @@ export const cardsAPI = {
     },
     updateCard: (card: UpdateCardType) => {
         return instance.put<{ updatedCard: CardType }>('cards/card', card);
+    },
+    updateCardGrade: (grade: number, card_id: string) => {
+        return instance.put<{ updatedGrade: UpdatedGradeType }>('cards/grade', {
+            grade,
+            card_id,
+        });
     },
 };
