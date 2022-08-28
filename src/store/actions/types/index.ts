@@ -33,3 +33,4 @@ export type { SetIsPackDeleted } from './cards/SetIsPackDeleted';
 export type { SetIsPacksFetched } from './packs/SetIsPacksFetched';
 export type { SetSortCards } from './cards/SetSortCards';
 export type { SetCardsPackName } from './cards/SetCardsPackName';
+export type { SetUpdatedCardGrade } from './cards/SetUpdatedCardGrade';

@@ -1,0 +1,14 @@
+.answerContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.subtitle {
+    margin-bottom: 15px;
+}
+
+.subtitle span {
+    font-weight: 700;
+}

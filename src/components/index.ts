@@ -32,5 +32,7 @@ export { CardsTableRows } from './cardsTableRows/CardsTableRows';
 export { RatingStars } from './ratingStars/RatingStars';
 export { EmptyPack } from './emptyPack/EmptyPack';
 export { PackMenu } from './menus/PackMenu';
+export { RadioButton } from './radioButton/RadioButton';
+export { AnswerContent } from './answerContent/AnswerContent';
 
 export type { FormValuesType } from './modalParent/types';

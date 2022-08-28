@@ -9,6 +9,7 @@ import {
     SET_CARDS_SEARCH_PARAMS,
     SET_IS_PACK_DELETED,
     SET_SORT_CARDS,
+    SET_UPDATED_CARD_GRADE,
     UPDATE_PACK_DATA,
 } from './constants';
 import {
@@ -22,10 +23,16 @@ import {
     SetCardsType,
     SetIsPackDeleted,
     SetSortCards,
+    SetUpdatedCardGrade,
     UpdatePackDataType,
 } from './types';
 
-import { CardsSearchParams, GetCardsResponseType, SortTypes } from 'api/types';
+import {
+    CardsSearchParams,
+    GetCardsResponseType,
+    SortTypes,
+    UpdatedGradeType,
+} from 'api/types';
 import { Nullable } from 'types';
 
 export const setCardsAC = (data: GetCardsResponseType): SetCardsType => {
@@ -116,6 +123,17 @@ export const setCardsPackNameAC = (packName: string): SetCardsPackName => {
         type: SET_CARDS_PACK_NAME,
         payload: {
             packName,
+        },
+    } as const;
+};
+
+export const setUpdatedCardGradeAC = (
+    updatedGrade: UpdatedGradeType,
+): SetUpdatedCardGrade => {
+    return {
+        type: SET_UPDATED_CARD_GRADE,
+        payload: {
+            updatedGrade,
         },
     } as const;
 };

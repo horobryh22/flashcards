@@ -12,6 +12,7 @@ import {
     SET_CARDS_SEARCH_PARAMS,
     SET_IS_PACK_DELETED,
     SET_SORT_CARDS,
+    SET_UPDATED_CARD_GRADE,
     UPDATE_PACK_DATA,
 } from 'store/actions/constants';
 
@@ -111,6 +112,19 @@ export const cardsReducer = (
             };
         case SET_CARDS_PACK_NAME:
             return { ...state, packName: action.payload.packName };
+        case SET_UPDATED_CARD_GRADE:
+            return {
+                ...state,
+                cards: state.cards.map(card =>
+                    card._id === action.payload.updatedGrade.card_id
+                        ? {
+                              ...card,
+                              grade: action.payload.updatedGrade.grade,
+                              shots: action.payload.updatedGrade.shots,
+                          }
+                        : card,
+                ),
+            };
         default:
             return state;
     }

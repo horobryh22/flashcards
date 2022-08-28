@@ -39,10 +39,3 @@
     opacity: 0.5;
     margin-bottom: 29px;
 }
-
-.answerContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}

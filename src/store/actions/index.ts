@@ -36,6 +36,7 @@ export {
     setIsPackDeletedAC,
     setSortCardsAC,
     setCardsPackNameAC,
+    setUpdatedCardGradeAC,
 } from './cards';
 export type {
     AuthActionsType,
