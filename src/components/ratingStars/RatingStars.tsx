@@ -55,7 +55,7 @@ export const RatingStars = ({ card }: RatingStarsType): ReturnComponentType => {
 
     return (
         <div className={classes.wrapper}>
-            <Rating name="read-only" value={card.grade} readOnly />
+            <Rating name="read-only" value={card.grade} precision={0.5} readOnly />
             {authUserId === card.user_id ? (
                 <div className={classes.actionImages}>
                     <NavLink to="" onClick={editCard}>

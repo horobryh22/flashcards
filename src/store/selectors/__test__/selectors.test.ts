@@ -29,6 +29,7 @@ const maxCardsCount = 4;
 beforeEach(() => {
     state = {
         app: {
+            info: null,
             status: REQUEST_STATUS.IDLE,
             isInitialized: false,
             error: null,

@@ -10,13 +10,14 @@ import { useAppDispatch } from 'hooks';
 import { clearPackUserIdAC, setCardsSearchParamsAC } from 'store/actions';
 import { ReturnComponentType } from 'types';
 
-const CARD_PARAMS_STATE: Omit<CardsSearchParams, 'pageCount'> = {
+const CARD_PARAMS_STATE: CardsSearchParams = {
     cardsPack_id: '',
     sortCards: '0updated',
     cardQuestion: '',
     max: 120,
     page: 1,
     min: 0,
+    pageCount: 6,
     cardAnswer: '',
 };
 
@@ -24,7 +25,7 @@ export const ArrowBackTo = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const handleClick = (): void => {
-        dispatch(setCardsSearchParamsAC(CARD_PARAMS_STATE as CardsSearchParams));
+        dispatch(setCardsSearchParamsAC(CARD_PARAMS_STATE));
         dispatch(clearPackUserIdAC());
     };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import classes from './ActionImages.module.css';
 import { ActionImagesType } from './types';
@@ -9,14 +9,22 @@ import edit from 'assets/images/edit.svg';
 import knowledge from 'assets/images/knowledge.svg';
 import remove from 'assets/images/remove.svg';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { setCardsPackNameAC, setModalTypeAC } from 'store/actions';
+import {
+    setCardCurrentPageAC,
+    setCardPageCountAC,
+    setCardsPackIdAC,
+    setModalTypeAC,
+} from 'store/actions';
+import { fetchCards } from 'store/middlewares';
 import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const ActionImages = ({ card }: ActionImagesType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const { name: packTitle, _id: packId, private: packPrivate } = card;
+    const navigate = useNavigate();
+
+    const { name: packTitle, _id: packId, private: packPrivate, cardsCount } = card;
 
     const authUserId = useTypedSelector(selectAuthUserId);
 
@@ -51,8 +59,14 @@ export const ActionImages = ({ card }: ActionImagesType): ReturnComponentType =>
         );
     };
 
-    const learnPack = (): void => {
-        dispatch(setCardsPackNameAC(card.name));
+    const learnPack = async (e: React.MouseEvent<HTMLElement>): Promise<void> => {
+        e.preventDefault();
+        e.stopPropagation();
+        await dispatch(setCardsPackIdAC(packId));
+        await dispatch(setCardPageCountAC(cardsCount));
+        await dispatch(setCardCurrentPageAC(1));
+        await dispatch(fetchCards());
+        navigate('/learn');
     };
 
     const linkClass = authUserId !== card.user_id ? classes.disabledIcon : '';
@@ -65,7 +79,11 @@ export const ActionImages = ({ card }: ActionImagesType): ReturnComponentType =>
             <NavLink to="" onClick={updatePack} className={linkClass}>
                 <img src={edit} alt="edit" />
             </NavLink>
-            <NavLink to="/learn" onClick={learnPack}>
+            <NavLink
+                to=""
+                onClick={learnPack}
+                className={cardsCount ? '' : classes.disabledIcon}
+            >
                 <img src={knowledge} alt="knowledge" />
             </NavLink>
         </div>

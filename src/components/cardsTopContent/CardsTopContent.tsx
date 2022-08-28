@@ -28,6 +28,13 @@ export const CardsTopContent = ({
     const packUserId = useTypedSelector(selectPackUserId);
     const authUserId = useTypedSelector(selectAuthUserId);
 
+    const mappedCallback = {
+        'Add new pack': addItem,
+        'Add new card': addItem,
+        'Learn to pack': learnPack,
+        '': () => {},
+    };
+
     const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
         setElement(event.currentTarget);
     };
@@ -61,7 +68,7 @@ export const CardsTopContent = ({
                         <StyledButton
                             variant="contained"
                             style={{ padding: '8px 28px' }}
-                            onClick={packUserId === authUserId ? addItem : learnPack}
+                            onClick={mappedCallback[buttonName]}
                         >
                             {buttonName}
                         </StyledButton>

@@ -7,6 +7,7 @@ let startState: AppStateType;
 
 beforeEach(() => {
     startState = {
+        info: null,
         error: null,
         status: REQUEST_STATUS.IDLE,
         isInitialized: false,

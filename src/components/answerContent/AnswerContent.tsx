@@ -14,7 +14,7 @@ export const AnswerContent = ({
     const [visible, setVisible] = useState(false);
 
     const showAnswer = (): void => {
-        setVisible(true);
+        setVisible(!visible);
     };
 
     return (
@@ -26,7 +26,7 @@ export const AnswerContent = ({
                         {answer}
                     </div>
                     <span>Rate yourself:</span>
-                    <RadioButton card_id={card_id} />
+                    <RadioButton card_id={card_id} setVisible={setVisible} />
                 </div>
             ) : (
                 <StyledButton onClick={showAnswer} variant="contained" fullWidth>

@@ -35,7 +35,7 @@ import {
 } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
-const CARDS_PAGE_COUNT_VALUES = [2, 4, 6, 8, 10];
+const CARDS_PAGE_COUNT_VALUES = [4, 6, 8, 10];
 
 export const CardsList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
@@ -99,7 +99,11 @@ export const CardsList = (): ReturnComponentType => {
         dispatch(setCardPageCountAC(Number(value)));
     };
 
-    const learnPack = (): void => navigate('/learn');
+    const learnPack = async (): Promise<void> => {
+        await dispatch(setCardPageCountAC(totalCount));
+        await dispatch(setCardCurrentPageAC(1));
+        navigate('/learn');
+    };
 
     const addCard = (): void => {
         dispatch(

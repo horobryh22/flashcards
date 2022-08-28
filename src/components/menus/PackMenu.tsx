@@ -8,7 +8,7 @@ import knowledge from 'assets/images/knowledge.svg';
 import remove from 'assets/images/remove.svg';
 import { ParentMenu } from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { setModalTypeAC } from 'store/actions';
+import { setCardCurrentPageAC, setCardPageCountAC, setModalTypeAC } from 'store/actions';
 import { MenuType, ReturnComponentType } from 'types';
 
 export const PackMenu = ({
@@ -23,6 +23,7 @@ export const PackMenu = ({
     const packTitle = useTypedSelector(state => state.cards.packName);
     const packPrivate = useTypedSelector(state => state.cards.packPrivate);
     const packId = useTypedSelector(state => state.cards.searchParams.cardsPack_id);
+    const cardsTotalCount = useTypedSelector(state => state.cards.cardsTotalCount);
 
     const handleEditClick = (): void => {
         dispatch(
@@ -51,7 +52,11 @@ export const PackMenu = ({
         );
     };
 
-    const handleLearnClick = (): void => navigate('/learn');
+    const handleLearnClick = async (): Promise<void> => {
+        await dispatch(setCardPageCountAC(cardsTotalCount));
+        await dispatch(setCardCurrentPageAC(1));
+        navigate('/learn');
+    };
 
     return (
         <ParentMenu element={element} open={open} setElement={setElement}>
@@ -67,7 +72,7 @@ export const PackMenu = ({
                 </ListItemIcon>
                 Delete
             </MenuItem>
-            <MenuItem onClick={handleLearnClick}>
+            <MenuItem onClick={handleLearnClick} disabled={!cardsTotalCount}>
                 <ListItemIcon>
                     <img src={knowledge} alt="knowledge" />
                 </ListItemIcon>

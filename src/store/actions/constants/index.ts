@@ -7,6 +7,7 @@ export const SET_IS_AVATAR_BROKEN = 'auth/SET-IS-AVATAR-BROKEN';
 export const SET_AUTH_USER_DATA = 'auth/SET-AUTH-USER-DATA';
 export const SET_APP_STATUS = 'app/SET-APP-STATUS';
 export const SET_IS_INITIALIZED = 'app/SET-IS-INITIALIZED';
+export const SET_APP_INFO = 'app/SET-APP-INFO';
 export const SET_MODAL_TYPE = 'app/SET-MODAL-TYPE';
 export const SET_MODAL_STATE = 'app/SET-MODAL-STATE';
 export const SET_CARD_PACKS = 'packs/SET-CARD-PACKS';

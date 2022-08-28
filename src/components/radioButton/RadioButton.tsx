@@ -9,7 +9,10 @@ import { useAppDispatch } from 'hooks';
 import { updateCardGrade } from 'store/middlewares';
 import { ReturnComponentType } from 'types';
 
-export const RadioButton = ({ card_id }: RadioButtonType): ReturnComponentType => {
+export const RadioButton = ({
+    card_id,
+    setVisible,
+}: RadioButtonType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const [grade, setGrade] = React.useState('1');
@@ -20,6 +23,8 @@ export const RadioButton = ({ card_id }: RadioButtonType): ReturnComponentType =
 
     const handleClick = (): void => {
         dispatch(updateCardGrade(Number(grade), card_id));
+        setVisible(false);
+        setGrade('1');
     };
 
     return (

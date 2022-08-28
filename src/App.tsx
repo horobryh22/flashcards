@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { Backdrop, CircularProgress } from '@mui/material';
 
-import { Header, ModalParent, RoutesApp, SnackBar } from 'components';
+import { Header, ModalParent, RoutesApp, SimpleSnackBar, SnackBar } from 'components';
 import { REQUEST_STATUS } from 'enums';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setModalStateAC } from 'store/actions';
@@ -51,6 +51,7 @@ const App = (): ReturnComponentType => {
             <Header />
             <RoutesApp />
             <SnackBar />
+            <SimpleSnackBar />
             <ModalParent open={isOpen} onClose={onClose} />
         </>
     );

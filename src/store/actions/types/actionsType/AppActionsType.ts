@@ -1,4 +1,5 @@
 import {
+    setAppInfoAC,
     setAppStatusAC,
     setIsInitializedAC,
     setModalStateAC,
@@ -9,4 +10,5 @@ export type AppActionsType =
     | ReturnType<typeof setAppStatusAC>
     | ReturnType<typeof setIsInitializedAC>
     | ReturnType<typeof setModalTypeAC>
-    | ReturnType<typeof setModalStateAC>;
+    | ReturnType<typeof setModalStateAC>
+    | ReturnType<typeof setAppInfoAC>;

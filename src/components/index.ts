@@ -34,5 +34,6 @@ export { EmptyPack } from './emptyPack/EmptyPack';
 export { PackMenu } from './menus/PackMenu';
 export { RadioButton } from './radioButton/RadioButton';
 export { AnswerContent } from './answerContent/AnswerContent';
+export { SimpleSnackBar } from './simpleSnackBar/SimpleSnackBar';
 
 export type { FormValuesType } from './modalParent/types';

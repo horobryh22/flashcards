@@ -8,8 +8,9 @@ import { PacksTableRowsType } from './types';
 
 import { ActionImages } from 'components';
 import { PACK_COLUMNS } from 'constant';
-import { useAppDispatch } from 'hooks';
-import { setCardsPackIdAC, setIsPacksFetched } from 'store/actions';
+import { useAppDispatch, useTypedSelector } from 'hooks';
+import { setAppInfoAC, setCardsPackIdAC, setIsPacksFetched } from 'store/actions';
+import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentType => {
@@ -17,11 +18,29 @@ export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentTyp
 
     const navigate = useNavigate();
 
+    const authUserId = useTypedSelector(selectAuthUserId);
+
     const mappedRows = rows.map(row => {
         const handleClick = (): void => {
-            dispatch(setCardsPackIdAC(row._id));
-            dispatch(setIsPacksFetched(false));
-            navigate(`/cards?cardsPack_id=${row._id}`);
+            if (row.cardsCount) {
+                dispatch(setCardsPackIdAC(row._id));
+                dispatch(setIsPacksFetched(false));
+                navigate(`/cards?cardsPack_id=${row._id}`);
+
+                return;
+            }
+
+            if (authUserId === row.user_id) {
+                dispatch(setCardsPackIdAC(row._id));
+                dispatch(setIsPacksFetched(false));
+                navigate(`/cards?cardsPack_id=${row._id}`);
+
+                return;
+            }
+
+            if (authUserId !== row.user_id) {
+                dispatch(setAppInfoAC('This pack is empty'));
+            }
         };
 
         const stopPropagation = (e: MouseEvent): void => {

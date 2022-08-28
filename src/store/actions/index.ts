@@ -12,6 +12,7 @@ export {
     setIsInitializedAC,
     setModalTypeAC,
     setModalStateAC,
+    setAppInfoAC,
 } from './app';
 export {
     setCardPacksAC,

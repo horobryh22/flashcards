@@ -37,3 +37,4 @@ export { selectCardsPage } from './cards/selectCardsPage/selectCardsPage';
 export { selectPackUserId } from './cards/selectPackUserId/selectPackUserId';
 export { selectCardsTotalCount } from './cards/selectCardsTotalCount/selectCardsTotalCount';
 export { selectIsCardsFetched } from './cards/selectIsCardsFetched/selectIsCardsFetched';
+export { selectCards } from './cards/selectCards/selectCards';

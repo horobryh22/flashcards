@@ -3,6 +3,7 @@ import { AppStateType } from './types';
 import { REQUEST_STATUS } from 'enums';
 import { AppActionsType } from 'store/actions';
 import {
+    SET_APP_INFO,
     SET_APP_STATUS,
     SET_IS_INITIALIZED,
     SET_MODAL_STATE,
@@ -10,6 +11,7 @@ import {
 } from 'store/actions/constants';
 
 const initialState: AppStateType = {
+    info: null,
     isInitialized: false,
     error: null,
     status: REQUEST_STATUS.IDLE,
@@ -40,6 +42,8 @@ export const appReducer = (
             return { ...state, modal: { ...state.modal, ...action.payload.modal } };
         case SET_MODAL_STATE:
             return { ...state, modal: { ...state.modal, isOpen: action.payload.isOpen } };
+        case SET_APP_INFO:
+            return { ...state, info: action.payload.info };
         default:
             return state;
     }
