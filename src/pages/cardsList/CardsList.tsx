@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 
+import classes from './CardsList.module.css';
+
 import { CardsSearchParams, SortTypes } from 'api/types';
 import {
     ArrowBackTo,
@@ -34,6 +36,7 @@ import {
     selectPackUserId,
 } from 'store/selectors';
 import { ReturnComponentType } from 'types';
+import { isBase64 } from 'utils';
 
 const CARDS_PAGE_COUNT_VALUES = [5, 10, 15, 20, 25];
 
@@ -50,6 +53,7 @@ export const CardsList = (): ReturnComponentType => {
     const isCardsFetched = useTypedSelector(selectIsCardsFetched);
     const authUserId = useTypedSelector(selectAuthUserId);
     const packUserId = useTypedSelector(selectPackUserId);
+    const packCover = useTypedSelector(state => state.cards.packDeckCover);
 
     const cardsPackId = useTypedSelector(selectCardsPackId);
     const cardQuestion = useTypedSelector(selectCardQuestion);
@@ -133,6 +137,11 @@ export const CardsList = (): ReturnComponentType => {
                         learnPack={learnPack}
                         style={{ marginTop: '50px', marginBottom: '0px' }}
                     />
+                    {packCover && isBase64(packCover) && (
+                        <div className={classes.coverContainer}>
+                            <img src={packCover} alt="cover" />
+                        </div>
+                    )}
                     <Search
                         onChangeValue={handleValueChange}
                         uriParam="cardQuestion"

@@ -12,6 +12,7 @@ import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setAppInfoAC, setCardsPackIdAC, setIsPacksFetched } from 'store/actions';
 import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
+import { isBase64 } from 'utils';
 
 export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentType => {
     const dispatch = useAppDispatch();
@@ -78,7 +79,7 @@ export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentTyp
                             {column.id === 'name' && (
                                 <div className={classes.nameContainer}>
                                     <div className={classes.coverWrapper}>
-                                        {row.deckCover && (
+                                        {row.deckCover && isBase64(row.deckCover) && (
                                             <img src={row.deckCover} alt="cover" />
                                         )}
                                     </div>

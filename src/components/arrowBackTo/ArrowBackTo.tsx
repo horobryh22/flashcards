@@ -17,7 +17,7 @@ const CARD_PARAMS_STATE: CardsSearchParams = {
     max: 120,
     page: 1,
     min: 0,
-    pageCount: 6,
+    pageCount: 5,
     cardAnswer: '',
 };
 
