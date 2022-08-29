@@ -13,6 +13,7 @@ export const SET_MODAL_STATE = 'app/SET-MODAL-STATE';
 export const SET_CARD_PACKS = 'packs/SET-CARD-PACKS';
 export const SET_SORT_PACKS = 'packs/SET-SORT-PACKS';
 export const SET_CURRENT_PAGE = 'packs/SET-CURRENT-PAGE';
+export const SET_PACK_COVER = 'packs/SET-PACK-COVER';
 export const SET_PAGE_COUNT = 'packs/SET-PAGE-COUNT';
 export const SET_PACK_NAME = 'packs/SET-PACK-NAME';
 export const SET_IS_PACKS_FETCHED = 'packs/SET-IS-PACKS-FETCHED';

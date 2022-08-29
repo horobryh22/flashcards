@@ -17,13 +17,22 @@ export const chooseAction = (
     values: FormValuesType,
     cardId: string,
     cardPack_id: string,
+    packCover?: string,
 ): void => {
     switch (modalType) {
         case 'addPack':
-            dispatch(addCardsPack({ name: values.name, private: values.private }));
+            dispatch(
+                addCardsPack({
+                    name: values.name,
+                    private: values.private,
+                    deckCover: packCover,
+                }),
+            );
             break;
         case 'editPack':
-            dispatch(updateCardsPack(packId as string, values.name, values.private));
+            dispatch(
+                updateCardsPack(packId as string, values.name, values.private, packCover),
+            );
             break;
         case 'removePack':
             dispatch(removeCardsPack(packId as string));

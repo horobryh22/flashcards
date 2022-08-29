@@ -33,7 +33,7 @@ const initialState: CardsStateType = {
         max: 120,
         sortCards: '0updated',
         page: 1,
-        pageCount: 6,
+        pageCount: 5,
     },
 };
 

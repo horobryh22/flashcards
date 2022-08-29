@@ -14,6 +14,7 @@ import {
     setCardPageCountAC,
     setCardsPackIdAC,
     setModalTypeAC,
+    setPackCoverAC,
 } from 'store/actions';
 import { fetchCards } from 'store/middlewares';
 import { selectAuthUserId } from 'store/selectors';
@@ -46,6 +47,7 @@ export const ActionImages = ({ card }: ActionImagesType): ReturnComponentType =>
     const updatePack = (e: React.MouseEvent<HTMLElement>): void => {
         e.preventDefault();
         e.stopPropagation();
+        dispatch(setPackCoverAC(card.deckCover || ''));
         dispatch(
             setModalTypeAC({
                 packPrivate,

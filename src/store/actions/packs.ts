@@ -3,6 +3,7 @@ import {
     SET_CARDS_RANGE,
     SET_CURRENT_PAGE,
     SET_IS_PACKS_FETCHED,
+    SET_PACK_COVER,
     SET_PACK_NAME,
     SET_PAGE_COUNT,
     SET_SEARCH_PARAMS,
@@ -14,6 +15,7 @@ import {
     SetCardsRangeType,
     SetCurrentPageType,
     SetIsPacksFetched,
+    SetPackCover,
     SetPackNameType,
     SetPageCountType,
     SetSearchParamsType,
@@ -86,5 +88,12 @@ export const setIsPacksFetched = (isPacksFetched: boolean): SetIsPacksFetched =>
     return {
         type: SET_IS_PACKS_FETCHED,
         payload: { isPacksFetched },
+    } as const;
+};
+
+export const setPackCoverAC = (packCover: string): SetPackCover => {
+    return {
+        type: SET_PACK_COVER,
+        payload: { packCover },
     } as const;
 };

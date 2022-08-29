@@ -72,9 +72,20 @@ export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentTyp
 
                     return (
                         <TableCell key={column.id} align={column.align}>
-                            {column.id !== 'actions' ? (
+                            {column.id !== 'actions' && column.id !== 'name' && (
                                 <div className={classes.nameWrapper}>{value}</div>
-                            ) : (
+                            )}
+                            {column.id === 'name' && (
+                                <div className={classes.nameContainer}>
+                                    <div className={classes.coverWrapper}>
+                                        {row.deckCover && (
+                                            <img src={row.deckCover} alt="cover" />
+                                        )}
+                                    </div>
+                                    <div className={classes.nameWrapper}>{value}</div>
+                                </div>
+                            )}
+                            {column.id === 'actions' && (
                                 <NavLink
                                     to=""
                                     className={classes.actionsWrapper}

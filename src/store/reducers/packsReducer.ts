@@ -5,6 +5,7 @@ import {
     SET_CARDS_RANGE,
     SET_CURRENT_PAGE,
     SET_IS_PACKS_FETCHED,
+    SET_PACK_COVER,
     SET_PACK_NAME,
     SET_PAGE_COUNT,
     SET_SEARCH_PARAMS,
@@ -22,9 +23,10 @@ const initialState: PacksStateType = {
         max: 120,
         sortPacks: '0updated',
         page: 1,
-        pageCount: 6,
+        pageCount: 5,
         user_id: '',
     },
+    packCover: '',
     cardPacksTotalCount: 0,
     isInitialized: false,
 };
@@ -93,6 +95,8 @@ export const packsReducer = (
             };
         case SET_IS_PACKS_FETCHED:
             return { ...state, isPacksFetched: action.payload.isPacksFetched };
+        case SET_PACK_COVER:
+            return { ...state, packCover: action.payload.packCover };
         default:
             return state;
     }

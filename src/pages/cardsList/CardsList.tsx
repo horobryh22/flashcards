@@ -35,7 +35,7 @@ import {
 } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
-const CARDS_PAGE_COUNT_VALUES = [4, 6, 8, 10];
+const CARDS_PAGE_COUNT_VALUES = [5, 10, 15, 20, 25];
 
 export const CardsList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();

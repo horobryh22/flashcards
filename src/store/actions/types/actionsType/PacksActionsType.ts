@@ -3,6 +3,7 @@ import {
     setCardsRangeAC,
     setCurrentPageAC,
     setIsPacksFetched,
+    setPackCoverAC,
     setPackNameAC,
     setPageCountAC,
     setSearchParamsAC,
@@ -19,4 +20,5 @@ export type PacksActionsType =
     | ReturnType<typeof setCardsRangeAC>
     | ReturnType<typeof setSearchUserIdAC>
     | ReturnType<typeof setSearchParamsAC>
-    | ReturnType<typeof setIsPacksFetched>;
+    | ReturnType<typeof setIsPacksFetched>
+    | ReturnType<typeof setPackCoverAC>;

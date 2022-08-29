@@ -52,6 +52,7 @@ beforeEach(() => {
             isAvatarBroken: false,
         },
         packs: {
+            packCover: '',
             isPacksFetched: false,
             cardPacks: [],
             searchParams: {

@@ -33,7 +33,6 @@ import {
     SortTypes,
     UpdatedGradeType,
 } from 'api/types';
-import { Nullable } from 'types';
 
 export const setCardsAC = (data: GetCardsResponseType): SetCardsType => {
     return {
@@ -87,7 +86,7 @@ export const clearPackUserIdAC = (): ClearPackUserId => {
 
 export const updatePackDataAC = (
     name: string,
-    deckCover: Nullable<string>,
+    deckCover: string,
     packPrivate: boolean,
 ): UpdatePackDataType => {
     return {

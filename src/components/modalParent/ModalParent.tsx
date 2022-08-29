@@ -13,7 +13,7 @@ import { CardModal, ModalContent } from 'components';
 import { PackModal } from 'components/modals';
 import { DELAY } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { setModalStateAC } from 'store/actions';
+import { setModalStateAC, setPackCoverAC } from 'store/actions';
 import {
     selectButtonName,
     selectModalTitle,
@@ -44,6 +44,7 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
     const cardAnswer = useTypedSelector(state => state.app.modal.cardAnswer);
     const cardId = useTypedSelector(state => state.app.modal.cardId);
     const cardsPack_id = useTypedSelector(state => state.cards.searchParams.cardsPack_id);
+    const packCover = useTypedSelector(state => state.packs.packCover);
 
     const deletingPack =
         packTitle && packTitle.length > MAX_STRING_LENGTH
@@ -93,6 +94,7 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
             values,
             cardId as string,
             cardsPack_id,
+            packCover,
         );
 
         TIMER = setTimeout(() => {
@@ -124,7 +126,10 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
     }, []);
 
     useEffect(() => {
-        if (!open) reset();
+        if (!open) {
+            reset();
+            dispatch(setPackCoverAC(''));
+        }
     }, [open]);
 
     if (open) {

@@ -16,6 +16,7 @@ const defaultPage = 50;
 
 beforeEach(() => {
     startState = {
+        packCover: '',
         isPacksFetched: false,
         cardPacks: [{} as PackType],
         cardPacksTotalCount: 100,

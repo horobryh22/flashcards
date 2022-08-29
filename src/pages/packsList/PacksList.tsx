@@ -28,7 +28,7 @@ import {
 } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
-const PACKS_PAGE_COUNT_VALUES = [2, 4, 6, 8, 10];
+const PACKS_PAGE_COUNT_VALUES = [5, 10, 15, 20, 25];
 
 export const PacksList = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
