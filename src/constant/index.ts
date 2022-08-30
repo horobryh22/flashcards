@@ -6,3 +6,4 @@ export { DELAY } from './delay';
 export { MAX_CARDS_COUNT } from './maxCardsCount';
 export { DEFAULT_PAGE_COUNT } from './defaultPageCount';
 export { ROW_HEIGHT } from './table/rowHeight';
+export { MAX_FILE_SIZE } from './maxFileSize';

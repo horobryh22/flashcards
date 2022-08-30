@@ -7,19 +7,19 @@ import { Controller } from 'react-hook-form';
 import classes from './PackModal.module.css';
 import { PackModalType } from './types';
 
+import { InputTypeFile } from 'components/inputTypeFile/InputTypeFile';
+import { MAX_FILE_SIZE } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setPackCoverAC } from 'store/actions';
 import { ReturnComponentType } from 'types';
 import { convertFileToBase64 } from 'utils';
-
-const MAX_FILE_SIZE = 4000000;
 
 export const PackModal = ({ control, getValues }: PackModalType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const packCover = useTypedSelector(state => state.packs.packCover);
 
-    const uploadHandler = (e: ChangeEvent<HTMLInputElement>): void => {
+    const handleUpload = (e: ChangeEvent<HTMLInputElement>): void => {
         if (e.target.files && e.target.files.length) {
             const file = e.target.files[0];
 
@@ -39,17 +39,16 @@ export const PackModal = ({ control, getValues }: PackModalType): ReturnComponen
                 </div>
             )}
             <div className={classes.button}>
-                <label htmlFor="input-type-file">
-                    <input
-                        id="input-type-file"
-                        type="file"
-                        onChange={uploadHandler}
-                        style={{ display: 'none' }}
-                    />
-                    <Button component="span" variant="contained" endIcon={<UploadIcon />}>
+                <InputTypeFile uploadHandler={handleUpload}>
+                    <Button
+                        component="span"
+                        variant="contained"
+                        fullWidth
+                        endIcon={<UploadIcon />}
+                    >
                         UPLOAD COVER
                     </Button>
-                </label>
+                </InputTypeFile>
             </div>
             <Controller
                 name="name"

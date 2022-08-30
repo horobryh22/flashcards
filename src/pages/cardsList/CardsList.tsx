@@ -3,8 +3,6 @@ import React, { useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 
-import classes from './CardsList.module.css';
-
 import { CardsSearchParams, SortTypes } from 'api/types';
 import {
     ArrowBackTo,
@@ -12,6 +10,7 @@ import {
     CardsTopContent,
     CustomPagination,
     EmptyPack,
+    PackCover,
     Search,
 } from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
@@ -137,11 +136,7 @@ export const CardsList = (): ReturnComponentType => {
                         learnPack={learnPack}
                         style={{ marginTop: '50px', marginBottom: '0px' }}
                     />
-                    {packCover && isBase64(packCover) && (
-                        <div className={classes.coverContainer}>
-                            <img src={packCover} alt="cover" />
-                        </div>
-                    )}
+                    {isBase64(packCover as string) && <PackCover />}
                     <Search
                         onChangeValue={handleValueChange}
                         uriParam="cardQuestion"
