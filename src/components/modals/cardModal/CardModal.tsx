@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 
 import UploadIcon from '@mui/icons-material/Upload';
 import { Button, MenuItem, Select, TextField } from '@mui/material';
@@ -17,9 +17,7 @@ import { convertFileToBase64, isBase64 } from 'utils';
 export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const modalQuestionFormat = useTypedSelector(state => state.app.modal.questionFormat);
-
-    const [questionFormat, setQuestionFormat] = useState(modalQuestionFormat);
+    const questionFormat = useTypedSelector(state => state.app.modal.questionFormat);
 
     const modalQuestionImg = useTypedSelector(state => state.app.modal.questionImg);
     const modalAnswerImg = useTypedSelector(state => state.app.modal.answerImg);
@@ -60,10 +58,6 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
             dispatch(setQuestionFormatAC('text'));
         }
     };
-
-    useEffect(() => {
-        setQuestionFormat(modalQuestionFormat);
-    }, [modalQuestionFormat]);
 
     return (
         <div className={classes.modalBody}>

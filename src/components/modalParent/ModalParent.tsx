@@ -13,7 +13,12 @@ import { CardModal, ModalContent } from 'components';
 import { PackModal } from 'components/modals';
 import { DELAY } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { setModalStateAC, setPackCoverAC, setQuestionFormatAC } from 'store/actions';
+import {
+    setModalStateAC,
+    setModalTypeAC,
+    setPackCoverAC,
+    setQuestionFormatAC,
+} from 'store/actions';
 import {
     selectButtonName,
     selectModalTitle,
@@ -84,7 +89,8 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
         editCard: <CardModal control={control} />,
         removeCard: (
             <div className={classes.modalContent}>
-                Do you really want to remove <b>{deletingCard}</b>?
+                Do you really want to remove{' '}
+                <b>{deletingCard !== 'no question' ? deletingCard : 'this card'}</b>?
             </div>
         ),
     };
@@ -142,6 +148,17 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
             reset();
             dispatch(setPackCoverAC(''));
             dispatch(setQuestionFormatAC('text'));
+            dispatch(
+                setModalTypeAC({
+                    questionImg: '',
+                    questionFormat: 'text',
+                    answerImg: '',
+                    isOpen: false,
+                    buttonName: '',
+                    modalTitle: '',
+                    type: '',
+                }),
+            );
         }
     }, [open]);
 
