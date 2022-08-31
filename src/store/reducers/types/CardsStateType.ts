@@ -11,4 +11,6 @@ export type CardsStateType = {
     packPrivate: boolean;
     packDeckCover: Nullable<string>;
     isPackDeleted: boolean;
+    questionCover: string;
+    answerCover: string;
 };

@@ -8,12 +8,20 @@ import { AppThunkType } from 'store/types';
 import { errorHandler } from 'utils';
 
 export const updateCard =
-    (question: string, answer: string, _id: string): AppThunkType =>
+    (
+        question: string,
+        answer: string,
+        _id: string,
+        answerImg: string,
+        questionImg: string,
+    ): AppThunkType =>
     async dispatch => {
         try {
             dispatch(setAppStatusAC(REQUEST_STATUS.LOADING));
 
-            await cardsAPI.updateCard({ card: { answer, question, _id } });
+            await cardsAPI.updateCard({
+                card: { answer, question, _id, answerImg, questionImg },
+            });
 
             dispatch(fetchCards());
         } catch (e) {

@@ -51,7 +51,7 @@ export const Profile = (): ReturnComponentType => {
                 <span className={classes.title}>Personal Information</span>
                 <div className={classes.avatar}>
                     <UserAvatar height={100} width={100} />
-                    <InputTypeFile uploadHandler={handleUpload}>
+                    <InputTypeFile uploadHandler={handleUpload} id="profile">
                         <div className={classes.avatarIcon}>
                             <img src={camera} alt="camera" />
                         </div>

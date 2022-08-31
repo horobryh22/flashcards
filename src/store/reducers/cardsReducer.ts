@@ -3,6 +3,7 @@ import { CardsStateType } from './types';
 import { CardsActionsType } from 'store/actions';
 import {
     CLEAR_PACK_USER_ID,
+    SET_ANSWER_COVER,
     SET_CARD_CURRENT_PAGE,
     SET_CARD_PAGE_COUNT,
     SET_CARD_QUESTION,
@@ -11,6 +12,7 @@ import {
     SET_CARDS_PACK_NAME,
     SET_CARDS_SEARCH_PARAMS,
     SET_IS_PACK_DELETED,
+    SET_QUESTION_COVER,
     SET_SORT_CARDS,
     SET_UPDATED_CARD_GRADE,
     UPDATE_PACK_DATA,
@@ -25,6 +27,8 @@ const initialState: CardsStateType = {
     packName: '',
     packPrivate: false,
     packDeckCover: '',
+    questionCover: '',
+    answerCover: '',
     searchParams: {
         cardAnswer: '',
         cardQuestion: '',
@@ -125,6 +129,10 @@ export const cardsReducer = (
                         : card,
                 ),
             };
+        case SET_QUESTION_COVER:
+            return { ...state, questionCover: action.payload.cover };
+        case SET_ANSWER_COVER:
+            return { ...state, answerCover: action.payload.cover };
         default:
             return state;
     }

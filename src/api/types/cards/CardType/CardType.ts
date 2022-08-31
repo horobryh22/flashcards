@@ -4,6 +4,8 @@ export type CardType = {
     user_id: string;
     answer: string;
     question: string;
+    questionImg: string;
+    answerImg: string;
     grade: number;
     shots: number;
     comments: string;

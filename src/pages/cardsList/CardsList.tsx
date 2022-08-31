@@ -136,7 +136,7 @@ export const CardsList = (): ReturnComponentType => {
                         learnPack={learnPack}
                         style={{ marginTop: '50px', marginBottom: '0px' }}
                     />
-                    {isBase64(packCover as string) && <PackCover />}
+                    {packCover && isBase64(packCover) && <PackCover />}
                     <Search
                         onChangeValue={handleValueChange}
                         uriParam="cardQuestion"

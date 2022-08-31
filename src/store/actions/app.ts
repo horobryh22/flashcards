@@ -4,6 +4,7 @@ import {
     SET_IS_INITIALIZED,
     SET_MODAL_STATE,
     SET_MODAL_TYPE,
+    SET_QUESTION_FORMAT,
 } from './constants';
 import {
     SetAppInfo,
@@ -11,6 +12,7 @@ import {
     SetIsInitializedType,
     SetModalState,
     SetModalType,
+    SetQuestionFormat,
 } from './types';
 
 import { REQUEST_STATUS } from 'enums';
@@ -48,5 +50,14 @@ export const setAppInfoAC = (info: Nullable<string>): SetAppInfo => {
     return {
         type: SET_APP_INFO,
         payload: { info },
+    } as const;
+};
+
+export const setQuestionFormatAC = (format: 'text' | 'image'): SetQuestionFormat => {
+    return {
+        type: SET_QUESTION_FORMAT,
+        payload: {
+            format,
+        },
     } as const;
 };

@@ -13,6 +13,7 @@ export {
     setModalTypeAC,
     setModalStateAC,
     setAppInfoAC,
+    setQuestionFormatAC,
 } from './app';
 export {
     setCardPacksAC,
@@ -39,6 +40,8 @@ export {
     setSortCardsAC,
     setCardsPackNameAC,
     setUpdatedCardGradeAC,
+    setAnswerCoverAC,
+    setQuestionCoverAC,
 } from './cards';
 export type {
     AuthActionsType,

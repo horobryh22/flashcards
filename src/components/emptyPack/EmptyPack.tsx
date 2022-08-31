@@ -34,7 +34,7 @@ export const EmptyPack = ({ title, isMyPack }: EmptyPackType): ReturnComponentTy
                 isButtonNeed={false}
                 style={{ marginTop: '50px', marginBottom: '0px' }}
             />
-            {isBase64(packCover as string) && <PackCover />}
+            {packCover && isBase64(packCover) && <PackCover />}
             <div className={classes.wrapper}>
                 <span className={classes.description}>
                     This pack is empty. Click add new card to fill this pack

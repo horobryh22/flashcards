@@ -17,7 +17,10 @@ export const chooseAction = (
     values: FormValuesType,
     cardId: string,
     cardPack_id: string,
-    packCover?: string,
+    packCover: string,
+    questionCover: string,
+    answerCover: string,
+    questionFormat: 'text' | 'image',
 ): void => {
     switch (modalType) {
         case 'addPack':
@@ -38,13 +41,36 @@ export const chooseAction = (
             dispatch(removeCardsPack(packId as string));
             break;
         case 'addCard':
-            dispatch(addCard(values.question, values.answer, cardPack_id));
+            dispatch(
+                addCard(
+                    values.question,
+                    values.answer,
+                    cardPack_id,
+                    answerCover,
+                    questionCover,
+                ),
+            );
             break;
         case 'removeCard':
             dispatch(removeCard(cardId));
             break;
         case 'editCard':
-            dispatch(updateCard(values.question, values.answer, cardId));
+            if (questionFormat === 'text') {
+                dispatch(
+                    updateCard(values.question, values.answer, cardId, 'none', 'none'),
+                );
+            }
+            if (questionFormat === 'image') {
+                dispatch(
+                    updateCard(
+                        'no question',
+                        'no answer',
+                        cardId,
+                        answerCover,
+                        questionCover,
+                    ),
+                );
+            }
             break;
         default:
     }

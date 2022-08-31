@@ -1,5 +1,6 @@
 import {
     CLEAR_PACK_USER_ID,
+    SET_ANSWER_COVER,
     SET_CARD_CURRENT_PAGE,
     SET_CARD_PAGE_COUNT,
     SET_CARD_QUESTION,
@@ -8,12 +9,14 @@ import {
     SET_CARDS_PACK_NAME,
     SET_CARDS_SEARCH_PARAMS,
     SET_IS_PACK_DELETED,
+    SET_QUESTION_COVER,
     SET_SORT_CARDS,
     SET_UPDATED_CARD_GRADE,
     UPDATE_PACK_DATA,
 } from './constants';
 import {
     ClearPackUserId,
+    SetAnswerCover,
     SetCardCurrentPage,
     SetCardPageCount,
     SetCardQuestion,
@@ -22,6 +25,7 @@ import {
     SetCardsSearchParams,
     SetCardsType,
     SetIsPackDeleted,
+    SetQuestionCover,
     SetSortCards,
     SetUpdatedCardGrade,
     UpdatePackDataType,
@@ -133,6 +137,24 @@ export const setUpdatedCardGradeAC = (
         type: SET_UPDATED_CARD_GRADE,
         payload: {
             updatedGrade,
+        },
+    } as const;
+};
+
+export const setQuestionCoverAC = (cover: string): SetQuestionCover => {
+    return {
+        type: SET_QUESTION_COVER,
+        payload: {
+            cover,
+        },
+    } as const;
+};
+
+export const setAnswerCoverAC = (cover: string): SetAnswerCover => {
+    return {
+        type: SET_ANSWER_COVER,
+        payload: {
+            cover,
         },
     } as const;
 };

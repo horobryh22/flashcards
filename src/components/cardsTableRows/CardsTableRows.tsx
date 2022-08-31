@@ -8,6 +8,7 @@ import { CardsTableRowsType } from './types';
 import { RatingStars } from 'components';
 import { CARDS_COLUMNS } from 'constant';
 import { ReturnComponentType } from 'types';
+import { isBase64 } from 'utils';
 
 export const CardsTableRows = ({ rows }: CardsTableRowsType): ReturnComponentType => {
     const mappedRows = rows.map(row => {
@@ -15,6 +16,15 @@ export const CardsTableRows = ({ rows }: CardsTableRowsType): ReturnComponentTyp
             <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
                 {CARDS_COLUMNS.map(column => {
                     let value;
+                    let cover;
+
+                    if (column.id === 'question') {
+                        cover = row.questionImg;
+                    }
+
+                    if (column.id === 'answer') {
+                        cover = row.answerImg;
+                    }
 
                     if (column.id !== 'grade') {
                         value = row[column.id];
@@ -28,11 +38,14 @@ export const CardsTableRows = ({ rows }: CardsTableRowsType): ReturnComponentTyp
 
                     return (
                         <TableCell key={column.id} align={column.align}>
-                            {column.id !== 'grade' ? (
-                                <div className={classes.nameWrapper}>{value}</div>
+                            {cover && isBase64(cover) ? (
+                                <div className={classes.coverContainer}>
+                                    <img src={cover} alt="cover" />
+                                </div>
                             ) : (
-                                <RatingStars card={row} />
+                                <div className={classes.nameWrapper}>{value}</div>
                             )}
+                            {column.id === 'grade' && <RatingStars card={row} />}
                         </TableCell>
                     );
                 })}

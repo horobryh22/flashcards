@@ -7,14 +7,15 @@ import { ReturnComponentType } from 'types';
 export const InputTypeFile = ({
     children,
     uploadHandler,
+    id,
 }: InputTypeFileType): ReturnComponentType => {
     return (
-        <label htmlFor="input-file">
+        <label htmlFor={id}>
             <input
                 type="file"
                 onChange={uploadHandler}
                 style={{ display: 'none' }}
-                id="input-file"
+                id={id}
             />
             {children}
         </label>

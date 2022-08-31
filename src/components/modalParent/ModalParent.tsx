@@ -13,7 +13,7 @@ import { CardModal, ModalContent } from 'components';
 import { PackModal } from 'components/modals';
 import { DELAY } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { setModalStateAC, setPackCoverAC } from 'store/actions';
+import { setModalStateAC, setPackCoverAC, setQuestionFormatAC } from 'store/actions';
 import {
     selectButtonName,
     selectModalTitle,
@@ -34,6 +34,7 @@ const MAX_STRING_LENGTH = 19;
 export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
+    const questionFormat = useTypedSelector(state => state.app.modal.questionFormat);
     const modalType = useTypedSelector(selectModalType);
     const modalTitle = useTypedSelector(selectModalTitle);
     const buttonName = useTypedSelector(selectButtonName);
@@ -45,6 +46,8 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
     const cardId = useTypedSelector(state => state.app.modal.cardId);
     const cardsPack_id = useTypedSelector(state => state.cards.searchParams.cardsPack_id);
     const packCover = useTypedSelector(state => state.packs.packCover);
+    const questionCover = useTypedSelector(state => state.cards.questionCover);
+    const answerCover = useTypedSelector(state => state.cards.answerCover);
 
     const deletingPack =
         packTitle && packTitle.length > MAX_STRING_LENGTH
@@ -95,6 +98,9 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
             cardId as string,
             cardsPack_id,
             packCover,
+            questionCover,
+            answerCover,
+            questionFormat as 'text' | 'image',
         );
 
         TIMER = setTimeout(() => {
@@ -109,8 +115,14 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
         }
 
         if (modalType === 'editCard') {
-            setValue('question', cardQuestion as string);
-            setValue('answer', cardAnswer as string);
+            setValue(
+                'question',
+                cardQuestion && cardQuestion !== 'no question' ? cardQuestion : '',
+            );
+            setValue(
+                'answer',
+                cardAnswer && cardAnswer !== 'no answer' ? cardAnswer : '',
+            );
         }
     }, [packTitle, modalType, packPrivate, cardQuestion, cardAnswer, open]);
 
@@ -129,6 +141,7 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
         if (!open) {
             reset();
             dispatch(setPackCoverAC(''));
+            dispatch(setQuestionFormatAC('text'));
         }
     }, [open]);
 

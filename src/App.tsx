@@ -5,7 +5,7 @@ import { Backdrop, CircularProgress } from '@mui/material';
 import { Header, ModalParent, RoutesApp, SimpleSnackBar, SnackBar } from 'components';
 import { REQUEST_STATUS } from 'enums';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { setModalStateAC } from 'store/actions';
+import { setModalTypeAC } from 'store/actions';
 import { initializedApp } from 'store/middlewares';
 import { selectAppStatus, selectIsInitialized, selectIsOpen } from 'store/selectors';
 import { ReturnComponentType } from 'types';
@@ -22,7 +22,18 @@ const App = (): ReturnComponentType => {
     }, []);
 
     const onClose = (): void => {
-        dispatch(setModalStateAC(false));
+        // dispatch(setModalStateAC(false));
+        dispatch(
+            setModalTypeAC({
+                questionFormat: 'text',
+                answerImg: '',
+                questionImg: '',
+                isOpen: false,
+                type: '',
+                modalTitle: '',
+                buttonName: '',
+            }),
+        );
     };
 
     if (!isInitialized) {

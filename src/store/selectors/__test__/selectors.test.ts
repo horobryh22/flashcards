@@ -68,6 +68,8 @@ beforeEach(() => {
             isInitialized: false,
         },
         cards: {
+            questionCover: '',
+            answerCover: '',
             isPackDeleted: false,
             packPrivate: false,
             packDeckCover: null,

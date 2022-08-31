@@ -36,5 +36,6 @@ export { RadioButton } from './radioButton/RadioButton';
 export { AnswerContent } from './answerContent/AnswerContent';
 export { SimpleSnackBar } from './simpleSnackBar/SimpleSnackBar';
 export { PackCover } from './packCover/PackCover';
+export { Cover } from './cover/Cover';
 
 export type { FormValuesType } from './modalParent/types';

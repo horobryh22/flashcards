@@ -4,6 +4,7 @@ import {
     setIsInitializedAC,
     setModalStateAC,
     setModalTypeAC,
+    setQuestionFormatAC,
 } from 'store/actions';
 
 export type AppActionsType =
@@ -11,4 +12,5 @@ export type AppActionsType =
     | ReturnType<typeof setIsInitializedAC>
     | ReturnType<typeof setModalTypeAC>
     | ReturnType<typeof setModalStateAC>
-    | ReturnType<typeof setAppInfoAC>;
+    | ReturnType<typeof setAppInfoAC>
+    | ReturnType<typeof setQuestionFormatAC>;

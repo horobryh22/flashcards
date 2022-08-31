@@ -12,6 +12,7 @@ import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setModalTypeAC } from 'store/actions';
 import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
+import { isBase64 } from 'utils';
 
 export type RatingStarsType = {
     card: CardType;
@@ -42,6 +43,12 @@ export const RatingStars = ({ card }: RatingStarsType): ReturnComponentType => {
         e.stopPropagation();
         dispatch(
             setModalTypeAC({
+                questionImg: card.questionImg,
+                answerImg: card.answerImg,
+                questionFormat:
+                    isBase64(card.questionImg) && isBase64(card.answerImg)
+                        ? 'image'
+                        : 'text',
                 cardId: card._id,
                 cardQuestion: card.question,
                 cardAnswer: card.answer,

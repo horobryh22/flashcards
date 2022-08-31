@@ -10,6 +10,8 @@ type UpdatedCardType = {
     question?: string;
     grade?: number;
     shots?: number;
+    questionImg?: string;
+    answerImg?: string;
     comments?: string;
     type?: string;
     rating?: number;

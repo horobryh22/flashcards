@@ -7,6 +7,7 @@ import { Controller } from 'react-hook-form';
 import classes from './PackModal.module.css';
 import { PackModalType } from './types';
 
+import { Cover } from 'components/cover/Cover';
 import { InputTypeFile } from 'components/inputTypeFile/InputTypeFile';
 import { MAX_FILE_SIZE } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
@@ -33,13 +34,9 @@ export const PackModal = ({ control, getValues }: PackModalType): ReturnComponen
 
     return (
         <div className={classes.modalBody}>
-            {packCover && (
-                <div className={classes.coverContainer}>
-                    <img className={classes.cover} src={packCover} alt="cover" />
-                </div>
-            )}
+            <Cover cover={packCover} />
             <div className={classes.button}>
-                <InputTypeFile uploadHandler={handleUpload}>
+                <InputTypeFile uploadHandler={handleUpload} id="pack-cover">
                     <Button
                         component="span"
                         variant="contained"

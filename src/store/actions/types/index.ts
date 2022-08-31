@@ -36,3 +36,6 @@ export type { SetCardsPackName } from './cards/SetCardsPackName';
 export type { SetUpdatedCardGrade } from './cards/SetUpdatedCardGrade';
 export type { SetAppInfo } from './app/SetAppInfo';
 export type { SetPackCover } from './packs/SetPackCover';
+export type { SetQuestionCover } from './cards/SetQuestionCover';
+export type { SetAnswerCover } from './cards/SetAnswerCover';
+export type { SetQuestionFormat } from './app/SetQuestionFormat';

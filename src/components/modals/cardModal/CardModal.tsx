@@ -1,24 +1,31 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import UploadIcon from '@mui/icons-material/Upload';
-import { Button, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
+import { Button, MenuItem, Select, TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
 
 import classes from './CardModal.module.css';
 import { CardModalType } from './types';
 
-import { InputTypeFile } from 'components/inputTypeFile/InputTypeFile';
-import { useAppDispatch } from 'hooks';
-import { setPackCoverAC } from 'store/actions';
+import { Cover, InputTypeFile } from 'components';
+import { MAX_FILE_SIZE } from 'constant';
+import { useAppDispatch, useTypedSelector } from 'hooks';
+import { setAnswerCoverAC, setQuestionCoverAC, setQuestionFormatAC } from 'store/actions';
 import { ReturnComponentType } from 'types';
-import { convertFileToBase64 } from 'utils';
-
-const MAX_FILE_SIZE = 4000000;
+import { convertFileToBase64, isBase64 } from 'utils';
 
 export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const [questionFormat, setQuestionFormat] = React.useState('text');
+    const modalQuestionFormat = useTypedSelector(state => state.app.modal.questionFormat);
+
+    const [questionFormat, setQuestionFormat] = useState(modalQuestionFormat);
+
+    const modalQuestionImg = useTypedSelector(state => state.app.modal.questionImg);
+    const modalAnswerImg = useTypedSelector(state => state.app.modal.answerImg);
+
+    const questionCover = useTypedSelector(state => state.cards.questionCover);
+    const answerCover = useTypedSelector(state => state.cards.answerCover);
 
     const handleAnswerUpload = (e: ChangeEvent<HTMLInputElement>): void => {
         if (e.target.files && e.target.files.length) {
@@ -26,7 +33,7 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
 
             if (file.size < MAX_FILE_SIZE) {
                 convertFileToBase64(file, (file64: string) => {
-                    dispatch(setPackCoverAC(file64));
+                    dispatch(setAnswerCoverAC(file64));
                 });
             }
         }
@@ -38,26 +45,30 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
 
             if (file.size < MAX_FILE_SIZE) {
                 convertFileToBase64(file, (file64: string) => {
-                    dispatch(setPackCoverAC(file64));
+                    dispatch(setQuestionCoverAC(file64));
                 });
             }
         }
     };
 
-    const handleChange = (event: SelectChangeEvent): void => {
-        setQuestionFormat(event.target.value);
+    const handleChange = (): void => {
+        if (questionFormat === 'text') {
+            dispatch(setQuestionFormatAC('image'));
+        }
+
+        if (questionFormat === 'image') {
+            dispatch(setQuestionFormatAC('text'));
+        }
     };
+
+    useEffect(() => {
+        setQuestionFormat(modalQuestionFormat);
+    }, [modalQuestionFormat]);
 
     return (
         <div className={classes.modalBody}>
             <span className={classes.helperText}>Choose a question format</span>
-            <Select
-                fullWidth
-                defaultValue="text"
-                size="small"
-                onChange={handleChange}
-                value={questionFormat}
-            >
+            <Select fullWidth size="small" onChange={handleChange} value={questionFormat}>
                 <MenuItem value="text">Text</MenuItem>
                 <MenuItem value="image">Image</MenuItem>
             </Select>
@@ -105,8 +116,16 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
                 </>
             ) : (
                 <>
+                    <Cover
+                        cover={
+                            questionCover ||
+                            (isBase64(modalQuestionImg as string)
+                                ? (modalQuestionImg as string)
+                                : null)
+                        }
+                    />
                     <div className={classes.button}>
-                        <InputTypeFile uploadHandler={handleQuestionUpload}>
+                        <InputTypeFile uploadHandler={handleQuestionUpload} id="question">
                             <Button
                                 component="span"
                                 variant="contained"
@@ -117,8 +136,16 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
                             </Button>
                         </InputTypeFile>
                     </div>
+                    <Cover
+                        cover={
+                            answerCover ||
+                            (isBase64(modalAnswerImg as string)
+                                ? (modalAnswerImg as string)
+                                : null)
+                        }
+                    />
                     <div className={classes.button}>
-                        <InputTypeFile uploadHandler={handleAnswerUpload}>
+                        <InputTypeFile uploadHandler={handleAnswerUpload} id="answer">
                             <Button
                                 component="span"
                                 variant="contained"
