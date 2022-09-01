@@ -8,11 +8,11 @@ import { AppThunkType } from 'store/types';
 import { errorHandler } from 'utils';
 
 export const updateUserData =
-    ({ name, avatar }: UpdateUserDataType): AppThunkType =>
+    (userData: UpdateUserDataType): AppThunkType =>
     async dispatch => {
         try {
             dispatch(setAppStatusAC(REQUEST_STATUS.LOADING));
-            const data = await userAPI.updateUserData({ name, avatar });
+            const data = await userAPI.updateUserData(userData);
 
             dispatch(setAuthUserDataAC(data.data.updatedUser));
         } catch (e) {

@@ -7,8 +7,8 @@ import { Controller } from 'react-hook-form';
 import classes from './PackModal.module.css';
 import { PackModalType } from './types';
 
-import { Cover } from 'components/cover/Cover';
-import { InputTypeFile } from 'components/inputTypeFile/InputTypeFile';
+import { Cover } from 'components/common/cover/Cover';
+import { InputTypeFile } from 'components/common/inputTypeFile/InputTypeFile';
 import { MAX_FILE_SIZE } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setPackCoverAC } from 'store/actions';

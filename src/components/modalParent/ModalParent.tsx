@@ -14,9 +14,11 @@ import { PackModal } from 'components/modals';
 import { DELAY } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import {
+    setAnswerCoverAC,
     setModalStateAC,
     setModalTypeAC,
     setPackCoverAC,
+    setQuestionCoverAC,
     setQuestionFormatAC,
 } from 'store/actions';
 import {
@@ -148,6 +150,8 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
             reset();
             dispatch(setPackCoverAC(''));
             dispatch(setQuestionFormatAC('text'));
+            dispatch(setQuestionCoverAC(''));
+            dispatch(setAnswerCoverAC(''));
             dispatch(
                 setModalTypeAC({
                     questionImg: '',

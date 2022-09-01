@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import classes from './CheckEmail.module.css';
 
 import email from 'assets/images/email.svg';
-import { StyledButton } from 'components/header/styles';
+import { StyledButton } from 'components/common/header/styles';
 import { ReturnComponentType } from 'types';
 
 export const CheckEmail = (): ReturnComponentType => {

@@ -6,7 +6,7 @@ import classes from './CardsTopContent.module.css';
 import { CardsTopContentType } from './types';
 
 import actionsGroup from 'assets/images/actionsGroup.svg';
-import { StyledButton } from 'components/header/styles';
+import { StyledButton } from 'components/common/header/styles';
 import { PackMenu } from 'components/menus/PackMenu';
 import { useTypedSelector } from 'hooks';
 import { selectAuthUserId, selectPackUserId } from 'store/selectors';

@@ -4,7 +4,7 @@ import classes from './ModalContent.module.css';
 import { CANCEL_BUTTON_STYLE, MAIN_BUTTON_STYLE } from './styles';
 import { ModalContentType } from './types';
 
-import { StyledButton } from 'components/header/styles';
+import { StyledButton } from 'components/common/header/styles';
 import { ReturnComponentType } from 'types';
 
 export const ModalContent = ({

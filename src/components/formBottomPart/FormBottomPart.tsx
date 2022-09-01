@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import classes from './FormBottomPart.module.css';
 import { FormBottomPartType } from './types';
 
-import { StyledButton } from 'components/header/styles';
+import { StyledButton } from 'components/common/header/styles';
 import { ReturnComponentType } from 'types';
 
 export const FormBottomPart: React.FC<FormBottomPartType> = ({

@@ -6,7 +6,7 @@ import { Navigate, useParams } from 'react-router-dom';
 
 import classes from './SetNewPassword.module.css';
 
-import { StyledButton } from 'components/header/styles';
+import { StyledButton } from 'components/common/header/styles';
 import { PASSWORD_RULES } from 'constant';
 import { useAppDispatch, useTypedSelector, useVisibility } from 'hooks';
 import { setNewPassword } from 'store/middlewares';

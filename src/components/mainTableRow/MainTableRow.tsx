@@ -4,23 +4,13 @@ import { ArrowDropDown } from '@mui/icons-material';
 import { TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
-import { OrderDirectionType } from './types';
+import { MainTableRowType, OrderDirectionType } from './types';
 
-import { CardsSortType, SortTypes } from 'api/types';
+import { CardsSortType } from 'api/types';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { selectIsPacksFetched } from 'store/selectors';
-import {
-    CardsColumnsType,
-    ColumnSortType,
-    PackColumnsType,
-    ReturnComponentType,
-} from 'types';
+import { ColumnSortType, ReturnComponentType } from 'types';
 import { handleSortType } from 'utils';
-
-export type MainTableRowType = {
-    columns: PackColumnsType[] | CardsColumnsType[];
-    currentSort: SortTypes;
-};
 
 export const MainTableRow = ({
     columns,

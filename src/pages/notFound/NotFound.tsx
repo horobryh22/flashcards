@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import classes from './NotFound.module.css';
 
 import errorImage from 'assets/images/404.svg';
-import { StyledButton } from 'components/header/styles';
+import { StyledButton } from 'components/common/header/styles';
 import { ReturnComponentType } from 'types';
 
 export const NotFound = (): ReturnComponentType => {
