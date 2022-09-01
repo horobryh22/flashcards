@@ -6,11 +6,12 @@ import Snackbar from '@mui/material/Snackbar';
 
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setAppInfoAC } from 'store/actions';
+import { selectAppInfo } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 
 export const SimpleSnackBar = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
-    const info = useTypedSelector(state => state.app.info);
+    const info = useTypedSelector(selectAppInfo);
 
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string): void => {
         if (reason === 'clickaway') {

@@ -11,19 +11,26 @@ import { Cover, InputTypeFile } from 'components';
 import { MAX_FILE_SIZE } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setAnswerCoverAC, setQuestionCoverAC, setQuestionFormatAC } from 'store/actions';
+import {
+    selectAnswerCover,
+    selectAnswerImg,
+    selectQuestionCover,
+    selectQuestionFormat,
+    selectQuestionImg,
+} from 'store/selectors';
 import { ReturnComponentType } from 'types';
 import { convertFileToBase64, isBase64 } from 'utils';
 
 export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const questionFormat = useTypedSelector(state => state.app.modal.questionFormat);
+    const questionFormat = useTypedSelector(selectQuestionFormat);
 
-    const modalQuestionImg = useTypedSelector(state => state.app.modal.questionImg);
-    const modalAnswerImg = useTypedSelector(state => state.app.modal.answerImg);
+    const modalQuestionImg = useTypedSelector(selectQuestionImg);
+    const modalAnswerImg = useTypedSelector(selectAnswerImg);
 
-    const questionCover = useTypedSelector(state => state.cards.questionCover);
-    const answerCover = useTypedSelector(state => state.cards.answerCover);
+    const questionCover = useTypedSelector(selectQuestionCover);
+    const answerCover = useTypedSelector(selectAnswerCover);
 
     const handleAnswerUpload = (e: ChangeEvent<HTMLInputElement>): void => {
         if (e.target.files && e.target.files.length) {

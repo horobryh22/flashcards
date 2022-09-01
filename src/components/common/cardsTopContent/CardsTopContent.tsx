@@ -6,8 +6,8 @@ import classes from './CardsTopContent.module.css';
 import { CardsTopContentType } from './types';
 
 import actionsGroup from 'assets/images/actionsGroup.svg';
+import { PackMenu } from 'components';
 import { StyledButton } from 'components/common/header/styles';
-import { PackMenu } from 'components/menus/PackMenu';
 import { useTypedSelector } from 'hooks';
 import { selectAuthUserId, selectPackUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';

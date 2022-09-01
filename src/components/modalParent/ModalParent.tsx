@@ -26,7 +26,7 @@ import {
     selectModalTitle,
     selectModalType,
     selectPackId,
-    selectPackPrivate,
+    selectCardsPackPrivate,
     selectPackTitle,
 } from 'store/selectors';
 import { ReturnComponentType } from 'types';
@@ -47,7 +47,7 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
     const buttonName = useTypedSelector(selectButtonName);
     const packTitle = useTypedSelector(selectPackTitle);
     const packId = useTypedSelector(selectPackId);
-    const packPrivate = useTypedSelector(selectPackPrivate);
+    const packPrivate = useTypedSelector(selectCardsPackPrivate);
     const cardQuestion = useTypedSelector(state => state.app.modal.cardQuestion);
     const cardAnswer = useTypedSelector(state => state.app.modal.cardAnswer);
     const cardId = useTypedSelector(state => state.app.modal.cardId);

@@ -9,6 +9,12 @@ import remove from 'assets/images/remove.svg';
 import { ParentMenu } from 'components';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setCardCurrentPageAC, setCardPageCountAC, setModalTypeAC } from 'store/actions';
+import {
+    selectCardsPackId,
+    selectCardsPackName,
+    selectCardsPackPrivate,
+    selectCardsTotalCount,
+} from 'store/selectors';
 import { MenuType, ReturnComponentType } from 'types';
 
 export const PackMenu = ({
@@ -20,10 +26,10 @@ export const PackMenu = ({
 
     const navigate = useNavigate();
 
-    const packTitle = useTypedSelector(state => state.cards.packName);
-    const packPrivate = useTypedSelector(state => state.cards.packPrivate);
-    const packId = useTypedSelector(state => state.cards.searchParams.cardsPack_id);
-    const cardsTotalCount = useTypedSelector(state => state.cards.cardsTotalCount);
+    const packTitle = useTypedSelector(selectCardsPackName);
+    const packPrivate = useTypedSelector(selectCardsPackPrivate);
+    const packId = useTypedSelector(selectCardsPackId);
+    const cardsTotalCount = useTypedSelector(selectCardsTotalCount);
 
     const handleEditClick = (): void => {
         dispatch(

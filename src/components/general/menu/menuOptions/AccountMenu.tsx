@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import logoutImage from 'assets/images/logout.svg';
 import profileImage from 'assets/images/profile.svg';
-import { ParentMenu } from 'components';
+import { ParentMenu } from 'components/index';
 import { useAppDispatch } from 'hooks';
 import { logout } from 'store/middlewares';
 import { MenuType, ReturnComponentType } from 'types';

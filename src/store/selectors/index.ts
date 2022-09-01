@@ -39,3 +39,12 @@ export { selectCardsTotalCount } from './cards/selectCardsTotalCount/selectCards
 export { selectIsCardsFetched } from './cards/selectIsCardsFetched/selectIsCardsFetched';
 export { selectCards } from './cards/selectCards/selectCards';
 export { selectPackCover } from './cards/selectPackCover/selectPackCover';
+export { selectSortCards } from './cards/selectSortCards/selectSortCards';
+export { selectAppInfo } from './app/selectAppInfo/selectAppInfo';
+export { selectCardsPackPrivate } from './cards/selectCardsPackPrivate/selectCardsPackPrivate';
+export { selectPacksPackCover } from './packs/selectPacksPackCover/selectPacksPackCover';
+export { selectQuestionCover } from './cards/selectQuestionCover/selectQuestionCover';
+export { selectAnswerCover } from './cards/selectAnswerCover/selectAnswerCover';
+export { selectAnswerImg } from './app/selectAnswerImg/selectAnswerImg';
+export { selectQuestionImg } from './app/selectQuestionImg/selectQuestionImg';
+export { selectQuestionFormat } from './app/selectQuestionFormat/selectQuestionFormat';

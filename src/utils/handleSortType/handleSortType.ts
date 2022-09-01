@@ -1,5 +1,5 @@
 import { CardsSortType } from 'api/types';
-import { OrderDirectionType } from 'components/mainTableRow/types';
+import { OrderDirectionType } from 'components/common/mainTableRow/types';
 import { AppDispatch } from 'store';
 import { setSortCardsAC, setSortPacksAC } from 'store/actions';
 import { ColumnSortType } from 'types';

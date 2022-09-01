@@ -1,5 +1,4 @@
 import { Paper, Skeleton, Table, TableContainer } from '@mui/material';
-import { useSearchParams } from 'react-router-dom';
 
 import classes from './PacksTable.module.css';
 
@@ -18,12 +17,9 @@ import { ReturnComponentType } from 'types';
 const MAIN_ROW_HEIGHT = 51.18;
 
 export const PacksTable = (): ReturnComponentType => {
-    const [searchParams] = useSearchParams();
-
     const pageCount = useTypedSelector(selectPageCount);
     const isPacksFetched = useTypedSelector(selectIsPacksFetched);
     const sortPacks = useTypedSelector(selectSortPacks);
-    const paramPageCount = Number(searchParams.get('pageCount')) || pageCount;
     const cardPacks = useTypedSelector(selectCardPacks);
     const cardPacksTotalCount = useTypedSelector(selectPacksTotalCount);
 
@@ -49,7 +45,11 @@ export const PacksTable = (): ReturnComponentType => {
                         animation="wave"
                         variant="rectangular"
                         width={1150}
-                        height={ROW_HEIGHT * paramPageCount + MAIN_ROW_HEIGHT}
+                        height={
+                            pageCount > 5
+                                ? ROW_HEIGHT * 5 + MAIN_ROW_HEIGHT
+                                : ROW_HEIGHT * 4 + MAIN_ROW_HEIGHT
+                        }
                     />
                 )}
             </Paper>

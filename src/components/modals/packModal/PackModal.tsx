@@ -7,18 +7,18 @@ import { Controller } from 'react-hook-form';
 import classes from './PackModal.module.css';
 import { PackModalType } from './types';
 
-import { Cover } from 'components/common/cover/Cover';
-import { InputTypeFile } from 'components/common/inputTypeFile/InputTypeFile';
+import { Cover, InputTypeFile } from 'components';
 import { MAX_FILE_SIZE } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setPackCoverAC } from 'store/actions';
+import { selectPacksPackCover } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 import { convertFileToBase64 } from 'utils';
 
 export const PackModal = ({ control, getValues }: PackModalType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const packCover = useTypedSelector(state => state.packs.packCover);
+    const packCover = useTypedSelector(selectPacksPackCover);
 
     const handleUpload = (e: ChangeEvent<HTMLInputElement>): void => {
         if (e.target.files && e.target.files.length) {
