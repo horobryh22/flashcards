@@ -6,13 +6,12 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import classes from './PacksTableRows.module.css';
 import { PacksTableRowsType } from './types';
 
-import { ActionImages } from 'components';
+import { ActionImages, PackCoverIntoTable } from 'components/index';
 import { PACK_COLUMNS } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setAppInfoAC, setCardsPackIdAC, setIsPacksFetched } from 'store/actions';
 import { selectAuthUserId } from 'store/selectors';
 import { ReturnComponentType } from 'types';
-import { isBase64 } from 'utils';
 
 export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentType => {
     const dispatch = useAppDispatch();
@@ -49,6 +48,45 @@ export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentTyp
             e.stopPropagation();
         };
 
+        const mappedColumns = PACK_COLUMNS.map(column => {
+            let value;
+
+            if (column.id !== 'actions') {
+                value = row[column.id];
+            }
+
+            if (column.id === 'updated') {
+                const date = new Date(row[column.id]);
+
+                value = date.toLocaleDateString();
+            }
+
+            return (
+                <TableCell key={column.id} align={column.align}>
+                    {column.id !== 'actions' && column.id !== 'name' && (
+                        <div className={classes.nameWrapper}>{value}</div>
+                    )}
+                    {column.id === 'name' && (
+                        <div className={classes.nameContainer}>
+                            {row.deckCover && (
+                                <PackCoverIntoTable deckCover={row.deckCover} />
+                            )}
+                            <div className={classes.nameWrapper}>{value}</div>
+                        </div>
+                    )}
+                    {column.id === 'actions' && (
+                        <NavLink
+                            to=""
+                            className={classes.actionsWrapper}
+                            onClick={stopPropagation}
+                        >
+                            <ActionImages card={row} />
+                        </NavLink>
+                    )}
+                </TableCell>
+            );
+        });
+
         return (
             <TableRow
                 hover
@@ -58,46 +96,7 @@ export const PacksTableRows = ({ rows }: PacksTableRowsType): ReturnComponentTyp
                 onClick={handleClick}
                 style={{ cursor: 'pointer' }}
             >
-                {PACK_COLUMNS.map(column => {
-                    let value;
-
-                    if (column.id !== 'actions') {
-                        value = row[column.id];
-                    }
-
-                    if (column.id === 'updated') {
-                        const date = new Date(row[column.id]);
-
-                        value = date.toLocaleDateString();
-                    }
-
-                    return (
-                        <TableCell key={column.id} align={column.align}>
-                            {column.id !== 'actions' && column.id !== 'name' && (
-                                <div className={classes.nameWrapper}>{value}</div>
-                            )}
-                            {column.id === 'name' && (
-                                <div className={classes.nameContainer}>
-                                    <div className={classes.coverWrapper}>
-                                        {row.deckCover && isBase64(row.deckCover) && (
-                                            <img src={row.deckCover} alt="cover" />
-                                        )}
-                                    </div>
-                                    <div className={classes.nameWrapper}>{value}</div>
-                                </div>
-                            )}
-                            {column.id === 'actions' && (
-                                <NavLink
-                                    to=""
-                                    className={classes.actionsWrapper}
-                                    onClick={stopPropagation}
-                                >
-                                    <ActionImages card={row} />
-                                </NavLink>
-                            )}
-                        </TableCell>
-                    );
-                })}
+                {mappedColumns}
             </TableRow>
         );
     });

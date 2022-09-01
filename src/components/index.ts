@@ -1,12 +1,12 @@
 export { Header } from './common/header/Header';
 export { SignUp } from '../pages/signUp/SignUp';
-export { FormBottomPart } from './formBottomPart/FormBottomPart';
+export { FormBottomPart } from './common/formBottomPart/FormBottomPart';
 export { SnackBar } from 'components/snackbar/SnackBar';
 export { RoutesApp } from './general/routesApp/RoutesApp';
 export { CardsTopContent } from './cardsTopContent/CardsTopContent';
-export { PacksTable } from 'components/packsTable/PacksTable';
+export { PacksTable } from 'components/packs/packsTable/PacksTable';
 export { MainTableRow } from './mainTableRow/MainTableRow';
-export { PacksTableRows } from 'components/packsTableRows/PacksTableRows';
+export { PacksTableRows } from 'components/packs/packsTableRows/PacksTableRows';
 export { ActionImages } from './packs/actionImages/ActionImages';
 export { CustomPagination } from './common/customPagination/CustomPagination';
 export { CustomSelect } from './common/customSelect/CustomSelect';
@@ -38,5 +38,6 @@ export { SimpleSnackBar } from './simpleSnackBar/SimpleSnackBar';
 export { PackCover } from './cards/packCover/PackCover';
 export { Cover } from './common/cover/Cover';
 export { AuthUserAvatar } from './common/authUserAvatar/AuthUserAvatar';
+export { PackCoverIntoTable } from './packs/packsTableRows/packCoverIntoTable/PackCoverIntoTable';
 
 export type { FormValuesType } from './modalParent/types';

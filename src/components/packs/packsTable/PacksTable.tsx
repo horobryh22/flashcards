@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import classes from './PacksTable.module.css';
 
-import { MainTableRow, NoResultsFound, PacksTableRows } from 'components';
+import { MainTableRow, NoResultsFound, PacksTableRows } from 'components/index';
 import { PACK_COLUMNS, ROW_HEIGHT } from 'constant';
 import { useTypedSelector } from 'hooks';
 import {
@@ -31,7 +31,7 @@ export const PacksTable = (): ReturnComponentType => {
         <div className={classes.container}>
             <Paper sx={{ width: '100%' }} style={{ marginTop: '25px' }}>
                 {isPacksFetched ? (
-                    <TableContainer sx={{ maxHeight: 395 }}>
+                    <TableContainer sx={{ maxHeight: 377 }}>
                         <Table stickyHeader aria-label="sticky table">
                             <MainTableRow
                                 currentSort={sortPacks}
