@@ -1,13 +1,11 @@
 import React, { ChangeEvent } from 'react';
 
-import UploadIcon from '@mui/icons-material/Upload';
-import { Button, MenuItem, Select, TextField } from '@mui/material';
-import { Controller } from 'react-hook-form';
+import { MenuItem, Select } from '@mui/material';
 
 import classes from './CardModal.module.css';
 import { CardModalType } from './types';
 
-import { Cover, InputTypeFile } from 'components';
+import { Cover, CustomInput, UploadButton } from 'components';
 import { MAX_FILE_SIZE } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setAnswerCoverAC, setQuestionCoverAC, setQuestionFormatAC } from 'store/actions';
@@ -25,10 +23,8 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const questionFormat = useTypedSelector(selectQuestionFormat);
-
     const modalQuestionImg = useTypedSelector(selectQuestionImg);
     const modalAnswerImg = useTypedSelector(selectAnswerImg);
-
     const questionCover = useTypedSelector(selectQuestionCover);
     const answerCover = useTypedSelector(selectAnswerCover);
 
@@ -75,45 +71,8 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
             </Select>
             {questionFormat === 'text' ? (
                 <>
-                    <Controller
-                        name="question"
-                        control={control}
-                        render={({ field }) => (
-                            <>
-                                <span
-                                    className={`${classes.helperText} ${classes.bottomHelperText}`}
-                                >
-                                    Question
-                                </span>
-                                <TextField
-                                    {...field}
-                                    size="small"
-                                    variant="standard"
-                                    fullWidth
-                                />
-                            </>
-                        )}
-                    />
-                    <Controller
-                        name="answer"
-                        control={control}
-                        render={({ field }) => (
-                            <>
-                                <span
-                                    className={`${classes.helperText} ${classes.bottomHelperText}`}
-                                >
-                                    Answer
-                                </span>
-                                <TextField
-                                    {...field}
-                                    size="small"
-                                    variant="standard"
-                                    fullWidth
-                                    style={{ marginBottom: 20 }}
-                                />
-                            </>
-                        )}
-                    />
+                    <CustomInput control={control} name="question" label="Question" />
+                    <CustomInput control={control} name="answer" label="Answer" />
                 </>
             ) : (
                 <>
@@ -125,18 +84,16 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
                                 : null)
                         }
                     />
-                    <div className={classes.button}>
-                        <InputTypeFile uploadHandler={handleQuestionUpload} id="question">
-                            <Button
-                                component="span"
-                                variant="contained"
-                                fullWidth
-                                endIcon={<UploadIcon />}
-                            >
-                                UPLOAD QUESTION
-                            </Button>
-                        </InputTypeFile>
-                    </div>
+                    <UploadButton
+                        id="question"
+                        handleUpload={handleQuestionUpload}
+                        buttonName="UPLOAD QUESTION"
+                    />
+                    <UploadButton
+                        id="answer"
+                        handleUpload={handleAnswerUpload}
+                        buttonName="UPLOAD ANSWER"
+                    />
                     <Cover
                         cover={
                             answerCover ||
@@ -145,18 +102,6 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
                                 : null)
                         }
                     />
-                    <div className={classes.button}>
-                        <InputTypeFile uploadHandler={handleAnswerUpload} id="answer">
-                            <Button
-                                component="span"
-                                variant="contained"
-                                fullWidth
-                                endIcon={<UploadIcon />}
-                            >
-                                UPLOAD ANSWER
-                            </Button>
-                        </InputTypeFile>
-                    </div>
                 </>
             )}
         </div>

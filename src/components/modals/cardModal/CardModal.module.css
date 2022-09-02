@@ -7,21 +7,3 @@
     align-items: flex-start;
     justify-content: space-between;
 }
-
-.helperText {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    opacity: 0.5;
-    margin-bottom: 10px;
-}
-
-.bottomHelperText {
-    margin: 23px 0 0 0;
-}
-
-.button {
-    width: 100%;
-    margin-top: 20px;
-}

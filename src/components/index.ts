@@ -39,5 +39,7 @@ export { PackCover } from './cards/packCover/PackCover';
 export { Cover } from './common/cover/Cover';
 export { AuthUserAvatar } from './common/authUserAvatar/AuthUserAvatar';
 export { PackCoverIntoTable } from './packs/packsTableRows/packCoverIntoTable/PackCoverIntoTable';
+export { CustomInput } from './customInput/CustomInput';
+export { UploadButton } from './uploadButton/UploadButton';
 
 export type { FormValuesType } from './modalParent/types';
