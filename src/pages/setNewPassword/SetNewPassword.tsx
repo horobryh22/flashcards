@@ -1,17 +1,18 @@
 import React from 'react';
 
-import { FormControl, FormGroup, FormLabel, TextField } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
+import { FormControl, FormGroup, FormLabel } from '@mui/material';
+import { useForm } from 'react-hook-form';
 import { Navigate, useParams } from 'react-router-dom';
 
 import classes from './SetNewPassword.module.css';
 
+import { FormInput } from 'components';
 import { StyledButton } from 'components/common/header/styles';
 import { PASSWORD_RULES } from 'constant';
 import { useAppDispatch, useTypedSelector, useVisibility } from 'hooks';
 import { setNewPassword } from 'store/middlewares';
 import { selectGoToLogin } from 'store/selectors';
-import { ReturnComponentType } from 'types';
+import { AllValuesFormType, ReturnComponentType } from 'types';
 
 export const SetNewPassword = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ export const SetNewPassword = (): ReturnComponentType => {
         control,
         handleSubmit,
         formState: { errors },
-    } = useForm({
+    } = useForm<AllValuesFormType>({
         defaultValues: {
             password: '',
         },
@@ -47,23 +48,18 @@ export const SetNewPassword = (): ReturnComponentType => {
             <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                 <FormControl fullWidth>
                     <FormGroup>
-                        <Controller
-                            name="password"
+                        <FormInput
                             control={control}
                             rules={PASSWORD_RULES}
-                            render={({ field }) => (
-                                <TextField
-                                    {...field}
-                                    variant="standard"
-                                    type={`${visibility ? 'text' : 'password'}`}
-                                    label="Password"
-                                    margin="normal"
-                                    color={`${errors.password ? 'error' : 'primary'}`}
-                                    InputProps={{
-                                        endAdornment: visible,
-                                    }}
-                                />
-                            )}
+                            name="password"
+                            variant="standard"
+                            type={`${visibility ? 'text' : 'password'}`}
+                            label="Password"
+                            margin="normal"
+                            color={`${errors.password ? 'error' : 'primary'}`}
+                            InputProps={{
+                                endAdornment: visible,
+                            }}
                         />
                         <div className={classes.error}>{errors.password?.message}</div>
                         <FormLabel>

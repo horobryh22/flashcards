@@ -48,3 +48,6 @@ export { selectAnswerCover } from './cards/selectAnswerCover/selectAnswerCover';
 export { selectAnswerImg } from './app/selectAnswerImg/selectAnswerImg';
 export { selectQuestionImg } from './app/selectQuestionImg/selectQuestionImg';
 export { selectQuestionFormat } from './app/selectQuestionFormat/selectQuestionFormat';
+export { selectModalCardQuestion } from './app/selectModalCardQuestion/selectModalCardQuestion';
+export { selectModalCardAnswer } from './app/selectModalCardAnswer/selectModalCardAnswer';
+export { selectModalCardId } from './app/selectModalCardId/selectModalCardId';

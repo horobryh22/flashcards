@@ -1,17 +1,17 @@
 import React from 'react';
 
-import { FormControl, FormGroup, TextField } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
+import { FormControl, FormGroup } from '@mui/material';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import classes from './SignUp.module.css';
 import { SignUpFormType } from './types';
 
-import { FormBottomPart } from 'components';
+import { FormBottomPart, FormInput } from 'components';
 import { EMAIL_RULES, PASSWORD_RULES } from 'constant';
 import { useAppDispatch, useVisibility } from 'hooks';
 import { registerUser } from 'store/middlewares';
-import { ReturnComponentType } from 'types';
+import { AllValuesFormType, ReturnComponentType } from 'types';
 
 const INTERVAL_TO_REDIRECT = 1000;
 
@@ -27,7 +27,7 @@ export const SignUp = (): ReturnComponentType => {
         handleSubmit,
         setError,
         formState: { errors },
-    } = useForm<SignUpFormType>({ mode: 'onBlur' });
+    } = useForm<AllValuesFormType>({ mode: 'onBlur' });
 
     const onSubmit = ({ email, password, passwordConfirm }: SignUpFormType): void => {
         if (password !== passwordConfirm) {
@@ -48,57 +48,42 @@ export const SignUp = (): ReturnComponentType => {
             <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                 <FormControl fullWidth>
                     <FormGroup>
-                        <Controller
-                            name="email"
+                        <FormInput
                             control={control}
+                            name="email"
                             rules={EMAIL_RULES}
-                            render={({ field }) => (
-                                <TextField
-                                    {...field}
-                                    variant="standard"
-                                    label="Email"
-                                    margin="normal"
-                                    color={`${errors.email ? 'error' : 'primary'}`}
-                                />
-                            )}
+                            variant="standard"
+                            label="Email"
+                            margin="normal"
+                            color={`${errors.email ? 'error' : 'primary'}`}
                         />
                         <div className={classes.error}>{errors.email?.message}</div>
-                        <Controller
-                            name="password"
+                        <FormInput
                             control={control}
+                            name="password"
                             rules={PASSWORD_RULES}
-                            render={({ field }) => (
-                                <TextField
-                                    {...field}
-                                    variant="standard"
-                                    type={`${visibility ? 'text' : 'password'}`}
-                                    label="Password"
-                                    margin="normal"
-                                    color={`${errors.password ? 'error' : 'primary'}`}
-                                    InputProps={{
-                                        endAdornment: visible,
-                                    }}
-                                />
-                            )}
+                            variant="standard"
+                            type={`${visibility ? 'text' : 'password'}`}
+                            label="Password"
+                            margin="normal"
+                            color={`${errors.password ? 'error' : 'primary'}`}
+                            InputProps={{
+                                endAdornment: visible,
+                            }}
                         />
                         <div className={classes.error}>{errors.password?.message}</div>
-                        <Controller
-                            name="passwordConfirm"
+                        <FormInput
                             control={control}
+                            name="passwordConfirm"
                             rules={PASSWORD_RULES}
-                            render={({ field }) => (
-                                <TextField
-                                    {...field}
-                                    variant="standard"
-                                    type={`${visibility ? 'text' : 'password'}`}
-                                    label="Password"
-                                    margin="normal"
-                                    color={`${errors.password ? 'error' : 'primary'}`}
-                                    InputProps={{
-                                        endAdornment: visible,
-                                    }}
-                                />
-                            )}
+                            variant="standard"
+                            type={`${visibility ? 'text' : 'password'}`}
+                            label="Password"
+                            margin="normal"
+                            color={`${errors.password ? 'error' : 'primary'}`}
+                            InputProps={{
+                                endAdornment: visible,
+                            }}
                         />
                         <div className={classes.error}>
                             {errors.passwordConfirm?.message}

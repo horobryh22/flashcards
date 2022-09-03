@@ -26,25 +26,6 @@
     line-height: 24px;
 }
 
-.questionCover {
-    width: 100%;
-    height: 100px;
-}
-
-.questionCover img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.subtitle {
-    margin-bottom: 15px;
-}
-
-.subtitle span {
-    font-weight: 700;
-}
-
 .answersAmount {
     font-size: 14px;
     opacity: 0.5;

@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { FormControl, FormGroup, FormLabel, TextField } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
+import { FormControl, FormGroup, FormLabel } from '@mui/material';
+import { useForm } from 'react-hook-form';
 
 import classes from './ForgotPassword.module.css';
 
-import { FormBottomPart } from 'components';
+import { FormBottomPart, FormInput } from 'components';
 import { EMAIL_RULES } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
-import { CheckEmail } from 'pages/checkEmail/CheckEmail';
+import { CheckEmail } from 'pages';
 import { forgot, selectIsEmailSent } from 'store';
-import { ReturnComponentType } from 'types';
+import { AllValuesFormType, ReturnComponentType } from 'types';
 
 export const ForgotPassword = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ export const ForgotPassword = (): ReturnComponentType => {
         control,
         handleSubmit,
         formState: { errors },
-    } = useForm({
+    } = useForm<AllValuesFormType>({
         defaultValues: {
             email: '',
         },
@@ -40,19 +40,14 @@ export const ForgotPassword = (): ReturnComponentType => {
             <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                 <FormControl fullWidth>
                     <FormGroup>
-                        <Controller
+                        <FormInput
                             name="email"
                             control={control}
                             rules={EMAIL_RULES}
-                            render={({ field }) => (
-                                <TextField
-                                    {...field}
-                                    variant="standard"
-                                    label="Email"
-                                    margin="normal"
-                                    color={`${errors.email ? 'error' : 'primary'}`}
-                                />
-                            )}
+                            variant="standard"
+                            label="Email"
+                            margin="normal"
+                            color={`${errors.email ? 'error' : 'primary'}`}
                         />
                         <div className={classes.error}>{errors.email?.message}</div>
                         <FormLabel>

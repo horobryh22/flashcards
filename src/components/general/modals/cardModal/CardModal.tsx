@@ -5,7 +5,7 @@ import { MenuItem, Select } from '@mui/material';
 import classes from './CardModal.module.css';
 import { CardModalType } from './types';
 
-import { Cover, CustomInput, UploadButton } from 'components';
+import { Cover, ModalInput, UploadButton } from 'components';
 import { MAX_FILE_SIZE } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setAnswerCoverAC, setQuestionCoverAC, setQuestionFormatAC } from 'store/actions';
@@ -71,8 +71,8 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
             </Select>
             {questionFormat === 'text' ? (
                 <>
-                    <CustomInput control={control} name="question" label="Question" />
-                    <CustomInput control={control} name="answer" label="Answer" />
+                    <ModalInput control={control} name="question" helperText="Question" />
+                    <ModalInput control={control} name="answer" helperText="Answer" />
                 </>
             ) : (
                 <>
@@ -89,11 +89,6 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
                         handleUpload={handleQuestionUpload}
                         buttonName="UPLOAD QUESTION"
                     />
-                    <UploadButton
-                        id="answer"
-                        handleUpload={handleAnswerUpload}
-                        buttonName="UPLOAD ANSWER"
-                    />
                     <Cover
                         cover={
                             answerCover ||
@@ -101,6 +96,11 @@ export const CardModal = ({ control }: CardModalType): ReturnComponentType => {
                                 ? (modalAnswerImg as string)
                                 : null)
                         }
+                    />
+                    <UploadButton
+                        id="answer"
+                        handleUpload={handleAnswerUpload}
+                        buttonName="UPLOAD ANSWER"
                     />
                 </>
             )}

@@ -1,13 +1,12 @@
 import React, { ChangeEvent } from 'react';
 
-import UploadIcon from '@mui/icons-material/Upload';
-import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material';
+import { Checkbox, FormControlLabel } from '@mui/material';
 import { Controller } from 'react-hook-form';
 
 import classes from './PackModal.module.css';
 import { PackModalType } from './types';
 
-import { Cover, InputTypeFile } from 'components';
+import { Cover, ModalInput, UploadButton } from 'components';
 import { MAX_FILE_SIZE } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { setPackCoverAC } from 'store/actions';
@@ -35,31 +34,16 @@ export const PackModal = ({ control, getValues }: PackModalType): ReturnComponen
     return (
         <div className={classes.modalBody}>
             <Cover cover={packCover} />
-            <div className={classes.button}>
-                <InputTypeFile uploadHandler={handleUpload} id="pack-cover">
-                    <Button
-                        component="span"
-                        variant="contained"
-                        fullWidth
-                        endIcon={<UploadIcon />}
-                    >
-                        UPLOAD COVER
-                    </Button>
-                </InputTypeFile>
-            </div>
-            <Controller
-                name="name"
+            <UploadButton
+                id="pack-cover"
+                handleUpload={handleUpload}
+                buttonName="UPLOAD COVER"
+            />
+            <ModalInput
+                style={{ marginBottom: 20 }}
                 control={control}
-                render={({ field }) => (
-                    <TextField
-                        {...field}
-                        label="Name pack"
-                        style={{ marginBottom: 20 }}
-                        size="small"
-                        variant="standard"
-                        fullWidth
-                    />
-                )}
+                name="name"
+                helperText="Name pack"
             />
             <Controller
                 name="private"

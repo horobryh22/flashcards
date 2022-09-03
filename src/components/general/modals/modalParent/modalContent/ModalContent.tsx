@@ -1,10 +1,12 @@
 import React from 'react';
 
-import classes from './ModalContent.module.css';
-import { CANCEL_BUTTON_STYLE, MAIN_BUTTON_STYLE } from './styles';
-import { ModalContentType } from './types';
-
 import { StyledButton } from 'components/common/header/styles';
+import classes from 'components/general/modals/modalParent/modalContent/ModalContent.module.css';
+import {
+    CANCEL_BUTTON_STYLE,
+    MAIN_BUTTON_STYLE,
+} from 'components/general/modals/modalParent/modalContent/styles';
+import { ModalContentType } from 'components/general/modals/modalParent/modalContent/types';
 import { ReturnComponentType } from 'types';
 
 export const ModalContent = ({

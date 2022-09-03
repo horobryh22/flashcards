@@ -22,7 +22,6 @@ const App = (): ReturnComponentType => {
     }, []);
 
     const onClose = (): void => {
-        // dispatch(setModalStateAC(false));
         dispatch(
             setModalTypeAC({
                 questionFormat: 'text',

@@ -4,11 +4,11 @@ import { Navigate } from 'react-router-dom';
 
 import classes from './LearnPack.module.css';
 
-import { AnswerContent, ArrowBackTo } from 'components';
+import { AnswerContent, ArrowBackTo, QuestionContent } from 'components';
 import { useTypedSelector } from 'hooks';
 import { selectCards, selectCardsPackName, selectIsCardsFetched } from 'store/selectors';
 import { ReturnComponentType } from 'types';
-import { getRandomCard, isBase64 } from 'utils';
+import { getRandomCard } from 'utils';
 
 export const LearnPack = (): ReturnComponentType => {
     const cards = useTypedSelector(selectCards);
@@ -27,15 +27,10 @@ export const LearnPack = (): ReturnComponentType => {
             <ArrowBackTo />
             <div className={classes.title}>{`Learn '${packName}'`}</div>
             <div className={classes.questionContainer}>
-                <div className={classes.subtitle}>
-                    <span>Question: </span>
-                    {randomCard?.question !== 'no question' && randomCard.question}
-                </div>
-                {isBase64(randomCard.questionImg) && (
-                    <div className={classes.questionCover}>
-                        <img src={randomCard.questionImg} alt="question" />
-                    </div>
-                )}
+                <QuestionContent
+                    question={randomCard.question}
+                    questionImg={randomCard.questionImg}
+                />
                 <span className={classes.answersAmount}>
                     Amount of answers per question: {randomCard?.shots}
                 </span>

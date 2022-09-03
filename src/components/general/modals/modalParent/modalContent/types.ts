@@ -1,4 +1,4 @@
-import { ModalMapperType } from 'components/modalParent/types';
+import { ModalMapperType } from 'components/general/modals/modalParent/types';
 import { ModalTypes } from 'types';
 
 export type ModalContentType = {

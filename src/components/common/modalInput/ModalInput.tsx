@@ -3,15 +3,16 @@ import React from 'react';
 import { TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
 
-import classes from './CustomInput.module.css';
+import classes from './ModalInput.module.css';
 import { CustomInputType } from './types';
 
 import { ReturnComponentType } from 'types';
 
-export const CustomInput = ({
+export const ModalInput = ({
     control,
     name,
-    label,
+    helperText,
+    style,
 }: CustomInputType): ReturnComponentType => {
     return (
         <Controller
@@ -20,9 +21,15 @@ export const CustomInput = ({
             render={({ field }) => (
                 <>
                     <span className={`${classes.helperText} ${classes.bottomHelperText}`}>
-                        {label}
+                        {helperText}
                     </span>
-                    <TextField {...field} size="small" variant="standard" fullWidth />
+                    <TextField
+                        style={style}
+                        {...field}
+                        size="small"
+                        variant="standard"
+                        fullWidth
+                    />
                 </>
             )}
         />

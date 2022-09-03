@@ -15,7 +15,7 @@ export const CheckEmail = (): ReturnComponentType => {
             <h1 className={classes.title}>Check Email</h1>
             <FormControl fullWidth>
                 <FormGroup>
-                    <img src={email} alt="" />
+                    <img src={email} alt="email" />
                     <FormLabel>
                         <p className={classes.label}>
                             We’ve sent an Email with instructions to example@mail.com

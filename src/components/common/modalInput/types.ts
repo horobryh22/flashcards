@@ -1,6 +1,9 @@
+import { CSSProperties } from 'react';
+
+import { TextFieldProps } from '@mui/material/TextField/TextField';
 import { Control } from 'react-hook-form';
 
-export type CustomInputType = {
+export type CustomInputType = TextFieldProps & {
     control: Control<{
         name: string;
         private: boolean;
@@ -8,5 +11,6 @@ export type CustomInputType = {
         answer: string;
     }>;
     name: 'name' | 'private' | 'question' | 'answer';
-    label: string;
+    helperText: string;
+    style?: CSSProperties;
 };

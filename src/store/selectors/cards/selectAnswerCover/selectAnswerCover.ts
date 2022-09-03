@@ -1,6 +1,5 @@
 import { AppRootState } from 'store/types';
-import { Nullable } from 'types';
 
-export const selectAnswerCover = (state: AppRootState): Nullable<string> => {
+export const selectAnswerCover = (state: AppRootState): string => {
     return state.cards.answerCover;
 };

@@ -9,8 +9,7 @@ import classes from './ModalParent.module.css';
 import { BOX_STYLES } from './styles';
 import { FormValuesType, ModalMapperType, ModalParentType } from './types';
 
-import { CardModal, ModalContent } from 'components';
-import { PackModal } from 'components/modals';
+import { PackModal, CardModal, ModalContent } from 'components';
 import { DELAY } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import {
@@ -22,12 +21,20 @@ import {
     setQuestionFormatAC,
 } from 'store/actions';
 import {
+    selectAnswerCover,
     selectButtonName,
+    selectCardsPackId,
+    selectCardsPackPrivate,
+    selectModalCardAnswer,
+    selectModalCardId,
+    selectModalCardQuestion,
     selectModalTitle,
     selectModalType,
     selectPackId,
-    selectCardsPackPrivate,
+    selectPacksPackCover,
     selectPackTitle,
+    selectQuestionCover,
+    selectQuestionFormat,
 } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 import { chooseAction } from 'utils';
@@ -41,20 +48,20 @@ const MAX_STRING_LENGTH = 19;
 export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
-    const questionFormat = useTypedSelector(state => state.app.modal.questionFormat);
+    const questionFormat = useTypedSelector(selectQuestionFormat);
     const modalType = useTypedSelector(selectModalType);
     const modalTitle = useTypedSelector(selectModalTitle);
     const buttonName = useTypedSelector(selectButtonName);
     const packTitle = useTypedSelector(selectPackTitle);
     const packId = useTypedSelector(selectPackId);
     const packPrivate = useTypedSelector(selectCardsPackPrivate);
-    const cardQuestion = useTypedSelector(state => state.app.modal.cardQuestion);
-    const cardAnswer = useTypedSelector(state => state.app.modal.cardAnswer);
-    const cardId = useTypedSelector(state => state.app.modal.cardId);
-    const cardsPack_id = useTypedSelector(state => state.cards.searchParams.cardsPack_id);
-    const packCover = useTypedSelector(state => state.packs.packCover);
-    const questionCover = useTypedSelector(state => state.cards.questionCover);
-    const answerCover = useTypedSelector(state => state.cards.answerCover);
+    const cardQuestion = useTypedSelector(selectModalCardQuestion);
+    const cardAnswer = useTypedSelector(selectModalCardAnswer);
+    const cardId = useTypedSelector(selectModalCardId);
+    const cardsPack_id = useTypedSelector(selectCardsPackId);
+    const packCover = useTypedSelector(selectPacksPackCover);
+    const questionCover = useTypedSelector(selectQuestionCover);
+    const answerCover = useTypedSelector(selectAnswerCover);
 
     const deletingPack =
         packTitle && packTitle.length > MAX_STRING_LENGTH
@@ -155,7 +162,6 @@ export const ModalParent = ({ open, onClose }: ModalParentType): ReturnComponent
             dispatch(
                 setModalTypeAC({
                     questionImg: '',
-                    questionFormat: 'text',
                     answerImg: '',
                     isOpen: false,
                     buttonName: '',

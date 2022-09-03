@@ -32,7 +32,9 @@ import {
     selectCardsTotalCount,
     selectIsCardsFetched,
     selectIsPackDeleted,
+    selectPackCover,
     selectPackUserId,
+    selectSortCards,
 } from 'store/selectors';
 import { ReturnComponentType } from 'types';
 import { isBase64 } from 'utils';
@@ -52,13 +54,13 @@ export const CardsList = (): ReturnComponentType => {
     const isCardsFetched = useTypedSelector(selectIsCardsFetched);
     const authUserId = useTypedSelector(selectAuthUserId);
     const packUserId = useTypedSelector(selectPackUserId);
-    const packCover = useTypedSelector(state => state.cards.packDeckCover);
+    const packCover = useTypedSelector(selectPackCover);
 
     const cardsPackId = useTypedSelector(selectCardsPackId);
     const cardQuestion = useTypedSelector(selectCardQuestion);
     const page = useTypedSelector(selectCardsPage);
     const pageCount = useTypedSelector(selectCardsPageCount);
-    const sortCards = useTypedSelector(state => state.cards.searchParams.sortCards);
+    const sortCards = useTypedSelector(selectSortCards);
 
     const paramCardsPackId = searchParams.get('cardsPack_id') || cardsPackId;
     const paramCardQuestion = searchParams.get('cardQuestion') || cardQuestion;

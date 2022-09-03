@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 import { UploadButtonType } from './types';
 import classes from './UploadButton.module.css';
 
-import { InputTypeFile } from 'components';
+import { InputTypeFile } from 'components/index';
 import { ReturnComponentType } from 'types';
 
 export const UploadButton = ({
