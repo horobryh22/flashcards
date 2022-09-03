@@ -2,6 +2,7 @@ import React from 'react';
 
 import { FormControl, FormGroup, FormLabel } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
 
 import classes from './ForgotPassword.module.css';
 
@@ -10,12 +11,14 @@ import { EMAIL_RULES } from 'constant';
 import { useAppDispatch, useTypedSelector } from 'hooks';
 import { CheckEmail } from 'pages';
 import { forgot, selectIsEmailSent } from 'store';
+import { selectIsUserAuth } from 'store/selectors';
 import { AllValuesFormType, ReturnComponentType } from 'types';
 
 export const ForgotPassword = (): ReturnComponentType => {
     const dispatch = useAppDispatch();
 
     const isEmailSent = useTypedSelector(selectIsEmailSent);
+    const isUserAuth = useTypedSelector(selectIsUserAuth);
 
     const {
         control,
@@ -33,6 +36,8 @@ export const ForgotPassword = (): ReturnComponentType => {
     };
 
     if (isEmailSent) return <CheckEmail />;
+
+    if (isUserAuth) return <Navigate to="/profile" />;
 
     return (
         <div className={classes.formWrapper}>

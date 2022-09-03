@@ -6,11 +6,17 @@ import classes from './LearnPack.module.css';
 
 import { AnswerContent, ArrowBackTo, QuestionContent } from 'components';
 import { useTypedSelector } from 'hooks';
-import { selectCards, selectCardsPackName, selectIsCardsFetched } from 'store/selectors';
+import {
+    selectCards,
+    selectCardsPackName,
+    selectIsCardsFetched,
+    selectIsUserAuth,
+} from 'store/selectors';
 import { ReturnComponentType } from 'types';
 import { getRandomCard } from 'utils';
 
 export const LearnPack = (): ReturnComponentType => {
+    const isUserAuth = useTypedSelector(selectIsUserAuth);
     const cards = useTypedSelector(selectCards);
     const randomCard = useMemo(() => {
         return getRandomCard(cards);
@@ -20,6 +26,10 @@ export const LearnPack = (): ReturnComponentType => {
 
     if (!isCardsFetched) {
         return <Navigate to="/packs" />;
+    }
+
+    if (!isUserAuth) {
+        return <Navigate to="/login" />;
     }
 
     return (

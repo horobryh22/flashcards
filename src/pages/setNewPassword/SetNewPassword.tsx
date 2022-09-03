@@ -11,7 +11,7 @@ import { StyledButton } from 'components/common/header/styles';
 import { PASSWORD_RULES } from 'constant';
 import { useAppDispatch, useTypedSelector, useVisibility } from 'hooks';
 import { setNewPassword } from 'store/middlewares';
-import { selectGoToLogin } from 'store/selectors';
+import { selectGoToLogin, selectIsUserAuth } from 'store/selectors';
 import { AllValuesFormType, ReturnComponentType } from 'types';
 
 export const SetNewPassword = (): ReturnComponentType => {
@@ -22,6 +22,8 @@ export const SetNewPassword = (): ReturnComponentType => {
     const goToLogin = useTypedSelector(selectGoToLogin);
 
     const [visible, visibility] = useVisibility(false);
+
+    const isUserAuth = useTypedSelector(selectIsUserAuth);
 
     const {
         control,
@@ -41,6 +43,8 @@ export const SetNewPassword = (): ReturnComponentType => {
     };
 
     if (goToLogin) return <Navigate to="/login" />;
+
+    if (isUserAuth) return <Navigate to="/profile" />;
 
     return (
         <div className={classes.formWrapper}>

@@ -2,15 +2,16 @@ import React from 'react';
 
 import { FormControl, FormGroup } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import classes from './SignUp.module.css';
 import { SignUpFormType } from './types';
 
 import { FormBottomPart, FormInput } from 'components';
 import { EMAIL_RULES, PASSWORD_RULES } from 'constant';
-import { useAppDispatch, useVisibility } from 'hooks';
+import { useAppDispatch, useTypedSelector, useVisibility } from 'hooks';
 import { registerUser } from 'store/middlewares';
+import { selectIsUserAuth } from 'store/selectors';
 import { AllValuesFormType, ReturnComponentType } from 'types';
 
 const INTERVAL_TO_REDIRECT = 1000;
@@ -21,6 +22,8 @@ export const SignUp = (): ReturnComponentType => {
     const navigate = useNavigate();
 
     const [visible, visibility] = useVisibility(false);
+
+    const isUserAuth = useTypedSelector(selectIsUserAuth);
 
     const {
         control,
@@ -41,6 +44,8 @@ export const SignUp = (): ReturnComponentType => {
             navigate('/login');
         }, INTERVAL_TO_REDIRECT);
     };
+
+    if (isUserAuth) return <Navigate to="/profile" />;
 
     return (
         <div className={classes.formWrapper}>

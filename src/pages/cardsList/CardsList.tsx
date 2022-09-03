@@ -32,6 +32,7 @@ import {
     selectCardsTotalCount,
     selectIsCardsFetched,
     selectIsPackDeleted,
+    selectIsUserAuth,
     selectPackCover,
     selectPackUserId,
     selectSortCards,
@@ -48,6 +49,7 @@ export const CardsList = (): ReturnComponentType => {
 
     const [searchParams] = useSearchParams();
 
+    const isUserAuth = useTypedSelector(selectIsUserAuth);
     const packName = useTypedSelector(selectCardsPackName);
     const isPackDeleted = useTypedSelector(selectIsPackDeleted);
     const totalCount = useTypedSelector(selectCardsTotalCount);
@@ -123,6 +125,10 @@ export const CardsList = (): ReturnComponentType => {
 
     if (isPackDeleted) {
         return <Navigate to="/packs" />;
+    }
+
+    if (!isUserAuth) {
+        return <Navigate to="/login" />;
     }
 
     return (
