@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { NavLink, useNavigate } from 'react-router-dom';
+import { IconButton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import classes from './ActionImages.module.css';
 import { ActionImagesType } from './types';
@@ -75,19 +76,19 @@ export const ActionImages = ({ card }: ActionImagesType): ReturnComponentType =>
 
     return (
         <div style={{ width: '70px', display: 'flex', justifyContent: 'space-between' }}>
-            <NavLink to="" onClick={removePack} className={linkClass}>
+            <IconButton size="small" onClick={removePack} className={linkClass}>
                 <img src={remove} alt="remove" />
-            </NavLink>
-            <NavLink to="" onClick={updatePack} className={linkClass}>
+            </IconButton>
+            <IconButton size="small" onClick={updatePack} className={linkClass}>
                 <img src={edit} alt="edit" />
-            </NavLink>
-            <NavLink
-                to=""
+            </IconButton>
+            <IconButton
+                size="small"
                 onClick={learnPack}
                 className={cardsCount ? '' : classes.disabledIcon}
             >
                 <img src={knowledge} alt="knowledge" />
-            </NavLink>
+            </IconButton>
         </div>
     );
 };
