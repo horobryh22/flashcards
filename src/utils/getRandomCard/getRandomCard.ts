@@ -1,6 +1,6 @@
 import { CardType } from 'api/types';
 
-export const getRandomCard = (cards: CardType[]): any => {
+export const getRandomCard = (cards: CardType[]): CardType => {
     const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0);
     const rand = Math.random() * sum;
     const res = cards.reduce(
