@@ -17,7 +17,7 @@ export const packsAPI = {
         pageCount,
         user_id,
     }: SearchParamsType) => {
-        return instance.get<GetPacksResponseType>('cards/pack', {
+        return instance.get<GetPacksResponseType>('/cards/pack', {
             params: {
                 packName,
                 min,
@@ -30,16 +30,16 @@ export const packsAPI = {
         });
     },
     addCardsPack: (pack: AddCardsPackType) => {
-        return instance.post<{ newCardsPack: PackType }>('cards/pack', pack);
+        return instance.post<{ newCardsPack: PackType }>('/cards/pack', pack);
     },
     removeCardsPack: (packId: string) => {
-        return instance.delete<{ deletedCardsPack: PackType }>('cards/pack', {
+        return instance.delete<{ deletedCardsPack: PackType }>('/cards/pack', {
             params: {
                 id: packId,
             },
         });
     },
     updateCardsPack: (pack: UpdateCardsPackType) => {
-        return instance.put<{ updatedCardsPack: PackType }>('cards/pack', pack);
+        return instance.put<{ updatedCardsPack: PackType }>('/cards/pack', pack);
     },
 };

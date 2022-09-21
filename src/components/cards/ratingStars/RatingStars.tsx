@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Rating } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { IconButton, Rating } from '@mui/material';
 
 import classes from './RatingStars.module.css';
 
@@ -65,12 +64,12 @@ export const RatingStars = ({ card }: RatingStarsType): ReturnComponentType => {
             <Rating name="read-only" value={card.grade} precision={0.5} readOnly />
             {authUserId === card.user_id ? (
                 <div className={classes.actionImages}>
-                    <NavLink to="" onClick={editCard}>
+                    <IconButton size="small" onClick={editCard}>
                         <img src={edit} alt="edit" />
-                    </NavLink>
-                    <NavLink to="" onClick={removeCard}>
+                    </IconButton>
+                    <IconButton size="small" onClick={removeCard}>
                         <img src={remove} alt="remove" />
-                    </NavLink>
+                    </IconButton>
                 </div>
             ) : null}
         </div>
