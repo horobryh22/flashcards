@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { instance } from 'api/config';
 import { AuthUserDataType, RegisterUserDataType, RegisterUserErrorType } from 'api/types';
 import { SignInValuesType } from 'pages';
@@ -21,7 +19,7 @@ export const authAPI = {
         );
     },
     forgot: (email: string) => {
-        return axios.post<{ info: string; error: string }>(
+        return instance.post<{ info: string; error: string }>(
             '/auth/forgot',
             {
                 email,
