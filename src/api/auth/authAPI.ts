@@ -25,7 +25,7 @@ export const authAPI = {
                 email,
                 from: 'test-front-admin <hvi17@yandex.ru>',
                 message: `<div style='background-color: lime; padding: 15px'>
-                          password recovery link: <a href=${process.env.REACT_APP_BACK_URL}/password_recovery/$token$>link</a>
+                          password recovery link: <a href=https://flashcards-rho-five.vercel.app/password_recovery/$token$>link</a>
                       </div>`,
             },
             { withCredentials: true },
